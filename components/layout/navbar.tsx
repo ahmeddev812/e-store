@@ -214,8 +214,8 @@ export function Navbar() {
               {/* Wishlist - Luxury with Animation */}
               <Link href="/wishlist" className="group relative rounded-full p-2.5 transition-all duration-300 hover:bg-[#D4A853]/20">
                 <Heart className="size-4 text-white/70 transition-all duration-300 group-hover:scale-110 group-hover:text-[#D4A853]" />
-                <AnimatePresence>
-                  {wishlistCount > 0 && (
+                {mounted && wishlistCount > 0 && (
+                  <AnimatePresence>
                     <motion.span
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
@@ -224,15 +224,15 @@ export function Navbar() {
                     >
                       {wishlistCount}
                     </motion.span>
-                  )}
-                </AnimatePresence>
+                  </AnimatePresence>
+                )}
               </Link>
 
               {/* Cart - Luxury with Animation */}
               <Link href="/cart" className="group relative rounded-full p-2.5 transition-all duration-300 hover:bg-[#D4A853]/20">
                 <ShoppingCart className="size-4 text-white/70 transition-all duration-300 group-hover:scale-110 group-hover:text-[#D4A853]" />
-                <AnimatePresence>
-                  {itemCount > 0 && (
+                {mounted && itemCount > 0 && (
+                  <AnimatePresence>
                     <motion.span
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
@@ -241,8 +241,8 @@ export function Navbar() {
                     >
                       {itemCount}
                     </motion.span>
-                  )}
-                </AnimatePresence>
+                  </AnimatePresence>
+                )}
               </Link>
 
               {/* User Section - Clerk Auth */}

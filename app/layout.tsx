@@ -1,4 +1,3 @@
-import { ClerkProvider } from "@clerk/nextjs"
 import type { Metadata } from "next"
 import { Playfair_Display, Inter, Space_Grotesk } from "next/font/google"
 import "./globals.css"
@@ -47,8 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning className={`${playfair.variable} ${inter.variable} ${spaceGrotesk.variable}`}>
       <body className="min-h-screen bg-[#0a0a0f] text-white/90 antialiased font-sans overflow-x-hidden">
-        <ClerkProvider dynamic>
-          <Providers>
+        <Providers>
             <div className="flex min-h-screen flex-col">
               {/* Premium Animated Background */}
               <div className="fixed inset-0 -z-20">
@@ -86,9 +84,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </main>
               
               
-          </div>
+            </div>
           </Providers>
-            </ClerkProvider>
       </body>
     </html>
   )

@@ -1,24 +1,29 @@
-"use client"
+"use client";
 
-import { ThemeProvider } from "next-themes"
-import { Toaster } from "sonner"
+import { ClerkProvider } from "@clerk/react";
+import { ThemeProvider } from "next-themes";
+import { Toaster } from "sonner";
 
-export function Providers({ children }: { children: React.ReactNode }) {
+export function Providers({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-      {children}
-      <Toaster
-        richColors
-        position="top-right"
-        toastOptions={{
-          style: {
-            background: 'linear-gradient(135deg, rgba(15,15,25,0.95), rgba(10,10,20,0.95))',
-            border: '1px solid rgba(255,255,255,0.1)',
-            backdropFilter: 'blur(20px)',
-            color: '#fff',
-          },
-        }}
-      />
-    </ThemeProvider>
-  )
+    <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY!}>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="dark"
+        enableSystem
+        disableTransitionOnChange
+      >
+        {children}
+
+        <Toaster
+          richColors
+          position="top-right"
+        />
+      </ThemeProvider>
+    </ClerkProvider>
+  );
 }
