@@ -3,6 +3,7 @@
 import { useState, useMemo, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { useCartStore } from "@/store/cart"
 import { validateCoupon } from "@/data/coupons"
@@ -131,6 +132,7 @@ function FeatureCard({ icon: Icon, title, description }: any) {
 }
 
 export default function CartPage() {
+  const router = useRouter()
   const { items, removeItem, updateQuantity, clearCart } = useCartStore()
   const [couponCode, setCouponCode] = useState("")
   const [appliedCoupon, setAppliedCoupon] = useState<{
@@ -174,10 +176,15 @@ export default function CartPage() {
   }
 
   const handleCheckout = () => {
+    console.log("[Cart] Proceed to Checkout clicked")
+    console.log("[Cart] Items in cart:", items.length)
+    if (items.length === 0) {
+      toast.error("Your cart is empty")
+      return
+    }
     setIsCheckingOut(true)
-    setTimeout(() => {
-      setIsCheckingOut(false)
-    }, 2000)
+    console.log("[Cart] Redirecting to /checkout")
+    router.push("/checkout")
   }
 
   // Empty Cart State

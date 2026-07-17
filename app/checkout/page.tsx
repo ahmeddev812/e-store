@@ -59,6 +59,10 @@ export default function CheckoutPage() {
   }
 
   const handleStripeCheckout = async () => {
+    console.log("[Checkout] Pay with Stripe clicked")
+    console.log("[Checkout] Items count:", items.length)
+    console.log("[Checkout] Shipping info:", shipping)
+
     const required = ["name", "email", "phone", "address", "city", "zip"] as const
     const empty = required.find((k) => !shipping[k].trim())
     if (empty) {
@@ -74,6 +78,7 @@ export default function CheckoutPage() {
     setLoading(true)
 
     try {
+      console.log("[Checkout] Sending POST to /api/stripe/checkout")
       const response = await fetch("/api/stripe/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -81,17 +86,25 @@ export default function CheckoutPage() {
       })
 
       const data = await response.json()
+      console.log("[Checkout] API response:", JSON.stringify(data, null, 2))
+      console.log("[Checkout] Response status:", response.status)
 
       if (!response.ok) {
+        console.error("[Checkout] API error:", data.error)
         toast.error(data.error || "Failed to create checkout session")
         setLoading(false)
         return
       }
 
       if (!data.url || !data.sessionId) {
+        console.error("[Checkout] Invalid response - missing url or sessionId:", data)
         toast.error("Invalid checkout session response")
+        setLoading(false)
         return
       }
+
+      console.log("[Checkout] Session created:", data.sessionId)
+      console.log("[Checkout] Redirect URL:", data.url)
 
       const orderId = generateOrderId()
       const order = {
@@ -122,11 +135,14 @@ export default function CheckoutPage() {
 
       clearCart()
 
+      console.log("[Checkout] Redirecting to Stripe Checkout:", data.url)
       window.location.href = data.url
-    } catch {
+    } catch (err) {
+      console.error("[Checkout] Exception during checkout:", err)
       toast.error("Something went wrong. Please try again.")
     } finally {
       setLoading(false)
+      console.log("[Checkout] Loading state reset")
     }
   }
 

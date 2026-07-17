@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, Suspense, useEffect, useState } from "react"
+import { Suspense, useEffect, useState, useMemo } from "react"
 import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
@@ -10,8 +10,8 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { Badge } from "@/components/ui/badge"
 import { formatUSD, getDiscountPrice } from "@/lib/utils"
-import { 
-  CheckCircle, Package, Truck, ShoppingBag, ArrowRight, 
+import {
+  CheckCircle, Package, Truck, ShoppingBag, ArrowRight,
   Crown, Gift, MapPin,
   Share2, Link2,
   Shield, RotateCcw, Headphones, Award
@@ -54,40 +54,111 @@ interface Order {
   paymentMethod?: string
 }
 
+function LoadingSpinner() {
+  return (
+    <div className="min-h-screen overflow-x-hidden">
+      <div className="fixed inset-0 bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]" />
+      <div className="relative flex min-h-[70vh] items-center justify-center">
+        <div className="size-10 rounded-full border-4 border-[#F57224] border-t-transparent animate-spin" />
+      </div>
+    </div>
+  )
+}
+
+function GenericSuccessPage() {
+  return (
+    <div className="min-h-screen overflow-x-hidden">
+      <div className="fixed inset-0 bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]" />
+      <div className="relative flex min-h-[70vh] flex-col items-center justify-center px-4">
+        <motion.div
+          initial={{ scale: 0, rotate: -180 }}
+          animate={{ scale: 1, rotate: 0 }}
+          transition={{ type: "spring", duration: 0.8 }}
+          className="mb-6 rounded-full bg-gradient-to-br from-white/5 to-white/0 p-8 backdrop-blur-xl"
+        >
+          <CheckCircle className="size-20 text-emerald-400" />
+        </motion.div>
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="text-3xl font-bold text-white mb-3"
+        >
+          Payment Successful!
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="text-white/50 mb-8 text-center max-w-md"
+        >
+          Thank you for your purchase. Your order is being processed.
+        </motion.p>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+        >
+          <Link href="/products">
+            <Button className="bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow">
+              Continue Shopping
+              <ArrowRight className="ml-2 size-4" />
+            </Button>
+          </Link>
+        </motion.div>
+      </div>
+    </div>
+  )
+}
+
 function OrderSuccessContent() {
   const searchParams = useSearchParams()
   const sessionId = searchParams.get("session_id")
+
   const [isShareOpen, setIsShareOpen] = useState(false)
   const [confetti, setConfetti] = useState(true)
-
-  const order = useMemo(() => {
-    if (!sessionId) return null
-    const stored = localStorage.getItem("order_history")
-    if (!stored) return null
-    const orders = JSON.parse(stored)
-    const matched = orders.find((o: Order) => o.stripeSessionId === sessionId)
-    if (!matched) return null
-    if (matched.status === "pending") {
-      matched.status = "paid"
-      localStorage.setItem("order_history", JSON.stringify(orders))
-    }
-    return matched
-  }, [sessionId])
+  const [order, setOrder] = useState<Order | null>(null)
+  const [loading, setLoading] = useState(() => !!sessionId)
+  const [confettiY, setConfettiY] = useState(1000)
 
   useEffect(() => {
+    setConfettiY(window.innerHeight + 100)
     const timer = setTimeout(() => setConfetti(false), 5000)
     return () => clearTimeout(timer)
   }, [])
 
+  useEffect(() => {
+    if (!sessionId) {
+      setLoading(false)
+      return
+    }
+    try {
+      const stored = localStorage.getItem("order_history")
+      if (stored) {
+        const orders = JSON.parse(stored)
+        const matched = orders.find((o: Order) => o.stripeSessionId === sessionId)
+        if (matched) {
+          if (matched.status === "pending") {
+            matched.status = "paid"
+            localStorage.setItem("order_history", JSON.stringify(orders))
+          }
+          setOrder(matched)
+        }
+      }
+    } catch {
+      // localStorage unavailable
+    }
+    setLoading(false)
+  }, [sessionId])
+
   const particles = useMemo(() => {
-    const w = typeof window !== "undefined" ? window.innerWidth : 1000
     const hash = (i: number, seed: number) => {
       let h = i * 374761393 + seed * 668265263
       h = ((h ^ (h >> 13)) * 1274126177) & 0x7fffffff
       return (h ^ (h >> 16)) / 0x7fffffff
     }
     return Array.from({ length: 50 }, (_, i) => ({
-      x: hash(i, 1) * w,
+      x: hash(i, 1) * 1000,
       rotate: hash(i, 2) * 360,
       driftX: (hash(i, 3) - 0.5) * 200,
       duration: hash(i, 4) * 3 + 2,
@@ -99,13 +170,13 @@ function OrderSuccessContent() {
   const handleShare = (platform: string) => {
     const url = window.location.href
     const text = `I just placed an order on BlazeCart! 🎉 Order #${order?.id || ""}`
-    
+
     const shareUrls: Record<string, string> = {
       twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`,
       facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
       copy: url,
     }
-    
+
     if (platform === 'copy') {
       navigator.clipboard.writeText(url)
     } else {
@@ -114,50 +185,12 @@ function OrderSuccessContent() {
     setIsShareOpen(false)
   }
 
+  if (loading) {
+    return <LoadingSpinner />
+  }
+
   if (!order) {
-    return (
-      <div className="min-h-screen overflow-x-hidden">
-        <div className="fixed inset-0 bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]" />
-        <div className="relative flex min-h-[70vh] flex-col items-center justify-center px-4">
-          <motion.div
-            initial={{ scale: 0, rotate: -180 }}
-            animate={{ scale: 1, rotate: 0 }}
-            transition={{ type: "spring", duration: 0.8 }}
-            className="mb-6 rounded-full bg-gradient-to-br from-white/5 to-white/0 p-8 backdrop-blur-xl"
-          >
-            <CheckCircle className="size-20 text-emerald-400" />
-          </motion.div>
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-3xl font-bold text-white mb-3"
-          >
-            Payment Successful!
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="text-white/50 mb-8 text-center max-w-md"
-          >
-            Thank you for your purchase. Your order is being processed.
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-          >
-            <Link href="/products">
-              <Button className="bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow">
-                Continue Shopping
-                <ArrowRight className="ml-2 size-4" />
-              </Button>
-            </Link>
-          </motion.div>
-        </div>
-      </div>
-    )
+    return <GenericSuccessPage />
   }
 
   const estimatedDate = new Date(order.estimatedDelivery).toLocaleDateString("en-US", {
@@ -196,13 +229,13 @@ function OrderSuccessContent() {
             {particles.map((p, i) => (
               <motion.div
                 key={i}
-                initial={{ 
+                initial={{
                   x: p.x,
                   y: -20,
                   rotate: 0
                 }}
-                animate={{ 
-                  y: typeof window !== "undefined" ? window.innerHeight + 100 : 1000,
+                animate={{
+                  y: confettiY,
                   rotate: p.rotate,
                   x: p.driftX
                 }}
@@ -235,7 +268,7 @@ function OrderSuccessContent() {
               <CheckCircle className="size-14 text-emerald-400" />
             </div>
           </motion.div>
-          
+
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -252,7 +285,7 @@ function OrderSuccessContent() {
           >
             Thank you for shopping with BlazeCart. Your payment has been processed.
           </motion.p>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -275,8 +308,8 @@ function OrderSuccessContent() {
                   className="absolute left-1/2 top-full mt-2 flex -translate-x-1/2 gap-2 rounded-xl glass-premium p-2 z-10"
                 >
                   {[
-                    { icon: (props: React.SVGProps<SVGSVGElement>) => <svg {...props} viewBox="0 0 24 24" fill="#1DA1F2"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>, name: 'twitter', color: '#1DA1F2' },
-                    { icon: (props: React.SVGProps<SVGSVGElement>) => <svg {...props} viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>, name: 'facebook', color: '#1877F2' },
+                    { icon: (props: React.SVGProps<SVGSVGElement>) => <svg {...props} viewBox="0 0 24 24" fill="#1DA1F2"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>, name: 'twitter', color: '#1DA1F2' },
+                    { icon: (props: React.SVGProps<SVGSVGElement>) => <svg {...props} viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" /></svg>, name: 'facebook', color: '#1877F2' },
                     { icon: Link2, name: 'copy', color: '#F57224' },
                   ].map((social) => (
                     <button
@@ -409,7 +442,7 @@ function OrderSuccessContent() {
                     <Crown className="size-4 text-[#F57224]" />
                     <h3 className="font-semibold text-white">Order Summary</h3>
                   </div>
-                  
+
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
                       <span className="text-white/60">Subtotal</span>
@@ -426,9 +459,9 @@ function OrderSuccessContent() {
                       </div>
                     )}
                   </div>
-                  
+
                   <Separator className="bg-white/10" />
-                  
+
                   <div className="flex justify-between text-lg font-bold">
                     <span className="text-white">Total Paid</span>
                     <span className="text-2xl text-[#F57224]">{formatUSD(order.total)}</span>
@@ -546,14 +579,7 @@ function OrderSuccessContent() {
 
 export default function OrderSuccessPage() {
   return (
-    <Suspense fallback={
-      <div className="min-h-screen overflow-x-hidden">
-        <div className="fixed inset-0 bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]" />
-        <div className="relative flex min-h-[70vh] items-center justify-center">
-          <div className="size-10 rounded-full border-4 border-[#F57224] border-t-transparent animate-spin" />
-        </div>
-      </div>
-    }>
+    <Suspense fallback={<LoadingSpinner />}>
       <OrderSuccessContent />
     </Suspense>
   )

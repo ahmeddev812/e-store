@@ -25,6 +25,15 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Separator } from "@/components/ui/separator"
 import { cn, formatUSD, getInitials } from "@/lib/utils"
 
+interface StoredOrder {
+  id: string
+  createdAt?: string
+  date?: string
+  total: number
+  status: string
+  items: number | Array<{ productId: string; quantity: number }>
+}
+
 interface Order {
   id: string
   date: string
@@ -40,18 +49,32 @@ export default function DashboardPage() {
   const [orders, setOrders] = useState<Order[]>([])
 
   useEffect(() => {
-    const stored = localStorage.getItem("order_history")
-    if (stored) {
-      setOrders(JSON.parse(stored))
-    } else {
-      const demoOrders: Order[] = [
-        { id: "ORD-A3B8F2C1", date: "2026-04-28", total: 289.99, status: "delivered", items: 3 },
-        { id: "ORD-D7E9F1A2", date: "2026-05-02", total: 59.99, status: "shipped", items: 1 },
-        { id: "ORD-B4C6D8E0", date: "2026-05-10", total: 449.5, status: "processing", items: 5 },
-        { id: "ORD-F2G3H4I5", date: "2026-05-12", total: 129.0, status: "pending", items: 2 },
-      ]
-      localStorage.setItem("order_history", JSON.stringify(demoOrders))
-      setOrders(demoOrders)
+    try {
+      const stored = localStorage.getItem("order_history")
+      if (stored) {
+        const parsed: StoredOrder[] = JSON.parse(stored)
+        const normalized: Order[] = parsed.map((o) => ({
+          id: o.id,
+          date: o.date || o.createdAt || "",
+          total: o.total,
+          status: o.status,
+          items: Array.isArray(o.items)
+            ? o.items.reduce((sum, i) => sum + i.quantity, 0)
+            : o.items,
+        }))
+        setOrders(normalized)
+      } else {
+        const demoOrders: Order[] = [
+          { id: "ORD-A3B8F2C1", date: "2026-04-28", total: 289.99, status: "delivered", items: 3 },
+          { id: "ORD-D7E9F1A2", date: "2026-05-02", total: 59.99, status: "shipped", items: 1 },
+          { id: "ORD-B4C6D8E0", date: "2026-05-10", total: 449.5, status: "processing", items: 5 },
+          { id: "ORD-F2G3H4I5", date: "2026-05-12", total: 129.0, status: "pending", items: 2 },
+        ]
+        localStorage.setItem("order_history", JSON.stringify(demoOrders))
+        setOrders(demoOrders)
+      }
+    } catch {
+      // localStorage unavailable or corrupt data
     }
   }, [])
 

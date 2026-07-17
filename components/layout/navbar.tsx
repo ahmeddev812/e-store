@@ -24,6 +24,7 @@ const navLinks = [
   { name: "Home", href: "/", icon: Home, luxury: true },
   { name: "Products", href: "/products", icon: Diamond, luxury: true },
   { name: "Categories", href: "/categories", icon: Grid, luxury: false },
+  { name: "Checkout", href: "/checkout", icon: ShoppingCart, luxury: false },
   { name: "About", href: "/about", icon: Sparkles, luxury: false },
   { name: "Contact", href: "/contact", icon: Award, luxury: false },
 ]
@@ -363,6 +364,14 @@ export function Navbar() {
                     >
                       <User className="size-5" />
                       My Account
+                    </Link>
+                    <Link
+                      href="/checkout"
+                      className="flex items-center gap-4 rounded-xl px-4 py-4 text-base text-white/70 transition-all duration-300 hover:bg-white/10"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      <ShoppingCart className="size-5" />
+                      Checkout
                     </Link>
                     <Link
                       href="/wishlist"

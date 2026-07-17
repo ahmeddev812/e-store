@@ -1,16 +1,29 @@
 import { NextResponse } from "next/server"
 
 export async function POST(req: Request) {
+  console.log("[Stripe API] POST /api/stripe/checkout called")
+
   const secretKey = process.env.STRIPE_SECRET_KEY
 
   if (!secretKey) {
+    console.error("[Stripe API] STRIPE_SECRET_KEY is missing")
     return NextResponse.json(
-      { error: "Stripe is not configured. Set STRIPE_SECRET_KEY environment variable." },
+      {
+        success: false,
+        reason: "Stripe Secret Key Missing",
+        error: "Stripe is not configured. Set STRIPE_SECRET_KEY environment variable.",
+      },
       { status: 501 }
     )
   }
 
   try {
+    const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
+
+    console.log("[Stripe API] Using base URL:", baseUrl)
+    console.log("[Stripe API] Publishable key present:", !!publishableKey)
+
     const { Stripe } = await import("stripe")
     const stripe = new Stripe(secretKey, {
       apiVersion: "2026-06-24.dahlia",
@@ -19,8 +32,19 @@ export async function POST(req: Request) {
     const body = await req.json()
     const { items, shipping } = body
 
+    console.log("[Stripe API] Cart items received:", items?.length || 0)
+    console.log("[Stripe API] Shipping data received:", !!shipping)
+
     if (!items || items.length === 0) {
-      return NextResponse.json({ error: "No items provided" }, { status: 400 })
+      console.error("[Stripe API] No items in cart")
+      return NextResponse.json(
+        {
+          success: false,
+          reason: "Invalid Cart",
+          error: "No items provided",
+        },
+        { status: 400 }
+      )
     }
 
     type LineItem = {
@@ -44,12 +68,15 @@ export async function POST(req: Request) {
       quantity: item.quantity,
     }))
 
+    console.log("[Stripe API] Creating Checkout Session...")
+    console.log("[Stripe API] Line items:", JSON.stringify(lineItems.map((li: any) => ({ name: li.price_data.product_data.name, amount: li.price_data.unit_amount, qty: li.quantity }))))
+
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       line_items: lineItems,
       mode: "payment",
-      success_url: `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/order-success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/checkout`,
+      success_url: `${baseUrl}/order-success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${baseUrl}/checkout`,
       shipping_address_collection: {
         allowed_countries: ["US", "CA", "GB", "AU", "DE", "FR", "PK", "AE", "IN"],
       },
@@ -87,10 +114,20 @@ export async function POST(req: Request) {
       },
     })
 
+    console.log("[Stripe API] Session created successfully:", session.id)
+    console.log("[Stripe API] Redirect URL:", session.url)
+
     return NextResponse.json({ sessionId: session.id, url: session.url })
   } catch (error: unknown) {
-    console.error("Stripe checkout error:", error)
+    console.error("[Stripe API] Stripe checkout error:", error)
     const message = error instanceof Error ? error.message : "Internal server error"
-    return NextResponse.json({ error: message }, { status: 500 })
+    return NextResponse.json(
+      {
+        success: false,
+        reason: "Stripe Session Creation Failed",
+        error: message,
+      },
+      { status: 500 }
+    )
   }
 }
