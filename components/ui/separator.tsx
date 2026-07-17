@@ -15,7 +15,7 @@ function Separator({
       data-slot="separator"
       orientation={orientation}
       className={cn(
-        "shrink-0 bg-white/10",
+        "shrink-0 bg-muted/30",
         orientation === "horizontal" ? "h-px w-full" : "h-full w-px",
         className
       )}

@@ -149,8 +149,8 @@ export default function CheckoutPage() {
   if (!isSignedIn) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[70vh] px-4 animate-fade-in">
-        <h1 className="text-2xl font-bold text-white mb-2">Sign in to checkout</h1>
-        <p className="text-white/50 mb-8">Please sign in to complete your purchase.</p>
+        <h1 className="text-2xl font-bold text-foreground mb-2">Sign in to checkout</h1>
+        <p className="text-muted-foreground mb-8">Please sign in to complete your purchase.</p>
         <Link href="/login">
           <Button className="shadow-glow">Sign In</Button>
         </Link>
@@ -161,8 +161,8 @@ export default function CheckoutPage() {
   if (items.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[70vh] px-4 animate-fade-in">
-        <h1 className="text-2xl font-bold text-white mb-2">Nothing to checkout</h1>
-        <p className="text-white/50 mb-8">Your cart is empty. Add some items first.</p>
+        <h1 className="text-2xl font-bold text-foreground mb-2">Nothing to checkout</h1>
+        <p className="text-muted-foreground mb-8">Your cart is empty. Add some items first.</p>
         <Link href="/products">
           <Button className="shadow-glow">Browse Products</Button>
         </Link>
@@ -173,18 +173,18 @@ export default function CheckoutPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 animate-fade-in">
       <div className="mb-8">
-        <Link href="/cart" className="text-white/50 hover:text-white text-sm flex items-center gap-1 mb-2">
+        <Link href="/cart" className="text-muted-foreground hover:text-foreground text-sm flex items-center gap-1 mb-2">
           <ChevronLeft className="size-3.5" />
           Back to Cart
         </Link>
-        <h1 className="text-2xl font-bold text-white">Checkout</h1>
+        <h1 className="text-2xl font-bold text-foreground">Checkout</h1>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
         <div className="lg:col-span-3 space-y-6">
           <Card>
             <CardContent className="p-5">
-              <h2 className="text-white font-semibold mb-4">Shipping Information</h2>
+              <h2 className="text-foreground font-semibold mb-4">Shipping Information</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="sm:col-span-2 space-y-1.5">
                   <Label htmlFor="name">Full Name</Label>
@@ -247,13 +247,13 @@ export default function CheckoutPage() {
 
           <Card>
             <CardContent className="p-5">
-              <h2 className="text-white font-semibold mb-4">Payment Method</h2>
+              <h2 className="text-foreground font-semibold mb-4">Payment Method</h2>
               <div className="space-y-3">
                 <div className="flex items-center gap-3 rounded-lg border border-[#F57224] bg-[#F57224]/10 p-3 shadow-[0_0_15px_rgba(245,114,36,0.2)]">
                   <CreditCard className="size-5 text-[#F57224]" />
                   <div>
-                    <span className="text-white text-sm font-medium">Pay with Card (Stripe)</span>
-                    <p className="text-white/40 text-xs">Secure payment via Stripe Checkout</p>
+                    <span className="text-foreground text-sm font-medium">Pay with Card (Stripe)</span>
+                    <p className="text-muted-foreground/70 text-xs">Secure payment via Stripe Checkout</p>
                   </div>
                 </div>
               </div>
@@ -264,22 +264,22 @@ export default function CheckoutPage() {
         <div className="lg:col-span-2 space-y-4">
           <Card>
             <CardContent className="p-5">
-              <h2 className="text-white font-semibold mb-4">Order Summary</h2>
+              <h2 className="text-foreground font-semibold mb-4">Order Summary</h2>
               <div className="space-y-3">
                 {items.map((item) => {
                   const dp = getDiscountPrice(item.price, item.discountPercentage)
                   return (
                     <div key={item.productId} className="flex gap-3">
-                      <div className="relative size-12 shrink-0 rounded-lg overflow-hidden bg-white/5">
+                      <div className="relative size-12 shrink-0 rounded-lg overflow-hidden bg-muted/50">
                         <Image src={item.thumbnail} alt={item.title} fill className="object-cover" sizes="48px" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-white text-sm truncate">{item.title}</p>
-                        <p className="text-white/50 text-xs">
+                        <p className="text-foreground text-sm truncate">{item.title}</p>
+                        <p className="text-muted-foreground text-xs">
                           {formatUSD(dp)} x {item.quantity}
                         </p>
                       </div>
-                      <span className="text-white text-sm shrink-0">{formatUSD(dp * item.quantity)}</span>
+                      <span className="text-foreground text-sm shrink-0">{formatUSD(dp * item.quantity)}</span>
                     </div>
                   )
                 })}
@@ -289,7 +289,7 @@ export default function CheckoutPage() {
 
           <Card>
             <CardContent className="p-5">
-              <h2 className="text-white font-semibold mb-4">Coupon</h2>
+              <h2 className="text-foreground font-semibold mb-4">Coupon</h2>
               {appliedCoupon ? (
                 <div className="flex items-center justify-between bg-emerald-500/10 border border-emerald-500/20 rounded-lg px-3 py-2.5">
                   <div className="flex items-center gap-2">
@@ -302,7 +302,7 @@ export default function CheckoutPage() {
                       setCouponCode("")
                       setCouponError("")
                     }}
-                    className="text-white/40 hover:text-white/70 text-xs"
+                    className="text-muted-foreground/70 hover:text-foreground/70 text-xs"
                   >
                     Remove
                   </button>
@@ -328,8 +328,8 @@ export default function CheckoutPage() {
           <Card>
             <CardContent className="p-5 space-y-3">
               <div className="flex justify-between text-sm">
-                <span className="text-white/60">Subtotal</span>
-                <span className="text-white">{formatUSD(subtotal)}</span>
+                <span className="text-muted-foreground">Subtotal</span>
+                <span className="text-foreground">{formatUSD(subtotal)}</span>
               </div>
               {discount > 0 && (
                 <div className="flex justify-between text-sm">
@@ -339,7 +339,7 @@ export default function CheckoutPage() {
               )}
               <Separator />
               <div className="flex justify-between text-base font-semibold">
-                <span className="text-white">Total</span>
+                <span className="text-foreground">Total</span>
                 <span className="text-[#F57224]">{formatUSD(total)}</span>
               </div>
               <Button

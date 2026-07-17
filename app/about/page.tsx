@@ -186,7 +186,7 @@ export default function AboutPage() {
               <span className="text-sm font-medium text-[#F57224]">Our Journey</span>
             </motion.div>
 
-            <h1 className="text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl">
+            <h1 className="text-5xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
               Our{" "}
               <span className="relative inline-block">
                 <span className="absolute -inset-1 rounded-lg bg-gradient-to-r from-[#F57224]/30 to-[#F57224]/20 blur-xl" />
@@ -195,7 +195,7 @@ export default function AboutPage() {
                 </span>
               </span>
             </h1>
-            <p className="mt-6 text-lg text-white/60 max-w-2xl mx-auto">
+            <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto">
               BlazeCart was born from a simple idea: make quality products accessible to everyone,
               backed by exceptional customer service and fast delivery.
             </p>
@@ -210,13 +210,13 @@ export default function AboutPage() {
           className="absolute bottom-8 left-1/2 -translate-x-1/2"
         >
           <div className="flex flex-col items-center gap-2">
-            <span className="text-xs text-white/40">Discover our story</span>
+            <span className="text-xs text-muted-foreground/70">Discover our story</span>
             <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ repeat: Infinity, repeatType: "loop", duration: 1.5 }}
-              className="flex items-center justify-center size-6 rounded-full border border-white/20"
+              className="flex items-center justify-center size-6 rounded-full border border-border"
             >
-              <ChevronRight className="size-4 rotate-90 text-white/40" />
+              <ChevronRight className="size-4 rotate-90 text-muted-foreground/70" />
             </motion.div>
           </div>
         </motion.div>
@@ -249,11 +249,11 @@ export default function AboutPage() {
             <Badge className="bg-gradient-to-r from-[#F57224]/20 to-[#F57224]/5 text-[#F57224] border-[#F57224]/30">
               Our Journey
             </Badge>
-            <h2 className="text-3xl font-bold text-white">
+            <h2 className="text-3xl font-bold text-foreground">
               Building Trust{" "}
               <span className="text-gradient">Since Day One</span>
             </h2>
-            <div className="space-y-4 text-white/60">
+            <div className="space-y-4 text-muted-foreground">
               <p>
                 Founded in 2020, BlazeCart started as a small online store with a big vision.
                 What began as a passion project quickly grew into a trusted marketplace serving thousands
@@ -290,8 +290,8 @@ export default function AboutPage() {
           <Badge className="mb-4 bg-gradient-to-r from-[#F57224]/20 to-[#F57224]/5 text-[#F57224]">
             Our Milestones
           </Badge>
-          <h2 className="text-3xl font-bold text-white">The Journey So Far</h2>
-          <p className="text-white/50 max-w-2xl mx-auto mt-2">
+          <h2 className="text-3xl font-bold text-foreground">The Journey So Far</h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto mt-2">
             Key moments that shaped our success story
           </p>
         </motion.div>
@@ -313,8 +313,8 @@ export default function AboutPage() {
                     <milestone.icon className="size-6 text-[#F57224]" />
                   </div>
                   <div className="text-2xl font-bold text-[#F57224]">{milestone.year}</div>
-                  <div className="font-semibold text-white mt-1">{milestone.title}</div>
-                  <div className="text-xs text-white/40 mt-1">{milestone.description}</div>
+                  <div className="font-semibold text-foreground mt-1">{milestone.title}</div>
+                  <div className="text-xs text-muted-foreground/70 mt-1">{milestone.description}</div>
                 </div>
               </motion.div>
             ))}
@@ -338,11 +338,11 @@ export default function AboutPage() {
                   <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-[#F57224]/20 to-[#F57224]/5 text-[#F57224] mb-4 group-hover:scale-110 transition-transform">
                     <stat.icon className="w-7 h-7" />
                   </div>
-                  <div className="text-4xl font-bold text-white mb-2">
+                  <div className="text-4xl font-bold text-foreground mb-2">
                     {stat.value}
                     <span className="text-xl text-[#F57224]">{stat.suffix}</span>
                   </div>
-                  <div className="text-sm text-white/50">{stat.label}</div>
+                  <div className="text-sm text-muted-foreground">{stat.label}</div>
                 </CardContent>
               </Card>
             </motion.div>
@@ -361,8 +361,8 @@ export default function AboutPage() {
           <Badge className="mb-4 bg-gradient-to-r from-[#F57224]/20 to-[#F57224]/5 text-[#F57224]">
             Core Values
           </Badge>
-          <h2 className="text-3xl font-bold text-white">What Drives Us</h2>
-          <p className="text-white/50 max-w-2xl mx-auto mt-2">
+          <h2 className="text-3xl font-bold text-foreground">What Drives Us</h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto mt-2">
             Our core values shape every decision we make and define who we are as a company
           </p>
         </motion.div>
@@ -382,10 +382,10 @@ export default function AboutPage() {
                   <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-[#F57224]/20 to-[#F57224]/5 text-[#F57224] mb-4 group-hover:scale-110 transition-transform">
                     <value.icon className="w-6 h-6" />
                   </div>
-                  <h3 className="text-lg font-semibold text-white mb-2">
+                  <h3 className="text-lg font-semibold text-foreground mb-2">
                     {value.title}
                   </h3>
-                  <p className="text-sm text-white/50 leading-relaxed">
+                  <p className="text-sm text-muted-foreground leading-relaxed">
                     {value.description}
                   </p>
                 </CardContent>
@@ -406,8 +406,8 @@ export default function AboutPage() {
           <Badge className="mb-4 bg-gradient-to-r from-[#F57224]/20 to-[#F57224]/5 text-[#F57224]">
             Testimonials
           </Badge>
-          <h2 className="text-3xl font-bold text-white">What Our Customers Say</h2>
-          <p className="text-white/50 max-w-2xl mx-auto mt-2">
+          <h2 className="text-3xl font-bold text-foreground">What Our Customers Say</h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto mt-2">
             Real stories from satisfied customers
           </p>
         </motion.div>
@@ -434,7 +434,7 @@ export default function AboutPage() {
                       />
                     </div>
                     <div>
-                      <div className="font-semibold text-white">{testimonial.name}</div>
+                      <div className="font-semibold text-foreground">{testimonial.name}</div>
                       <div className="text-xs text-[#F57224]">{testimonial.role}</div>
                     </div>
                   </div>
@@ -443,7 +443,7 @@ export default function AboutPage() {
                       <Star key={i} className="size-4 fill-[#F57224] text-[#F57224]" />
                     ))}
                   </div>
-                  <p className="text-sm text-white/60 italic">"{testimonial.comment}"</p>
+                  <p className="text-sm text-muted-foreground italic">"{testimonial.comment}"</p>
                   <CheckCircle className="size-4 text-green-500 mt-3" />
                 </CardContent>
               </Card>
@@ -463,8 +463,8 @@ export default function AboutPage() {
           <Badge className="mb-4 bg-gradient-to-r from-[#F57224]/20 to-[#F57224]/5 text-[#F57224]">
             Leadership
           </Badge>
-          <h2 className="text-3xl font-bold text-white">Meet Our Team</h2>
-          <p className="text-white/50 max-w-2xl mx-auto mt-2">
+          <h2 className="text-3xl font-bold text-foreground">Meet Our Team</h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto mt-2">
             The passionate people behind BlazeCart
           </p>
         </motion.div>
@@ -492,11 +492,11 @@ export default function AboutPage() {
                   />
                 </div>
               </div>
-              <h3 className="text-lg font-semibold text-white group-hover:text-[#F57224] transition-colors">
+              <h3 className="text-lg font-semibold text-foreground group-hover:text-[#F57224] transition-colors">
                 {member.name}
               </h3>
               <p className="text-sm text-[#F57224] mt-1">{member.role}</p>
-              <p className="text-xs text-white/40 mt-2 italic">"{member.quote}"</p>
+              <p className="text-xs text-muted-foreground/70 mt-2 italic">"{member.quote}"</p>
             </motion.div>
           ))}
         </div>
@@ -515,8 +515,8 @@ export default function AboutPage() {
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-[#F57224]/20 to-[#F57224]/5 mb-6">
               <MessageCircle className="size-8 text-[#F57224]" />
             </div>
-            <h2 className="text-3xl font-bold text-white">Join Our Journey</h2>
-            <p className="mt-2 text-white/60 max-w-md mx-auto">
+            <h2 className="text-3xl font-bold text-foreground">Join Our Journey</h2>
+            <p className="mt-2 text-muted-foreground max-w-md mx-auto">
               Be part of something special. Experience shopping like never before.
             </p>
             <div className="mt-6 flex flex-wrap gap-4 justify-center">
@@ -526,7 +526,7 @@ export default function AboutPage() {
                 </Button>
               </Link>
               <Link href="/contact">
-                <Button variant="outline" className="border-white/20 hover:border-[#F57224]/50">
+                <Button variant="outline" className="border-border hover:border-[#F57224]/50">
                   Contact Us
                 </Button>
               </Link>

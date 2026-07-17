@@ -4,10 +4,10 @@ import Link from "next/link"
 import { motion } from "framer-motion"
 import { useRef, useState, useEffect } from "react"
 import { 
-  Mail, Phone, MapPin, Clock, Shield, Truck, 
-  RotateCcw, CreditCard, Heart, ArrowUp, Sparkles,
-  Crown, Gift, Star, Award, Globe, Headphones,
-  Package, DollarSign, Zap, CheckCircle, Info, BookOpen,
+  Mail, Shield, Truck, 
+  RotateCcw, Heart, ArrowUp, Sparkles,
+  Crown, Gift, Star, Globe, Headphones,
+  Package, Zap, CheckCircle, Info, BookOpen,
   HelpCircle, Search, ShoppingBag, FileText, ShieldCheck,
   Users, Briefcase, Target,
 } from "lucide-react"
@@ -57,6 +57,7 @@ const footerSections = {
       { name: "Privacy Policy", href: "/privacy", icon: ShieldCheck },
       { name: "Terms of Service", href: "/terms", icon: FileText },
       { name: "Cookie Policy", href: "/cookies", icon: CookieIcon },
+      { name: "GDPR Compliance", href: "/gdpr", icon: Globe },
       { name: "Accessibility", href: "/help", icon: Globe },
     ],
   },
@@ -166,7 +167,7 @@ export function Footer() {
       </div>
 
       {/* Features Bar */}
-      <div className="relative border-b border-white/10 bg-white/5 backdrop-blur-sm">
+      <div className="relative border-b border-border bg-muted/50 backdrop-blur-sm">
         <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
             {features.map((feature, index) => (
@@ -176,14 +177,14 @@ export function Footer() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.05 }}
                 viewport={{ once: true }}
-                className="flex items-center gap-3 rounded-xl bg-white/5 p-3 transition-all duration-300 hover:bg-[#F57224]/10"
+                className="flex items-center gap-3 rounded-xl bg-muted/50 p-3 transition-all duration-300 hover:bg-accent"
               >
                 <div className="rounded-lg bg-[#F57224]/10 p-2">
                   <feature.icon className="size-4 text-[#F57224]" />
                 </div>
                 <div className="hidden sm:block">
-                  <p className="text-xs font-medium text-white">{feature.title}</p>
-                  <p className="text-[10px] text-white/40">{feature.description}</p>
+                  <p className="text-xs font-medium text-foreground">{feature.title}</p>
+                  <p className="text-[10px] text-muted-foreground/70">{feature.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -220,14 +221,14 @@ export function Footer() {
                   Premium
                 </Badge>
               </Link>
-              <p className="text-sm text-white/50 leading-relaxed max-w-lg">
+              <p className="text-sm text-muted-foreground leading-relaxed max-w-lg">
                 Ignite your style with premium products at unbeatable prices. Shop with confidence and experience luxury shopping.
               </p>
               <div className="flex gap-2">
                 {[4.8, 4.9, 5.0].map((rating, i) => (
-                  <div key={i} className="flex items-center gap-1 rounded-lg bg-white/5 px-2 py-1">
+                  <div key={i} className="flex items-center gap-1 rounded-lg bg-muted/50 px-2 py-1">
                     <Star className="size-3 fill-yellow-500 text-yellow-500" />
-                    <span className="text-xs text-white">{rating}</span>
+                    <span className="text-xs text-foreground">{rating}</span>
                   </div>
                 ))}
               </div>
@@ -245,7 +246,7 @@ export function Footer() {
             >
               <div className="flex items-center gap-2 mb-4">
                 <section.icon className="size-4 text-[#F57224]" />
-                <h3 className="text-sm font-semibold text-white/90 uppercase tracking-wider">
+                <h3 className="text-sm font-semibold text-foreground/90 uppercase tracking-wider">
                   {section.title}
                 </h3>
               </div>
@@ -257,7 +258,7 @@ export function Footer() {
                         href={link.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group flex items-center gap-2 text-sm text-white/50 transition-all duration-300 hover:text-[#F57224]"
+                        className="group flex items-center gap-2 text-sm text-muted-foreground transition-all duration-300 hover:text-[#F57224]"
                       >
                         <link.icon className="size-3.5 opacity-0 transition-all duration-300 group-hover:opacity-100" />
                         <span>{link.name}</span>
@@ -265,7 +266,7 @@ export function Footer() {
                     ) : (
                       <Link
                         href={link.href}
-                        className="group flex items-center gap-2 text-sm text-white/50 transition-all duration-300 hover:text-[#F57224]"
+                        className="group flex items-center gap-2 text-sm text-muted-foreground transition-all duration-300 hover:text-[#F57224]"
                       >
                         <link.icon className="size-3.5 opacity-0 transition-all duration-300 group-hover:opacity-100" />
                         <span>{link.name}</span>
@@ -296,8 +297,8 @@ export function Footer() {
                 <Mail className="size-6 text-[#F57224]" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-white">Subscribe to Newsletter</h3>
-                <p className="text-sm text-white/40">Get 10% off your first purchase + exclusive deals</p>
+                <h3 className="text-lg font-semibold text-foreground">Subscribe to Newsletter</h3>
+                <p className="text-sm text-muted-foreground/70">Get 10% off your first purchase + exclusive deals</p>
               </div>
             </div>
             <form onSubmit={handleSubscribe} className="flex w-full max-w-md gap-2">
@@ -306,7 +307,7 @@ export function Footer() {
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="flex-1 border-white/10 bg-white/5 text-white placeholder:text-white/40"
+                className="flex-1 border-border bg-muted/50 text-foreground placeholder:text-muted-foreground/70"
                 required
               />
               <Button
@@ -327,8 +328,8 @@ export function Footer() {
         </motion.div>
 
         {/* Bottom Bar */}
-        <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 sm:flex-row">
-          <p className="text-xs text-white/30">
+        <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 sm:flex-row">
+          <p className="text-xs text-foreground/30">
             &copy; {new Date().getFullYear()} BlazeCart. All rights reserved. | Crafted with{" "}
             <Heart className="inline size-3 text-red-500" /> for premium ecommerce
           </p>
@@ -338,7 +339,7 @@ export function Footer() {
             {paymentIcons.map((payment) => (
               <div
                 key={payment.name}
-                className={`rounded-lg bg-gradient-to-r ${payment.color} px-2 py-1 text-xs font-medium text-white shadow-lg`}
+                className={`rounded-lg bg-gradient-to-r ${payment.color} px-2 py-1 text-xs font-medium text-foreground shadow-lg`}
               >
                 {payment.icon} {payment.name}
               </div>
@@ -356,7 +357,7 @@ export function Footer() {
           onClick={scrollToTop}
           className="fixed bottom-8 right-8 z-50 rounded-full bg-gradient-to-r from-[#F57224] to-orange-500 p-3 shadow-glow transition-all duration-300 hover:scale-110"
         >
-          <ArrowUp className="size-5 text-white" />
+          <ArrowUp className="size-5 text-foreground" />
         </motion.button>
       )}
     </footer>

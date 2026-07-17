@@ -190,7 +190,7 @@ export default function GDPRPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl font-bold text-white sm:text-5xl lg:text-6xl"
+            className="text-4xl font-bold text-foreground sm:text-5xl lg:text-6xl"
           >
             GDPR{" "}
             <span className="relative inline-block">
@@ -205,7 +205,7 @@ export default function GDPRPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mx-auto mt-4 max-w-2xl text-white/60"
+            className="mx-auto mt-4 max-w-2xl text-muted-foreground"
           >
             Your privacy rights and how we protect your personal data under the General Data Protection Regulation
           </motion.p>
@@ -214,7 +214,7 @@ export default function GDPRPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-4 flex items-center justify-center gap-2 text-sm text-white/40"
+            className="mt-4 flex items-center justify-center gap-2 text-sm text-muted-foreground/70"
           >
             <Badge className="bg-[#F57224]/10 text-[#F57224] border-none">
               Last updated: January 2025
@@ -232,7 +232,7 @@ export default function GDPRPage() {
         >
           <Link
             href="/privacy"
-            className="inline-flex items-center gap-2 text-sm text-white/40 hover:text-[#F57224] transition-colors"
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground/70 hover:text-[#F57224] transition-colors"
           >
             <ArrowRight className="size-4 rotate-180" />
             Back to Privacy Policy
@@ -248,10 +248,10 @@ export default function GDPRPage() {
           transition={{ duration: 0.5 }}
           className="mb-10 text-center"
         >
-          <h2 className="text-3xl font-bold text-white mb-4">
+          <h2 className="text-3xl font-bold text-foreground mb-4">
             Your Rights Under GDPR
           </h2>
-          <p className="mx-auto max-w-2xl text-white/50">
+          <p className="mx-auto max-w-2xl text-muted-foreground">
             The General Data Protection Regulation grants you eight fundamental rights regarding your personal data.
             We are committed to upholding these rights and responding to all requests within the statutory timeframe.
           </p>
@@ -270,8 +270,8 @@ export default function GDPRPage() {
                   <div className="mb-4 inline-flex rounded-lg bg-gradient-to-br from-[#F57224]/20 to-[#F57224]/5 p-3 w-fit group-hover:scale-110 transition-transform duration-300">
                     <right.icon className="size-6 text-[#F57224]" />
                   </div>
-                  <h3 className="text-lg font-semibold text-white mb-2">{right.title}</h3>
-                  <p className="text-sm text-white/50 leading-relaxed flex-1">{right.description}</p>
+                  <h3 className="text-lg font-semibold text-foreground mb-2">{right.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed flex-1">{right.description}</p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -291,7 +291,7 @@ export default function GDPRPage() {
           >
             <div className="sticky top-24 space-y-6">
               <div className="glass-premium rounded-xl p-5">
-                <h3 className="mb-4 flex items-center gap-2 text-sm font-semibold text-white">
+                <h3 className="mb-4 flex items-center gap-2 text-sm font-semibold text-foreground">
                   <FileText className="size-4 text-[#F57224]" />
                   On This Page
                 </h3>
@@ -300,14 +300,14 @@ export default function GDPRPage() {
                     <a
                       key={index}
                       href={`#section-${index}`}
-                      className="block text-sm text-white/50 transition-colors hover:text-[#F57224]"
+                      className="block text-sm text-muted-foreground transition-colors hover:text-[#F57224]"
                     >
                       {section.title}
                     </a>
                   ))}
                   <a
                     href="#dpo"
-                    className="block text-sm text-white/50 transition-colors hover:text-[#F57224]"
+                    className="block text-sm text-muted-foreground transition-colors hover:text-[#F57224]"
                   >
                     Contact Our DPO
                   </a>
@@ -315,14 +315,14 @@ export default function GDPRPage() {
               </div>
 
               <div className="glass-premium rounded-xl bg-gradient-to-br from-[#F57224]/10 to-[#F57224]/5 p-5">
-                <h3 className="mb-3 flex items-center gap-2 text-sm font-semibold text-white">
+                <h3 className="mb-3 flex items-center gap-2 text-sm font-semibold text-foreground">
                   <Shield className="size-4 text-[#F57224]" />
                   Related Policies
                 </h3>
                 <div className="space-y-2">
                   <Link
                     href="/privacy"
-                    className="flex items-center justify-between rounded-lg p-2 text-sm text-white/50 transition-all hover:bg-white/5 hover:text-[#F57224]"
+                    className="flex items-center justify-between rounded-lg p-2 text-sm text-muted-foreground transition-all hover:bg-muted/50 hover:text-[#F57224]"
                   >
                     <span className="flex items-center gap-2">
                       <FileText className="size-3" />
@@ -332,7 +332,7 @@ export default function GDPRPage() {
                   </Link>
                   <Link
                     href="/cookies"
-                    className="flex items-center justify-between rounded-lg p-2 text-sm text-white/50 transition-all hover:bg-white/5 hover:text-[#F57224]"
+                    className="flex items-center justify-between rounded-lg p-2 text-sm text-muted-foreground transition-all hover:bg-muted/50 hover:text-[#F57224]"
                   >
                     <span className="flex items-center gap-2">
                       <Info className="size-3" />
@@ -358,11 +358,11 @@ export default function GDPRPage() {
                   <div className="rounded-lg bg-[#F57224]/10 p-2">
                     <section.icon className="size-5 text-[#F57224]" />
                   </div>
-                  <h2 className="text-xl font-bold text-white">
+                  <h2 className="text-xl font-bold text-foreground">
                     {section.title}
                   </h2>
                 </div>
-                <div className="text-white/60 leading-relaxed whitespace-pre-line">
+                <div className="text-muted-foreground leading-relaxed whitespace-pre-line">
                   {section.content}
                 </div>
               </div>
@@ -374,10 +374,10 @@ export default function GDPRPage() {
                 <div className="rounded-lg bg-[#F57224]/10 p-2">
                   <UserCheck className="size-5 text-[#F57224]" />
                 </div>
-                <h2 className="text-xl font-bold text-white">Contact Our Data Protection Officer</h2>
+                <h2 className="text-xl font-bold text-foreground">Contact Our Data Protection Officer</h2>
               </div>
 
-              <div className="text-white/60 leading-relaxed mb-6">
+              <div className="text-muted-foreground leading-relaxed mb-6">
                 <p className="mb-4">
                   If you have any questions, concerns, or requests regarding how we process your personal data
                   under the GDPR, or if you wish to exercise any of your data protection rights, please contact
@@ -395,9 +395,9 @@ export default function GDPRPage() {
                     <Shield className="size-5 text-[#F57224]" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-white mb-1">Data Protection Officer</h3>
-                    <p className="text-sm text-white/50">Email: dpo@blazecart.com</p>
-                    <p className="text-sm text-white/50 mt-1">
+                    <h3 className="font-semibold text-foreground mb-1">Data Protection Officer</h3>
+                    <p className="text-sm text-muted-foreground">Email: dpo@blazecart.com</p>
+                    <p className="text-sm text-muted-foreground mt-1">
                       We will acknowledge receipt of your request within 3 business days and respond
                       substantively within 30 calendar days. Complex requests may be extended by up to
                       60 additional days, and we will inform you of any such extension within the initial
@@ -411,8 +411,8 @@ export default function GDPRPage() {
                 <div className="flex items-start gap-4">
                   <CheckCircle className="size-6 text-emerald-500 flex-shrink-0 mt-0.5" />
                   <div>
-                    <h3 className="font-semibold text-white">We take your privacy seriously</h3>
-                    <p className="mt-1 text-sm text-white/40">
+                    <h3 className="font-semibold text-foreground">We take your privacy seriously</h3>
+                    <p className="mt-1 text-sm text-muted-foreground/70">
                       BlazeCart is committed to protecting your personal data and respecting your privacy rights
                       under the General Data Protection Regulation (GDPR) and all applicable data protection laws.
                       For any data protection concerns, our DPO is available to assist you.

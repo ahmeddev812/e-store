@@ -68,11 +68,11 @@ export default function ProfileSettingsPage() {
   const userImage = user?.imageUrl
 
   return (
-    <div className="min-h-screen bg-[#0B1120] p-4 md:p-8 bg-[radial-gradient(ellipse_at_top,rgba(245,114,36,0.03)_0%,transparent_60%)]">
+    <div className="min-h-screen bg-background p-4 md:p-8 bg-[radial-gradient(ellipse_at_top,rgba(245,114,36,0.03)_0%,transparent_60%)]">
       <div className="mx-auto max-w-2xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
           <div className="mb-8 flex items-center justify-between">
-            <h1 className="text-2xl font-bold text-white">Profile Settings</h1>
+            <h1 className="text-2xl font-bold text-foreground">Profile Settings</h1>
             <Button onClick={() => signOut({ redirectUrl: "/" })} variant="outline" className="gap-2 border-red-500/30 text-red-400 hover:bg-red-500/10">
               <LogOut className="size-4" />
               Logout
@@ -84,15 +84,15 @@ export default function ProfileSettingsPage() {
               <div className="relative">
                 <Avatar className="size-20 border-2 border-[#F57224]/30">
                   <AvatarImage src={userImage} />
-                  <AvatarFallback className="bg-[#1E293B] text-xl text-white">
+                  <AvatarFallback className="bg-muted text-xl text-muted-foreground">
                     {getInitials(userName)}
                   </AvatarFallback>
                 </Avatar>
               </div>
               <div className="text-center sm:text-left">
-                <p className="text-lg font-medium text-white">{userName}</p>
-                <p className="text-sm text-white/50">{userEmail}</p>
-                <p className="mt-1 text-xs text-white/30">Managed by Clerk</p>
+                <p className="text-lg font-medium text-foreground">{userName}</p>
+                <p className="text-sm text-muted-foreground">{userEmail}</p>
+                <p className="mt-1 text-xs text-foreground/30">Managed by Clerk</p>
               </div>
             </CardContent>
           </Card>

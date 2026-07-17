@@ -8,8 +8,8 @@ const labelVariants = cva(
   {
     variants: {
       variant: {
-        default: "text-white/80",
-        muted: "text-white/50",
+        default: "text-foreground/80",
+        muted: "text-muted-foreground",
         primary: "text-[#F57224]",
         success: "text-emerald-400",
         error: "text-red-400",
@@ -89,7 +89,7 @@ const Label = forwardRef<HTMLLabelElement, LabelProps>(
             </span>
           )}
           {optional && !required && (
-            <span className="ml-1 text-white/30 text-[10px] font-normal" aria-hidden="true">
+            <span className="ml-1 text-foreground/30 text-[10px] font-normal" aria-hidden="true">
               (optional)
             </span>
           )}
@@ -98,13 +98,13 @@ const Label = forwardRef<HTMLLabelElement, LabelProps>(
           <div className="group relative inline-flex">
             <button
               type="button"
-              className="text-white/40 hover:text-white/70 transition-colors"
+              className="text-muted-foreground/70 hover:text-foreground/70 transition-colors"
               aria-label="More information"
             >
               <HelpIcon className="size-3.5" />
             </button>
             <div className="pointer-events-none absolute left-1/2 top-full mt-2 -translate-x-1/2 opacity-0 transition-opacity group-hover:opacity-100 z-10">
-              <div className="whitespace-nowrap rounded-lg bg-black/90 px-2 py-1 text-xs text-white backdrop-blur-sm">
+              <div className="whitespace-nowrap rounded-lg bg-background/90 px-2 py-1 text-xs text-foreground backdrop-blur-sm">
                 {tooltip}
               </div>
             </div>
@@ -165,7 +165,7 @@ function FormField({
         </p>
       )}
       {hint && !error && (
-        <p className="text-xs text-white/40 flex items-center gap-1">
+        <p className="text-xs text-muted-foreground/70 flex items-center gap-1">
           <InfoIcon className="size-3" />
           {hint}
         </p>

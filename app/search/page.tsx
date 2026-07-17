@@ -16,8 +16,8 @@ export default function SearchPage() {
   return (
     <Suspense fallback={
       <div className="mx-auto max-w-7xl px-6 py-8">
-        <h1 className="text-3xl font-bold text-white">Search</h1>
-        <p className="mt-1 text-white/50">Loading...</p>
+        <h1 className="text-3xl font-bold text-foreground">Search</h1>
+        <p className="mt-1 text-muted-foreground">Loading...</p>
       </div>
     }>
       <SearchPageContent />
@@ -37,9 +37,9 @@ function SearchPageContent() {
   return (
     <div className="mx-auto max-w-7xl px-6 py-8 animate-fade-in">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-white">Search Results</h1>
+        <h1 className="text-3xl font-bold text-foreground">Search Results</h1>
         {query && (
-          <p className="mt-1 text-white/50">
+          <p className="mt-1 text-muted-foreground">
             {results.length} result{results.length !== 1 ? "s" : ""} for &ldquo;{query}&rdquo;
           </p>
         )}
@@ -47,10 +47,10 @@ function SearchPageContent() {
 
       {!query.trim() ? (
         <div className="flex flex-col items-center justify-center py-20 animate-fade-in">
-          <div className="rounded-full bg-white/5 backdrop-blur-xl border border-white/10 p-6 mb-4">
+          <div className="rounded-full bg-muted/50 backdrop-blur-xl border border-border p-6 mb-4">
             <SearchX className="size-16 text-white/20" />
           </div>
-          <p className="mt-4 text-lg text-white/50">Enter a search term to find products</p>
+          <p className="mt-4 text-lg text-muted-foreground">Enter a search term to find products</p>
           <Link href="/products">
             <Button variant="outline" className="mt-4">
               Browse All Products
@@ -59,11 +59,11 @@ function SearchPageContent() {
         </div>
       ) : results.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 animate-fade-in">
-          <div className="rounded-full bg-white/5 backdrop-blur-xl border border-white/10 p-6 mb-4">
+          <div className="rounded-full bg-muted/50 backdrop-blur-xl border border-border p-6 mb-4">
             <SearchX className="size-16 text-white/20" />
           </div>
-          <p className="mt-4 text-lg text-white/50">No results found for &ldquo;{query}&rdquo;</p>
-          <p className="mt-2 text-sm text-white/30">Try different keywords or browse our categories</p>
+          <p className="mt-4 text-lg text-muted-foreground">No results found for &ldquo;{query}&rdquo;</p>
+          <p className="mt-2 text-sm text-foreground/30">Try different keywords or browse our categories</p>
           <div className="mt-6 flex gap-4">
             <Link href="/products">
               <Button variant="outline">All Products</Button>
@@ -103,14 +103,14 @@ function SearchPageContent() {
                     )}
                   </div>
                   <CardContent className="p-4">
-                    <p className="text-xs text-white/40">{p.brand}</p>
-                    <h3 className="mt-1 font-medium text-white">{truncate(p.title, 40)}</h3>
+                    <p className="text-xs text-muted-foreground/70">{p.brand}</p>
+                    <h3 className="mt-1 font-medium text-foreground">{truncate(p.title, 40)}</h3>
                     <div className="mt-2 flex items-center gap-2">
                       <span className="text-lg font-bold text-[#F57224]">
                         {formatUSD(getDiscountPrice(p.price, p.discountPercentage))}
                       </span>
                       {p.discountPercentage > 0 && (
-                        <span className="text-sm text-white/40 line-through">{formatUSD(p.price)}</span>
+                        <span className="text-sm text-muted-foreground/70 line-through">{formatUSD(p.price)}</span>
                       )}
                     </div>
                     <Rating value={p.rating} size="sm" readonly showValue />

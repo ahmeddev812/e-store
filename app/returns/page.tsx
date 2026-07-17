@@ -118,7 +118,7 @@ export default function ReturnsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl font-bold text-white sm:text-5xl lg:text-6xl"
+            className="text-4xl font-bold text-foreground sm:text-5xl lg:text-6xl"
           >
             Returns &{" "}
             <span className="relative inline-block">
@@ -133,7 +133,7 @@ export default function ReturnsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mx-auto mt-4 max-w-2xl text-white/60"
+            className="mx-auto mt-4 max-w-2xl text-muted-foreground"
           >
             Hassle-free returns within 30 days. We are here to make your return experience smooth and straightforward.
           </motion.p>
@@ -145,7 +145,7 @@ export default function ReturnsPage() {
             className="mt-6"
           >
             <Link href="/">
-              <Button variant="outline" className="border-white/20 text-white/60 hover:border-[#F57224]/50 hover:text-[#F57224]">
+              <Button variant="outline" className="border-border text-muted-foreground hover:border-[#F57224]/50 hover:text-[#F57224]">
                 <ArrowRight className="mr-2 size-4 rotate-180" />
                 Back to Shopping
               </Button>
@@ -172,27 +172,27 @@ export default function ReturnsPage() {
                     </div>
                   </div>
                   <div className="flex-1">
-                    <h2 className="text-2xl font-bold text-white">30-Day Hassle-Free Returns</h2>
-                    <p className="mt-2 text-white/60 max-w-2xl">
+                    <h2 className="text-2xl font-bold text-foreground">30-Day Hassle-Free Returns</h2>
+                    <p className="mt-2 text-muted-foreground max-w-2xl">
                       Not completely satisfied? You have 30 days from delivery to return your items for a full refund.
                       No questions asked, free return shipping on all domestic orders.
                     </p>
                     <div className="mt-4 flex flex-wrap gap-6">
                       <div className="flex items-center gap-2">
                         <CheckCircle className="size-4 text-emerald-500" />
-                        <span className="text-sm text-white/70">Free Returns</span>
+                        <span className="text-sm text-foreground/70">Free Returns</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <CheckCircle className="size-4 text-emerald-500" />
-                        <span className="text-sm text-white/70">30-Day Window</span>
+                        <span className="text-sm text-foreground/70">30-Day Window</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <CheckCircle className="size-4 text-emerald-500" />
-                        <span className="text-sm text-white/70">Full Refund</span>
+                        <span className="text-sm text-foreground/70">Full Refund</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <CheckCircle className="size-4 text-emerald-500" />
-                        <span className="text-sm text-white/70">Instant Processing</span>
+                        <span className="text-sm text-foreground/70">Instant Processing</span>
                       </div>
                     </div>
                   </div>
@@ -215,8 +215,8 @@ export default function ReturnsPage() {
             <RefreshCcw className="mr-1 size-3" />
             How It Works
           </Badge>
-          <h2 className="text-2xl font-bold text-white">Return Process</h2>
-          <p className="mt-2 text-white/50">Follow these simple steps to return your item</p>
+          <h2 className="text-2xl font-bold text-foreground">Return Process</h2>
+          <p className="mt-2 text-muted-foreground">Follow these simple steps to return your item</p>
         </motion.div>
 
         <div className="relative grid gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -242,8 +242,8 @@ export default function ReturnsPage() {
                     </div>
                     <step.icon className="relative size-7 text-[#F57224]" />
                   </div>
-                  <h3 className="mb-2 text-lg font-semibold text-white">{step.title}</h3>
-                  <p className="text-sm text-white/50">{step.description}</p>
+                  <h3 className="mb-2 text-lg font-semibold text-foreground">{step.title}</h3>
+                  <p className="text-sm text-muted-foreground">{step.description}</p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -263,8 +263,8 @@ export default function ReturnsPage() {
             <Package className="mr-1 size-3" />
             Start Return
           </Badge>
-          <h2 className="text-2xl font-bold text-white">Request a Return</h2>
-          <p className="mt-2 text-white/50">Fill in the details below to begin your return</p>
+          <h2 className="text-2xl font-bold text-foreground">Request a Return</h2>
+          <p className="mt-2 text-muted-foreground">Fill in the details below to begin your return</p>
         </motion.div>
 
         <motion.div
@@ -277,29 +277,29 @@ export default function ReturnsPage() {
             <CardContent className="p-6 md:p-8">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-white/70">Order ID</label>
+                  <label className="text-sm font-medium text-foreground/70">Order ID</label>
                   <Input
                     type="text"
                     placeholder="e.g. ORD-2024-XXXXX"
                     value={orderId}
                     onChange={(e) => setOrderId(e.target.value)}
-                    className="border-white/10 bg-white/5 text-white placeholder:text-white/30 focus:border-[#F57224]/50"
+                    className="border-border bg-muted/50 text-foreground placeholder:text-foreground/30 focus:border-[#F57224]/50"
                   />
-                  <p className="text-xs text-white/30">You can find your Order ID in your order confirmation email</p>
+                  <p className="text-xs text-foreground/30">You can find your Order ID in your order confirmation email</p>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-white/70">Return Reason</label>
+                  <label className="text-sm font-medium text-foreground/70">Return Reason</label>
                   <select
                     value={reason}
                     onChange={(e) => setReason(e.target.value)}
-                    className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2.5 text-sm text-white outline-none transition-colors focus:border-[#F57224]/50 focus:ring-1 focus:ring-[#F57224]/30"
+                    className="w-full rounded-lg border border-border bg-muted/50 px-3 py-2.5 text-sm text-foreground outline-none transition-colors focus:border-[#F57224]/50 focus:ring-1 focus:ring-[#F57224]/30"
                   >
-                    <option value="" disabled className="bg-[#0a0a0f] text-white/40">
+                    <option value="" disabled className="bg-background text-muted-foreground/70">
                       Select a reason for return
                     </option>
                     {refundReasons.map((r) => (
-                      <option key={r} value={r} className="bg-[#0a0a0f] text-white">
+                      <option key={r} value={r} className="bg-background text-foreground">
                         {r}
                       </option>
                     ))}
@@ -331,8 +331,8 @@ export default function ReturnsPage() {
             <HelpCircle className="mr-1 size-3" />
             FAQs
           </Badge>
-          <h2 className="text-2xl font-bold text-white">Return & Refund FAQs</h2>
-          <p className="mt-2 text-white/50">Find answers to common return-related questions</p>
+          <h2 className="text-2xl font-bold text-foreground">Return & Refund FAQs</h2>
+          <p className="mt-2 text-muted-foreground">Find answers to common return-related questions</p>
         </motion.div>
 
         <div className="mx-auto max-w-3xl space-y-3">
@@ -347,9 +347,9 @@ export default function ReturnsPage() {
             >
               <button
                 onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                className="flex w-full items-center justify-between p-5 text-left transition-colors hover:bg-white/5"
+                className="flex w-full items-center justify-between p-5 text-left transition-colors hover:bg-muted/50"
               >
-                <span className="pr-4 font-medium text-white">{faq.question}</span>
+                <span className="pr-4 font-medium text-foreground">{faq.question}</span>
                 <ArrowRight
                   className={`size-5 flex-shrink-0 text-[#F57224] transition-transform duration-300 ${
                     openFaq === index ? "rotate-90" : ""
@@ -361,9 +361,9 @@ export default function ReturnsPage() {
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
                   transition={{ duration: 0.3 }}
-                  className="border-t border-white/10 px-5 pb-5"
+                  className="border-t border-border px-5 pb-5"
                 >
-                  <p className="pt-3 text-sm leading-relaxed text-white/60">{faq.answer}</p>
+                  <p className="pt-3 text-sm leading-relaxed text-muted-foreground">{faq.answer}</p>
                 </motion.div>
               )}
             </motion.div>
@@ -387,8 +387,8 @@ export default function ReturnsPage() {
                   </div>
                 </div>
                 <div className="flex-1">
-                  <h2 className="text-2xl font-bold text-white">Need Help With Your Return?</h2>
-                  <p className="mt-2 text-white/60">
+                  <h2 className="text-2xl font-bold text-foreground">Need Help With Your Return?</h2>
+                  <p className="mt-2 text-muted-foreground">
                     Our support team is available 24/7 to assist you with any return-related questions.
                   </p>
                   <div className="mt-6 flex flex-wrap justify-center gap-6 md:justify-start">
@@ -397,8 +397,8 @@ export default function ReturnsPage() {
                         <Mail className="size-4 text-[#F57224]" />
                       </div>
                       <div>
-                        <p className="text-sm text-white/40">Email</p>
-                        <p className="text-sm font-medium text-white">returns@blazecart.com</p>
+                        <p className="text-sm text-muted-foreground/70">Email</p>
+                        <p className="text-sm font-medium text-foreground">returns@blazecart.com</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
@@ -406,8 +406,8 @@ export default function ReturnsPage() {
                         <Phone className="size-4 text-[#F57224]" />
                       </div>
                       <div>
-                        <p className="text-sm text-white/40">Phone</p>
-                        <p className="text-sm font-medium text-white">1-800-BLAZECART</p>
+                        <p className="text-sm text-muted-foreground/70">Phone</p>
+                        <p className="text-sm font-medium text-foreground">1-800-BLAZECART</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
@@ -415,8 +415,8 @@ export default function ReturnsPage() {
                         <Clock className="size-4 text-[#F57224]" />
                       </div>
                       <div>
-                        <p className="text-sm text-white/40">Hours</p>
-                        <p className="text-sm font-medium text-white">24/7 Support</p>
+                        <p className="text-sm text-muted-foreground/70">Hours</p>
+                        <p className="text-sm font-medium text-foreground">24/7 Support</p>
                       </div>
                     </div>
                   </div>

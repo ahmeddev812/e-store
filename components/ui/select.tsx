@@ -31,14 +31,14 @@ function SelectTrigger({
     <SelectPrimitive.Trigger
       data-slot="select-trigger"
       className={cn(
-        "flex h-9 w-full items-center justify-between rounded-lg border border-white/20 bg-white/10 backdrop-blur-xl px-3 py-1 text-sm text-white shadow-2xl transition-all outline-none hover:bg-white/15 focus-visible:border-[#F57224]/50 focus-visible:ring-3 focus-visible:ring-[#F57224]/20 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:truncate",
+        "flex h-9 w-full items-center justify-between rounded-lg border border-border bg-muted/30 backdrop-blur-xl px-3 py-1 text-sm text-foreground shadow-2xl transition-all outline-none hover:bg-accent focus-visible:border-[#F57224]/50 focus-visible:ring-3 focus-visible:ring-[#F57224]/20 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:truncate",
         className
       )}
       {...props}
     >
       {children}
       <SelectPrimitive.Icon className="flex items-center">
-        <ChevronDown className="size-4 text-white/60 transition-transform data-[open]:rotate-180" />
+        <ChevronDown className="size-4 text-muted-foreground transition-transform data-[open]:rotate-180" />
       </SelectPrimitive.Icon>
     </SelectPrimitive.Trigger>
   )
@@ -51,7 +51,7 @@ function SelectValue({
   return (
     <SelectPrimitive.Value
       data-slot="select-value"
-      className={cn("text-white/80", className)}
+      className={cn("text-foreground/80", className)}
       {...props}
     />
   )
@@ -67,7 +67,7 @@ function SelectPopup({
         <SelectPrimitive.Popup
           data-slot="select-popup"
           className={cn(
-            "min-w-[var(--anchor-width)] overflow-hidden rounded-lg border border-white/20 bg-[#1E293B]/95 backdrop-blur-xl p-1 shadow-2xl data-[ending-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:scale-95 data-[starting-style]:opacity-0",
+            "min-w-[var(--anchor-width)] overflow-hidden rounded-lg border border-border bg-[#1E293B]/95 backdrop-blur-xl p-1 shadow-2xl data-[ending-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:scale-95 data-[starting-style]:opacity-0",
             className
           )}
           {...props}
@@ -86,7 +86,7 @@ function SelectItem({
     <SelectPrimitive.Item
       data-slot="select-item"
       className={cn(
-        "group/item relative flex cursor-default items-center gap-2 rounded-md px-2 py-1.5 text-sm text-white/80 outline-none select-none hover:bg-white/10 data-[highlighted]:bg-white/10 data-[highlighted]:text-white",
+        "group/item relative flex cursor-default items-center gap-2 rounded-md px-2 py-1.5 text-sm text-foreground/80 outline-none select-none hover:bg-muted/30 data-[highlighted]:bg-muted/30 data-[highlighted]:text-foreground",
         className
       )}
       {...props}
@@ -121,7 +121,7 @@ function SelectLabel({
   return (
     <SelectPrimitive.GroupLabel
       data-slot="select-label"
-      className={cn("px-2 py-1.5 text-xs font-medium text-white/50", className)}
+      className={cn("px-2 py-1.5 text-xs font-medium text-muted-foreground", className)}
       {...props}
     />
   )

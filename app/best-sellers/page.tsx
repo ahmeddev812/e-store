@@ -36,7 +36,7 @@ export default function BestSellersPage() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="rounded-full bg-white/5 backdrop-blur-xl border border-white/10 p-6 mb-6"
+            className="rounded-full bg-muted/50 backdrop-blur-xl border border-border p-6 mb-6"
           >
             <Crown className="size-16 text-white/20" />
           </motion.div>
@@ -44,7 +44,7 @@ export default function BestSellersPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15 }}
-            className="text-2xl font-bold text-white mb-2"
+            className="text-2xl font-bold text-foreground mb-2"
           >
             No Best Sellers Yet
           </motion.h1>
@@ -52,7 +52,7 @@ export default function BestSellersPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.25 }}
-            className="text-white/50 text-center max-w-md mb-8"
+            className="text-muted-foreground text-center max-w-md mb-8"
           >
             Our top-rated products haven&apos;t been decided yet. Check back soon for the
             items everyone&apos;s loving.
@@ -92,7 +92,7 @@ export default function BestSellersPage() {
             <Button
               variant="ghost"
               size="sm"
-              className="text-white/60 hover:text-white"
+              className="text-muted-foreground hover:text-foreground"
             >
               <ArrowRight className="size-4 mr-1 rotate-180" />
               Back to Products
@@ -109,13 +109,13 @@ export default function BestSellersPage() {
             <div className="inline-flex items-center justify-center size-14 rounded-full bg-gradient-to-br from-[#F57224]/30 to-[#F57224]/10 border border-[#F57224]/30 backdrop-blur-xl mb-4">
               <Crown className="size-7 text-[#F57224]" />
             </div>
-            <h1 className="text-4xl sm:text-5xl font-bold text-white mb-3">
+            <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-3">
               Best{" "}
               <span className="bg-gradient-to-r from-[#F57224] to-orange-400 bg-clip-text text-transparent">
                 Sellers
               </span>
             </h1>
-            <p className="text-white/50 text-lg max-w-xl">
+            <p className="text-muted-foreground text-lg max-w-xl">
               What everyone&apos;s loving — the most popular picks, hand-picked for you.
             </p>
           </motion.div>
@@ -127,26 +127,26 @@ export default function BestSellersPage() {
           transition={{ delay: 0.2 }}
           className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12"
         >
-          <div className="glass-card rounded-xl p-5 text-center backdrop-blur-md border border-white/10">
+          <div className="glass-card rounded-xl p-5 text-center backdrop-blur-md border border-border">
             <div className="inline-flex items-center justify-center size-10 rounded-full bg-[#F57224]/20 mb-3">
               <Award className="size-5 text-[#F57224]" />
             </div>
-            <p className="text-2xl font-bold text-white">{totalProducts}</p>
-            <p className="text-sm text-white/50">Total Products</p>
+            <p className="text-2xl font-bold text-foreground">{totalProducts}</p>
+            <p className="text-sm text-muted-foreground">Total Products</p>
           </div>
-          <div className="glass-card rounded-xl p-5 text-center backdrop-blur-md border border-white/10">
+          <div className="glass-card rounded-xl p-5 text-center backdrop-blur-md border border-border">
             <div className="inline-flex items-center justify-center size-10 rounded-full bg-amber-500/20 mb-3">
               <Star className="size-5 text-amber-400" />
             </div>
-            <p className="text-2xl font-bold text-white">{avgRating.toFixed(1)}</p>
-            <p className="text-sm text-white/50">Average Rating</p>
+            <p className="text-2xl font-bold text-foreground">{avgRating.toFixed(1)}</p>
+            <p className="text-sm text-muted-foreground">Average Rating</p>
           </div>
-          <div className="glass-card rounded-xl p-5 text-center backdrop-blur-md border border-white/10">
+          <div className="glass-card rounded-xl p-5 text-center backdrop-blur-md border border-border">
             <div className="inline-flex items-center justify-center size-10 rounded-full bg-emerald-500/20 mb-3">
               <TrendingUp className="size-5 text-emerald-400" />
             </div>
-            <p className="text-2xl font-bold text-white">{topCategory}</p>
-            <p className="text-sm text-white/50">Top Category</p>
+            <p className="text-2xl font-bold text-foreground">{topCategory}</p>
+            <p className="text-sm text-muted-foreground">Top Category</p>
           </div>
         </motion.div>
 
@@ -207,11 +207,11 @@ export default function BestSellersPage() {
                       <motion.div
                         initial={{ opacity: 0 }}
                         whileHover={{ opacity: 1 }}
-                        className="absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+                        className="absolute inset-0 flex items-center justify-center bg-background/60 backdrop-blur-sm"
                       >
                         <Button
                           variant="outline"
-                          className="border-white/20 bg-white/10 text-white hover:bg-[#F57224] hover:border-[#F57224]"
+                          className="border-border bg-muted/30 text-foreground hover:bg-[#F57224] hover:text-white hover:border-[#F57224]"
                           onClick={(e) => {
                             e.preventDefault()
                             window.location.href = `/products/${product.slug}`
@@ -224,10 +224,10 @@ export default function BestSellersPage() {
                     </div>
 
                     <CardContent className="p-4">
-                      <p className="text-xs text-white/40 uppercase tracking-wider">
+                      <p className="text-xs text-muted-foreground/70 uppercase tracking-wider">
                         {product.brand}
                       </p>
-                      <h3 className="mt-1 font-semibold text-white line-clamp-2 group-hover:text-[#F57224] transition-colors">
+                      <h3 className="mt-1 font-semibold text-foreground line-clamp-2 group-hover:text-[#F57224] transition-colors">
                         {product.title}
                       </h3>
 
@@ -236,7 +236,7 @@ export default function BestSellersPage() {
                           {formatUSD(discountedPrice)}
                         </span>
                         {product.discountPercentage > 0 && (
-                          <span className="text-xs text-white/40 line-through">
+                          <span className="text-xs text-muted-foreground/70 line-through">
                             {formatUSD(product.price)}
                           </span>
                         )}
@@ -244,7 +244,7 @@ export default function BestSellersPage() {
 
                       <div className="mt-2 flex items-center justify-between">
                         <Rating value={product.rating} size="sm" readonly showValue />
-                        <div className="flex items-center gap-1 text-[10px] text-white/40">
+                        <div className="flex items-center gap-1 text-[10px] text-muted-foreground/70">
                           <Heart className="size-3" />
                           {product.stock > 0 ? "In Stock" : "Out of Stock"}
                         </div>

@@ -66,7 +66,7 @@ function MobileMenu() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
+            className="fixed inset-0 z-50 bg-background/60 backdrop-blur-sm"
             onClick={() => setMobileMenuOpen(false)}
           />
           <motion.div
@@ -74,9 +74,9 @@ function MobileMenu() {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 30, stiffness: 300 }}
-            className="fixed inset-y-0 right-0 z-50 flex w-full max-w-sm flex-col border-l border-white/20 bg-white/80 backdrop-blur-2xl shadow-2xl dark:bg-black/80"
+            className="fixed inset-y-0 right-0 z-50 flex w-full max-w-sm flex-col border-l border-border bg-background/95 backdrop-blur-2xl shadow-2xl"
           >
-            <div className="flex items-center justify-between border-b border-white/10 px-4 py-4">
+            <div className="flex items-center justify-between border-b border-border px-4 py-4">
               <Link href="/" className="text-lg font-bold tracking-widest" onClick={() => setMobileMenuOpen(false)}>
                 <span className="bg-gradient-to-r from-[#F57224] to-orange-400 bg-clip-text text-transparent">BLAZECART</span>
               </Link>
@@ -85,15 +85,15 @@ function MobileMenu() {
               </Button>
             </div>
 
-            <div className="border-b border-white/10 px-4 py-4">
+            <div className="border-b border-border px-4 py-4">
               {isSignedIn && user ? (
                 <div className="flex items-center gap-3">
                   <div className="flex size-10 items-center justify-center rounded-full bg-[#F57224]/10 text-[#F57224]">
                     <User className="size-5" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium">{user.fullName || user.firstName || "User"}</p>
-                    <p className="text-xs text-white/40">{user.primaryEmailAddress?.emailAddress}</p>
+                    <p className="text-sm font-medium text-foreground">{user.fullName || user.firstName || "User"}</p>
+                    <p className="text-xs text-muted-foreground">{user.primaryEmailAddress?.emailAddress}</p>
                   </div>
                 </div>
               ) : (
@@ -102,7 +102,7 @@ function MobileMenu() {
                     <Button variant="default" size="sm" className="w-full bg-gradient-to-r from-[#F57224] to-orange-500">Sign In</Button>
                   </Link>
                   <Link href="/register" className="flex-1" onClick={() => setMobileMenuOpen(false)}>
-                    <Button variant="outline" size="sm" className="w-full border-white/20">Register</Button>
+                    <Button variant="outline" size="sm" className="w-full border-border">Register</Button>
                   </Link>
                 </div>
               )}
@@ -118,7 +118,7 @@ function MobileMenu() {
                       "flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-all",
                       pathname === link.href
                         ? "bg-[#F57224]/10 text-[#F57224]"
-                        : "text-white/70 hover:bg-white/10"
+                        : "text-foreground/70 hover:bg-accent"
                     )}
                   >
                     <link.icon className="size-5" />
@@ -126,43 +126,43 @@ function MobileMenu() {
                   </Link>
                 ))}
               </div>
-              <hr className="my-4 border-white/10" />
+              <hr className="my-4 border-border" />
               <div className="space-y-1">
                 {isSignedIn ? (
                   <>
-                    <Link href="/wishlist" className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-white/70 hover:bg-white/10" onClick={() => setMobileMenuOpen(false)}>
+                    <Link href="/wishlist" className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-foreground/70 hover:bg-accent" onClick={() => setMobileMenuOpen(false)}>
                       <Heart className="size-5" />
                       Wishlist
                     </Link>
-                    <Link href="/order-tracking" className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-white/70 hover:bg-white/10" onClick={() => setMobileMenuOpen(false)}>
+                    <Link href="/order-tracking" className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-foreground/70 hover:bg-accent" onClick={() => setMobileMenuOpen(false)}>
                       <Truck className="size-5" />
                       Order Tracking
                     </Link>
-                    <Link href="/profile-settings" className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-white/70 hover:bg-white/10" onClick={() => setMobileMenuOpen(false)}>
+                    <Link href="/profile-settings" className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-foreground/70 hover:bg-accent" onClick={() => setMobileMenuOpen(false)}>
                       <Settings className="size-5" />
                       Profile Settings
                     </Link>
-                    <Link href="/help" className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-white/70 hover:bg-white/10" onClick={() => setMobileMenuOpen(false)}>
+                    <Link href="/help" className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-foreground/70 hover:bg-accent" onClick={() => setMobileMenuOpen(false)}>
                       <Info className="size-5" />
                       Support
                     </Link>
-                    <hr className="my-4 border-white/10" />
-                    <button onClick={handleLogout} className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-red-400 hover:bg-white/10">
+                    <hr className="my-4 border-border" />
+                    <button onClick={handleLogout} className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-red-400 hover:bg-accent">
                       <LogOut className="size-5" />
                       Sign Out
                     </button>
                   </>
                 ) : (
                   <>
-                    <Link href="/cart" className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-white/70 hover:bg-white/10" onClick={() => setMobileMenuOpen(false)}>
+                    <Link href="/cart" className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-foreground/70 hover:bg-accent" onClick={() => setMobileMenuOpen(false)}>
                       <ShoppingBag className="size-5" />
                       Cart
                     </Link>
-                    <Link href="/new-arrivals" className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-white/70 hover:bg-white/10" onClick={() => setMobileMenuOpen(false)}>
+                    <Link href="/new-arrivals" className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-foreground/70 hover:bg-accent" onClick={() => setMobileMenuOpen(false)}>
                       <Sparkles className="size-5" />
                       New Arrivals
                     </Link>
-                    <Link href="/flash-sales" className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-white/70 hover:bg-white/10" onClick={() => setMobileMenuOpen(false)}>
+                    <Link href="/flash-sales" className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-foreground/70 hover:bg-accent" onClick={() => setMobileMenuOpen(false)}>
                       <Flame className="size-5" />
                       Flash Sales
                     </Link>
@@ -171,8 +171,8 @@ function MobileMenu() {
               </div>
             </nav>
 
-            <div className="border-t border-white/10 px-4 py-4">
-              <p className="text-center text-xs text-white/30">
+            <div className="border-t border-border px-4 py-4">
+              <p className="text-center text-xs text-foreground/30">
                 &copy; {new Date().getFullYear()} BlazeCart. All rights reserved.
               </p>
             </div>

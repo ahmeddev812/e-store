@@ -37,11 +37,11 @@ export default function WishlistPage() {
   if (items.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[70vh] px-4 animate-fade-in">
-        <div className="rounded-full bg-white/5 backdrop-blur-xl border border-white/10 p-6 mb-6">
+        <div className="rounded-full bg-muted/50 backdrop-blur-xl border border-border p-6 mb-6">
           <Heart className="size-16 text-white/20" />
         </div>
-        <h1 className="text-2xl font-bold text-white mb-2">Your wishlist is empty</h1>
-        <p className="text-white/50 mb-8 text-center max-w-md">
+        <h1 className="text-2xl font-bold text-foreground mb-2">Your wishlist is empty</h1>
+        <p className="text-muted-foreground mb-8 text-center max-w-md">
           Save items you love to your wishlist and come back to them anytime.
         </p>
         <Link href="/products">
@@ -57,8 +57,8 @@ export default function WishlistPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 animate-fade-in">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-white">My Wishlist</h1>
-        <p className="text-white/50 text-sm mt-1">{items.length} item{items.length !== 1 ? "s" : ""}</p>
+        <h1 className="text-2xl font-bold text-foreground">My Wishlist</h1>
+        <p className="text-muted-foreground text-sm mt-1">{items.length} item{items.length !== 1 ? "s" : ""}</p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -69,7 +69,7 @@ export default function WishlistPage() {
             <Card key={item.id}>
               <CardContent className="p-0">
                 <Link href={`/products/${item.slug}`}>
-                  <div className="relative aspect-square bg-white/5">
+                  <div className="relative aspect-square bg-muted/50">
                     <Image
                       src={item.thumbnail}
                       alt={item.title}
@@ -81,14 +81,14 @@ export default function WishlistPage() {
                 </Link>
                 <div className="p-4 space-y-3">
                   <Link href={`/products/${item.slug}`}>
-                    <h3 className="text-white font-medium text-sm truncate hover:text-[#F57224] transition-colors">
+                    <h3 className="text-foreground font-medium text-sm truncate hover:text-[#F57224] transition-colors">
                       {item.title}
                     </h3>
                   </Link>
                   <div className="flex items-center gap-2">
                     <span className="text-[#F57224] font-semibold">{formatUSD(discountedPrice)}</span>
                     {item.discountPercentage > 0 && (
-                      <span className="text-white/40 text-xs line-through">{formatUSD(item.price)}</span>
+                      <span className="text-muted-foreground/70 text-xs line-through">{formatUSD(item.price)}</span>
                     )}
                   </div>
                   <div className="flex gap-2">

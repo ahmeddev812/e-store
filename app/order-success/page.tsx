@@ -74,7 +74,7 @@ function GenericSuccessPage() {
           initial={{ scale: 0, rotate: -180 }}
           animate={{ scale: 1, rotate: 0 }}
           transition={{ type: "spring", duration: 0.8 }}
-          className="mb-6 rounded-full bg-gradient-to-br from-white/5 to-white/0 p-8 backdrop-blur-xl"
+          className="mb-6 rounded-full bg-gradient-to-br from-accent/5 to-transparent p-8 backdrop-blur-xl"
         >
           <CheckCircle className="size-20 text-emerald-400" />
         </motion.div>
@@ -82,7 +82,7 @@ function GenericSuccessPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="text-3xl font-bold text-white mb-3"
+          className="text-3xl font-bold text-foreground mb-3"
         >
           Payment Successful!
         </motion.h1>
@@ -90,7 +90,7 @@ function GenericSuccessPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="text-white/50 mb-8 text-center max-w-md"
+          className="text-muted-foreground mb-8 text-center max-w-md"
         >
           Thank you for your purchase. Your order is being processed.
         </motion.p>
@@ -273,7 +273,7 @@ function OrderSuccessContent() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="text-3xl font-bold text-white sm:text-4xl"
+            className="text-3xl font-bold text-foreground sm:text-4xl"
           >
             Order Confirmed!
           </motion.h1>
@@ -281,7 +281,7 @@ function OrderSuccessContent() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="mt-2 text-white/60"
+            className="mt-2 text-muted-foreground"
           >
             Thank you for shopping with BlazeCart. Your payment has been processed.
           </motion.p>
@@ -294,7 +294,7 @@ function OrderSuccessContent() {
           >
             <button
               onClick={() => setIsShareOpen(!isShareOpen)}
-              className="flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm text-white/60 transition-all hover:bg-white/20"
+              className="flex items-center gap-2 rounded-full bg-muted/30 px-4 py-2 text-sm text-muted-foreground transition-all hover:bg-muted/20"
             >
               <Share2 className="size-4" />
               Share your order
@@ -338,27 +338,27 @@ function OrderSuccessContent() {
                 <CardContent className="p-6 space-y-5">
                   <div className="flex flex-wrap items-center justify-between gap-4">
                     <div>
-                      <p className="text-xs uppercase tracking-wider text-white/40">Order Number</p>
-                      <p className="font-mono text-lg font-semibold text-white">{order.id}</p>
+                      <p className="text-xs uppercase tracking-wider text-muted-foreground/70">Order Number</p>
+                      <p className="font-mono text-lg font-semibold text-foreground">{order.id}</p>
                     </div>
                     <Badge className="bg-gradient-to-r from-emerald-500 to-green-500 border-none px-3 py-1">
                       {order.status.toUpperCase()}
                     </Badge>
                   </div>
 
-                  <Separator className="bg-white/10" />
+                  <Separator className="bg-muted/30" />
 
                   <div>
-                    <h3 className="mb-4 text-sm font-semibold text-white">Order Tracking</h3>
+                    <h3 className="mb-4 text-sm font-semibold text-foreground">Order Tracking</h3>
                     <div className="relative">
-                      <div className="absolute left-5 top-0 h-full w-px bg-gradient-to-b from-emerald-500 via-white/20 to-white/10" />
+                      <div className="absolute left-5 top-0 h-full w-px bg-gradient-to-b from-emerald-500 via-muted-foreground/20 to-muted-foreground/10" />
                       <div className="space-y-6">
                         {trackingSteps.map((step) => (
                           <div key={step.label} className="relative flex items-start gap-4">
                             <div className={`relative z-10 flex h-10 w-10 items-center justify-center rounded-full ${
                               step.status === "completed" ? "bg-emerald-500/20 text-emerald-400" :
                               step.status === "current" ? "bg-[#F57224]/20 text-[#F57224]" :
-                              "bg-white/10 text-white/30"
+                              "bg-muted/30 text-foreground/30"
                             }`}>
                               <step.icon className="size-5" />
                             </div>
@@ -366,11 +366,11 @@ function OrderSuccessContent() {
                               <p className={`font-medium ${
                                 step.status === "completed" ? "text-emerald-400" :
                                 step.status === "current" ? "text-[#F57224]" :
-                                "text-white/40"
+                                "text-muted-foreground/70"
                               }`}>
                                 {step.label}
                               </p>
-                              <p className="text-xs text-white/30">{step.date}</p>
+                              <p className="text-xs text-foreground/30">{step.date}</p>
                             </div>
                             {step.status === "current" && (
                               <div className="absolute -right-2 -top-2">
@@ -383,11 +383,11 @@ function OrderSuccessContent() {
                     </div>
                   </div>
 
-                  <Separator className="bg-white/10" />
+                  <Separator className="bg-muted/30" />
 
                   <div>
                     <div className="mb-3 flex items-center justify-between">
-                      <h3 className="text-sm font-semibold text-white">Items ({order.items.length})</h3>
+                      <h3 className="text-sm font-semibold text-foreground">Items ({order.items.length})</h3>
                     </div>
                     <div className="space-y-3">
                       {order.items.map((item: OrderItem, index: number) => {
@@ -398,7 +398,7 @@ function OrderSuccessContent() {
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.3 + index * 0.05 }}
-                            className="flex gap-3 rounded-xl bg-white/5 p-3 transition-all hover:bg-white/10"
+                            className="flex gap-3 rounded-xl bg-muted/50 p-3 transition-all hover:bg-muted/30"
                           >
                             <div className="relative size-16 shrink-0 overflow-hidden rounded-lg">
                               <Image
@@ -410,8 +410,8 @@ function OrderSuccessContent() {
                               />
                             </div>
                             <div className="flex-1 min-w-0">
-                              <p className="text-sm font-medium text-white truncate">{item.title}</p>
-                              <p className="text-xs text-white/40">
+                              <p className="text-sm font-medium text-foreground truncate">{item.title}</p>
+                              <p className="text-xs text-muted-foreground/70">
                                 {formatUSD(discountedPrice)} x {item.quantity}
                               </p>
                             </div>
@@ -440,16 +440,16 @@ function OrderSuccessContent() {
                 <CardContent className="p-6 space-y-4">
                   <div className="flex items-center gap-2">
                     <Crown className="size-4 text-[#F57224]" />
-                    <h3 className="font-semibold text-white">Order Summary</h3>
+                    <h3 className="font-semibold text-foreground">Order Summary</h3>
                   </div>
 
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
-                      <span className="text-white/60">Subtotal</span>
-                      <span className="text-white">{formatUSD(order.subtotal)}</span>
+                      <span className="text-muted-foreground">Subtotal</span>
+                      <span className="text-foreground">{formatUSD(order.subtotal)}</span>
                     </div>
                     <div className="flex justify-between text-sm">
-                      <span className="text-white/60">Shipping</span>
+                      <span className="text-muted-foreground">Shipping</span>
                       <span className="text-emerald-400">Free</span>
                     </div>
                     {order.discount > 0 && (
@@ -460,21 +460,21 @@ function OrderSuccessContent() {
                     )}
                   </div>
 
-                  <Separator className="bg-white/10" />
+                  <Separator className="bg-muted/30" />
 
                   <div className="flex justify-between text-lg font-bold">
-                    <span className="text-white">Total Paid</span>
+                    <span className="text-foreground">Total Paid</span>
                     <span className="text-2xl text-[#F57224]">{formatUSD(order.total)}</span>
                   </div>
 
-                  <div className="rounded-lg bg-white/5 p-3 space-y-2">
+                  <div className="rounded-lg bg-muted/50 p-3 space-y-2">
                     <div>
-                      <p className="text-xs text-white/40">Payment Method</p>
-                      <p className="text-sm text-white">Stripe (Card)</p>
+                      <p className="text-xs text-muted-foreground/70">Payment Method</p>
+                      <p className="text-sm text-foreground">Stripe (Card)</p>
                     </div>
                     {order.stripeSessionId && (
                       <div>
-                        <p className="text-xs text-white/40">Stripe Session ID</p>
+                        <p className="text-xs text-muted-foreground/70">Stripe Session ID</p>
                         <p className="font-mono text-xs text-[#F57224] break-all">{order.stripeSessionId}</p>
                       </div>
                     )}
@@ -492,12 +492,12 @@ function OrderSuccessContent() {
                 <CardContent className="p-6 space-y-3">
                   <div className="flex items-center gap-2">
                     <MapPin className="size-4 text-[#F57224]" />
-                    <h3 className="font-semibold text-white">Shipping Address</h3>
+                    <h3 className="font-semibold text-foreground">Shipping Address</h3>
                   </div>
                   <div className="space-y-1 text-sm">
-                    <p className="text-white">{order.shipping?.name || order.shippingAddress?.fullName || "N/A"}</p>
-                    <p className="text-white/60">{order.shipping?.address || order.shippingAddress?.address || "N/A"}</p>
-                    <p className="text-white/60">
+                    <p className="text-foreground">{order.shipping?.name || order.shippingAddress?.fullName || "N/A"}</p>
+                    <p className="text-muted-foreground">{order.shipping?.address || order.shippingAddress?.address || "N/A"}</p>
+                    <p className="text-muted-foreground">
                       {order.shipping?.city || order.shippingAddress?.city || "N/A"}, {order.shipping?.zip || order.shippingAddress?.postalCode || "N/A"}
                     </p>
                   </div>
@@ -513,16 +513,16 @@ function OrderSuccessContent() {
               <Card className="glass-premium bg-gradient-to-br from-[#F57224]/10 to-[#F57224]/5">
                 <CardContent className="p-6 text-center">
                   <Headphones className="mx-auto mb-3 size-8 text-[#F57224]" />
-                  <h3 className="font-semibold text-white">Need Help?</h3>
-                  <p className="mt-1 text-xs text-white/40">Our support team is here for you</p>
+                  <h3 className="font-semibold text-foreground">Need Help?</h3>
+                  <p className="mt-1 text-xs text-muted-foreground/70">Our support team is here for you</p>
                   <div className="mt-4 space-y-2">
                     <Link href="/contact">
-                      <Button variant="outline" size="sm" className="w-full border-white/20">
+                      <Button variant="outline" size="sm" className="w-full border-border">
                         Contact Support
                       </Button>
                     </Link>
                     <Link href="/faq">
-                      <Button variant="ghost" size="sm" className="w-full text-white/60">
+                      <Button variant="ghost" size="sm" className="w-full text-muted-foreground">
                         Visit FAQ
                       </Button>
                     </Link>
@@ -540,7 +540,7 @@ function OrderSuccessContent() {
           className="mt-8 flex flex-col gap-3 sm:flex-row"
         >
           <Link href="/dashboard" className="flex-1">
-            <Button variant="outline" className="w-full border-white/20">
+            <Button variant="outline" className="w-full border-border">
               <Package className="mr-2 size-4" />
               View Dashboard
             </Button>
@@ -559,15 +559,15 @@ function OrderSuccessContent() {
           transition={{ delay: 0.6 }}
           className="mt-8 flex flex-wrap items-center justify-center gap-4 text-center"
         >
-          <div className="flex items-center gap-2 text-xs text-white/30">
+          <div className="flex items-center gap-2 text-xs text-foreground/30">
             <Shield className="size-3" />
             <span>Secure Transaction</span>
           </div>
-          <div className="flex items-center gap-2 text-xs text-white/30">
+          <div className="flex items-center gap-2 text-xs text-foreground/30">
             <RotateCcw className="size-3" />
             <span>30-Day Returns</span>
           </div>
-          <div className="flex items-center gap-2 text-xs text-white/30">
+          <div className="flex items-center gap-2 text-xs text-foreground/30">
             <Award className="size-3" />
             <span>Quality Guaranteed</span>
           </div>

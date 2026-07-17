@@ -104,7 +104,7 @@ export default function CareersPage() {
               <span className="text-sm font-medium text-[#F57224]">Careers at BlazeCart</span>
             </motion.div>
 
-            <h1 className="text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl">
+            <h1 className="text-5xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
               Join{" "}
               <span className="relative inline-block">
                 <span className="absolute -inset-1 rounded-lg bg-gradient-to-r from-[#F57224]/30 to-[#D4A853]/20 blur-xl" />
@@ -113,7 +113,7 @@ export default function CareersPage() {
                 </span>
               </span>
             </h1>
-            <p className="mt-6 text-lg text-white/60 max-w-2xl mx-auto">
+            <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto">
               At BlazeCart, we&apos;re building the future of ecommerce. Join a passionate team
               dedicated to delivering premium shopping experiences to millions worldwide.
             </p>
@@ -130,7 +130,7 @@ export default function CareersPage() {
                 </Button>
               </Link>
               <Link href="/">
-                <Button variant="outline" className="border-white/20 hover:border-[#F57224]/50 text-base px-8 py-6">
+                <Button variant="outline" className="border-border hover:border-[#F57224]/50 text-base px-8 py-6">
                   Back to Home
                 </Button>
               </Link>
@@ -146,13 +146,13 @@ export default function CareersPage() {
           className="absolute bottom-8 left-1/2 -translate-x-1/2"
         >
           <div className="flex flex-col items-center gap-2">
-            <span className="text-xs text-white/40">Explore opportunities</span>
+            <span className="text-xs text-muted-foreground/70">Explore opportunities</span>
             <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ repeat: Infinity, repeatType: "loop", duration: 1.5 }}
-              className="flex items-center justify-center size-6 rounded-full border border-white/20"
+              className="flex items-center justify-center size-6 rounded-full border border-border"
             >
-              <ChevronRight className="size-4 rotate-90 text-white/40" />
+              <ChevronRight className="size-4 rotate-90 text-muted-foreground/70" />
             </motion.div>
           </div>
         </motion.div>
@@ -169,10 +169,10 @@ export default function CareersPage() {
           <Badge className="mb-4 bg-gradient-to-r from-[#F57224]/20 to-[#D4A853]/10 text-[#F57224] border-[#F57224]/30">
             Why Join Us
           </Badge>
-          <h2 className="text-3xl font-bold text-white">
+          <h2 className="text-3xl font-bold text-foreground">
             Perks & <span className="text-gradient">Benefits</span>
           </h2>
-          <p className="text-white/50 max-w-2xl mx-auto mt-2">
+          <p className="text-muted-foreground max-w-2xl mx-auto mt-2">
             We believe in taking care of our team members with industry-leading benefits.
           </p>
         </motion.div>
@@ -191,8 +191,8 @@ export default function CareersPage() {
                   <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-[#F57224]/20 to-[#D4A853]/10 text-[#F57224] mb-4 group-hover:scale-110 transition-transform">
                     <benefit.icon className="size-7" />
                   </div>
-                  <h3 className="text-lg font-semibold text-white mb-2">{benefit.title}</h3>
-                  <p className="text-sm text-white/50 leading-relaxed">{benefit.description}</p>
+                  <h3 className="text-lg font-semibold text-foreground mb-2">{benefit.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{benefit.description}</p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -211,10 +211,10 @@ export default function CareersPage() {
           <Badge className="mb-4 bg-gradient-to-r from-[#F57224]/20 to-[#D4A853]/10 text-[#F57224] border-[#F57224]/30">
             Open Positions
           </Badge>
-          <h2 className="text-3xl font-bold text-white">
+          <h2 className="text-3xl font-bold text-foreground">
             Current <span className="text-gradient">Opportunities</span>
           </h2>
-          <p className="text-white/50 max-w-2xl mx-auto mt-2">
+          <p className="text-muted-foreground max-w-2xl mx-auto mt-2">
             Find your place at BlazeCart and help shape the future of ecommerce.
           </p>
         </motion.div>
@@ -234,7 +234,7 @@ export default function CareersPage() {
                     <Briefcase className="size-6" />
                   </div>
 
-                  <h3 className="text-xl font-semibold text-white group-hover:text-[#F57224] transition-colors">
+                  <h3 className="text-xl font-semibold text-foreground group-hover:text-[#F57224] transition-colors">
                     {position.title}
                   </h3>
 
@@ -242,16 +242,16 @@ export default function CareersPage() {
                     {position.department}
                   </Badge>
 
-                  <p className="text-sm text-white/60 mt-3 leading-relaxed flex-1">
+                  <p className="text-sm text-muted-foreground mt-3 leading-relaxed flex-1">
                     {position.description}
                   </p>
 
-                  <div className="mt-4 pt-4 border-t border-white/10 space-y-2">
-                    <div className="flex items-center gap-2 text-sm text-white/50">
+                  <div className="mt-4 pt-4 border-t border-border space-y-2">
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
                       <MapPin className="size-4 text-[#F57224]" />
                       {position.location}
                     </div>
-                    <div className="flex items-center gap-2 text-sm text-white/50">
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
                       <Clock className="size-4 text-[#D4A853]" />
                       {position.type}
                     </div>
@@ -288,11 +288,11 @@ export default function CareersPage() {
                   <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-[#F57224]/20 to-[#D4A853]/10 text-[#F57224] mb-4 group-hover:scale-110 transition-transform">
                     <stat.icon className="size-7" />
                   </div>
-                  <div className="text-4xl font-bold text-white mb-2">
+                  <div className="text-4xl font-bold text-foreground mb-2">
                     {stat.value}
                     {stat.suffix && <span className="text-xl text-[#F57224]">{stat.suffix}</span>}
                   </div>
-                  <div className="text-sm text-white/50">{stat.label}</div>
+                  <div className="text-sm text-muted-foreground">{stat.label}</div>
                 </CardContent>
               </Card>
             </motion.div>
@@ -313,8 +313,8 @@ export default function CareersPage() {
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-[#F57224]/20 to-[#D4A853]/10 mb-6">
               <Users className="size-8 text-[#F57224]" />
             </div>
-            <h2 className="text-3xl font-bold text-white">Ready to Make an Impact?</h2>
-            <p className="mt-2 text-white/60 max-w-md mx-auto">
+            <h2 className="text-3xl font-bold text-foreground">Ready to Make an Impact?</h2>
+            <p className="mt-2 text-muted-foreground max-w-md mx-auto">
               Don&apos;t see the perfect role? Send us your resume and we&apos;ll keep you in mind
               for future opportunities.
             </p>
@@ -323,7 +323,7 @@ export default function CareersPage() {
                 Submit Resume <ArrowRight className="ml-2 size-5" />
               </Button>
               <Link href="/">
-                <Button variant="outline" className="border-white/20 hover:border-[#F57224]/50 text-base px-8 py-6">
+                <Button variant="outline" className="border-border hover:border-[#F57224]/50 text-base px-8 py-6">
                   Back to Home
                 </Button>
               </Link>

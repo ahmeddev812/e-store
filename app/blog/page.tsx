@@ -132,7 +132,7 @@ export default function BlogPage() {
         >
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-sm text-white/50 hover:text-[#F57224] transition-colors group"
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-[#F57224] transition-colors group"
           >
             <ArrowRight className="size-4 rotate-180 group-hover:-translate-x-1 transition-transform" />
             Back to Home
@@ -161,7 +161,7 @@ export default function BlogPage() {
               <span className="text-sm font-medium text-[#F57224]">Our Journal</span>
             </motion.div>
 
-            <h1 className="text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl">
+            <h1 className="text-5xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
               Our{" "}
               <span className="relative inline-block">
                 <span className="absolute -inset-1 rounded-lg bg-gradient-to-r from-[#F57224]/30 to-[#F57224]/20 blur-xl" />
@@ -170,7 +170,7 @@ export default function BlogPage() {
                 </span>
               </span>
             </h1>
-            <p className="mt-6 text-lg text-white/60 max-w-2xl mx-auto">
+            <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto">
               Discover the latest in premium fashion, style guides, brand stories, and expert tips
               to elevate your shopping experience.
             </p>
@@ -189,7 +189,7 @@ export default function BlogPage() {
             transition={{ repeat: Infinity, repeatType: "loop", duration: 1.5 }}
             className="flex items-center justify-center"
           >
-            <ArrowRight className="size-5 rotate-90 text-white/30" />
+            <ArrowRight className="size-5 rotate-90 text-foreground/30" />
           </motion.div>
         </motion.div>
       </section>
@@ -230,18 +230,18 @@ export default function BlogPage() {
                     <Badge className="bg-gradient-to-r from-[#F57224] to-orange-500 text-white border-none text-xs">
                       {featuredPost.category}
                     </Badge>
-                    <span className="flex items-center gap-1 text-xs text-white/40">
+                    <span className="flex items-center gap-1 text-xs text-muted-foreground/70">
                       <Clock className="size-3" />
                       {featuredPost.readTime}
                     </span>
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#F57224] transition-colors">
+                  <h3 className="text-2xl font-bold text-foreground mb-3 group-hover:text-[#F57224] transition-colors">
                     {featuredPost.title}
                   </h3>
-                  <p className="text-white/60 text-sm leading-relaxed mb-6">
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-6">
                     {featuredPost.excerpt}
                   </p>
-                  <div className="flex flex-wrap items-center gap-4 text-xs text-white/40 mb-6">
+                  <div className="flex flex-wrap items-center gap-4 text-xs text-muted-foreground/70 mb-6">
                     <span className="flex items-center gap-1">
                       <Calendar className="size-3" />
                       {featuredPost.date}
@@ -318,18 +318,18 @@ export default function BlogPage() {
                         <Badge className="bg-[#F57224]/10 text-[#F57224] border-none text-[10px]">
                           {post.category}
                         </Badge>
-                        <span className="flex items-center gap-1 text-[10px] text-white/40">
+                        <span className="flex items-center gap-1 text-[10px] text-muted-foreground/70">
                           <Clock className="size-3" />
                           {post.readTime}
                         </span>
                       </div>
-                      <h3 className="font-bold text-white mb-2 group-hover:text-[#F57224] transition-colors line-clamp-2">
+                      <h3 className="font-bold text-foreground mb-2 group-hover:text-[#F57224] transition-colors line-clamp-2">
                         {post.title}
                       </h3>
-                      <p className="text-sm text-white/50 leading-relaxed mb-4 line-clamp-2">
+                      <p className="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-2">
                         {post.excerpt}
                       </p>
-                      <div className="flex flex-wrap items-center gap-3 text-[10px] text-white/30 mb-4">
+                      <div className="flex flex-wrap items-center gap-3 text-[10px] text-foreground/30 mb-4">
                         <span className="flex items-center gap-1">
                           <User className="size-3" />
                           {post.author}
@@ -374,19 +374,19 @@ export default function BlogPage() {
                 <CardContent className="p-5">
                   <div className="flex items-center gap-2 mb-4">
                     <Tag className="size-4 text-[#F57224]" />
-                    <h3 className="font-semibold text-white">Categories</h3>
+                    <h3 className="font-semibold text-foreground">Categories</h3>
                   </div>
                   <div className="space-y-2">
                     {categories.map((cat) => (
                       <button
                         key={cat.name}
-                        className="flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm text-white/60 hover:bg-gradient-to-r hover:from-[#F57224]/20 hover:to-[#F57224]/5 hover:text-[#F57224] transition-all duration-300 group"
+                        className="flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm text-muted-foreground hover:bg-gradient-to-r hover:from-[#F57224]/20 hover:to-[#F57224]/5 hover:text-[#F57224] transition-all duration-300 group"
                       >
                         <span className="flex items-center gap-2">
-                          <span className="size-1.5 rounded-full bg-white/20 group-hover:bg-[#F57224] transition-colors" />
+                          <span className="size-1.5 rounded-full bg-muted/20 group-hover:bg-[#F57224] hover:text-white transition-colors" />
                           <span>{cat.name}</span>
                         </span>
-                        <Badge className="bg-white/10 text-white/40 text-[9px] border-none group-hover:bg-[#F57224]/20 group-hover:text-[#F57224] transition-colors">
+                        <Badge className="bg-muted/30 text-muted-foreground/70 text-[9px] border-none group-hover:bg-[#F57224]/20 group-hover:text-[#F57224] transition-colors">
                           {cat.count}
                         </Badge>
                       </button>
@@ -400,13 +400,13 @@ export default function BlogPage() {
                 <CardContent className="p-5">
                   <div className="flex items-center gap-2 mb-4">
                     <BookOpen className="size-4 text-[#F57224]" />
-                    <h3 className="font-semibold text-white">Popular Tags</h3>
+                    <h3 className="font-semibold text-foreground">Popular Tags</h3>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {tags.map((tag) => (
                       <span
                         key={tag}
-                        className="px-3 py-1.5 rounded-full text-[11px] font-medium bg-white/5 text-white/50 border border-white/10 hover:bg-[#F57224]/20 hover:text-[#F57224] hover:border-[#F57224]/30 transition-all duration-300 cursor-pointer"
+                        className="px-3 py-1.5 rounded-full text-[11px] font-medium bg-muted/50 text-muted-foreground border border-border hover:bg-[#F57224]/20 hover:text-[#F57224] hover:border-[#F57224]/30 transition-all duration-300 cursor-pointer"
                       >
                         {tag}
                       </span>
@@ -421,8 +421,8 @@ export default function BlogPage() {
                   <div className="mb-4 inline-flex items-center justify-center rounded-xl bg-[#F57224]/20 p-3">
                     <MessageCircle className="size-6 text-[#F57224]" />
                   </div>
-                  <h3 className="mb-2 font-semibold text-white">Stay Updated</h3>
-                  <p className="mb-4 text-xs text-white/40">
+                  <h3 className="mb-2 font-semibold text-foreground">Stay Updated</h3>
+                  <p className="mb-4 text-xs text-muted-foreground/70">
                     Get the latest articles and style tips delivered to your inbox.
                   </p>
                   <Button className="w-full bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow text-xs">
@@ -449,8 +449,8 @@ export default function BlogPage() {
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-[#F57224]/20 to-[#F57224]/5 mb-6">
               <Heart className="size-8 text-[#F57224]" />
             </div>
-            <h2 className="text-3xl font-bold text-white">Join Our Community</h2>
-            <p className="mt-2 text-white/60 max-w-md mx-auto">
+            <h2 className="text-3xl font-bold text-foreground">Join Our Community</h2>
+            <p className="mt-2 text-muted-foreground max-w-md mx-auto">
               Stay ahead of the trends. Subscribe to our newsletter for exclusive content and premium insights.
             </p>
             <div className="mt-6 flex flex-wrap gap-4 justify-center">
@@ -461,7 +461,7 @@ export default function BlogPage() {
                 </Button>
               </Link>
               <Link href="/">
-                <Button variant="outline" className="border-white/20 hover:border-[#F57224]/50">
+                <Button variant="outline" className="border-border hover:border-[#F57224]/50">
                   Explore More
                 </Button>
               </Link>

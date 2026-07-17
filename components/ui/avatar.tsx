@@ -21,7 +21,7 @@ const avatarVariants = cva(
       },
       variant: {
         default: "",
-        glass: "ring-2 ring-white/20 ring-offset-2 ring-offset-black/20 backdrop-blur-sm",
+        glass: "ring-2 ring-ring/20 ring-offset-2 ring-offset-background backdrop-blur-sm",
         premium: "ring-2 ring-[#F57224]/50 ring-offset-2 ring-offset-black/30 shadow-glow",
         bordered: "border-2 border-[#F57224]/30",
       },
@@ -77,7 +77,7 @@ function AvatarFallback({
     <AvatarPrimitive.Fallback
       data-slot="avatar-fallback"
       className={cn(
-        "flex size-full items-center justify-center bg-gradient-to-br from-[#1E293B] to-[#0f172a] font-medium text-white/80 transition-all duration-300 group-hover:from-[#F57224]/20 group-hover:to-[#F57224]/10 group-hover:text-[#F57224]",
+        "flex size-full items-center justify-center bg-gradient-to-br from-muted to-muted/80 font-medium text-muted-foreground transition-all duration-300 group-hover:from-[#F57224]/20 group-hover:to-[#F57224]/10 group-hover:text-[#F57224]",
         className
       )}
       {...props}
@@ -112,7 +112,7 @@ function AvatarGroup({ children, max = 4, size = "default", className }: AvatarG
       ))}
       {remainingCount > 0 && (
         <div className={cn(
-          "relative flex items-center justify-center rounded-full bg-gradient-to-br from-[#1E293B] to-[#0f172a] ring-2 ring-black/20",
+          "relative flex items-center justify-center rounded-full bg-gradient-to-br from-muted to-muted/70 ring-2 ring-border",
           size === "xs" && "size-6 text-[10px]",
           size === "sm" && "size-8 text-xs",
           size === "default" && "size-10 text-sm",
@@ -121,7 +121,7 @@ function AvatarGroup({ children, max = 4, size = "default", className }: AvatarG
           size === "xl" && "size-20 text-xl",
           size === "2xl" && "size-24 text-2xl",
         )}>
-          <span className="font-medium text-white/80">+{remainingCount}</span>
+          <span className="font-medium text-foreground/80">+{remainingCount}</span>
         </div>
       )}
     </div>
@@ -148,10 +148,10 @@ function AvatarWithStatus({
 }: AvatarWithStatusProps) {
   const _size: keyof typeof statusSizes = size ?? "default"
   const statusColors = {
-    online: "bg-emerald-500 ring-2 ring-black/20",
-    offline: "bg-gray-500 ring-2 ring-black/20",
-    away: "bg-yellow-500 ring-2 ring-black/20",
-    busy: "bg-red-500 ring-2 ring-black/20",
+    online: "bg-emerald-500 ring-2 ring-background/20",
+    offline: "bg-gray-500 ring-2 ring-background/20",
+    away: "bg-yellow-500 ring-2 ring-background/20",
+    busy: "bg-red-500 ring-2 ring-background/20",
   }
 
   const statusSizes = {
@@ -173,7 +173,7 @@ function AvatarWithStatus({
       {status && (
         <span
           className={cn(
-            "absolute bottom-0 right-0 rounded-full border-2 border-white",
+            "absolute bottom-0 right-0 rounded-full border-2 border-background",
             statusColors[status],
             statusSizes[_size]
           )}

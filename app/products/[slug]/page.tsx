@@ -66,10 +66,10 @@ function ImageGallery({ images, title, discount }: { images: string[]; title: st
           </div>
         )}
         <button 
-          className="absolute right-4 top-4 rounded-full bg-black/50 p-2 backdrop-blur-sm transition-all hover:bg-[#F57224]"
+          className="absolute right-4 top-4 rounded-full bg-background/70 p-2 backdrop-blur-sm transition-all hover:bg-[#F57224] hover:text-white"
           onClick={() => setIsZoomed(!isZoomed)}
         >
-          <Maximize2 className="size-4 text-white" />
+          <Maximize2 className="size-4 text-foreground" />
         </button>
       </motion.div>
       
@@ -113,8 +113,8 @@ function ReviewCard({ review }: { review: any }) {
               </span>
             </div>
             <div>
-              <p className="font-semibold text-white">{review.userName}</p>
-              <p className="text-xs text-white/40">
+              <p className="font-semibold text-foreground">{review.userName}</p>
+              <p className="text-xs text-muted-foreground/70">
                 {new Date(review.createdAt).toLocaleDateString('en-US', { 
                   year: 'numeric', 
                   month: 'long', 
@@ -125,12 +125,12 @@ function ReviewCard({ review }: { review: any }) {
           </div>
           <Rating value={review.rating} size="sm" readonly className="mb-2" />
           {review.comment && (
-            <p className="text-sm text-white/70 leading-relaxed mt-2">{review.comment}</p>
+            <p className="text-sm text-foreground/70 leading-relaxed mt-2">{review.comment}</p>
           )}
         </div>
         <button
           onClick={() => setHelpful(!helpful)}
-          className="flex items-center gap-1 rounded-lg bg-white/5 px-3 py-1.5 text-xs text-white/40 transition-all hover:bg-[#F57224]/10 hover:text-[#F57224]"
+          className="flex items-center gap-1 rounded-lg bg-muted/50 px-3 py-1.5 text-xs text-muted-foreground/70 transition-all hover:bg-[#F57224]/10 hover:text-[#F57224]"
         >
           <ThumbsUp className={`size-3 ${helpful ? "fill-[#F57224] text-[#F57224]" : ""}`} />
           <span>Helpful</span>
@@ -168,8 +168,8 @@ export default function ProductDetailPage() {
           >
             <Package className="size-16 text-[#F57224]/40" />
           </motion.div>
-          <h1 className="text-2xl font-bold text-white mb-2">Product Not Found</h1>
-          <p className="text-white/50 text-center mb-6">The product you're looking for doesn't exist or has been removed.</p>
+          <h1 className="text-2xl font-bold text-foreground mb-2">Product Not Found</h1>
+          <p className="text-muted-foreground text-center mb-6">The product you're looking for doesn't exist or has been removed.</p>
           <Link href="/products">
             <Button className="bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow">
               <ChevronLeft className="mr-2 size-4" /> Back to Products
@@ -252,11 +252,11 @@ export default function ProductDetailPage() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-6 flex items-center gap-2 text-sm"
         >
-          <Link href="/" className="text-white/40 hover:text-white transition-colors">Home</Link>
+          <Link href="/" className="text-muted-foreground/70 hover:text-foreground transition-colors">Home</Link>
           <span className="text-white/20">/</span>
-          <Link href="/products" className="text-white/40 hover:text-white transition-colors">Products</Link>
+          <Link href="/products" className="text-muted-foreground/70 hover:text-foreground transition-colors">Products</Link>
           <span className="text-white/20">/</span>
-          <span className="text-white/60 line-clamp-1">{product.title}</span>
+          <span className="text-muted-foreground line-clamp-1">{product.title}</span>
         </motion.div>
 
         <div className="grid gap-10 lg:grid-cols-2">
@@ -296,19 +296,19 @@ export default function ProductDetailPage() {
                   </Badge>
                 )}
               </div>
-              <h1 className="text-3xl font-bold text-white lg:text-4xl">{product.title}</h1>
+              <h1 className="text-3xl font-bold text-foreground lg:text-4xl">{product.title}</h1>
             </div>
 
             {/* Rating */}
             <div className="flex items-center gap-4">
               <Rating value={product.rating} readonly showValue size="default" />
-              <span className="text-white/30">|</span>
-              <Link href="#reviews" className="text-sm text-white/50 hover:text-[#F57224] transition-colors">
+              <span className="text-foreground/30">|</span>
+              <Link href="#reviews" className="text-sm text-muted-foreground hover:text-[#F57224] transition-colors">
                 {reviews.length} Customer Reviews
               </Link>
               <button
                 onClick={() => setIsShareOpen(!isShareOpen)}
-                className="relative flex items-center gap-1 text-sm text-white/50 hover:text-[#F57224] transition-colors"
+                className="relative flex items-center gap-1 text-sm text-muted-foreground hover:text-[#F57224] transition-colors"
               >
                 <Share2 className="size-4" />
                 Share
@@ -345,7 +345,7 @@ export default function ProductDetailPage() {
               <span className="text-4xl font-bold text-[#F57224]">{formatUSD(discountedPrice)}</span>
               {product.discountPercentage > 0 && (
                 <>
-                  <span className="text-xl text-white/40 line-through">{formatUSD(product.price)}</span>
+                  <span className="text-xl text-muted-foreground/70 line-through">{formatUSD(product.price)}</span>
                   <Badge className="bg-gradient-to-r from-[#F57224] to-orange-500 border-none">
                     Save {product.discountPercentage}%
                   </Badge>
@@ -354,23 +354,23 @@ export default function ProductDetailPage() {
             </div>
 
             {/* Description */}
-            <p className="text-white/60 leading-relaxed">{product.description}</p>
+            <p className="text-muted-foreground leading-relaxed">{product.description}</p>
 
             {/* Product Specs */}
             <div className="grid grid-cols-2 gap-4 rounded-xl glass-premium p-4">
               <div className="flex items-center gap-2">
                 <Package className="size-4 text-[#F57224]" />
                 <div>
-                  <p className="text-xs text-white/40">SKU</p>
-                  <p className="text-sm text-white">{product.sku || 'N/A'}</p>
+                  <p className="text-xs text-muted-foreground/70">SKU</p>
+                  <p className="text-sm text-foreground">{product.sku || 'N/A'}</p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
                 <Globe className="size-4 text-[#F57224]" />
                 <div>
-                  <p className="text-xs text-white/40">Category</p>
+                  <p className="text-xs text-muted-foreground/70">Category</p>
                   <Link href={`/products?category=${categoriesWithCount.find(c => c.id === product.categoryId)?.slug}`}>
-                    <p className="text-sm text-white hover:text-[#F57224] transition-colors">{product.categoryName}</p>
+                    <p className="text-sm text-foreground hover:text-[#F57224] transition-colors">{product.categoryName}</p>
                   </Link>
                 </div>
               </div>
@@ -384,14 +384,14 @@ export default function ProductDetailPage() {
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
                     className="rounded-lg p-2 transition-colors hover:bg-[#F57224]/20"
                   >
-                    <Minus className="size-4 text-white" />
+                    <Minus className="size-4 text-foreground" />
                   </button>
-                  <span className="w-12 text-center font-medium text-white">{quantity}</span>
+                  <span className="w-12 text-center font-medium text-foreground">{quantity}</span>
                   <button
                     onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
                     className="rounded-lg p-2 transition-colors hover:bg-[#F57224]/20"
                   >
-                    <Plus className="size-4 text-white" />
+                    <Plus className="size-4 text-foreground" />
                   </button>
                 </div>
                 <Button
@@ -409,7 +409,7 @@ export default function ProductDetailPage() {
                   onClick={handleToggleWishlist}
                   className="size-12 rounded-xl"
                 >
-                  <Heart className={`size-5 transition-all ${wishlisted ? "fill-[#F57224] text-[#F57224]" : "text-white"}`} />
+                  <Heart className={`size-5 transition-all ${wishlisted ? "fill-[#F57224] text-[#F57224]" : "text-foreground"}`} />
                 </Button>
               </div>
             </div>
@@ -423,8 +423,8 @@ export default function ProductDetailPage() {
               ].map(({ icon: Icon, label, desc }) => (
                 <div key={label} className="text-center">
                   <Icon className="mx-auto size-5 text-[#F57224]" />
-                  <p className="mt-1 text-xs font-medium text-white">{label}</p>
-                  <p className="text-[10px] text-white/40">{desc}</p>
+                  <p className="mt-1 text-xs font-medium text-foreground">{label}</p>
+                  <p className="text-[10px] text-muted-foreground/70">{desc}</p>
                 </div>
               ))}
             </div>
@@ -438,7 +438,7 @@ export default function ProductDetailPage() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mt-16"
         >
-          <div className="flex gap-2 border-b border-white/10">
+          <div className="flex gap-2 border-b border-border">
             {[
               { id: "details", label: "Product Details", icon: Package },
               { id: "reviews", label: `Reviews (${reviews.length})`, icon: MessageCircle },
@@ -449,7 +449,7 @@ export default function ProductDetailPage() {
                 className={`flex items-center gap-2 px-6 py-3 text-sm font-medium transition-all ${
                   selectedTab === tab.id
                     ? "border-b-2 border-[#F57224] text-[#F57224]"
-                    : "text-white/40 hover:text-white"
+                    : "text-muted-foreground/70 hover:text-foreground"
                 }`}
               >
                 <tab.icon className="size-4" />
@@ -460,27 +460,27 @@ export default function ProductDetailPage() {
 
           <div className="py-6">
             {selectedTab === "details" && (
-              <div className="space-y-4 text-white/60">
-                <h3 className="text-lg font-semibold text-white">Product Specifications</h3>
+              <div className="space-y-4 text-muted-foreground">
+                <h3 className="text-lg font-semibold text-foreground">Product Specifications</h3>
                 <div className="grid gap-2 sm:grid-cols-2">
-                  <div className="flex justify-between border-b border-white/10 py-2">
+                  <div className="flex justify-between border-b border-border py-2">
                     <span>Brand</span>
-                    <span className="text-white">{product.brand}</span>
+                    <span className="text-foreground">{product.brand}</span>
                   </div>
-                  <div className="flex justify-between border-b border-white/10 py-2">
+                  <div className="flex justify-between border-b border-border py-2">
                     <span>Stock Status</span>
-                    <span className="text-white">{product.stock} units</span>
+                    <span className="text-foreground">{product.stock} units</span>
                   </div>
-                  <div className="flex justify-between border-b border-white/10 py-2">
+                  <div className="flex justify-between border-b border-border py-2">
                     <span>Category</span>
-                    <span className="text-white">{product.categoryName}</span>
+                    <span className="text-foreground">{product.categoryName}</span>
                   </div>
                   {product.tags.length > 0 && (
-                    <div className="flex justify-between border-b border-white/10 py-2">
+                    <div className="flex justify-between border-b border-border py-2">
                       <span>Tags</span>
                       <div className="flex gap-1">
                         {product.tags.slice(0, 3).map(tag => (
-                          <Badge key={tag} className="bg-white/10 text-white/60 text-[9px]">
+                          <Badge key={tag} className="bg-muted/30 text-muted-foreground text-[9px]">
                             {tag}
                           </Badge>
                         ))}
@@ -496,21 +496,21 @@ export default function ProductDetailPage() {
                 {/* Rating Summary */}
                 <div className="flex flex-wrap gap-8 rounded-xl glass-premium p-6">
                   <div className="text-center">
-                    <div className="text-5xl font-bold text-white">{totalRating.toFixed(1)}</div>
+                    <div className="text-5xl font-bold text-foreground">{totalRating.toFixed(1)}</div>
                     <Rating value={totalRating} size="sm" readonly className="justify-center my-2" />
-                    <div className="text-sm text-white/40">Based on {reviews.length} reviews</div>
+                    <div className="text-sm text-muted-foreground/70">Based on {reviews.length} reviews</div>
                   </div>
                   <div className="flex-1 space-y-2">
                     {ratingDistribution.map((item) => (
                       <div key={item.star} className="flex items-center gap-2">
-                        <span className="w-8 text-sm text-white/60">{item.star}★</span>
-                        <div className="flex-1 h-2 rounded-full bg-white/10 overflow-hidden">
+                        <span className="w-8 text-sm text-muted-foreground">{item.star}★</span>
+                        <div className="flex-1 h-2 rounded-full bg-muted/30 overflow-hidden">
                           <div 
                             className="h-full rounded-full bg-gradient-to-r from-[#F57224] to-orange-500"
                             style={{ width: `${item.percentage}%` }}
                           />
                         </div>
-                        <span className="w-8 text-sm text-white/40">{item.count}</span>
+                        <span className="w-8 text-sm text-muted-foreground/70">{item.count}</span>
                       </div>
                     ))}
                   </div>
@@ -521,7 +521,7 @@ export default function ProductDetailPage() {
                   {reviews.length === 0 ? (
                     <div className="text-center py-12">
                       <MessageCircle className="mx-auto mb-3 size-12 text-white/20" />
-                      <p className="text-white/40">No reviews yet. Be the first to review!</p>
+                      <p className="text-muted-foreground/70">No reviews yet. Be the first to review!</p>
                     </div>
                   ) : (
                     reviews.map((review) => (
@@ -544,7 +544,7 @@ export default function ProductDetailPage() {
             className="mt-16"
           >
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-white">You May Also Like</h2>
+              <h2 className="text-2xl font-bold text-foreground">You May Also Like</h2>
               <Link href="/products">
                 <Button variant="ghost" className="text-[#F57224]">
                   View All <ArrowRight className="ml-1 size-4" />
@@ -570,13 +570,13 @@ export default function ProductDetailPage() {
                       )}
                     </div>
                     <CardContent className="p-4">
-                      <h3 className="font-medium text-white line-clamp-1">{rp.title}</h3>
+                      <h3 className="font-medium text-foreground line-clamp-1">{rp.title}</h3>
                       <div className="mt-2 flex items-center gap-2">
                         <span className="text-lg font-bold text-[#F57224]">
                           {formatUSD(getDiscountPrice(rp.price, rp.discountPercentage))}
                         </span>
                         {rp.discountPercentage > 0 && (
-                          <span className="text-sm text-white/40 line-through">{formatUSD(rp.price)}</span>
+                          <span className="text-sm text-muted-foreground/70 line-through">{formatUSD(rp.price)}</span>
                         )}
                       </div>
                       <Rating value={rp.rating} size="sm" readonly />
@@ -596,11 +596,11 @@ export default function ProductDetailPage() {
             initial={{ y: 100 }}
             animate={{ y: 0 }}
             exit={{ y: 100 }}
-            className="fixed bottom-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-xl border-t border-white/10 p-4 md:hidden"
+            className="fixed bottom-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-t border-border p-4 md:hidden"
           >
             <div className="flex items-center gap-3">
               <div className="flex-1">
-                <p className="text-sm font-semibold text-white">{product.title}</p>
+                <p className="text-sm font-semibold text-foreground">{product.title}</p>
                 <p className="text-lg font-bold text-[#F57224]">{formatUSD(discountedPrice)}</p>
               </div>
               <Button onClick={handleAddToCart} className="bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow">

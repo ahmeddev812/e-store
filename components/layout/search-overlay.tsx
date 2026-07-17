@@ -119,7 +119,7 @@ function SearchOverlay() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-50 bg-black/70 backdrop-blur-md"
+            className="fixed inset-0 z-50 bg-background/70 backdrop-blur-md"
             onClick={() => setSearchOpen(false)}
           />
 
@@ -129,7 +129,7 @@ function SearchOverlay() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -30 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-gradient-to-b from-white/95 to-white/90 backdrop-blur-2xl shadow-2xl dark:from-black/95 dark:to-black/90"
+            className="fixed inset-x-0 top-0 z-50 border-b border-border bg-gradient-to-b from-background to-muted/80 backdrop-blur-2xl shadow-2xl"
           >
             <div className="mx-auto max-w-4xl px-4 py-6 sm:px-6">
               {/* Search Input */}
@@ -148,13 +148,13 @@ function SearchOverlay() {
                     if (e.key === "Enter") handleSearch(query)
                   }}
                   placeholder="What are you looking for today?"
-                  className="w-full rounded-2xl border border-white/20 bg-white/50 py-4 pl-14 pr-14 text-lg text-foreground placeholder:text-white/40 backdrop-blur-md transition-all focus:border-[#F57224]/50 focus:outline-none focus:ring-2 focus:ring-[#F57224]/20 dark:bg-black/30"
+                  className="w-full rounded-2xl border border-border bg-muted/10 py-4 pl-14 pr-14 text-lg text-foreground placeholder:text-muted-foreground/70 backdrop-blur-md transition-all focus:border-[#F57224]/50 focus:outline-none focus:ring-2 focus:ring-[#F57224]/20 dark:bg-muted/60"
                 />
                 <button
                   onClick={() => setSearchOpen(false)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-2 transition-all hover:bg-[#F57224]/20 hover:scale-110"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-muted/30 p-2 transition-all hover:bg-[#F57224]/20 hover:scale-110"
                 >
-                  <X className="size-4 text-white/70" />
+                  <X className="size-4 text-foreground/70" />
                 </button>
               </div>
 
@@ -168,7 +168,7 @@ function SearchOverlay() {
                     className="mt-6 flex items-center justify-center gap-2 py-8"
                   >
                     <div className="size-5 animate-spin rounded-full border-2 border-[#F57224] border-t-transparent" />
-                    <span className="text-sm text-white/60">Searching products...</span>
+                    <span className="text-sm text-muted-foreground">Searching products...</span>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -183,7 +183,7 @@ function SearchOverlay() {
                         <div className="rounded-lg bg-[#F57224]/10 p-1">
                           <Package className="size-4 text-[#F57224]" />
                         </div>
-                        <h3 className="text-sm font-semibold text-white">Top Results</h3>
+                        <h3 className="text-sm font-semibold text-foreground">Top Results</h3>
                         <Badge className="bg-[#F57224]/20 text-[#F57224] text-[9px] border-none">
                           Live
                         </Badge>
@@ -199,7 +199,7 @@ function SearchOverlay() {
                               setSearchOpen(false)
                               router.push(`/search?q=${encodeURIComponent(product.name)}`)
                             }}
-                            className="group flex cursor-pointer items-center gap-3 rounded-xl bg-white/5 p-3 transition-all hover:bg-[#F57224]/10 hover:scale-[1.02]"
+                            className="group flex cursor-pointer items-center gap-3 rounded-xl bg-muted/50 p-3 transition-all hover:bg-[#F57224]/10 hover:scale-[1.02]"
                           >
                             <div className="relative h-12 w-12 overflow-hidden rounded-lg">
                               <Image
@@ -210,18 +210,18 @@ function SearchOverlay() {
                               />
                             </div>
                             <div className="flex-1">
-                              <p className="text-sm font-medium text-white group-hover:text-[#F57224] transition-colors">
+                              <p className="text-sm font-medium text-foreground group-hover:text-[#F57224] transition-colors">
                                 {product.name}
                               </p>
                               <div className="flex items-center gap-2">
                                 <span className="text-sm font-bold text-[#F57224]">${product.price}</span>
                                 <div className="flex items-center gap-0.5">
                                   <Star className="size-3 fill-yellow-500 text-yellow-500" />
-                                  <span className="text-xs text-white/60">{product.rating}</span>
+                                  <span className="text-xs text-muted-foreground">{product.rating}</span>
                                 </div>
                               </div>
                             </div>
-                            <Eye className="size-4 text-white/40 opacity-0 transition-opacity group-hover:opacity-100" />
+                            <Eye className="size-4 text-muted-foreground/70 opacity-0 transition-opacity group-hover:opacity-100" />
                           </motion.div>
                         ))}
                       </div>
@@ -235,7 +235,7 @@ function SearchOverlay() {
                         <div className="rounded-lg bg-gradient-to-r from-[#F57224]/20 to-[#F57224]/5 p-1">
                           <Flame className="size-4 text-[#F57224]" />
                         </div>
-                        <h3 className="text-sm font-semibold text-white">Popular Categories</h3>
+                        <h3 className="text-sm font-semibold text-foreground">Popular Categories</h3>
                         <Badge className="bg-orange-500/20 text-orange-400 text-[9px] border-none">
                           Trending
                         </Badge>
@@ -253,7 +253,7 @@ function SearchOverlay() {
                             className={`group flex items-center gap-2 rounded-xl bg-gradient-to-r ${suggestion.color} bg-opacity-10 p-2.5 transition-all hover:shadow-glow`}
                           >
                             <span className="text-lg">{suggestion.icon}</span>
-                            <span className="flex-1 text-left text-sm font-medium text-white">
+                            <span className="flex-1 text-left text-sm font-medium text-foreground">
                               {suggestion.name}
                             </span>
                             {suggestion.popular && (
@@ -272,12 +272,12 @@ function SearchOverlay() {
                           <div className="rounded-lg bg-[#F57224]/10 p-1">
                             <Clock className="size-4 text-[#F57224]" />
                           </div>
-                          <h3 className="text-sm font-semibold text-white">Recent Searches</h3>
+                          <h3 className="text-sm font-semibold text-foreground">Recent Searches</h3>
                         </div>
                         <div className="mt-3 space-y-1">
                           {recent.length === 0 && (
                             <div className="flex items-center justify-center py-6 text-center">
-                              <p className="text-sm text-white/40">No recent searches</p>
+                              <p className="text-sm text-muted-foreground/70">No recent searches</p>
                             </div>
                           )}
                           {recent.map((item) => (
@@ -285,14 +285,14 @@ function SearchOverlay() {
                               key={item.term}
                               initial={{ opacity: 0, x: -10 }}
                               animate={{ opacity: 1, x: 0 }}
-                              className="group flex items-center justify-between rounded-lg px-3 py-2 transition-all hover:bg-white/5"
+                              className="group flex items-center justify-between rounded-lg px-3 py-2 transition-all hover:bg-muted/50"
                             >
                               <button
                                 onClick={() => {
                                   setQuery(item.term)
                                   handleSearch(item.term)
                                 }}
-                                className="flex items-center gap-2 text-sm text-white/70 group-hover:text-[#F57224]"
+                                className="flex items-center gap-2 text-sm text-foreground/70 group-hover:text-[#F57224]"
                               >
                                 <Clock className="size-3.5" />
                                 {item.term}
@@ -301,12 +301,12 @@ function SearchOverlay() {
                                 )}
                               </button>
                               <div className="flex items-center gap-2">
-                                <span className="text-[10px] text-white/30">{item.count}</span>
+                                <span className="text-[10px] text-foreground/30">{item.count}</span>
                                 <button
                                   onClick={() => removeRecent(item.term)}
                                   className="opacity-0 transition-opacity group-hover:opacity-100"
                                 >
-                                  <X className="size-3 text-white/40 hover:text-red-400" />
+                                  <X className="size-3 text-muted-foreground/70 hover:text-red-400" />
                                 </button>
                               </div>
                             </motion.div>
@@ -320,7 +320,7 @@ function SearchOverlay() {
                           <div className="rounded-lg bg-[#F57224]/10 p-1">
                             <TrendingUp className="size-4 text-[#F57224]" />
                           </div>
-                          <h3 className="text-sm font-semibold text-white">Trending Now</h3>
+                          <h3 className="text-sm font-semibold text-foreground">Trending Now</h3>
                           <Badge className="bg-emerald-500/20 text-emerald-400 text-[9px] border-none">
                             +125% this week
                           </Badge>
@@ -333,7 +333,7 @@ function SearchOverlay() {
                                 setQuery(trend)
                                 handleSearch(trend)
                               }}
-                              className="group rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-sm text-white/70 backdrop-blur-sm transition-all hover:border-[#F57224]/30 hover:bg-[#F57224]/10 hover:text-[#F57224]"
+                              className="group rounded-full border border-border bg-muted/50 px-3 py-1.5 text-sm text-foreground/70 backdrop-blur-sm transition-all hover:border-[#F57224]/30 hover:bg-[#F57224]/10 hover:text-[#F57224]"
                             >
                               {trend}
                             </button>
@@ -348,7 +348,7 @@ function SearchOverlay() {
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="border-t border-white/10 pt-4"
+                      className="border-t border-border pt-4"
                     >
                       <button
                         onClick={() => handleSearch(query)}
@@ -362,8 +362,8 @@ function SearchOverlay() {
                   )}
 
                   {/* Quick Tips */}
-                  <div className="mt-4 rounded-xl bg-white/5 p-3">
-                    <div className="flex items-center justify-center gap-4 text-xs text-white/30">
+                  <div className="mt-4 rounded-xl bg-muted/50 p-3">
+                    <div className="flex items-center justify-center gap-4 text-xs text-foreground/30">
                       <span>Try: "iPhone 15"</span>
                       <span>•</span>
                       <span>Try: "Nike shoes"</span>

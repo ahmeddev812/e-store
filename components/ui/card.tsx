@@ -13,9 +13,9 @@ const cardVariants = cva(
         default: "glass-card",
         premium: "glass-premium hover:shadow-[0_0_40px_rgba(245,114,36,0.2)] hover:scale-[1.02]",
         glass: "glass-card backdrop-blur-md",
-        bordered: "border border-white/10 bg-white/5 backdrop-blur-sm",
-        gradient: "bg-gradient-to-br from-[#F57224]/10 via-[#F57224]/5 to-transparent border border-white/10",
-        dark: "bg-[#0f0f1a] border border-white/10",
+        bordered: "border border-border bg-accent/50 backdrop-blur-sm",
+        gradient: "bg-gradient-to-br from-[#F57224]/10 via-[#F57224]/5 to-transparent border border-border",
+        dark: "bg-card border border-border",
       },
       interactive: {
         true: "cursor-pointer hover:border-[#F57224]/30 hover:shadow-[0_0_30px_rgba(245,114,36,0.15)] active:scale-[0.99]",
@@ -81,7 +81,7 @@ function CardTitle({
     <h3
       data-slot="card-title"
       className={cn(
-        "text-lg font-semibold text-white leading-none tracking-tight",
+        "text-lg font-semibold text-foreground leading-none tracking-tight",
         className
       )}
       {...props}
@@ -96,7 +96,7 @@ function CardDescription({
   return (
     <p
       data-slot="card-description"
-      className={cn("text-sm text-white/50", className)}
+      className={cn("text-sm text-muted-foreground", className)}
       {...props}
     />
   )
@@ -123,7 +123,7 @@ function CardFooter({
     <div
       data-slot="card-footer"
       className={cn(
-        "flex items-center gap-2 border-t border-white/10 mt-4 pt-4",
+        "flex items-center gap-2 border-t border-border mt-4 pt-4",
         className
       )}
       {...props}
@@ -175,7 +175,7 @@ function CardWithImage({
           className="h-full w-full object-cover transition-transform duration-500 hover:scale-110"
         />
         {overlay && (
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
         )}
       </div>
       <div className={cn(

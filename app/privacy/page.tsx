@@ -184,7 +184,7 @@ If you are not satisfied with our response, you may have the right to escalate y
 
 export default function PrivacyPage() {
   return (
-    <div className="min-h-screen bg-white dark:bg-[#0a0a0f] bg-[radial-gradient(ellipse_at_top,rgba(245,114,36,0.03)_0%,transparent_60%)]">
+    <div className="min-h-screen bg-background bg-[radial-gradient(ellipse_at_top,rgba(245,114,36,0.03)_0%,transparent_60%)]">
       <div className="container mx-auto px-4 py-12 md:py-20 max-w-4xl animate-fade-in">
         <div className="text-center mb-16">
           <Badge className="mb-4">Legal</Badge>
@@ -215,7 +215,7 @@ export default function PrivacyPage() {
                 </div>
               </div>
               {index < sections.length - 1 && (
-                <Separator className="my-8 bg-white/10" />
+                <Separator className="my-8 bg-muted/30" />
               )}
             </div>
           ))}

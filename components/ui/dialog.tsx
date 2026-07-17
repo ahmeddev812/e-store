@@ -53,7 +53,7 @@ function DialogBackdrop({
     <DialogPrimitive.Backdrop
       data-slot="dialog-backdrop"
       className={cn(
-        "fixed inset-0 z-50 bg-black/40 backdrop-blur-sm data-[ending-style]:opacity-0 data-[starting-style]:opacity-0",
+        "fixed inset-0 z-50 bg-background/80 backdrop-blur-sm data-[ending-style]:opacity-0 data-[starting-style]:opacity-0",
         className
       )}
       {...props}
@@ -73,7 +73,7 @@ function DialogPopup({
         <DialogPrimitive.Popup
           data-slot="dialog-popup"
           className={cn(
-            "relative w-full max-w-lg rounded-xl border border-white/20 bg-white/10 backdrop-blur-xl p-6 shadow-2xl data-[ending-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:scale-95 data-[starting-style]:opacity-0",
+            "relative w-full max-w-lg rounded-xl border border-border bg-muted/30 backdrop-blur-xl p-6 shadow-2xl data-[ending-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:scale-95 data-[starting-style]:opacity-0",
             className
           )}
           {...props}
@@ -93,7 +93,7 @@ function DialogClose({
     <DialogPrimitive.Close
       data-slot="dialog-close"
       className={cn(
-        "absolute top-4 right-4 rounded-lg p-1 text-white/60 opacity-70 transition-opacity hover:opacity-100 hover:text-white",
+        "absolute top-4 right-4 rounded-lg p-1 text-muted-foreground opacity-70 transition-opacity hover:opacity-100 hover:text-foreground",
         className
       )}
       {...props}
@@ -111,7 +111,7 @@ function DialogTitle({
   return (
     <DialogPrimitive.Title
       data-slot="dialog-title"
-      className={cn("text-lg font-semibold text-white", className)}
+      className={cn("text-lg font-semibold text-foreground", className)}
       {...props}
     />
   )
@@ -124,7 +124,7 @@ function DialogDescription({
   return (
     <DialogPrimitive.Description
       data-slot="dialog-description"
-      className={cn("text-sm text-white/60", className)}
+      className={cn("text-sm text-muted-foreground", className)}
       {...props}
     />
   )

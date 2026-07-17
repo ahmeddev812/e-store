@@ -101,7 +101,7 @@ function FAQItem({ question, answer, isOpen, onToggle, index, category, popular 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.05 }}
-      className="group border-b border-white/10 last:border-0"
+      className="group border-b border-border last:border-0"
     >
       <button
         onClick={onToggle}
@@ -118,7 +118,7 @@ function FAQItem({ question, answer, isOpen, onToggle, index, category, popular 
               </Badge>
             )}
           </div>
-          <span className="font-semibold text-white group-hover:text-[#F57224] transition-colors">
+          <span className="font-semibold text-foreground group-hover:text-[#F57224] transition-colors">
             {question}
           </span>
         </div>
@@ -139,7 +139,7 @@ function FAQItem({ question, answer, isOpen, onToggle, index, category, popular 
             transition={{ duration: 0.3 }}
           >
             <div className="pb-5 pl-0 md:pl-4">
-              <p className="text-white/60 leading-relaxed">{answer}</p>
+              <p className="text-muted-foreground leading-relaxed">{answer}</p>
             </div>
           </motion.div>
         )}
@@ -211,7 +211,7 @@ export default function FAQPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl font-bold text-white sm:text-5xl lg:text-6xl"
+            className="text-4xl font-bold text-foreground sm:text-5xl lg:text-6xl"
           >
             Frequently Asked{" "}
             <span className="relative inline-block">
@@ -226,7 +226,7 @@ export default function FAQPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mx-auto mt-4 max-w-2xl text-white/60"
+            className="mx-auto mt-4 max-w-2xl text-muted-foreground"
           >
             Find answers to common questions about our products, shipping, returns, and more.
             Can't find what you're looking for? Contact our support team.
@@ -240,13 +240,13 @@ export default function FAQPage() {
             className="mx-auto mt-8 max-w-md"
           >
             <form onSubmit={handleSearch} className="relative">
-              <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-white/40" />
+              <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground/70" />
               <Input
                 type="text"
                 placeholder="Search FAQs..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="border-white/10 bg-white/5 pl-10 text-white placeholder:text-white/40 focus:border-[#F57224]/50"
+                className="border-border bg-muted/50 pl-10 text-foreground placeholder:text-muted-foreground/70 focus:border-[#F57224]/50"
               />
             </form>
           </motion.div>
@@ -269,8 +269,8 @@ export default function FAQPage() {
                   <div className="inline-flex items-center justify-center rounded-xl bg-[#F57224]/10 p-2 mb-3">
                     <stat.icon className="size-5 text-[#F57224]" />
                   </div>
-                  <div className="text-xl font-bold text-white">{stat.value}</div>
-                  <div className="text-xs text-white/40">{stat.label}</div>
+                  <div className="text-xl font-bold text-foreground">{stat.value}</div>
+                  <div className="text-xs text-muted-foreground/70">{stat.label}</div>
                 </CardContent>
               </Card>
             </motion.div>
@@ -292,7 +292,7 @@ export default function FAQPage() {
               {/* Categories */}
               <Card className="glass-premium">
                 <CardContent className="p-5">
-                  <h3 className="mb-4 font-semibold text-white">Categories</h3>
+                  <h3 className="mb-4 font-semibold text-foreground">Categories</h3>
                   <div className="space-y-2">
                     {faqCategories.map((cat) => (
                       <button
@@ -301,14 +301,14 @@ export default function FAQPage() {
                         className={`flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm transition-all duration-300 ${
                           activeCategory === cat.name
                             ? "bg-gradient-to-r from-[#F57224]/20 to-[#F57224]/5 text-[#F57224]"
-                            : "text-white/60 hover:bg-white/5 hover:text-white"
+                            : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
                         }`}
                       >
                         <span className="flex items-center gap-2">
                           <span>{cat.icon}</span>
                           <span>{cat.name}</span>
                         </span>
-                        <Badge className="bg-white/10 text-white/40 text-[9px] border-none">
+                        <Badge className="bg-muted/30 text-muted-foreground/70 text-[9px] border-none">
                           {cat.count}
                         </Badge>
                       </button>
@@ -323,8 +323,8 @@ export default function FAQPage() {
                   <div className="mb-4 inline-flex items-center justify-center rounded-xl bg-[#F57224]/20 p-3">
                     <Headphones className="size-8 text-[#F57224]" />
                   </div>
-                  <h3 className="mb-2 font-semibold text-white">Still have questions?</h3>
-                  <p className="mb-4 text-xs text-white/40">
+                  <h3 className="mb-2 font-semibold text-foreground">Still have questions?</h3>
+                  <p className="mb-4 text-xs text-muted-foreground/70">
                     Can't find the answer you're looking for? Our team is here to help.
                   </p>
                   <div className="space-y-2">
@@ -335,7 +335,7 @@ export default function FAQPage() {
                       </Button>
                     </Link>
                     <div className="pt-2 text-center">
-                      <p className="text-[10px] text-white/30">or reach us at</p>
+                      <p className="text-[10px] text-foreground/30">or reach us at</p>
                       <p className="text-xs font-medium text-[#F57224]">support@blazecart.com</p>
                     </div>
                   </div>
@@ -356,7 +356,7 @@ export default function FAQPage() {
                 {filteredFaqs.length === 0 ? (
                   <div className="py-12 text-center">
                     <HelpCircle className="mx-auto mb-4 size-12 text-white/20" />
-                    <p className="text-white/60">No results found for "{searchQuery}"</p>
+                    <p className="text-muted-foreground">No results found for "{searchQuery}"</p>
                     <Button
                       variant="link"
                       onClick={() => {
@@ -399,8 +399,8 @@ export default function FAQPage() {
           <div className="absolute inset-0 bg-gradient-to-r from-[#F57224]/10 via-transparent to-[#F57224]/5" />
           <div className="relative">
             <Zap className="mx-auto mb-4 size-12 text-[#F57224]" />
-            <h2 className="text-2xl font-bold text-white">Need Immediate Assistance?</h2>
-            <p className="mt-2 text-white/60 max-w-md mx-auto">
+            <h2 className="text-2xl font-bold text-foreground">Need Immediate Assistance?</h2>
+            <p className="mt-2 text-muted-foreground max-w-md mx-auto">
               Chat with our support team for instant help with your questions.
             </p>
             <div className="mt-6 flex flex-wrap gap-4 justify-center">
@@ -411,7 +411,7 @@ export default function FAQPage() {
                 </Button>
               </Link>
               <Link href="/">
-                <Button variant="outline" className="border-white/20 hover:border-[#F57224]/50">
+                <Button variant="outline" className="border-border hover:border-[#F57224]/50">
                   Browse Products
                 </Button>
               </Link>

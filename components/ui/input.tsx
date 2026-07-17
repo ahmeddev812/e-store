@@ -5,14 +5,14 @@ import React, { forwardRef } from "react"
 import { cn } from "@/lib/utils"
 
 const inputVariants = cva(
-  "flex w-full rounded-lg border bg-white/10 backdrop-blur-xl border-white/20 text-white shadow-2xl transition-all outline-none placeholder:text-white/40 file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:border-[#F57224]/50 focus-visible:ring-3 focus-visible:ring-[#F57224]/20 disabled:cursor-not-allowed disabled:opacity-50",
+  "flex w-full rounded-lg border bg-muted/30 backdrop-blur-xl border-border text-foreground shadow-2xl transition-all outline-none placeholder:text-muted-foreground/70 file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:border-[#F57224]/50 focus-visible:ring-3 focus-visible:ring-[#F57224]/20 disabled:cursor-not-allowed disabled:opacity-50",
   {
     variants: {
       variant: {
         default: "",
         ghost: "border-transparent bg-transparent backdrop-blur-none shadow-none",
-        glass: "bg-white/5 backdrop-blur-md border-white/10",
-        premium: "bg-gradient-to-br from-white/10 to-white/5 border-[#F57224]/30 focus-visible:border-[#F57224] focus-visible:shadow-glow",
+        glass: "bg-muted/50 backdrop-blur-md border-border",
+        premium: "bg-gradient-to-br from-accent/10 to-accent/5 border-[#F57224]/30 focus-visible:border-[#F57224] focus-visible:shadow-glow",
         error: "border-red-500/50 focus-visible:border-red-500 focus-visible:ring-red-500/20",
         success: "border-emerald-500/50 focus-visible:border-emerald-500 focus-visible:ring-emerald-500/20",
       },
@@ -124,7 +124,7 @@ function PasswordInput({ showPasswordToggle = true, ...props }: PasswordInputPro
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
-            className="text-white/50 hover:text-white transition-colors"
+            className="text-muted-foreground hover:text-foreground transition-colors"
           >
             {showPassword ? "👁️" : "👁️‍🗨️"}
           </button>
@@ -159,7 +159,7 @@ function SearchInput({ onSearch, debounceDelay = 300, ...props }: SearchInputPro
       {...props}
       value={value}
       onChange={(e) => setValue(e.target.value)}
-      icon={<SearchIcon className="size-4 text-white/40" />}
+      icon={<SearchIcon className="size-4 text-muted-foreground/70" />}
       iconPosition="left"
     />
   )

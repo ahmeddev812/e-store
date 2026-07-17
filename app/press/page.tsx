@@ -70,7 +70,7 @@ export default function PressPage() {
         >
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-sm text-white/50 transition-colors hover:text-[#F57224]"
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-[#F57224]"
           >
             <ArrowRight className="size-4 rotate-180" />
             Back to Home
@@ -95,7 +95,7 @@ export default function PressPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl font-bold text-white sm:text-5xl lg:text-6xl"
+            className="text-4xl font-bold text-foreground sm:text-5xl lg:text-6xl"
           >
             In the{" "}
             <span className="relative inline-block">
@@ -110,7 +110,7 @@ export default function PressPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mx-auto mt-4 max-w-2xl text-white/60"
+            className="mx-auto mt-4 max-w-2xl text-muted-foreground"
           >
             Latest announcements, media coverage, and press resources from BlazeCart.
           </motion.p>
@@ -133,7 +133,7 @@ export default function PressPage() {
                   <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
                     <div className="flex-1 space-y-3">
                       <div className="flex flex-wrap items-center gap-3 text-sm">
-                        <span className="inline-flex items-center gap-1.5 text-white/40">
+                        <span className="inline-flex items-center gap-1.5 text-muted-foreground/70">
                           <Calendar className="size-3.5" />
                           {release.date}
                         </span>
@@ -144,11 +144,11 @@ export default function PressPage() {
                         </span>
                       </div>
 
-                      <h3 className="text-xl font-bold text-white transition-colors group-hover:text-[#F57224] md:text-2xl">
+                      <h3 className="text-xl font-bold text-foreground transition-colors group-hover:text-[#F57224] md:text-2xl">
                         {release.title}
                       </h3>
 
-                      <p className="text-sm leading-relaxed text-white/50 md:text-base">
+                      <p className="text-sm leading-relaxed text-muted-foreground md:text-base">
                         {release.summary}
                       </p>
 
@@ -194,8 +194,8 @@ export default function PressPage() {
               <div className="inline-flex items-center justify-center rounded-xl bg-gradient-to-br from-[#F57224]/20 to-[#F57224]/5 p-3 md:hidden">
                 <Download className="size-6 text-[#F57224]" />
               </div>
-              <h2 className="text-2xl font-bold text-white">Media Kit</h2>
-              <p className="max-w-lg text-sm text-white/50">
+              <h2 className="text-2xl font-bold text-foreground">Media Kit</h2>
+              <p className="max-w-lg text-sm text-muted-foreground">
                 Download our press kit including brand assets, logos, product images, and executive bios
                 for media and press coverage.
               </p>
@@ -219,8 +219,8 @@ export default function PressPage() {
           <Badge className="mb-4 bg-gradient-to-r from-[#F57224]/20 to-[#F57224]/5 text-[#F57224] border-none">
             Press Inquiries
           </Badge>
-          <h2 className="text-2xl font-bold text-white">Get in Touch</h2>
-          <p className="mx-auto mt-2 max-w-lg text-sm text-white/50">
+          <h2 className="text-2xl font-bold text-foreground">Get in Touch</h2>
+          <p className="mx-auto mt-2 max-w-lg text-sm text-muted-foreground">
             For press-related inquiries, interview requests, or media partnerships, please reach out to
             our communications team.
           </p>
@@ -237,7 +237,7 @@ export default function PressPage() {
                 <div className="mx-auto mb-4 inline-flex items-center justify-center rounded-xl bg-gradient-to-br from-[#F57224]/20 to-[#F57224]/5 p-3">
                   <Mail className="size-6 text-[#F57224]" />
                 </div>
-                <h3 className="text-lg font-semibold text-white">Press & Media Contact</h3>
+                <h3 className="text-lg font-semibold text-foreground">Press & Media Contact</h3>
                 <Link
                   href="mailto:press@blazecart.com"
                   className="mt-2 inline-flex items-center gap-1.5 text-[#D4A853] transition-colors hover:text-[#F57224]"
@@ -245,14 +245,14 @@ export default function PressPage() {
                   press@blazecart.com
                   <ExternalLink className="size-3.5" />
                 </Link>
-                <p className="mt-3 text-xs text-white/40">
+                <p className="mt-3 text-xs text-muted-foreground/70">
                   We aim to respond to all press inquiries within 24 hours.
                 </p>
                 <div className="mt-6">
                   <Link href="/contact">
                     <Button
                       variant="outline"
-                      className="border-white/10 text-white/70 hover:border-[#F57224]/50 hover:text-[#F57224]"
+                      className="border-border text-foreground/70 hover:border-[#F57224]/50 hover:text-[#F57224]"
                     >
                       Contact Our Team
                       <ArrowRight className="ml-2 size-4" />
@@ -276,8 +276,8 @@ export default function PressPage() {
           <div className="absolute inset-0 bg-gradient-to-r from-[#D4A853]/5 via-transparent to-[#F57224]/10" />
           <div className="relative">
             <Newspaper className="mx-auto mb-4 size-10 text-[#D4A853]" />
-            <h2 className="text-xl font-bold text-white">Have a Media Inquiry?</h2>
-            <p className="mx-auto mt-2 max-w-md text-sm text-white/50">
+            <h2 className="text-xl font-bold text-foreground">Have a Media Inquiry?</h2>
+            <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground">
               We welcome coverage from accredited journalists and media outlets. Reach out to our team
               for interviews, quotes, and story ideas.
             </p>
@@ -291,7 +291,7 @@ export default function PressPage() {
               <Link href="/">
                 <Button
                   variant="outline"
-                  className="border-white/10 text-white/70 hover:border-[#F57224]/50 hover:text-[#F57224]"
+                  className="border-border text-foreground/70 hover:border-[#F57224]/50 hover:text-[#F57224]"
                 >
                   Back to Home
                   <ArrowRight className="ml-2 size-4" />

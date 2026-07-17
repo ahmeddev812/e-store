@@ -131,7 +131,7 @@ export default function AdminPage() {
   const heroOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0.8])
 
   return (
-    <div ref={sectionRef} className="min-h-screen overflow-x-hidden bg-[#0B1120]">
+    <div ref={sectionRef} className="min-h-screen overflow-x-hidden bg-background">
       {/* Premium Background */}
       <div className="fixed inset-0 bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]">
         <div className="absolute top-20 left-10 size-72 rounded-full bg-[#F57224]/20 blur-[120px] animate-pulse" />
@@ -153,15 +153,15 @@ export default function AdminPage() {
                 <div className="rounded-xl bg-gradient-to-br from-[#F57224]/20 to-[#F57224]/5 p-2">
                   <Crown className="size-6 text-[#F57224]" />
                 </div>
-                <h1 className="text-2xl font-bold text-white md:text-3xl">Admin Dashboard</h1>
+                <h1 className="text-2xl font-bold text-foreground md:text-3xl">Admin Dashboard</h1>
                 <Badge className="bg-gradient-to-r from-[#F57224] to-orange-500 text-white border-none">
                   BlazeCart
                 </Badge>
               </div>
-              <p className="text-sm text-white/50">Welcome back, Admin. Here's your store performance overview.</p>
+              <p className="text-sm text-muted-foreground">Welcome back, Admin. Here's your store performance overview.</p>
             </div>
             <div className="flex items-center gap-3">
-              <Button variant="outline" size="sm" className="border-white/10 bg-white/5 backdrop-blur-xl">
+              <Button variant="outline" size="sm" className="border-border bg-muted/50 backdrop-blur-xl">
                 <Download className="mr-2 size-3" />
                 Export Report
               </Button>
@@ -190,7 +190,7 @@ export default function AdminPage() {
                         <div className={`rounded-xl ${card.bg} p-3 transition-all duration-300 group-hover:scale-110`}>
                           <Icon className={`size-5 text-${card.color.split(' ')[1]}`} />
                         </div>
-                        <div className="flex items-center gap-1 rounded-full bg-white/5 px-2 py-1 text-xs backdrop-blur-sm">
+                        <div className="flex items-center gap-1 rounded-full bg-muted/50 px-2 py-1 text-xs backdrop-blur-sm">
                           {card.trend === "up" ? (
                             <TrendingUp className="size-3 text-emerald-400" />
                           ) : (
@@ -201,9 +201,9 @@ export default function AdminPage() {
                           </span>
                         </div>
                       </div>
-                      <p className="mt-4 text-3xl font-bold text-white">{card.value}</p>
-                      <p className="text-xs text-white/40 mt-1">{card.title}</p>
-                      <p className="text-[10px] text-white/30 mt-1">{card.description}</p>
+                      <p className="mt-4 text-3xl font-bold text-foreground">{card.value}</p>
+                      <p className="text-xs text-muted-foreground/70 mt-1">{card.title}</p>
+                      <p className="text-[10px] text-foreground/30 mt-1">{card.description}</p>
                     </CardContent>
                   </Card>
                 </motion.div>
@@ -230,7 +230,7 @@ export default function AdminPage() {
                       className={`rounded-lg px-3 py-1 text-xs transition-all ${
                         selectedTimeframe === tf
                           ? "bg-gradient-to-r from-[#F57224] to-orange-500 text-white shadow-glow"
-                          : "bg-white/5 text-white/40 hover:bg-white/10"
+                          : "bg-muted/50 text-muted-foreground/70 hover:bg-muted/30"
                       }`}
                     >
                       {tf.charAt(0).toUpperCase() + tf.slice(1)}
@@ -251,7 +251,7 @@ export default function AdminPage() {
                         className="group relative flex flex-1 flex-col items-center gap-2"
                       >
                         <div className="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 transition-opacity group-hover:opacity-100">
-                          <div className="rounded-lg bg-black/80 px-2 py-1 text-xs text-white whitespace-nowrap">
+                          <div className="rounded-lg bg-background/80 px-2 py-1 text-xs text-foreground whitespace-nowrap">
                             ${(item.sales / 1000).toFixed(1)}k
                           </div>
                         </div>
@@ -261,8 +261,8 @@ export default function AdminPage() {
                           animate={{ height: `${(item.sales / maxSale) * 180}px` }}
                           transition={{ duration: 0.8, delay: index * 0.05 }}
                         />
-                        <span className="text-xs font-medium text-white/60">{item.day}</span>
-                        <span className="text-[10px] text-white/30">{item.orders} orders</span>
+                        <span className="text-xs font-medium text-muted-foreground">{item.day}</span>
+                        <span className="text-[10px] text-foreground/30">{item.orders} orders</span>
                       </motion.div>
                     ))}
                   </div>
@@ -291,11 +291,11 @@ export default function AdminPage() {
                     <div className="mb-1.5 flex items-center justify-between text-xs">
                       <div className="flex items-center gap-2">
                         <span className="text-base">{cat.icon}</span>
-                        <span className="text-white/70">{cat.label}</span>
+                        <span className="text-foreground/70">{cat.label}</span>
                       </div>
-                      <span className="text-white/50">{cat.value}%</span>
+                      <span className="text-muted-foreground">{cat.value}%</span>
                     </div>
-                    <div className="relative h-2 overflow-hidden rounded-full bg-white/10">
+                    <div className="relative h-2 overflow-hidden rounded-full bg-muted/30">
                       <motion.div
                         className={`h-full rounded-full bg-gradient-to-r ${cat.color}`}
                         initial={{ width: 0 }}
@@ -328,7 +328,7 @@ export default function AdminPage() {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="group flex items-center gap-3 rounded-xl transition-all duration-300 hover:bg-white/5 p-2"
+                    className="group flex items-center gap-3 rounded-xl transition-all duration-300 hover:bg-muted/50 p-2"
                   >
                     <div className="relative h-12 w-12 overflow-hidden rounded-lg">
                       <Image
@@ -339,13 +339,13 @@ export default function AdminPage() {
                       />
                     </div>
                     <div className="flex-1">
-                      <p className="text-sm font-medium text-white group-hover:text-[#F57224] transition-colors">
+                      <p className="text-sm font-medium text-foreground group-hover:text-[#F57224] transition-colors">
                         {product.name}
                       </p>
-                      <p className="text-xs text-white/40">{product.sales} units sold</p>
+                      <p className="text-xs text-muted-foreground/70">{product.sales} units sold</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-sm font-bold text-white">{formatUSD(product.revenue)}</p>
+                      <p className="text-sm font-bold text-foreground">{formatUSD(product.revenue)}</p>
                     </div>
                   </motion.div>
                 ))}
@@ -369,13 +369,13 @@ export default function AdminPage() {
                 <div className="overflow-x-auto">
                   <table className="w-full text-left text-sm">
                     <thead>
-                      <tr className="border-b border-white/10">
-                        <th className="pb-3 font-medium text-white/40">Order ID</th>
-                        <th className="pb-3 font-medium text-white/40">Customer</th>
-                        <th className="pb-3 font-medium text-white/40">Product</th>
-                        <th className="pb-3 font-medium text-white/40">Amount</th>
-                        <th className="pb-3 font-medium text-white/40">Status</th>
-                        <th className="pb-3 font-medium text-white/40">Date</th>
+                      <tr className="border-b border-border">
+                        <th className="pb-3 font-medium text-muted-foreground/70">Order ID</th>
+                        <th className="pb-3 font-medium text-muted-foreground/70">Customer</th>
+                        <th className="pb-3 font-medium text-muted-foreground/70">Product</th>
+                        <th className="pb-3 font-medium text-muted-foreground/70">Amount</th>
+                        <th className="pb-3 font-medium text-muted-foreground/70">Status</th>
+                        <th className="pb-3 font-medium text-muted-foreground/70">Date</th>
                        </tr>
                     </thead>
                     <tbody>
@@ -385,12 +385,12 @@ export default function AdminPage() {
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           transition={{ delay: index * 0.05 }}
-                          className="border-b border-white/5 transition-all duration-200 hover:bg-white/5 cursor-pointer"
+                          className="border-b border-border/50 transition-all duration-200 hover:bg-muted/50 cursor-pointer"
                         >
-                          <td className="py-3 font-mono text-xs text-white/60">{order.id}</td>
-                          <td className="py-3 text-white/80">{order.customer}</td>
-                          <td className="py-3 text-white/60">{order.product}</td>
-                          <td className="py-3 font-medium text-white">{formatUSD(order.amount)}</td>
+                          <td className="py-3 font-mono text-xs text-muted-foreground">{order.id}</td>
+                          <td className="py-3 text-foreground/80">{order.customer}</td>
+                          <td className="py-3 text-muted-foreground">{order.product}</td>
+                          <td className="py-3 font-medium text-foreground">{formatUSD(order.amount)}</td>
                           <td className="py-3">
                             <Badge
                               className={
@@ -406,7 +406,7 @@ export default function AdminPage() {
                               {order.status}
                             </Badge>
                           </td>
-                          <td className="py-3 text-xs text-white/40">{order.date}</td>
+                          <td className="py-3 text-xs text-muted-foreground/70">{order.date}</td>
                         </motion.tr>
                       ))}
                     </tbody>
@@ -437,8 +437,8 @@ export default function AdminPage() {
                         <item.icon className={`size-5 text-${item.color}`} />
                       </div>
                       <div>
-                        <p className="text-sm font-semibold text-white">{item.title}</p>
-                        <p className="text-[10px] text-white/40">{item.action}</p>
+                        <p className="text-sm font-semibold text-foreground">{item.title}</p>
+                        <p className="text-[10px] text-muted-foreground/70">{item.action}</p>
                       </div>
                     </div>
                   </CardContent>

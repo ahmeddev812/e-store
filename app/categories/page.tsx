@@ -98,7 +98,7 @@ export default function CategoriesPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl font-bold text-white sm:text-5xl lg:text-6xl"
+            className="text-4xl font-bold text-foreground sm:text-5xl lg:text-6xl"
           >
             Explore Our{" "}
             <span className="relative inline-block">
@@ -113,7 +113,7 @@ export default function CategoriesPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mx-auto mt-4 max-w-2xl text-white/60"
+            className="mx-auto mt-4 max-w-2xl text-muted-foreground"
           >
             Discover thousands of products across our curated categories. 
             Find exactly what you're looking for.
@@ -123,12 +123,12 @@ export default function CategoriesPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-6 flex items-center justify-center gap-2 text-sm text-white/40"
+            className="mt-6 flex items-center justify-center gap-2 text-sm text-muted-foreground/70"
           >
-            <Badge variant="outline" className="border-white/10 bg-white/5">
+            <Badge variant="outline" className="border-border bg-muted/50">
               {categoriesWithCount.length} Categories
             </Badge>
-            <Badge variant="outline" className="border-white/10 bg-white/5">
+            <Badge variant="outline" className="border-border bg-muted/50">
               {categoriesWithCount.reduce((sum, cat) => sum + cat._count.products, 0)}+ Products
             </Badge>
           </motion.div>
@@ -143,8 +143,8 @@ export default function CategoriesPage() {
           viewport={{ once: true }}
           className="mb-8 text-center"
         >
-          <h2 className="text-2xl font-bold text-white">Featured Categories</h2>
-          <p className="text-white/50">Most popular collections</p>
+          <h2 className="text-2xl font-bold text-foreground">Featured Categories</h2>
+          <p className="text-muted-foreground">Most popular collections</p>
         </motion.div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -162,7 +162,7 @@ export default function CategoriesPage() {
                 whileHover={{ y: -5 }}
               >
                 <Link href={`/products?category=${cat.slug}`}>
-                  <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-white/5 to-white/0 p-6 transition-all duration-500 hover:shadow-[0_0_40px_rgba(245,114,36,0.2)]">
+                  <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-accent/5 to-transparent p-6 transition-all duration-500 hover:shadow-[0_0_40px_rgba(245,114,36,0.2)]">
                     <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 transition-opacity duration-500 group-hover:opacity-10`} />
                     
                     <div className="relative flex items-center justify-between">
@@ -170,13 +170,13 @@ export default function CategoriesPage() {
                         <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#F57224]/20 to-[#F57224]/5">
                           <Icon className="size-6 text-[#F57224]" />
                         </div>
-                        <h3 className="text-xl font-bold text-white group-hover:text-[#F57224] transition-colors">
+                        <h3 className="text-xl font-bold text-foreground group-hover:text-[#F57224] transition-colors">
                           {cat.name}
                         </h3>
-                        <p className="mt-1 text-sm text-white/40">{cat._count.products} Products</p>
+                        <p className="mt-1 text-sm text-muted-foreground/70">{cat._count.products} Products</p>
                       </div>
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 transition-all duration-300 group-hover:bg-[#F57224] group-hover:scale-110">
-                        <ArrowRight className="size-4 text-white/60 group-hover:text-white" />
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-muted/50 transition-all duration-300 group-hover:bg-[#F57224] hover:text-white group-hover:scale-110">
+                        <ArrowRight className="size-4 text-muted-foreground group-hover:text-foreground" />
                       </div>
                     </div>
 
@@ -199,10 +199,10 @@ export default function CategoriesPage() {
           className="mb-8 flex items-center justify-between"
         >
           <div>
-            <h2 className="text-2xl font-bold text-white">All Categories</h2>
-            <p className="text-white/50">Browse our complete collection</p>
+            <h2 className="text-2xl font-bold text-foreground">All Categories</h2>
+            <p className="text-muted-foreground">Browse our complete collection</p>
           </div>
-          <div className="flex items-center gap-1 text-sm text-white/30">
+          <div className="flex items-center gap-1 text-sm text-foreground/30">
             <TrendingUp className="size-3" />
             <span>{categoriesWithCount.length} available</span>
           </div>
@@ -236,16 +236,16 @@ export default function CategoriesPage() {
                       <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent`} />
                       
                       {/* Category Icon Overlay */}
-                      <div className="absolute left-3 top-3 rounded-lg bg-black/50 p-1.5 backdrop-blur-sm">
+                      <div className="absolute left-3 top-3 rounded-lg bg-background/70 p-1.5 backdrop-blur-sm">
                         <Icon className="size-4 text-[#F57224]" />
                       </div>
                       
                       {/* Content */}
                       <div className="absolute bottom-0 left-0 right-0 p-4">
-                        <h3 className="text-lg font-bold text-white group-hover:text-[#F57224] transition-colors">
+                        <h3 className="text-lg font-bold text-foreground group-hover:text-[#F57224] transition-colors">
                           {cat.name}
                         </h3>
-                        <p className="text-sm text-white/60">{cat._count.products} Products</p>
+                        <p className="text-sm text-muted-foreground">{cat._count.products} Products</p>
                       </div>
 
                       {/* Hover Badge */}
@@ -280,8 +280,8 @@ export default function CategoriesPage() {
             <div className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-br from-[#F57224]/20 to-[#F57224]/5 p-3 mb-6">
               <Gift className="size-10 text-[#F57224]" />
             </div>
-            <h2 className="text-3xl font-bold text-white">Can't Find What You're Looking For?</h2>
-            <p className="mt-2 text-white/60 max-w-md mx-auto">
+            <h2 className="text-3xl font-bold text-foreground">Can't Find What You're Looking For?</h2>
+            <p className="mt-2 text-muted-foreground max-w-md mx-auto">
               Browse all products or contact our support team for personalized assistance
             </p>
             <div className="mt-6 flex flex-wrap gap-4 justify-center">
@@ -292,7 +292,7 @@ export default function CategoriesPage() {
                 </Button>
               </Link>
               <Link href="/contact">
-                <Button variant="outline" className="border-white/20 hover:border-[#F57224]/50">
+                <Button variant="outline" className="border-border hover:border-[#F57224]/50">
                   Contact Support
                 </Button>
               </Link>
@@ -314,9 +314,9 @@ export default function CategoriesPage() {
           className="flex cursor-pointer flex-col items-center gap-1"
           onClick={() => window.scrollTo({ top: window.innerHeight, behavior: "smooth" })}
         >
-          <span className="text-[10px] text-white/30">Scroll</span>
-          <div className="flex h-8 w-8 items-center justify-center rounded-full border border-white/20 bg-white/5 backdrop-blur-sm">
-            <ArrowRight className="size-3 rotate-90 text-white/40" />
+          <span className="text-[10px] text-foreground/30">Scroll</span>
+          <div className="flex h-8 w-8 items-center justify-center rounded-full border border-border bg-muted/50 backdrop-blur-sm">
+            <ArrowRight className="size-3 rotate-90 text-muted-foreground/70" />
           </div>
         </motion.div>
       </motion.div>

@@ -119,14 +119,14 @@ export default function DashboardPage() {
             <div className="flex items-center gap-4">
               <Avatar className="size-16 border-2 border-[#F57224]/30">
                 <AvatarImage src={userImage} />
-                <AvatarFallback className="bg-[#1E293B] text-lg text-white">
+                <AvatarFallback className="bg-muted text-lg text-muted-foreground">
                   {getInitials(userName)}
                 </AvatarFallback>
               </Avatar>
               <div>
-                <h1 className="text-2xl font-bold text-white">{userName}</h1>
-                <p className="text-sm text-white/50">{userEmail}</p>
-                <p className="mt-1 flex items-center gap-1 text-xs text-white/40">
+                <h1 className="text-2xl font-bold text-foreground">{userName}</h1>
+                <p className="text-sm text-muted-foreground">{userEmail}</p>
+                <p className="mt-1 flex items-center gap-1 text-xs text-muted-foreground/70">
                   <Calendar className="size-3" />
                   Member since {new Date(user?.createdAt || Date.now()).toLocaleDateString("en-US", { month: "long", year: "numeric" })}
                 </p>
@@ -144,7 +144,7 @@ export default function DashboardPage() {
                       <div className="flex size-10 items-center justify-center rounded-lg bg-[#F57224]/10 text-[#F57224]">
                         <Icon className="size-5" />
                       </div>
-                      <span className="text-sm font-medium text-white/80 group-hover:text-white">
+                      <span className="text-sm font-medium text-foreground/80 group-hover:text-foreground">
                         {link.label}
                       </span>
                     </CardContent>
@@ -163,22 +163,22 @@ export default function DashboardPage() {
             </CardHeader>
             <CardContent>
               {orders.length === 0 ? (
-                <p className="py-8 text-center text-sm text-white/40">No orders yet</p>
+                <p className="py-8 text-center text-sm text-muted-foreground/70">No orders yet</p>
               ) : (
                 <div className="space-y-3">
                   {orders.map((order) => (
                     <div
                       key={order.id}
-                      className="flex flex-col gap-3 rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl p-4 sm:flex-row sm:items-center sm:justify-between transition-all duration-300 hover:border-[#F57224]/20 hover:shadow-[0_4px_20px_rgba(245,114,36,0.1)]"
+                      className="flex flex-col gap-3 rounded-xl border border-border bg-muted/50 backdrop-blur-xl p-4 sm:flex-row sm:items-center sm:justify-between transition-all duration-300 hover:border-[#F57224]/20 hover:shadow-[0_4px_20px_rgba(245,114,36,0.1)]"
                     >
                       <div className="space-y-1">
                         <div className="flex items-center gap-2">
-                          <span className="text-sm font-medium text-white">{order.id}</span>
+                          <span className="text-sm font-medium text-foreground">{order.id}</span>
                           <Badge variant={statusColor(order.status)} size="sm">
                             {order.status}
                           </Badge>
                         </div>
-                        <div className="flex items-center gap-3 text-xs text-white/50">
+                        <div className="flex items-center gap-3 text-xs text-muted-foreground">
                           <span className="flex items-center gap-1">
                             <Calendar className="size-3" />
                             {order.date}

@@ -29,8 +29,8 @@ const sizeMap = {
 }
 
 const variantClasses = {
-  default: "border-white/20 bg-white/5 backdrop-blur-xl",
-  glass: "glass-premium border-white/10",
+  default: "border-border bg-muted/50 backdrop-blur-xl",
+  glass: "glass-premium border-border",
   premium: "bg-gradient-to-r from-[#F57224]/10 to-[#F57224]/5 border-[#F57224]/30 shadow-glow",
   bordered: "border-2 border-[#F57224]/20 bg-transparent",
 }
@@ -83,7 +83,7 @@ function QuantitySelector({
   return (
     <div className="space-y-2">
       {label && (
-        <label className="text-sm font-medium text-white/70">
+        <label className="text-sm font-medium text-foreground/70">
           {label}
         </label>
       )}
@@ -103,7 +103,7 @@ function QuantitySelector({
             disabled={disabled || value <= min || currentStock <= 0}
             onClick={handleDecrease}
             className={cn(
-              "flex items-center justify-center rounded-l-lg text-white/70 transition-all duration-200 hover:text-white hover:bg-white/10",
+              "flex items-center justify-center rounded-l-lg text-foreground/70 transition-all duration-200 hover:text-foreground hover:bg-muted/30",
               "disabled:pointer-events-none disabled:opacity-30",
               s.button
             )}
@@ -120,8 +120,8 @@ function QuantitySelector({
             readOnly={disabled}
             aria-label="Quantity"
             className={cn(
-              "border-x border-white/10 bg-transparent text-center font-medium text-white outline-none transition-all",
-              "focus:bg-white/5",
+              "border-x border-border bg-transparent text-center font-medium text-foreground outline-none transition-all",
+              "focus:bg-muted/50",
               s.input,
               disabled && "cursor-not-allowed"
             )}
@@ -132,7 +132,7 @@ function QuantitySelector({
             disabled={disabled || value >= currentStock || currentStock <= 0}
             onClick={handleIncrease}
             className={cn(
-              "flex items-center justify-center rounded-r-lg text-white/70 transition-all duration-200 hover:text-white hover:bg-white/10",
+              "flex items-center justify-center rounded-r-lg text-foreground/70 transition-all duration-200 hover:text-foreground hover:bg-muted/30",
               "disabled:pointer-events-none disabled:opacity-30",
               s.button
             )}
@@ -147,7 +147,7 @@ function QuantitySelector({
             onClick={onDelete}
             disabled={disabled}
             className={cn(
-              "rounded-lg p-2 text-white/40 transition-all duration-200 hover:bg-red-500/10 hover:text-red-400",
+              "rounded-lg p-2 text-muted-foreground/70 transition-all duration-200 hover:bg-red-500/10 hover:text-red-400",
               s.button,
               disabled && "opacity-50 cursor-not-allowed"
             )}
@@ -177,7 +177,7 @@ function QuantitySelector({
             )}
           </div>
           {currentStock <= 10 && currentStock > 0 && (
-            <div className="flex-1 h-1 rounded-full bg-white/10 overflow-hidden">
+            <div className="flex-1 h-1 rounded-full bg-muted/30 overflow-hidden">
               <div 
                 className="h-full rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 transition-all duration-500"
                 style={{ width: `${(value / currentStock) * 100}%` }}
@@ -208,7 +208,7 @@ function QuantityPresets({ onChange, presets = [1, 2, 3, 5, 10], currentValue }:
             "rounded-lg px-3 py-1.5 text-xs font-medium transition-all duration-200",
             currentValue === preset
               ? "bg-gradient-to-r from-[#F57224] to-orange-500 text-white shadow-glow"
-              : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white border border-white/10"
+              : "bg-muted/50 text-muted-foreground hover:bg-muted/30 hover:text-foreground border border-border"
           )}
         >
           {preset}

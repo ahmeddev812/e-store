@@ -189,7 +189,7 @@ export default function ContactPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-3xl font-bold text-white mb-4"
+            className="text-3xl font-bold text-foreground mb-4"
           >
             Message Sent!
           </motion.h2>
@@ -197,7 +197,7 @@ export default function ContactPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="text-white/60 max-w-md text-center mb-8"
+            className="text-muted-foreground max-w-md text-center mb-8"
           >
             Thank you for reaching out. We've received your message and will get back to you within 24 hours.
           </motion.p>
@@ -245,7 +245,7 @@ export default function ContactPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl font-bold text-white sm:text-5xl lg:text-6xl"
+            className="text-4xl font-bold text-foreground sm:text-5xl lg:text-6xl"
           >
             Contact{" "}
             <span className="relative inline-block">
@@ -260,7 +260,7 @@ export default function ContactPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mx-auto mt-4 max-w-2xl text-white/60"
+            className="mx-auto mt-4 max-w-2xl text-muted-foreground"
           >
             Have questions? We're here to help. Reach out to us through any of the channels below.
           </motion.p>
@@ -283,8 +283,8 @@ export default function ContactPage() {
                   <div className="inline-flex items-center justify-center rounded-xl bg-[#F57224]/10 p-2 mb-3">
                     <stat.icon className="size-5 text-[#F57224]" />
                   </div>
-                  <div className="text-xl font-bold text-white">{stat.value}</div>
-                  <div className="text-xs text-white/40">{stat.label}</div>
+                  <div className="text-xl font-bold text-foreground">{stat.value}</div>
+                  <div className="text-xs text-muted-foreground/70">{stat.label}</div>
                 </CardContent>
               </Card>
             </motion.div>
@@ -309,13 +309,13 @@ export default function ContactPage() {
                   <div className="mb-4 inline-flex items-center justify-center rounded-xl bg-gradient-to-br from-[#F57224]/20 to-[#F57224]/5 p-3 transition-all duration-300 group-hover:scale-110">
                     <info.icon className="size-6 text-[#F57224]" />
                   </div>
-                  <h3 className="mb-2 text-lg font-semibold text-white">{info.title}</h3>
+                  <h3 className="mb-2 text-lg font-semibold text-foreground">{info.title}</h3>
                   {info.details.map((detail, idx) => (
-                    <p key={idx} className="text-sm text-white/60">
+                    <p key={idx} className="text-sm text-muted-foreground">
                       {detail}
                     </p>
                   ))}
-                  <p className="mt-2 text-xs text-white/30">{info.description}</p>
+                  <p className="mt-2 text-xs text-foreground/30">{info.description}</p>
                   {info.link && (
                     <Link href={info.link} target="_blank">
                       <Button variant="ghost" size="sm" className="mt-3 text-[#F57224] hover:bg-[#F57224]/10">
@@ -347,26 +347,26 @@ export default function ContactPage() {
                     <MessageCircle className="size-5 text-[#F57224]" />
                   </div>
                   <div>
-                    <h2 className="text-xl font-bold text-white">Send us a Message</h2>
-                    <p className="text-sm text-white/40">We'll get back to you within 24 hours</p>
+                    <h2 className="text-xl font-bold text-foreground">Send us a Message</h2>
+                    <p className="text-sm text-muted-foreground/70">We'll get back to you within 24 hours</p>
                   </div>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="grid gap-5 md:grid-cols-2">
                     <div className="space-y-2">
-                      <Label htmlFor="name" className="text-white/70">Full Name</Label>
+                      <Label htmlFor="name" className="text-foreground/70">Full Name</Label>
                       <Input
                         id="name"
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
                         placeholder="John Doe"
-                        className="border-white/10 bg-white/5 text-white placeholder:text-white/30 focus:border-[#F57224]/50"
+                        className="border-border bg-muted/50 text-foreground placeholder:text-foreground/30 focus:border-[#F57224]/50"
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="email" className="text-white/70">Email Address</Label>
+                      <Label htmlFor="email" className="text-foreground/70">Email Address</Label>
                       <Input
                         id="email"
                         name="email"
@@ -374,30 +374,30 @@ export default function ContactPage() {
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="john@example.com"
-                        className="border-white/10 bg-white/5 text-white placeholder:text-white/30 focus:border-[#F57224]/50"
+                        className="border-border bg-muted/50 text-foreground placeholder:text-foreground/30 focus:border-[#F57224]/50"
                       />
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="subject" className="text-white/70">Subject</Label>
+                    <Label htmlFor="subject" className="text-foreground/70">Subject</Label>
                     <Input
                       id="subject"
                       name="subject"
                       value={formData.subject}
                       onChange={handleChange}
                       placeholder="How can we help you?"
-                      className="border-white/10 bg-white/5 text-white placeholder:text-white/30 focus:border-[#F57224]/50"
+                      className="border-border bg-muted/50 text-foreground placeholder:text-foreground/30 focus:border-[#F57224]/50"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="message" className="text-white/70">Message</Label>
+                    <Label htmlFor="message" className="text-foreground/70">Message</Label>
                     <Textarea
                       id="message"
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
                       placeholder="Write your message here..."
-                      className="min-h-32 resize-none border-white/10 bg-white/5 text-white placeholder:text-white/30 focus:border-[#F57224]/50"
+                      className="min-h-32 resize-none border-border bg-muted/50 text-foreground placeholder:text-foreground/30 focus:border-[#F57224]/50"
                     />
                   </div>
                   <Button
@@ -407,7 +407,7 @@ export default function ContactPage() {
                   >
                     {isSubmitting ? (
                       <>
-                        <div className="mr-2 size-4 animate-spin rounded-full border-2 border-white/20 border-t-white" />
+                        <div className="mr-2 size-4 animate-spin rounded-full border-2 border-border border-t-white" />
                         Sending...
                       </>
                     ) : (
@@ -436,8 +436,8 @@ export default function ContactPage() {
                   <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#F57224]/10 to-[#F57224]/5">
                     <div className="text-center">
                       <MapPin className="mx-auto mb-2 size-10 text-[#F57224]" />
-                      <p className="text-white/60">Interactive Map View</p>
-                      <p className="text-xs text-white/30">123 Commerce Street, Tech City</p>
+                      <p className="text-muted-foreground">Interactive Map View</p>
+                      <p className="text-xs text-foreground/30">123 Commerce Street, Tech City</p>
                       <Button variant="link" className="mt-2 text-[#F57224]">
                         Open in Google Maps
                         <ArrowRight className="ml-1 size-3" />
@@ -451,7 +451,7 @@ export default function ContactPage() {
             {/* Social Links */}
             <Card className="glass-premium">
               <CardContent className="p-6">
-                <h3 className="mb-4 font-semibold text-white">Connect With Us</h3>
+                <h3 className="mb-4 font-semibold text-foreground">Connect With Us</h3>
                 <div className="flex flex-wrap gap-3">
                   {socialLinks.map((social) => {
                     const Icon = social.name === "Facebook" ? FacebookSvg
@@ -481,8 +481,8 @@ export default function ContactPage() {
             <Card className="glass-premium bg-gradient-to-r from-[#F57224]/10 to-[#F57224]/5">
               <CardContent className="p-4 text-center">
                 <Headphones className="mx-auto mb-2 size-8 text-[#F57224]" />
-                <p className="text-sm font-medium text-white">24/7 Premium Support</p>
-                <p className="text-xs text-white/40">Our team is always here for you</p>
+                <p className="text-sm font-medium text-foreground">24/7 Premium Support</p>
+                <p className="text-xs text-muted-foreground/70">Our team is always here for you</p>
               </CardContent>
             </Card>
           </motion.div>
@@ -500,8 +500,8 @@ export default function ContactPage() {
           <Badge className="mb-4 bg-gradient-to-r from-[#F57224]/20 to-[#F57224]/5 text-[#F57224] border-none">
             FAQs
           </Badge>
-          <h2 className="text-2xl font-bold text-white">Frequently Asked Questions</h2>
-          <p className="mt-2 text-white/50">Find quick answers to common questions</p>
+          <h2 className="text-2xl font-bold text-foreground">Frequently Asked Questions</h2>
+          <p className="mt-2 text-muted-foreground">Find quick answers to common questions</p>
         </motion.div>
 
         <div className="mx-auto max-w-3xl space-y-3">
@@ -516,9 +516,9 @@ export default function ContactPage() {
             >
               <button
                 onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                className="flex w-full items-center justify-between p-5 text-left transition-colors hover:bg-white/5"
+                className="flex w-full items-center justify-between p-5 text-left transition-colors hover:bg-muted/50"
               >
-                <span className="font-medium text-white">{faq.question}</span>
+                <span className="font-medium text-foreground">{faq.question}</span>
                 <ChevronRight className={`size-5 text-[#F57224] transition-transform duration-300 ${openFaq === index ? "rotate-90" : ""}`} />
               </button>
               <AnimatePresence>
@@ -528,9 +528,9 @@ export default function ContactPage() {
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="border-t border-white/10 px-5 pb-5"
+                    className="border-t border-border px-5 pb-5"
                   >
-                    <p className="pt-3 text-sm text-white/60">{faq.answer}</p>
+                    <p className="pt-3 text-sm text-muted-foreground">{faq.answer}</p>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -550,8 +550,8 @@ export default function ContactPage() {
           <div className="absolute inset-0 bg-gradient-to-r from-[#F57224]/10 via-transparent to-[#F57224]/5" />
           <div className="relative">
             <Gift className="mx-auto mb-4 size-12 text-[#F57224]" />
-            <h2 className="text-2xl font-bold text-white">Need Immediate Assistance?</h2>
-            <p className="mt-2 text-white/60">Chat with our support team for instant help</p>
+            <h2 className="text-2xl font-bold text-foreground">Need Immediate Assistance?</h2>
+            <p className="mt-2 text-muted-foreground">Chat with our support team for instant help</p>
             <Button className="mt-6 bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow">
               Start Live Chat
               <MessageCircle className="ml-2 size-4" />

@@ -76,10 +76,10 @@ function FlashProductCard({ product, index }: { product: typeof products[number]
                 </Badge>
               </div>
             )}
-            <div className="absolute inset-0 flex items-center justify-center bg-black/0 opacity-0 transition-all duration-300 group-hover:bg-black/60 group-hover:opacity-100">
+            <div className="absolute inset-0 flex items-center justify-center bg-black/0 opacity-0 transition-all duration-300 group-hover:bg-background/60 group-hover:opacity-100">
               <Button
                 variant="outline"
-                className="border-white/20 bg-white/10 text-white hover:bg-[#F57224] hover:border-[#F57224]"
+                className="border-border bg-muted/30 text-foreground hover:bg-[#F57224] hover:text-white hover:border-[#F57224]"
                 onClick={(e) => {
                   e.preventDefault()
                   window.location.href = `/products/${product.slug}`
@@ -91,13 +91,13 @@ function FlashProductCard({ product, index }: { product: typeof products[number]
             </div>
           </div>
           <CardContent className="p-4">
-            <p className="text-xs text-white/40 uppercase tracking-wider">{product.categoryName}</p>
-            <h3 className="mt-1 font-semibold text-white line-clamp-2 group-hover:text-[#F57224] transition-colors">
+            <p className="text-xs text-muted-foreground/70 uppercase tracking-wider">{product.categoryName}</p>
+            <h3 className="mt-1 font-semibold text-foreground line-clamp-2 group-hover:text-[#F57224] transition-colors">
               {product.title}
             </h3>
             <div className="mt-2 flex items-baseline gap-2">
               <span className="text-xl font-bold text-[#F57224]">{formatUSD(discountedPrice)}</span>
-              <span className="text-xs text-white/40 line-through">{formatUSD(product.price)}</span>
+              <span className="text-xs text-muted-foreground/70 line-through">{formatUSD(product.price)}</span>
             </div>
             <div className="mt-2 flex items-center gap-1">
               {Array.from({ length: 5 }).map((_, i) => (
@@ -106,7 +106,7 @@ function FlashProductCard({ product, index }: { product: typeof products[number]
                   className={`size-3 ${i < Math.round(product.rating) ? "fill-yellow-500 text-yellow-500" : "fill-white/10 text-white/10"}`}
                 />
               ))}
-              <span className="ml-1 text-xs text-white/40">({product.rating})</span>
+              <span className="ml-1 text-xs text-muted-foreground/70">({product.rating})</span>
             </div>
           </CardContent>
         </Card>
@@ -150,7 +150,7 @@ export default function FlashSalesPage() {
           className="mb-6"
         >
           <Link href="/products">
-            <Button variant="ghost" size="sm" className="text-white/60 hover:text-white">
+            <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
               <ArrowRight className="mr-2 size-4 rotate-180" />
               Back to Products
             </Button>
@@ -166,13 +166,13 @@ export default function FlashSalesPage() {
           <div className="mx-auto mb-4 inline-flex items-center justify-center rounded-full bg-gradient-to-br from-[#F57224]/30 to-[#F57224]/5 p-4 backdrop-blur-xl">
             <Flame className="size-10 text-[#F57224]" />
           </div>
-          <h1 className="text-4xl font-bold text-white md:text-5xl">
+          <h1 className="text-4xl font-bold text-foreground md:text-5xl">
             Flash{" "}
             <span className="bg-gradient-to-r from-[#F57224] to-orange-400 bg-clip-text text-transparent">
               Sale
             </span>
           </h1>
-          <p className="mt-2 text-white/60">
+          <p className="mt-2 text-muted-foreground">
             Limited-time deals with massive discounts. Grab them before they&apos;re gone!
           </p>
         </motion.div>
@@ -188,31 +188,31 @@ export default function FlashSalesPage() {
             <CardContent className="flex items-center justify-center gap-6 p-5">
               <div className="flex items-center gap-2">
                 <Clock className="size-5 text-[#F57224]" />
-                <span className="text-sm font-medium text-white/60">Ends in:</span>
+                <span className="text-sm font-medium text-muted-foreground">Ends in:</span>
               </div>
               {isExpired ? (
                 <span className="text-lg font-bold text-red-400">Expired</span>
               ) : (
                 <div className="flex items-center gap-3">
                   <div className="text-center">
-                    <div className="min-w-12 rounded-lg bg-white/10 px-3 py-1 text-2xl font-bold text-white">
+                    <div className="min-w-12 rounded-lg bg-muted/30 px-3 py-1 text-2xl font-bold text-foreground">
                       {hours}
                     </div>
-                    <p className="mt-0.5 text-[10px] text-white/40">Hours</p>
+                    <p className="mt-0.5 text-[10px] text-muted-foreground/70">Hours</p>
                   </div>
                   <span className="mt-[-1.5rem] text-2xl font-bold text-[#F57224]">:</span>
                   <div className="text-center">
-                    <div className="min-w-12 rounded-lg bg-white/10 px-3 py-1 text-2xl font-bold text-white">
+                    <div className="min-w-12 rounded-lg bg-muted/30 px-3 py-1 text-2xl font-bold text-foreground">
                       {minutes}
                     </div>
-                    <p className="mt-0.5 text-[10px] text-white/40">Mins</p>
+                    <p className="mt-0.5 text-[10px] text-muted-foreground/70">Mins</p>
                   </div>
                   <span className="mt-[-1.5rem] text-2xl font-bold text-[#F57224]">:</span>
                   <div className="text-center">
-                    <div className="min-w-12 rounded-lg bg-white/10 px-3 py-1 text-2xl font-bold text-white">
+                    <div className="min-w-12 rounded-lg bg-muted/30 px-3 py-1 text-2xl font-bold text-foreground">
                       {seconds}
                     </div>
-                    <p className="mt-0.5 text-[10px] text-white/40">Secs</p>
+                    <p className="mt-0.5 text-[10px] text-muted-foreground/70">Secs</p>
                   </div>
                 </div>
               )}
@@ -229,21 +229,21 @@ export default function FlashSalesPage() {
         >
           <div>
             <p className="text-2xl font-bold text-[#F57224]">{flashProducts.length}</p>
-            <p className="text-xs text-white/40">Deals Live</p>
+            <p className="text-xs text-muted-foreground/70">Deals Live</p>
           </div>
-          <div className="h-8 w-px bg-white/10" />
+          <div className="h-8 w-px bg-muted/30" />
           <div>
             <p className="text-2xl font-bold text-[#F57224]">
               {Math.max(...flashProducts.map((p) => p.discountPercentage))}%
             </p>
-            <p className="text-xs text-white/40">Max Discount</p>
+            <p className="text-xs text-muted-foreground/70">Max Discount</p>
           </div>
-          <div className="h-8 w-px bg-white/10" />
+          <div className="h-8 w-px bg-muted/30" />
           <div>
             <p className="text-2xl font-bold text-[#F57224]">
               {flashProducts.filter((p) => p.discountPercentage >= 50).length}
             </p>
-            <p className="text-xs text-white/40">50%+ Deals</p>
+            <p className="text-xs text-muted-foreground/70">50%+ Deals</p>
           </div>
         </motion.div>
 
@@ -261,12 +261,12 @@ export default function FlashSalesPage() {
               className={`relative rounded-full px-5 py-2 text-sm font-medium transition-all duration-300 ${
                 activeFilter === f.value
                   ? "bg-gradient-to-r from-[#F57224] to-orange-500 text-white shadow-glow"
-                  : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white"
+                  : "bg-muted/50 text-muted-foreground hover:bg-muted/30 hover:text-foreground"
               }`}
             >
               {f.label}
               {f.value > 0 && (
-                <span className="ml-1.5 rounded-full bg-white/10 px-1.5 py-0.5 text-[10px]">
+                <span className="ml-1.5 rounded-full bg-muted/30 px-1.5 py-0.5 text-[10px]">
                   {flashProducts.filter((p) => p.discountPercentage >= f.value).length}
                 </span>
               )}
@@ -281,13 +281,13 @@ export default function FlashSalesPage() {
             animate={{ opacity: 1, y: 0 }}
             className="flex flex-col items-center justify-center py-20"
           >
-            <div className="mb-6 rounded-full bg-white/5 p-6 backdrop-blur-xl">
+            <div className="mb-6 rounded-full bg-muted/50 p-6 backdrop-blur-xl">
               <Tag className="size-16 text-white/20" />
             </div>
-            <p className="text-lg text-white/50">No flash deals match this filter</p>
+            <p className="text-lg text-muted-foreground">No flash deals match this filter</p>
             <Button
               variant="outline"
-              className="mt-4 border-white/20"
+              className="mt-4 border-border"
               onClick={() => setActiveFilter(0)}
             >
               View All Deals

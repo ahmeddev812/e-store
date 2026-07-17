@@ -189,7 +189,7 @@ export default function TermsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl font-bold text-white sm:text-5xl lg:text-6xl"
+            className="text-4xl font-bold text-foreground sm:text-5xl lg:text-6xl"
           >
             Terms of{" "}
             <span className="relative inline-block">
@@ -204,7 +204,7 @@ export default function TermsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mx-auto mt-4 max-w-2xl text-white/60"
+            className="mx-auto mt-4 max-w-2xl text-muted-foreground"
           >
             Please read these terms carefully before using our services
           </motion.p>
@@ -213,7 +213,7 @@ export default function TermsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-4 flex items-center justify-center gap-2 text-sm text-white/40"
+            className="mt-4 flex items-center justify-center gap-2 text-sm text-muted-foreground/70"
           >
             <Badge className="bg-[#F57224]/10 text-[#F57224] border-none">
               Last updated: January 2025
@@ -235,7 +235,7 @@ export default function TermsPage() {
             <div className="sticky top-24 space-y-6">
               {/* Table of Contents */}
               <div className="glass-premium rounded-xl p-5">
-                <h3 className="mb-4 flex items-center gap-2 text-sm font-semibold text-white">
+                <h3 className="mb-4 flex items-center gap-2 text-sm font-semibold text-foreground">
                   <FileText className="size-4 text-[#F57224]" />
                   Table of Contents
                 </h3>
@@ -244,7 +244,7 @@ export default function TermsPage() {
                     <a
                       key={index}
                       href={`#section-${index}`}
-                      className="block text-sm text-white/50 transition-colors hover:text-[#F57224]"
+                      className="block text-sm text-muted-foreground transition-colors hover:text-[#F57224]"
                     >
                       {section.title}
                     </a>
@@ -254,7 +254,7 @@ export default function TermsPage() {
 
               {/* Quick Links */}
               <div className="glass-premium rounded-xl p-5">
-                <h3 className="mb-4 flex items-center gap-2 text-sm font-semibold text-white">
+                <h3 className="mb-4 flex items-center gap-2 text-sm font-semibold text-foreground">
                   <Heart className="size-4 text-[#F57224]" />
                   Quick Links
                 </h3>
@@ -263,7 +263,7 @@ export default function TermsPage() {
                     <Link
                       key={link.label}
                       href={link.href}
-                      className="flex items-center justify-between rounded-lg p-2 text-sm text-white/50 transition-all hover:bg-white/5 hover:text-[#F57224]"
+                      className="flex items-center justify-between rounded-lg p-2 text-sm text-muted-foreground transition-all hover:bg-muted/50 hover:text-[#F57224]"
                     >
                       <span className="flex items-center gap-2">
                         <link.icon className="size-3" />
@@ -277,11 +277,11 @@ export default function TermsPage() {
 
               {/* Contact Card */}
               <div className="glass-premium rounded-xl bg-gradient-to-br from-[#F57224]/10 to-[#F57224]/5 p-5">
-                <h3 className="mb-3 flex items-center gap-2 text-sm font-semibold text-white">
+                <h3 className="mb-3 flex items-center gap-2 text-sm font-semibold text-foreground">
                   <Shield className="size-4 text-[#F57224]" />
                   Have Questions?
                 </h3>
-                <p className="mb-4 text-xs text-white/40">
+                <p className="mb-4 text-xs text-muted-foreground/70">
                   Our legal team is here to help with any questions about our terms.
                 </p>
                 <Link href="/contact">
@@ -308,16 +308,16 @@ export default function TermsPage() {
                       <div className="rounded-lg bg-[#F57224]/10 p-2">
                         <section.icon className="size-5 text-[#F57224]" />
                       </div>
-                      <h2 className="text-xl font-bold text-white">
+                      <h2 className="text-xl font-bold text-foreground">
                         {section.title}
                       </h2>
                     </div>
-                    <div className="text-white/60 leading-relaxed whitespace-pre-line">
+                    <div className="text-muted-foreground leading-relaxed whitespace-pre-line">
                       {section.content}
                     </div>
                   </div>
                   {index < sections.length - 1 && (
-                    <Separator className="my-8 bg-white/10" />
+                    <Separator className="my-8 bg-muted/30" />
                   )}
                 </div>
               ))}
@@ -327,8 +327,8 @@ export default function TermsPage() {
                 <div className="flex items-start gap-4">
                   <CheckCircle className="size-6 text-emerald-500 flex-shrink-0 mt-0.5" />
                   <div>
-                    <h3 className="font-semibold text-white">By using our services, you agree to these terms</h3>
-                    <p className="mt-1 text-sm text-white/40">
+                    <h3 className="font-semibold text-foreground">By using our services, you agree to these terms</h3>
+                    <p className="mt-1 text-sm text-muted-foreground/70">
                       These Terms of Service constitute a binding agreement between you and BlazeCart.
                       Please review them carefully before making any purchase or using our services.
                     </p>

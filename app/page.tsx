@@ -47,13 +47,13 @@ function CountdownTimer({ target }: { target: Date }) {
           { value: timeLeft.seconds, label: "Secs" },
         ].map((item, idx) => (
           <div key={idx} className="flex flex-col items-center">
-            <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-[#F57224]/20 to-[#F57224]/5 p-2 min-w-[60px] backdrop-blur-sm border border-white/10">
+            <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-[#F57224]/20 to-[#F57224]/5 p-2 min-w-[60px] backdrop-blur-sm border border-border">
               <span className="text-2xl font-bold tabular-nums text-[#F57224]">
                 {String(item.value).padStart(2, "0")}
               </span>
-              <div className="absolute inset-x-0 top-1/2 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+              <div className="absolute inset-x-0 top-1/2 h-px bg-gradient-to-r from-transparent via-muted-foreground/20 to-transparent" />
             </div>
-            <span className="mt-1 text-[9px] uppercase tracking-wider text-white/40">{item.label}</span>
+            <span className="mt-1 text-[9px] uppercase tracking-wider text-muted-foreground/70">{item.label}</span>
           </div>
         ))}
       </div>
@@ -95,9 +95,9 @@ function UltraPremiumProductCard({ product, index }: { product: any; index: numb
             
             <button 
               onClick={(e) => { e.preventDefault(); e.stopPropagation(); setIsWishlisted(!isWishlisted); }}
-              className="absolute right-3 top-3 z-20 rounded-full bg-black/50 backdrop-blur-xl p-2 opacity-0 transition-all duration-300 group-hover:opacity-100 hover:bg-[#F57224]"
+              className="absolute right-3 top-3 z-20 rounded-full bg-background/70 backdrop-blur-xl p-2 opacity-0 transition-all duration-300 group-hover:opacity-100 hover:bg-[#F57224] hover:text-white"
             >
-              <Heart className={`size-4 transition-all ${isWishlisted ? "fill-[#F57224] text-[#F57224]" : "text-white"}`} />
+              <Heart className={`size-4 transition-all ${isWishlisted ? "fill-[#F57224] text-[#F57224]" : "text-foreground"}`} />
             </button>
 
             <div className="relative overflow-hidden bg-gradient-to-br from-gray-900 to-black">
@@ -110,7 +110,7 @@ function UltraPremiumProductCard({ product, index }: { product: any; index: numb
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
               <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-500 group-hover:opacity-100">
-                <Button size="sm" className="bg-white/20 backdrop-blur-xl hover:bg-[#F57224] transform translate-y-4 group-hover:translate-y-0 transition-all">
+                <Button size="sm" className="bg-muted/20 backdrop-blur-xl hover:bg-[#F57224] hover:text-white transform translate-y-4 group-hover:translate-y-0 transition-all">
                   <Eye className="mr-2 size-3" /> Quick View
                 </Button>
               </div>
@@ -118,10 +118,10 @@ function UltraPremiumProductCard({ product, index }: { product: any; index: numb
 
             <CardContent className="p-5">
               <div className="mb-2 flex items-center justify-between">
-                <span className="text-[10px] uppercase tracking-wider text-white/40">{product.categoryName}</span>
+                <span className="text-[10px] uppercase tracking-wider text-muted-foreground/70">{product.categoryName}</span>
                 <Rating value={product.rating} size="sm" readonly />
               </div>
-              <h3 className="text-base font-semibold text-white line-clamp-2 group-hover:text-[#F57224] transition-colors">
+              <h3 className="text-base font-semibold text-foreground line-clamp-2 group-hover:text-[#F57224] transition-colors">
                 {truncate(product.title, 40)}
               </h3>
               <div className="mt-3 flex items-baseline gap-2">
@@ -129,7 +129,7 @@ function UltraPremiumProductCard({ product, index }: { product: any; index: numb
                   {formatUSD(discountedPrice)}
                 </span>
                 {product.discountPercentage > 0 && (
-                  <span className="text-xs text-white/40 line-through">{formatUSD(product.price)}</span>
+                  <span className="text-xs text-muted-foreground/70 line-through">{formatUSD(product.price)}</span>
                 )}
               </div>
               <div className="mt-3 flex items-center justify-between">
@@ -139,7 +139,7 @@ function UltraPremiumProductCard({ product, index }: { product: any; index: numb
                       <div key={i} className="size-4 rounded-full bg-gradient-to-r from-[#F57224] to-orange-500 ring-2 ring-black/20" />
                     ))}
                   </div>
-                  <span className="text-[10px] text-white/30">+{product.stock} bought</span>
+                  <span className="text-[10px] text-foreground/30">+{product.stock} bought</span>
                 </div>
                 <Button size="sm" className="bg-[#F57224] hover:bg-[#F57224]/80 shadow-glow">
                   <ShoppingBag className="mr-1 size-3" /> Buy
@@ -181,7 +181,7 @@ function LuxuryCategoryCard({ category, index }: { category: any; index: number 
       whileHover={{ y: -5 }}
     >
       <Link href={`/products?category=${category.slug}`}>
-        <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-white/5 to-white/0 p-6 transition-all duration-500 hover:shadow-[0_0_40px_rgba(245,114,36,0.2)]">
+        <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-accent/5 to-transparent p-6 transition-all duration-500 hover:shadow-[0_0_40px_rgba(245,114,36,0.2)]">
           <div className="absolute inset-0 bg-gradient-to-br from-[#F57224]/0 to-[#F57224]/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
           
           <div className="relative flex items-center justify-between">
@@ -189,13 +189,13 @@ function LuxuryCategoryCard({ category, index }: { category: any; index: number 
               <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#F57224]/20 to-[#F57224]/5 group-hover:scale-110 transition-transform">
                 <Icon className="size-6 text-[#F57224]" />
               </div>
-              <h3 className="text-lg font-bold text-white group-hover:text-[#F57224] transition-colors">
+              <h3 className="text-lg font-bold text-foreground group-hover:text-[#F57224] transition-colors">
                 {category.name}
               </h3>
-              <p className="mt-1 text-sm text-white/40">{category._count.products} Products</p>
+              <p className="mt-1 text-sm text-muted-foreground/70">{category._count.products} Products</p>
             </div>
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 transition-all duration-300 group-hover:bg-[#F57224] group-hover:scale-110">
-              <ArrowRight className="size-4 text-white/60 group-hover:text-white" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-muted/50 transition-all duration-300 group-hover:bg-[#F57224] hover:text-white group-hover:scale-110">
+              <ArrowRight className="size-4 text-muted-foreground group-hover:text-foreground" />
             </div>
           </div>
         </div>
@@ -268,7 +268,7 @@ function PremiumHero() {
             </div>
 
             {/* Main Title with Luxury Split Text */}
-            <h1 className="text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl">
+            <h1 className="text-5xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
               Where{" "}
               <span className="relative inline-block">
                 <span className="absolute -inset-1 rounded-lg bg-gradient-to-r from-[#F57224]/30 to-[#D4A853]/20 blur-xl" />
@@ -281,7 +281,7 @@ function PremiumHero() {
             </h1>
 
             {/* Description */}
-            <p className="mt-6 text-lg leading-relaxed text-white/60 max-w-lg">
+            <p className="mt-6 text-lg leading-relaxed text-muted-foreground max-w-lg">
               Ignite your style with our curated collection of premium products. 
               Elegance redefined for the discerning connoisseur.
             </p>
@@ -290,15 +290,15 @@ function PremiumHero() {
             <div className="mt-6 flex flex-wrap gap-4">
               <div className="flex items-center gap-2">
                 <ShieldCheck className="size-4 text-emerald-500" />
-                <span className="text-xs text-white/50">100% Authentic</span>
+                <span className="text-xs text-muted-foreground">100% Authentic</span>
               </div>
               <div className="flex items-center gap-2">
                 <Medal className="size-4 text-[#D4A853]" />
-                <span className="text-xs text-white/50">Award Winning</span>
+                <span className="text-xs text-muted-foreground">Award Winning</span>
               </div>
               <div className="flex items-center gap-2">
                 <BadgeCheck className="size-4 text-blue-500" />
-                <span className="text-xs text-white/50">Verified Quality</span>
+                <span className="text-xs text-muted-foreground">Verified Quality</span>
               </div>
             </div>
 
@@ -316,7 +316,7 @@ function PremiumHero() {
                 </Link>
               </motion.div>
               <Link href="/categories">
-                <Button variant="outline" size="lg" className="border-white/20 hover:border-[#D4A853]/50 hover:bg-[#D4A853]/10">
+                <Button variant="outline" size="lg" className="border-border hover:border-[#D4A853]/50 hover:bg-[#D4A853]/10">
                   <Play className="mr-2 size-4" />
                   Watch Showcase
                 </Button>
@@ -324,7 +324,7 @@ function PremiumHero() {
             </div>
 
             {/* Customer Stats */}
-            <div className="mt-12 flex items-center gap-6 border-t border-white/10 pt-8">
+            <div className="mt-12 flex items-center gap-6 border-t border-border pt-8">
               <div className="flex -space-x-3">
                 {[1, 2, 3, 4].map((i) => (
                   <div
@@ -338,9 +338,9 @@ function PremiumHero() {
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="size-3 fill-yellow-500 text-yellow-500" />
                   ))}
-                  <span className="ml-2 text-sm font-semibold text-white">4.9</span>
+                  <span className="ml-2 text-sm font-semibold text-foreground">4.9</span>
                 </div>
-                <p className="text-xs text-white/40">Trusted by 50,000+ customers</p>
+                <p className="text-xs text-muted-foreground/70">Trusted by 50,000+ customers</p>
               </div>
             </div>
           </motion.div>
@@ -360,7 +360,7 @@ function PremiumHero() {
               {/* Main Feature Product */}
               <div className="relative mb-6">
                 <div className="glass-premium absolute -inset-1 rounded-2xl bg-gradient-to-r from-[#F57224] via-[#D4A853] to-[#F57224] opacity-0 blur-xl transition-all duration-500 group-hover:opacity-100" />
-                <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-white/10 to-white/5 p-1">
+                <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-accent/10 to-accent/5 p-1">
                   <Image
                     src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&h=600&fit=crop"
                     alt="Featured Product"
@@ -386,7 +386,7 @@ function PremiumHero() {
                   height={80}
                   className="rounded-lg"
                 />
-                <p className="mt-1 text-center text-[10px] text-white/60">-20% OFF</p>
+                <p className="mt-1 text-center text-[10px] text-muted-foreground">-20% OFF</p>
               </div>
               
               <div className="absolute -bottom-6 -left-6 -rotate-12 glass-premium rounded-xl p-2 shadow-2xl">
@@ -397,12 +397,12 @@ function PremiumHero() {
                   height={80}
                   className="rounded-lg"
                 />
-                <p className="mt-1 text-center text-[10px] text-white/60">Bestseller</p>
+                <p className="mt-1 text-center text-[10px] text-muted-foreground">Bestseller</p>
               </div>
 
               {/* Price Tag */}
               <div className="absolute -top-4 -left-4 rounded-full bg-gradient-to-r from-[#D4A853] to-[#F57224] px-4 py-2 shadow-glow">
-                <span className="text-sm font-bold text-white">Premium Quality</span>
+                <span className="text-sm font-bold text-foreground">Premium Quality</span>
               </div>
             </div>
           </motion.div>
@@ -417,13 +417,13 @@ function PremiumHero() {
         className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2"
       >
         <div className="flex flex-col items-center gap-2">
-          <span className="text-[10px] uppercase tracking-wider text-white/40">Scroll to Explore</span>
+          <span className="text-[10px] uppercase tracking-wider text-muted-foreground/70">Scroll to Explore</span>
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ repeat: Infinity, duration: 1.5 }}
-            className="flex h-8 w-8 items-center justify-center rounded-full border border-white/20"
+            className="flex h-8 w-8 items-center justify-center rounded-full border border-border"
           >
-            <ChevronRight className="size-4 rotate-90 text-white/40" />
+            <ChevronRight className="size-4 rotate-90 text-muted-foreground/70" />
           </motion.div>
         </div>
       </motion.div>
@@ -444,7 +444,7 @@ function BrandMarquee() {
         {[...brands, ...brands].map((brand, idx) => (
           <div
             key={idx}
-            className="mx-8 flex items-center gap-2 text-base font-semibold text-white/40"
+            className="mx-8 flex items-center gap-2 text-base font-semibold text-muted-foreground/70"
           >
             <Crown className="size-4 text-[#D4A853]" />
             {brand}
@@ -481,8 +481,8 @@ export default function HomePage() {
           <Badge className="mb-4 bg-gradient-to-r from-[#F57224]/20 to-[#F57224]/5 text-[#F57224] border-none">
             Shop by Category
           </Badge>
-          <h2 className="text-3xl font-bold text-white">Featured Categories</h2>
-          <p className="mt-2 text-white/50">Browse through our curated collections</p>
+          <h2 className="text-3xl font-bold text-foreground">Featured Categories</h2>
+          <p className="mt-2 text-muted-foreground">Browse through our curated collections</p>
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -502,8 +502,8 @@ export default function HomePage() {
                 <Flame className="size-8 text-[#F57224]" />
               </div>
               <div>
-                <h2 className="text-3xl font-bold text-white">Flash Sales</h2>
-                <p className="text-sm text-white/50">Limited time offers - Up to 70% off</p>
+                <h2 className="text-3xl font-bold text-foreground">Flash Sales</h2>
+                <p className="text-sm text-muted-foreground">Limited time offers - Up to 70% off</p>
               </div>
             </div>
             <CountdownTimer target={flashSaleTarget} />
@@ -525,8 +525,8 @@ export default function HomePage() {
               <Diamond className="size-8 text-[#F57224]" />
             </div>
             <div>
-              <h2 className="text-3xl font-bold text-white">Trending Products</h2>
-              <p className="text-sm text-white/50">Handpicked selections for you</p>
+              <h2 className="text-3xl font-bold text-foreground">Trending Products</h2>
+              <p className="text-sm text-muted-foreground">Handpicked selections for you</p>
             </div>
           </div>
           <Link href="/products">
@@ -551,8 +551,8 @@ export default function HomePage() {
               <Sparkles className="size-8 text-emerald-500" />
             </div>
             <div>
-              <h2 className="text-3xl font-bold text-white">New Arrivals</h2>
-              <p className="text-sm text-white/50">Fresh from the collection</p>
+              <h2 className="text-3xl font-bold text-foreground">New Arrivals</h2>
+              <p className="text-sm text-muted-foreground">Fresh from the collection</p>
             </div>
           </div>
           <Link href="/products?sort=newest">
@@ -577,8 +577,8 @@ export default function HomePage() {
               <Crown className="size-8 text-yellow-500" />
             </div>
             <div>
-              <h2 className="text-3xl font-bold text-white">Best Sellers</h2>
-              <p className="text-sm text-white/50">What everyone's loving</p>
+              <h2 className="text-3xl font-bold text-foreground">Best Sellers</h2>
+              <p className="text-sm text-muted-foreground">What everyone's loving</p>
             </div>
           </div>
           <Link href="/products?sort=rating-desc">
@@ -611,8 +611,8 @@ export default function HomePage() {
             <div className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-br from-[#D4A853]/20 to-[#F57224]/10 p-4 mb-6">
               <Crown className="size-10 text-[#D4A853]" />
             </div>
-              <h2 className="text-3xl font-bold text-white">Featured Collection</h2>
-              <p className="mx-auto mt-2 max-w-md text-white/60">
+              <h2 className="text-3xl font-bold text-foreground">Featured Collection</h2>
+              <p className="mx-auto mt-2 max-w-md text-muted-foreground">
                 Discover our exclusive premium collection, handpicked for the discerning shopper
               </p>
             <div className="mt-6 flex flex-wrap gap-4 justify-center">
@@ -622,7 +622,7 @@ export default function HomePage() {
                 </Button>
               </Link>
               <Link href="/new-arrivals">
-                <Button variant="outline" className="border-white/20 hover:border-[#D4A853]/50">
+                <Button variant="outline" className="border-border hover:border-[#D4A853]/50">
                   View New Arrivals
                 </Button>
               </Link>
@@ -637,8 +637,8 @@ export default function HomePage() {
           <Badge className="mb-4 bg-gradient-to-r from-[#F57224]/20 to-[#F57224]/5 text-[#F57224] border-none">
             Why Choose Us
           </Badge>
-          <h2 className="text-3xl font-bold text-white">The Blaze Experience</h2>
-          <p className="mt-2 text-white/50">Premium shopping redefined with exceptional service</p>
+          <h2 className="text-3xl font-bold text-foreground">The Blaze Experience</h2>
+          <p className="mt-2 text-muted-foreground">Premium shopping redefined with exceptional service</p>
         </div>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {[
@@ -660,8 +660,8 @@ export default function HomePage() {
               <div className="mx-auto mb-4 flex size-14 items-center justify-center rounded-xl bg-gradient-to-br from-[#F57224]/20 to-[#F57224]/5">
                 <feature.icon className="size-7 text-[#F57224]" />
               </div>
-              <h3 className="text-lg font-semibold text-white">{feature.title}</h3>
-              <p className="mt-1 text-sm text-white/40">{feature.description}</p>
+              <h3 className="text-lg font-semibold text-foreground">{feature.title}</h3>
+              <p className="mt-1 text-sm text-muted-foreground/70">{feature.description}</p>
             </motion.div>
           ))}
         </div>
@@ -679,9 +679,9 @@ export default function HomePage() {
             <div key={stat.label} className="text-center">
               <div className="flex items-center justify-center gap-2">
                 <stat.icon className="size-5 text-[#F57224]" />
-                <span className="text-2xl font-bold text-white">{stat.value}</span>
+                <span className="text-2xl font-bold text-foreground">{stat.value}</span>
               </div>
-              <p className="mt-1 text-xs text-white/40">{stat.label}</p>
+              <p className="mt-1 text-xs text-muted-foreground/70">{stat.label}</p>
             </div>
           ))}
         </div>
@@ -701,15 +701,15 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-r from-[#F57224]/10 via-transparent to-[#F57224]/5" />
           <div className="relative">
             <Gift className="mx-auto mb-4 size-12 text-[#F57224]" />
-            <h2 className="text-2xl font-bold text-white">Subscribe & Save 15%</h2>
-            <p className="mx-auto mt-2 max-w-md text-white/60">
+            <h2 className="text-2xl font-bold text-foreground">Subscribe & Save 15%</h2>
+            <p className="mx-auto mt-2 max-w-md text-muted-foreground">
               Get exclusive deals, early access, and 15% off your first order
             </p>
             <div className="mx-auto mt-6 flex max-w-md gap-3">
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-white placeholder:text-white/40 focus:border-[#F57224] focus:outline-none"
+                className="flex-1 rounded-xl border border-border bg-muted/30 px-4 py-3 text-foreground placeholder:text-muted-foreground/70 focus:border-[#F57224] focus:outline-none"
               />
               <Button className="bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow whitespace-nowrap">
                 Subscribe <Sparkles className="ml-2 size-4" />

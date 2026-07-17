@@ -31,7 +31,7 @@ function ProductCard({ product, className }: ProductCardProps) {
       whileHover={{ y: -4 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
       className={cn(
-        "group relative rounded-2xl border border-white/10 bg-white/5 p-3 shadow-2xl backdrop-blur-xl transition-all duration-300 hover:border-[#F57224]/30 hover:scale-[1.02] hover:shadow-[0_8px_40px_rgba(245,114,36,0.2)]",
+        "group relative rounded-2xl border border-border bg-muted/50 p-3 shadow-2xl backdrop-blur-xl transition-all duration-300 hover:border-[#F57224]/30 hover:scale-[1.02] hover:shadow-[0_8px_40px_rgba(245,114,36,0.2)]",
         className
       )}
     >
@@ -69,7 +69,7 @@ function ProductCard({ product, className }: ProductCardProps) {
           "absolute right-5 top-5 flex h-8 w-8 items-center justify-center rounded-full backdrop-blur-xl transition-all hover:scale-110",
           wishlisted
             ? "bg-[#F57224]/20 text-[#F57224]"
-            : "bg-black/20 text-white/70 hover:bg-[#F57224]/20 hover:text-[#F57224]"
+            : "bg-muted/50 text-foreground/70 hover:bg-[#F57224]/20 hover:text-[#F57224]"
         )}
       >
         <Heart className={cn("h-4 w-4", wishlisted && "fill-[#F57224]")} />
@@ -171,16 +171,16 @@ export default function SellerPage() {
   const displayProducts = sellerProducts.length > 0 ? sellerProducts : products
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#0a0a0f] bg-[radial-gradient(ellipse_at_top,rgba(245,114,36,0.03)_0%,transparent_60%)]">
+    <div className="min-h-screen bg-background bg-[radial-gradient(ellipse_at_top,rgba(245,114,36,0.03)_0%,transparent_60%)]">
       <div className="container mx-auto px-4 py-8 md:py-12 animate-fade-in">
         <Card className="overflow-hidden mb-8">
           <div className="h-32 md:h-48 bg-gradient-to-r from-[#F57224] to-[#ff9a5c]">
-            <div className="absolute inset-0 bg-black/10" />
+            <div className="absolute inset-0 bg-muted/20" />
           </div>
           <CardContent className="-mt-12 relative">
             <div className="flex flex-col md:flex-row items-start md:items-end gap-4 md:gap-6">
               <div className="relative">
-                <div className="w-24 h-24 md:w-32 md:h-32 rounded-2xl bg-white/10 dark:bg-white/10 border-4 border-white dark:border-[#0a0a0f] flex items-center justify-center text-4xl md:text-5xl font-bold text-[#F57224] shadow-xl">
+                <div className="w-24 h-24 md:w-32 md:h-32 rounded-2xl bg-muted/30 dark:bg-muted/30 border-4 border-background flex items-center justify-center text-4xl md:text-5xl font-bold text-[#F57224] shadow-xl">
                   {sellerInfo.name.charAt(0)}
                 </div>
                 <Badge className="absolute -right-2 -bottom-2 bg-[#F57224]">Official Store</Badge>
@@ -200,28 +200,28 @@ export default function SellerPage() {
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-              <div className="text-center p-4 rounded-xl bg-white/5 backdrop-blur-xl border border-white/10">
+              <div className="text-center p-4 rounded-xl bg-muted/50 backdrop-blur-xl border border-border">
                 <div className="flex items-center justify-center gap-1 text-[#F57224] mb-2">
                   <Star className="w-5 h-5 fill-[#F57224]" />
                   <span className="text-xl font-bold">{sellerInfo.rating}</span>
                 </div>
                 <p className="text-xs text-muted-foreground">Store Rating</p>
               </div>
-              <div className="text-center p-4 rounded-xl bg-white/5 backdrop-blur-xl border border-white/10">
+              <div className="text-center p-4 rounded-xl bg-muted/50 backdrop-blur-xl border border-border">
                 <div className="flex items-center justify-center gap-1 mb-2">
                   <Package className="w-5 h-5 text-[#F57224]" />
                   <span className="text-xl font-bold text-foreground">{displayProducts.length}</span>
                 </div>
                 <p className="text-xs text-muted-foreground">Products</p>
               </div>
-              <div className="text-center p-4 rounded-xl bg-white/5 backdrop-blur-xl border border-white/10">
+              <div className="text-center p-4 rounded-xl bg-muted/50 backdrop-blur-xl border border-border">
                 <div className="flex items-center justify-center gap-1 mb-2">
                   <Clock className="w-5 h-5 text-[#F57224]" />
                   <span className="text-xl font-bold text-foreground">{sellerInfo.responseTime}</span>
                 </div>
                 <p className="text-xs text-muted-foreground">Response Time</p>
               </div>
-              <div className="text-center p-4 rounded-xl bg-white/5 backdrop-blur-xl border border-white/10">
+              <div className="text-center p-4 rounded-xl bg-muted/50 backdrop-blur-xl border border-border">
                 <div className="flex items-center justify-center gap-1 mb-2">
                   <Calendar className="w-5 h-5 text-[#F57224]" />
                   <span className="text-lg font-bold text-foreground">{sellerInfo.joined}</span>

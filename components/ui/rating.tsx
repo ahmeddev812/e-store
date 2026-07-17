@@ -81,7 +81,7 @@ function Rating({
         )
       })}
       {showValue && (
-        <span className="ml-1 text-sm text-white/60">{value.toFixed(1)}</span>
+        <span className="ml-1 text-sm text-muted-foreground">{value.toFixed(1)}</span>
       )}
     </div>
   )

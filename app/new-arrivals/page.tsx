@@ -19,11 +19,11 @@ export default function NewArrivalsPage() {
       <div className="min-h-screen overflow-x-hidden">
         <div className="fixed inset-0 bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]" />
         <div className="relative flex flex-col items-center justify-center min-h-[70vh] px-4 animate-fade-in">
-          <div className="rounded-full bg-white/5 backdrop-blur-xl border border-white/10 p-6 mb-6">
+          <div className="rounded-full bg-muted/50 backdrop-blur-xl border border-border p-6 mb-6">
             <Sparkles className="size-16 text-white/20" />
           </div>
-          <h1 className="text-2xl font-bold text-white mb-2">No new arrivals yet</h1>
-          <p className="text-white/50 mb-8 text-center max-w-md">
+          <h1 className="text-2xl font-bold text-foreground mb-2">No new arrivals yet</h1>
+          <p className="text-muted-foreground mb-8 text-center max-w-md">
             Check back soon for our latest products and fresh additions.
           </p>
           <Link href="/products">
@@ -52,7 +52,7 @@ export default function NewArrivalsPage() {
           className="mb-6"
         >
           <Link href="/products">
-            <Button variant="ghost" size="sm" className="text-white/50 hover:text-white">
+            <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
               <ArrowRight className="size-4 mr-1 rotate-180" />
               Back to Products
             </Button>
@@ -78,7 +78,7 @@ export default function NewArrivalsPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.15 }}
-                className="text-4xl sm:text-5xl font-bold text-white"
+                className="text-4xl sm:text-5xl font-bold text-foreground"
               >
                 New{" "}
                 <span className="bg-gradient-to-r from-[#F57224] via-[#D4A853] to-[#F57224] bg-clip-text text-transparent">
@@ -89,7 +89,7 @@ export default function NewArrivalsPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.25 }}
-                className="mt-3 text-white/50 text-lg max-w-xl mx-auto"
+                className="mt-3 text-muted-foreground text-lg max-w-xl mx-auto"
               >
                 Fresh from the collection
               </motion.p>
@@ -98,10 +98,10 @@ export default function NewArrivalsPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.35 }}
-              className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-4 py-1.5"
+              className="inline-flex items-center gap-2 bg-muted/50 backdrop-blur-sm border border-border rounded-full px-4 py-1.5"
             >
               <Clock className="size-3.5 text-[#D4A853]" />
-              <span className="text-sm text-white/60">
+              <span className="text-sm text-muted-foreground">
                 {products.length} new item{products.length !== 1 ? "s" : ""} added recently
               </span>
             </motion.div>
@@ -156,10 +156,10 @@ export default function NewArrivalsPage() {
                         </div>
                       )}
 
-                      <div className="absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300">
+                      <div className="absolute inset-0 flex items-center justify-center bg-background/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300">
                         <Button
                           variant="outline"
-                          className="border-white/20 bg-white/10 text-white hover:bg-[#F57224] hover:border-[#F57224]"
+                          className="border-border bg-muted/30 text-foreground hover:bg-[#F57224] hover:text-white hover:border-[#F57224]"
                           onClick={(e) => {
                             e.preventDefault()
                             window.location.href = `/products/${product.slug}`
@@ -172,11 +172,11 @@ export default function NewArrivalsPage() {
                     </div>
 
                     <CardContent className="p-4 space-y-3">
-                      <p className="text-xs text-white/40 uppercase tracking-wider">
+                      <p className="text-xs text-muted-foreground/70 uppercase tracking-wider">
                         {product.brand || product.categoryName}
                       </p>
 
-                      <h3 className="font-semibold text-white line-clamp-2 group-hover:text-[#F57224] transition-colors">
+                      <h3 className="font-semibold text-foreground line-clamp-2 group-hover:text-[#F57224] transition-colors">
                         {product.title}
                       </h3>
 
@@ -185,7 +185,7 @@ export default function NewArrivalsPage() {
                           {formatUSD(discountedPrice)}
                         </span>
                         {product.discountPercentage > 0 && (
-                          <span className="text-xs text-white/40 line-through">
+                          <span className="text-xs text-muted-foreground/70 line-through">
                             {formatUSD(product.price)}
                           </span>
                         )}

@@ -41,7 +41,7 @@ function DropdownMenuPopup({
         <MenuPrimitive.Popup
           data-slot="dropdown-menu-popup"
           className={cn(
-            "min-w-40 overflow-hidden rounded-lg border border-white/20 bg-[#1E293B]/95 backdrop-blur-xl p-1 shadow-2xl data-[ending-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:scale-95 data-[starting-style]:opacity-0",
+            "min-w-40 overflow-hidden rounded-lg border border-border bg-popover backdrop-blur-xl p-1 shadow-2xl data-[ending-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:scale-95 data-[starting-style]:opacity-0",
             className
           )}
           {...props}
@@ -59,7 +59,7 @@ function DropdownMenuItem({
     <MenuPrimitive.Item
       data-slot="dropdown-menu-item"
       className={cn(
-        "relative flex cursor-default items-center gap-2 rounded-md px-2 py-1.5 text-sm text-white/80 outline-none select-none hover:bg-white/10 data-[highlighted]:bg-white/10 data-[highlighted]:text-white",
+        "relative flex cursor-default items-center gap-2 rounded-md px-2 py-1.5 text-sm text-foreground/80 outline-none select-none hover:bg-muted/30 data-[highlighted]:bg-muted/30 data-[highlighted]:text-foreground",
         className
       )}
       {...props}
@@ -76,7 +76,7 @@ function DropdownMenuCheckboxItem({
     <MenuPrimitive.CheckboxItem
       data-slot="dropdown-menu-checkbox-item"
       className={cn(
-        "relative flex cursor-default items-center gap-2 rounded-md px-2 py-1.5 pl-8 text-sm text-white/80 outline-none select-none hover:bg-white/10 data-[highlighted]:bg-white/10 data-[highlighted]:text-white",
+        "relative flex cursor-default items-center gap-2 rounded-md px-2 py-1.5 pl-8 text-sm text-foreground/80 outline-none select-none hover:bg-muted/30 data-[highlighted]:bg-muted/30 data-[highlighted]:text-foreground",
         className
       )}
       {...props}
@@ -104,7 +104,7 @@ function DropdownMenuRadioItem({
     <MenuPrimitive.RadioItem
       data-slot="dropdown-menu-radio-item"
       className={cn(
-        "relative flex cursor-default items-center gap-2 rounded-md px-2 py-1.5 pl-8 text-sm text-white/80 outline-none select-none hover:bg-white/10 data-[highlighted]:bg-white/10 data-[highlighted]:text-white",
+        "relative flex cursor-default items-center gap-2 rounded-md px-2 py-1.5 pl-8 text-sm text-foreground/80 outline-none select-none hover:bg-muted/30 data-[highlighted]:bg-muted/30 data-[highlighted]:text-foreground",
         className
       )}
       {...props}
@@ -137,7 +137,7 @@ function DropdownMenuGroupLabel({
   return (
     <MenuPrimitive.GroupLabel
       data-slot="dropdown-menu-group-label"
-      className={cn("px-2 py-1.5 text-xs font-medium text-white/50", className)}
+      className={cn("px-2 py-1.5 text-xs font-medium text-muted-foreground", className)}
       {...props}
     />
   )
@@ -150,7 +150,7 @@ function DropdownMenuSeparator({
   return (
     <div
       data-slot="dropdown-menu-separator"
-      className={cn("mx-1 my-1 h-px bg-white/10", className)}
+      className={cn("mx-1 my-1 h-px bg-muted/30", className)}
       {...props}
     />
   )
@@ -165,13 +165,13 @@ function DropdownMenuSubmenuTrigger({
     <MenuPrimitive.SubmenuTrigger
       data-slot="dropdown-menu-submenu-trigger"
       className={cn(
-        "relative flex cursor-default items-center gap-2 rounded-md px-2 py-1.5 text-sm text-white/80 outline-none select-none hover:bg-white/10 data-[highlighted]:bg-white/10 data-[highlighted]:text-white",
+        "relative flex cursor-default items-center gap-2 rounded-md px-2 py-1.5 text-sm text-foreground/80 outline-none select-none hover:bg-muted/30 data-[highlighted]:bg-muted/30 data-[highlighted]:text-foreground",
         className
       )}
       {...props}
     >
       {children}
-      <ChevronRight className="ml-auto size-3.5 text-white/40" />
+      <ChevronRight className="ml-auto size-3.5 text-muted-foreground/70" />
     </MenuPrimitive.SubmenuTrigger>
   )
 }

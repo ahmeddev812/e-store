@@ -18,12 +18,12 @@ function Toaster({
         unstyled: true,
         classNames: {
           toast:
-            "group toast group-[.toaster]:flex group-[.toaster]:items-center group-[.toaster]:gap-2 group-[.toaster]:rounded-xl group-[.toaster]:border group-[.toaster]:border-white/20 group-[.toaster]:bg-white/10 group-[.toaster]:backdrop-blur-xl group-[.toaster]:px-4 group-[.toaster]:py-3 group-[.toaster]:text-sm group-[.toaster]:text-white group-[.toaster]:shadow-2xl",
-          description: "group-[.toast]:text-white/70",
+            "group toast group-[.toaster]:flex group-[.toaster]:items-center group-[.toaster]:gap-2 group-[.toaster]:rounded-xl group-[.toaster]:border group-[.toaster]:border-border group-[.toaster]:bg-muted/30 group-[.toaster]:backdrop-blur-xl group-[.toaster]:px-4 group-[.toaster]:py-3 group-[.toaster]:text-sm group-[.toaster]:text-foreground group-[.toaster]:shadow-2xl",
+          description: "group-[.toast]:text-foreground/70",
           actionButton:
             "group-[.toast]:rounded-lg group-[.toast]:bg-[#F57224] group-[.toast]:px-3 group-[.toast]:py-1 group-[.toast]:text-xs group-[.toast]:font-medium group-[.toast]:text-white",
           cancelButton:
-            "group-[.toast]:rounded-lg group-[.toast]:border group-[.toast]:border-white/20 group-[.toast]:px-3 group-[.toast]:py-1 group-[.toast]:text-xs group-[.toast]:font-medium group-[.toast]:text-white/70",
+            "group-[.toast]:rounded-lg group-[.toast]:border group-[.toast]:border-border group-[.toast]:px-3 group-[.toast]:py-1 group-[.toast]:text-xs group-[.toast]:font-medium group-[.toast]:text-foreground/70",
           error:
             "group-[.toaster]:border-red-500/30 group-[.toaster]:bg-red-500/10",
           success:

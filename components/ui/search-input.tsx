@@ -38,13 +38,13 @@ function SearchInput({
       className={cn(
         "group relative flex items-center rounded-lg transition-all",
         glass
-          ? "border border-white/20 bg-white/10 backdrop-blur-xl shadow-2xl has-data-[focused=true]:border-[#F57224]/50 has-data-[focused=true]:ring-3 has-data-[focused=true]:ring-[#F57224]/20"
-          : "border border-white/20 bg-white/5",
+          ? "border border-border bg-muted/30 backdrop-blur-xl shadow-2xl has-data-[focused=true]:border-[#F57224]/50 has-data-[focused=true]:ring-3 has-data-[focused=true]:ring-[#F57224]/20"
+          : "border border-border bg-muted/50",
         className
       )}
       data-focused={focused || undefined}
     >
-      <Search className="pointer-events-none absolute left-3 size-4 text-white/40" />
+      <Search className="pointer-events-none absolute left-3 size-4 text-muted-foreground/70" />
       <input
         ref={inputRef}
         type="text"
@@ -54,7 +54,7 @@ function SearchInput({
         onBlur={() => setFocused(false)}
         placeholder={placeholder}
         className={cn(
-          "w-full bg-transparent py-2 pr-10 pl-9 text-sm text-white outline-none placeholder:text-white/40"
+          "w-full bg-transparent py-2 pr-10 pl-9 text-sm text-foreground outline-none placeholder:text-muted-foreground/70"
         )}
         {...props}
       />
@@ -67,7 +67,7 @@ function SearchInput({
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.15 }}
             onClick={handleClear}
-            className="absolute right-3 flex items-center justify-center rounded-full p-0.5 text-white/40 transition-colors hover:text-white"
+            className="absolute right-3 flex items-center justify-center rounded-full p-0.5 text-muted-foreground/70 transition-colors hover:text-foreground"
             aria-label="Clear search"
           >
             <X className="size-4" />

@@ -1,52 +1,56 @@
 "use client"
 
 import Link from "next/link"
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import { 
   ShoppingCart, Heart, Search, User, Menu, X, Moon, Sun, 
-  ChevronDown, Sparkles, Crown, Gift, Zap, Tag, 
-  ArrowRight, Home, Grid, Info, Phone, 
-  ShoppingBag, TrendingUp, Star, Clock, Flame, Diamond,
+  Sparkles, Crown, Home, Grid, Phone, 
+  ShoppingBag, Flame, Diamond,
   Award, Shield as ShieldIcon, Truck as TruckIcon,
   RotateCcw as RotateIcon, Headphones as HeadphoneIcon
 } from "lucide-react"
 import { useCartStore } from "@/store/cart"
 import { useWishlistStore } from "@/store/wishlist"
 import { useTheme } from "next-themes"
-import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { useRouter, usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { Badge } from "@/components/ui/badge"
 import { useUser, useClerk, SignInButton, UserButton } from "@clerk/nextjs"
+import { useUIStore } from "@/store/ui"
 
 const guestLinks = [
-  { name: "Home", href: "/", icon: Home, luxury: true },
-  { name: "Shop", href: "/products", icon: Diamond, luxury: true },
-  { name: "Categories", href: "/categories", icon: Grid, luxury: false },
-  { name: "New Arrivals", href: "/new-arrivals", icon: Sparkles, luxury: false },
-  { name: "Flash Sales", href: "/flash-sales", icon: Flame, luxury: false },
-  { name: "About", href: "/about", icon: Crown, luxury: false },
-  { name: "Contact", href: "/contact", icon: Phone, luxury: false },
+  { name: "Home", href: "/", icon: Home },
+  { name: "Shop", href: "/products", icon: Diamond },
+  { name: "Categories", href: "/categories", icon: Grid },
+  { name: "New Arrivals", href: "/new-arrivals", icon: Sparkles },
+  { name: "Flash Sales", href: "/flash-sales", icon: Flame },
+  { name: "About", href: "/about", icon: Crown },
+  { name: "Contact", href: "/contact", icon: Phone },
 ]
 
 const authLinks = [
-  { name: "Home", href: "/", icon: Home, luxury: true },
-  { name: "Shop", href: "/products", icon: Diamond, luxury: true },
-  { name: "Categories", href: "/categories", icon: Grid, luxury: false },
-  { name: "Dashboard", href: "/dashboard", icon: Award, luxury: false },
+  { name: "Home", href: "/", icon: Home },
+  { name: "Shop", href: "/products", icon: Diamond },
+  { name: "Categories", href: "/categories", icon: Grid },
+  { name: "Dashboard", href: "/dashboard", icon: Award },
 ]
 
+function isActive(href: string, pathname: string): boolean {
+  if (href === "/") return pathname === "/"
+  return pathname === href || pathname.startsWith(href + "/")
+}
+
 export function Navbar() {
-  const [mobileOpen, setMobileOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
   const [mounted, setMounted] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [searchSuggestions, setSearchSuggestions] = useState<string[]>([])
   const { theme, setTheme } = useTheme()
-  const { isSignedIn, user } = useUser()
+  const { isSignedIn } = useUser()
   const { signOut } = useClerk()
+  const { setMobileMenuOpen } = useUIStore()
   const itemCount = useCartStore((s) => s.getItemCount())
   const wishlistCount = useWishlistStore((s) => s.items.length)
   const router = useRouter()
@@ -102,22 +106,22 @@ export function Navbar() {
               <span className="text-[#D4A853] font-medium">Elite Member Benefits</span>
             </div>
             <div className="flex items-center gap-1">
-              <TruckIcon className="size-3 text-white/60" />
-              <span className="text-white/60">Free Global Shipping</span>
+              <TruckIcon className="size-3 text-muted-foreground" />
+              <span className="text-muted-foreground">Free Global Shipping</span>
             </div>
             <div className="flex items-center gap-1">
-              <RotateIcon className="size-3 text-white/60" />
-              <span className="text-white/60">30-Day Returns</span>
+              <RotateIcon className="size-3 text-muted-foreground" />
+              <span className="text-muted-foreground">30-Day Returns</span>
             </div>
           </div>
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-1">
-              <ShieldIcon className="size-3 text-white/60" />
-              <span className="text-white/60">100% Authentic</span>
+              <ShieldIcon className="size-3 text-muted-foreground" />
+              <span className="text-muted-foreground">100% Authentic</span>
             </div>
             <div className="flex items-center gap-1">
-              <HeadphoneIcon className="size-3 text-white/60" />
-              <span className="text-white/60">24/7 Concierge</span>
+              <HeadphoneIcon className="size-3 text-muted-foreground" />
+              <span className="text-muted-foreground">24/7 Concierge</span>
             </div>
             <div className="flex items-center gap-1 bg-[#D4A853]/20 px-3 py-1 rounded-full">
               <Sparkles className="size-3 text-[#D4A853]" />
@@ -130,16 +134,16 @@ export function Navbar() {
       {/* Main Navbar */}
       <nav className={`sticky top-0 z-50 transition-all duration-700 ${
         scrolled ? "glass-premium shadow-[0_20px_40px_rgba(0,0,0,0.3)] border-b border-[#D4A853]/20" : "glass-navbar"
-      }`}>
+      }`} role="navigation" aria-label="Main navigation">
         <div className="mx-auto max-w-[100rem] px-6 sm:px-8 lg:px-10">
           <div className="flex h-16 items-center justify-between lg:h-20">
-            {/* Logo - BlazeCart */}
+            {/* Logo */}
             <div className="flex items-center gap-12">
-              <Link href="/" className="group relative flex items-center gap-3">
+              <Link href="/" className="group relative flex items-center gap-3" aria-label="BlazeCart Home">
                 <div className="relative">
                   <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-[#D4A853] to-[#F57224] blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-500" />
                   <div className="relative rounded-xl bg-gradient-to-br from-[#D4A853]/20 to-[#F57224]/10 p-2 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3">
-                    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="size-6">
+                    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="size-6" aria-hidden="true">
                       <defs>
                         <linearGradient id="flameGrad" x1="0" y1="1" x2="0" y2="0">
                           <stop offset="0%" stopColor="#F57224" />
@@ -164,31 +168,34 @@ export function Navbar() {
                 </Badge>
               </Link>
 
-              {/* Desktop Navigation - switches based on auth */}
+              {/* Desktop Navigation */}
               <div className="hidden items-center gap-2 lg:flex">
-                {currentLinks.map((link) => (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    className={`group relative rounded-lg px-4 py-2 text-sm font-medium transition-all duration-500 ${
-                      pathname === link.href
-                        ? "text-[#D4A853]"
-                        : "text-white/70 hover:text-[#D4A853]"
-                    }`}
-                  >
-                    <span className="flex items-center gap-2">
-                      <link.icon className={`size-3.5 transition-all duration-300 group-hover:scale-110 ${pathname === link.href ? "text-[#D4A853]" : ""}`} />
-                      {link.name}
-                    </span>
-
-                    {pathname === link.href && (
-                      <motion.div
-                        layoutId="activeNav"
-                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#D4A853] to-[#F57224]"
-                      />
-                    )}
-                  </Link>
-                ))}
+                {currentLinks.map((link) => {
+                  const active = isActive(link.href, pathname)
+                  return (
+                    <Link
+                      key={link.name}
+                      href={link.href}
+                      className={`group relative rounded-lg px-4 py-2 text-sm font-medium transition-all duration-500 ${
+                        active
+                          ? "text-[#D4A853]"
+                          : "text-foreground/70 hover:text-[#D4A853]"
+                      }`}
+                      aria-current={active ? "page" : undefined}
+                    >
+                      <span className="flex items-center gap-2">
+                        <link.icon className={`size-3.5 transition-all duration-300 group-hover:scale-110 ${active ? "text-[#D4A853]" : ""}`} />
+                        {link.name}
+                      </span>
+                      {active && (
+                        <motion.div
+                          layoutId="activeNav"
+                          className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#D4A853] to-[#F57224]"
+                        />
+                      )}
+                    </Link>
+                  )
+                })}
               </div>
             </div>
 
@@ -200,8 +207,10 @@ export function Navbar() {
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setSearchOpen(!searchOpen)}
                 className="relative rounded-full p-2.5 transition-all duration-300 hover:bg-[#D4A853]/20 hover:text-[#D4A853]"
+                aria-label="Toggle search"
+                aria-expanded={searchOpen}
               >
-                <Search className="size-4 text-white/70 group-hover:text-[#D4A853]" />
+                <Search className="size-4 text-foreground/70" />
               </motion.button>
 
               {/* Theme Toggle */}
@@ -211,15 +220,20 @@ export function Navbar() {
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
                   className="rounded-full p-2.5 transition-all duration-300 hover:bg-[#D4A853]/20"
+                  aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
                 >
-                  {theme === "dark" ? <Sun className="size-4 text-white/70" /> : <Moon className="size-4 text-white/70" />}
+                  {theme === "dark" ? <Sun className="size-4 text-foreground/70" /> : <Moon className="size-4 text-foreground/70" />}
                 </motion.button>
               )}
 
               {/* Wishlist - only for authenticated users */}
               {isSignedIn ? (
-                <Link href="/wishlist" className="group relative rounded-full p-2.5 transition-all duration-300 hover:bg-[#D4A853]/20">
-                  <Heart className="size-4 text-white/70 transition-all duration-300 group-hover:scale-110 group-hover:text-[#D4A853]" />
+                <Link
+                  href="/wishlist"
+                  className="group relative rounded-full p-2.5 transition-all duration-300 hover:bg-[#D4A853]/20"
+                  aria-label={`Wishlist (${wishlistCount} items)`}
+                >
+                  <Heart className="size-4 text-foreground/70 transition-all duration-300 group-hover:scale-110 group-hover:text-[#D4A853]" />
                   {mounted && wishlistCount > 0 && (
                     <AnimatePresence>
                       <motion.span
@@ -227,6 +241,7 @@ export function Navbar() {
                         animate={{ scale: 1 }}
                         exit={{ scale: 0 }}
                         className="absolute -right-0.5 -top-0.5 flex size-4 items-center justify-center rounded-full bg-gradient-to-r from-[#D4A853] to-[#F57224] text-[9px] font-bold text-white shadow-glow"
+                        aria-hidden="true"
                       >
                         {wishlistCount}
                       </motion.span>
@@ -236,8 +251,12 @@ export function Navbar() {
               ) : null}
 
               {/* Cart */}
-              <Link href="/cart" className="group relative rounded-full p-2.5 transition-all duration-300 hover:bg-[#D4A853]/20">
-                <ShoppingCart className="size-4 text-white/70 transition-all duration-300 group-hover:scale-110 group-hover:text-[#D4A853]" />
+              <Link
+                href="/cart"
+                className="group relative rounded-full p-2.5 transition-all duration-300 hover:bg-[#D4A853]/20"
+                aria-label={`Shopping cart (${itemCount} items)`}
+              >
+                <ShoppingCart className="size-4 text-foreground/70 transition-all duration-300 group-hover:scale-110 group-hover:text-[#D4A853]" />
                 {mounted && itemCount > 0 && (
                   <AnimatePresence>
                     <motion.span
@@ -245,6 +264,7 @@ export function Navbar() {
                       animate={{ scale: 1 }}
                       exit={{ scale: 0 }}
                       className="absolute -right-0.5 -top-0.5 flex size-4 items-center justify-center rounded-full bg-gradient-to-r from-[#D4A853] to-[#F57224] text-[9px] font-bold text-white shadow-glow"
+                      aria-hidden="true"
                     >
                       {itemCount}
                     </motion.span>
@@ -260,8 +280,8 @@ export function Navbar() {
                       elements: {
                         userButtonAvatarBox: "size-7 border-2 border-[#F57224]/30",
                         userButtonTrigger: "focus:shadow-none",
-                        userButtonPopoverCard: "shadow-[0_20px_60px_rgba(0,0,0,0.5)] border border-white/10",
-                        userButtonPopoverActionButton: "text-white/80 hover:text-white hover:bg-white/5",
+                        userButtonPopoverCard: "shadow-[0_20px_60px_rgba(0,0,0,0.5)] border border-border",
+                        userButtonPopoverActionButton: "text-foreground/80 hover:text-foreground hover:bg-muted/50",
                         userButtonPopoverActionButtonText: "text-sm",
                         userButtonPopoverFooter: "hidden",
                       },
@@ -318,8 +338,8 @@ export function Navbar() {
                 </div>
               ) : (
                 <SignInButton mode="modal">
-                  <button className="rounded-full p-2 transition-all duration-300 hover:bg-[#D4A853]/20">
-                    <User className="size-4 text-white/70" />
+                  <button className="rounded-full p-2 transition-all duration-300 hover:bg-[#D4A853]/20" aria-label="Sign in">
+                    <User className="size-4 text-foreground/70" />
                   </button>
                 </SignInButton>
               )}
@@ -327,10 +347,11 @@ export function Navbar() {
               {/* Mobile Menu Button */}
               <motion.button
                 whileTap={{ scale: 0.95 }}
-                onClick={() => setMobileOpen(!mobileOpen)}
+                onClick={() => setMobileMenuOpen(true)}
                 className="rounded-full p-2.5 transition-all duration-300 hover:bg-[#D4A853]/20 lg:hidden"
+                aria-label="Open mobile menu"
               >
-                {mobileOpen ? <X className="size-4 text-white/70" /> : <Menu className="size-4 text-white/70" />}
+                <Menu className="size-4 text-foreground/70" />
               </motion.button>
             </div>
           </div>
@@ -343,23 +364,24 @@ export function Navbar() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="border-t border-[#D4A853]/20 bg-gradient-to-b from-black/90 to-black/80 backdrop-blur-2xl"
+              className="border-t border-[#D4A853]/20 bg-gradient-to-b from-background/95 to-background/85 backdrop-blur-2xl"
             >
-              <form onSubmit={handleSearch} className="mx-auto max-w-[100rem] px-6 py-6 sm:px-8 lg:px-10">
+              <form onSubmit={handleSearch} className="mx-auto max-w-[100rem] px-6 py-6 sm:px-8 lg:px-10" role="search">
                 <div className="relative">
                   <div className="absolute left-4 top-1/2 -translate-y-1/2">
                     <Search className="size-5 text-[#D4A853]" />
                   </div>
                   <Input
-                    type="text"
+                    type="search"
                     placeholder="Search products..."
                     value={searchQuery}
                     onChange={handleSearchChange}
-                    className="w-full border-[#D4A853]/30 bg-white/5 pl-12 pr-4 py-6 text-white placeholder:text-white/40 focus:border-[#D4A853] focus:ring-[#D4A853]/20 text-lg rounded-xl"
+                    className="w-full border-[#D4A853]/30 bg-muted/50 pl-12 pr-4 py-6 text-foreground placeholder:text-muted-foreground/70 focus:border-[#D4A853] focus:ring-[#D4A853]/20 text-lg rounded-xl"
                     autoFocus
+                    aria-label="Search products"
                   />
                   {searchSuggestions.length > 0 && (
-                    <div className="absolute left-0 right-0 top-full mt-3 overflow-hidden rounded-xl glass-premium border border-[#D4A853]/20">
+                    <div className="absolute left-0 right-0 top-full mt-3 overflow-hidden rounded-xl glass-premium border border-[#D4A853]/20" role="listbox">
                       {searchSuggestions.map((suggestion) => (
                         <button
                           key={suggestion}
@@ -368,7 +390,8 @@ export function Navbar() {
                             router.push(`/search?q=${encodeURIComponent(suggestion)}`)
                             setSearchOpen(false)
                           }}
-                          className="flex w-full items-center gap-3 px-4 py-3 text-sm text-white/70 transition-all duration-300 hover:bg-[#D4A853]/20 hover:text-[#D4A853]"
+                          className="flex w-full items-center gap-3 px-4 py-3 text-sm text-foreground/70 transition-all duration-300 hover:bg-[#D4A853]/20 hover:text-[#D4A853]"
+                          role="option"
                         >
                           <Search className="size-3" />
                           {suggestion}
@@ -378,100 +401,6 @@ export function Navbar() {
                   )}
                 </div>
               </form>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {mobileOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className="border-t border-[#D4A853]/20 bg-gradient-to-b from-black/95 to-black/90 backdrop-blur-2xl lg:hidden"
-            >
-              <div className="space-y-2 px-6 py-6">
-                {currentLinks.map((link) => (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    className={`flex items-center gap-4 rounded-xl px-4 py-4 text-base font-medium transition-all duration-300 ${
-                      pathname === link.href
-                        ? "bg-[#D4A853]/20 text-[#D4A853]"
-                        : "text-white/70 hover:bg-white/10 hover:text-white"
-                    }`}
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    <link.icon className="size-5" />
-                    {link.name}
-                  </Link>
-                ))}
-                {/* Mobile extra links */}
-                {isSignedIn ? (
-                  <>
-                    <Link
-                      href="/wishlist"
-                      className="flex items-center gap-4 rounded-xl px-4 py-4 text-base text-white/70 transition-all duration-300 hover:bg-white/10"
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      <Heart className="size-5" />
-                      Wishlist
-                    </Link>
-                    <Link
-                      href="/order-tracking"
-                      className="flex items-center gap-4 rounded-xl px-4 py-4 text-base text-white/70 transition-all duration-300 hover:bg-white/10"
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      <TruckIcon className="size-5" />
-                      Order Tracking
-                    </Link>
-                    <Link
-                      href="/profile-settings"
-                      className="flex items-center gap-4 rounded-xl px-4 py-4 text-base text-white/70 transition-all duration-300 hover:bg-white/10"
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      <SettingsIcon className="size-5" />
-                      Profile Settings
-                    </Link>
-                  </>
-                ) : (
-                  <>
-                    <Link
-                      href="/login"
-                      className="flex items-center gap-4 rounded-xl px-4 py-4 text-base text-[#F57224] transition-all duration-300 hover:bg-[#F57224]/10"
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      <User className="size-5" />
-                      Sign In
-                    </Link>
-                    <Link
-                      href="/register"
-                      className="flex items-center gap-4 rounded-xl px-4 py-4 text-base text-white/70 transition-all duration-300 hover:bg-white/10"
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      <User className="size-5" />
-                      Register
-                    </Link>
-                    <Link
-                      href="/new-arrivals"
-                      className="flex items-center gap-4 rounded-xl px-4 py-4 text-base text-white/70 transition-all duration-300 hover:bg-white/10"
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      <Sparkles className="size-5" />
-                      New Arrivals
-                    </Link>
-                    <Link
-                      href="/flash-sales"
-                      className="flex items-center gap-4 rounded-xl px-4 py-4 text-base text-white/70 transition-all duration-300 hover:bg-white/10"
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      <Flame className="size-5" />
-                      Flash Sales
-                    </Link>
-                  </>
-                )}
-              </div>
             </motion.div>
           )}
         </AnimatePresence>

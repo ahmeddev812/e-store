@@ -150,7 +150,7 @@ export default function HelpPage() {
           <Link href="/">
             <Button
               variant="ghost"
-              className="group text-white/50 hover:text-[#F57224] hover:bg-[#F57224]/10"
+              className="group text-muted-foreground hover:text-[#F57224] hover:bg-[#F57224]/10"
             >
               <Home className="mr-2 size-4" />
               <span className="text-sm">Back to Home</span>
@@ -177,7 +177,7 @@ export default function HelpPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl font-bold text-white sm:text-5xl lg:text-6xl"
+            className="text-4xl font-bold text-foreground sm:text-5xl lg:text-6xl"
           >
             Help{" "}
             <span className="relative inline-block">
@@ -192,7 +192,7 @@ export default function HelpPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mx-auto mt-4 max-w-2xl text-white/60"
+            className="mx-auto mt-4 max-w-2xl text-muted-foreground"
           >
             Find answers to your questions, browse help topics, or get in touch with our support team.
           </motion.p>
@@ -205,13 +205,13 @@ export default function HelpPage() {
             className="mx-auto mt-8 max-w-xl"
           >
             <div className="relative">
-              <Search className="absolute left-4 top-1/2 size-4 -translate-y-1/2 text-white/40" />
+              <Search className="absolute left-4 top-1/2 size-4 -translate-y-1/2 text-muted-foreground/70" />
               <input
                 type="text"
                 placeholder="Search for help topics..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full rounded-xl border border-white/10 bg-white/5 py-3.5 pl-11 pr-4 text-sm text-white placeholder:text-white/40 outline-none transition-all focus:border-[#F57224]/50 focus:bg-white/10 focus:shadow-[0_0_30px_rgba(245,114,36,0.15)]"
+                className="w-full rounded-xl border border-border bg-muted/50 py-3.5 pl-11 pr-4 text-sm text-foreground placeholder:text-muted-foreground/70 outline-none transition-all focus:border-[#F57224]/50 focus:bg-muted/30 focus:shadow-[0_0_30px_rgba(245,114,36,0.15)]"
               />
             </div>
           </motion.div>
@@ -224,7 +224,7 @@ export default function HelpPage() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-2 text-center text-2xl font-bold text-white"
+          className="mb-2 text-center text-2xl font-bold text-foreground"
         >
           How can we help you?
         </motion.h2>
@@ -233,7 +233,7 @@ export default function HelpPage() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
           viewport={{ once: true }}
-          className="mb-10 text-center text-sm text-white/40"
+          className="mb-10 text-center text-sm text-muted-foreground/70"
         >
           Browse through our help categories to find what you need
         </motion.p>
@@ -256,10 +256,10 @@ export default function HelpPage() {
                     >
                       <category.icon className="size-6 text-[#F57224]" />
                     </div>
-                    <h3 className="mb-2 text-lg font-semibold text-white group-hover:text-[#F57224] transition-colors">
+                    <h3 className="mb-2 text-lg font-semibold text-foreground group-hover:text-[#F57224] transition-colors">
                       {category.title}
                     </h3>
-                    <p className="mb-4 text-sm text-white/50 leading-relaxed">
+                    <p className="mb-4 text-sm text-muted-foreground leading-relaxed">
                       {category.description}
                     </p>
                     <span className="inline-flex items-center gap-1 text-xs font-medium text-[#F57224] opacity-0 translate-y-1 transition-all group-hover:opacity-100 group-hover:translate-y-0">
@@ -285,8 +285,8 @@ export default function HelpPage() {
             <HelpCircle className="size-3.5 text-[#D4A853]" />
             <span className="text-xs font-medium text-[#D4A853]">FAQs</span>
           </div>
-          <h2 className="text-2xl font-bold text-white">Frequently Asked Questions</h2>
-          <p className="mt-2 text-sm text-white/50">
+          <h2 className="text-2xl font-bold text-foreground">Frequently Asked Questions</h2>
+          <p className="mt-2 text-sm text-muted-foreground">
             Quick answers to the most common questions
           </p>
         </motion.div>
@@ -304,9 +304,9 @@ export default function HelpPage() {
                 <CardContent className="p-0">
                   <button
                     onClick={() => toggleFaq(index)}
-                    className="flex w-full items-center justify-between px-6 py-5 text-left transition-colors hover:bg-white/[0.02]"
+                    className="flex w-full items-center justify-between px-6 py-5 text-left transition-colors hover:bg-accent/10"
                   >
-                    <span className="flex-1 pr-4 font-semibold text-white group-hover:text-[#F57224] transition-colors">
+                    <span className="flex-1 pr-4 font-semibold text-foreground group-hover:text-[#F57224] transition-colors">
                       {item.question}
                     </span>
                     <motion.span
@@ -325,8 +325,8 @@ export default function HelpPage() {
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.3 }}
                       >
-                        <div className="border-t border-white/10 px-6 pb-5">
-                          <p className="pt-3 text-sm text-white/60 leading-relaxed">
+                        <div className="border-t border-border px-6 pb-5">
+                          <p className="pt-3 text-sm text-muted-foreground leading-relaxed">
                             {item.answer}
                           </p>
                         </div>
@@ -369,8 +369,8 @@ export default function HelpPage() {
             <Headphones className="size-3.5 text-[#F57224]" />
             <span className="text-xs font-medium text-[#F57224]">Contact Us</span>
           </div>
-          <h2 className="text-2xl font-bold text-white">Still need help?</h2>
-          <p className="mt-2 text-sm text-white/50">
+          <h2 className="text-2xl font-bold text-foreground">Still need help?</h2>
+          <p className="mt-2 text-sm text-muted-foreground">
             Choose your preferred way to get in touch
           </p>
         </motion.div>
@@ -387,11 +387,11 @@ export default function HelpPage() {
             >
               <Card className="glass-premium group h-full text-center transition-all duration-500 hover:border-[#F57224]/30 hover:shadow-[0_0_40px_rgba(245,114,36,0.15)]">
                 <CardContent className="p-8">
-                  <div className="mb-5 inline-flex items-center justify-center rounded-2xl bg-gradient-to-br from-white/10 to-white/5 p-4 transition-all duration-300 group-hover:scale-110">
+                  <div className="mb-5 inline-flex items-center justify-center rounded-2xl bg-gradient-to-br from-accent/10 to-accent/5 p-4 transition-all duration-300 group-hover:scale-110">
                     <option.icon className="size-8 text-[#F57224]" />
                   </div>
-                  <h3 className="mb-2 text-lg font-semibold text-white">{option.title}</h3>
-                  <p className="mb-6 text-sm text-white/50">{option.description}</p>
+                  <h3 className="mb-2 text-lg font-semibold text-foreground">{option.title}</h3>
+                  <p className="mb-6 text-sm text-muted-foreground">{option.description}</p>
                   {option.actionLink ? (
                     <Link href={option.actionLink}>
                       <Button className={`bg-gradient-to-r ${option.color} shadow-lg`}>
@@ -423,8 +423,8 @@ export default function HelpPage() {
           <div className="absolute inset-0 bg-gradient-to-r from-[#F57224]/10 via-transparent to-[#D4A853]/5" />
           <div className="relative">
             <HelpCircle className="mx-auto mb-4 size-12 text-[#F57224]" />
-            <h2 className="text-2xl font-bold text-white">We're here for you</h2>
-            <p className="mt-2 text-white/60 max-w-md mx-auto">
+            <h2 className="text-2xl font-bold text-foreground">We're here for you</h2>
+            <p className="mt-2 text-muted-foreground max-w-md mx-auto">
               Our support team is available 24/7 to assist you with any questions or concerns.
             </p>
             <div className="mt-6 flex flex-wrap gap-4 justify-center">
@@ -435,7 +435,7 @@ export default function HelpPage() {
                 </Button>
               </Link>
               <Link href="/">
-                <Button variant="outline" className="border-white/20 hover:border-[#F57224]/50 hover:text-[#F57224]">
+                <Button variant="outline" className="border-border hover:border-[#F57224]/50 hover:text-[#F57224]">
                   Continue Shopping
                   <ArrowRight className="ml-2 size-4" />
                 </Button>

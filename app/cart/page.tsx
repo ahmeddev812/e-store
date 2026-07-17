@@ -37,7 +37,7 @@ function CartItem({ item, onUpdate, onRemove }: any) {
       <Card className="group glass-premium overflow-hidden transition-all duration-300 hover:border-[#F57224]/30 hover:shadow-[0_0_30px_rgba(245,114,36,0.15)]">
         <CardContent className="flex gap-5 p-5">
           {/* Product Image */}
-          <div className="relative size-28 shrink-0 overflow-hidden rounded-xl bg-gradient-to-br from-white/5 to-white/0">
+          <div className="relative size-28 shrink-0 overflow-hidden rounded-xl bg-gradient-to-br from-accent/5 to-transparent">
             <Image
               src={item.thumbnail}
               alt={item.title}
@@ -57,18 +57,18 @@ function CartItem({ item, onUpdate, onRemove }: any) {
             <div className="flex items-start justify-between gap-4">
               <div className="flex-1">
                 <Link href={`/products/${item.productId}`}>
-                  <h3 className="text-base font-semibold text-white transition-colors hover:text-[#F57224] line-clamp-1">
+                  <h3 className="text-base font-semibold text-foreground transition-colors hover:text-[#F57224] line-clamp-1">
                     {item.title}
                   </h3>
                 </Link>
                 <div className="flex items-center gap-2 mt-1">
                   <span className="text-xl font-bold text-[#F57224]">{formatUSD(discountedPrice)}</span>
                   {item.discountPercentage > 0 && (
-                    <span className="text-sm text-white/40 line-through">{formatUSD(item.price)}</span>
+                    <span className="text-sm text-muted-foreground/70 line-through">{formatUSD(item.price)}</span>
                   )}
                 </div>
                 <div className="flex items-center gap-3 mt-2">
-                  <div className="flex items-center gap-1 rounded-lg bg-white/5 p-1">
+                  <div className="flex items-center gap-1 rounded-lg bg-muted/50 p-1">
                     <Button
                       variant="ghost"
                       size="icon-xs"
@@ -83,7 +83,7 @@ function CartItem({ item, onUpdate, onRemove }: any) {
                     >
                       <Minus className="size-3" />
                     </Button>
-                    <span className="min-w-8 text-center text-sm font-medium text-white">
+                    <span className="min-w-8 text-center text-sm font-medium text-foreground">
                       {item.quantity}
                     </span>
                     <Button
@@ -105,8 +105,8 @@ function CartItem({ item, onUpdate, onRemove }: any) {
                 </div>
               </div>
               <div className="text-right">
-                <p className="text-lg font-bold text-white">{formatUSD(lineTotal)}</p>
-                <p className="text-[10px] text-white/30">Total</p>
+                <p className="text-lg font-bold text-foreground">{formatUSD(lineTotal)}</p>
+                <p className="text-[10px] text-foreground/30">Total</p>
               </div>
             </div>
           </div>
@@ -119,13 +119,13 @@ function CartItem({ item, onUpdate, onRemove }: any) {
 // Feature Card Component
 function FeatureCard({ icon: Icon, title, description }: any) {
   return (
-    <div className="flex items-center gap-3 rounded-xl bg-white/5 p-3 transition-all duration-300 hover:bg-[#F57224]/10">
+    <div className="flex items-center gap-3 rounded-xl bg-muted/50 p-3 transition-all duration-300 hover:bg-[#F57224]/10">
       <div className="rounded-lg bg-[#F57224]/10 p-2">
         <Icon className="size-4 text-[#F57224]" />
       </div>
       <div>
-        <p className="text-xs font-medium text-white">{title}</p>
-        <p className="text-[10px] text-white/40">{description}</p>
+        <p className="text-xs font-medium text-foreground">{title}</p>
+        <p className="text-[10px] text-muted-foreground/70">{description}</p>
       </div>
     </div>
   )
@@ -210,7 +210,7 @@ export default function CartPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-3xl font-bold text-white mb-3"
+            className="text-3xl font-bold text-foreground mb-3"
           >
             Your Cart is Empty
           </motion.h1>
@@ -219,7 +219,7 @@ export default function CartPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="text-white/50 mb-8 text-center max-w-md"
+            className="text-muted-foreground mb-8 text-center max-w-md"
           >
             Looks like you haven&apos;t added anything yet. Browse our products and find something you love.
           </motion.p>
@@ -244,7 +244,7 @@ export default function CartPage() {
             transition={{ delay: 0.6 }}
             className="mt-12 text-center"
           >
-            <p className="text-xs text-white/30">or</p>
+            <p className="text-xs text-foreground/30">or</p>
             <Link href="/products">
               <Button variant="link" className="text-[#F57224]">
                 Browse our collections <ChevronRight className="ml-1 size-3" />
@@ -277,7 +277,7 @@ export default function CartPage() {
               <div className="rounded-xl bg-gradient-to-br from-[#F57224]/20 to-[#F57224]/5 p-2">
                 <ShoppingBag className="size-6 text-[#F57224]" />
               </div>
-              <h1 className="text-3xl font-bold text-white">Shopping Cart</h1>
+              <h1 className="text-3xl font-bold text-foreground">Shopping Cart</h1>
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
@@ -286,7 +286,7 @@ export default function CartPage() {
                 {items.length} {items.length === 1 ? "item" : "items"}
               </motion.div>
             </div>
-            <p className="text-sm text-white/50">Review and manage your selected items</p>
+            <p className="text-sm text-muted-foreground">Review and manage your selected items</p>
           </div>
 
           <Button
@@ -346,7 +346,7 @@ export default function CartPage() {
                 <CardContent className="p-5">
                   <div className="flex items-center gap-2 mb-4">
                     <Gift className="size-4 text-[#F57224]" />
-                    <h2 className="font-semibold text-white">Apply Coupon</h2>
+                    <h2 className="font-semibold text-foreground">Apply Coupon</h2>
                   </div>
 
                   {appliedCoupon ? (
@@ -364,7 +364,7 @@ export default function CartPage() {
                       </div>
                       <button
                         onClick={handleRemoveCoupon}
-                        className="rounded-lg px-2 py-1 text-xs text-white/40 transition-colors hover:bg-white/10 hover:text-white"
+                        className="rounded-lg px-2 py-1 text-xs text-muted-foreground/70 transition-colors hover:bg-muted/30 hover:text-foreground"
                       >
                         Remove
                       </button>
@@ -401,7 +401,7 @@ export default function CartPage() {
                           <button
                             key={code}
                             onClick={() => setCouponCode(code)}
-                            className="rounded-full bg-white/5 px-2 py-0.5 text-[10px] text-white/40 transition-colors hover:bg-[#F57224]/20 hover:text-[#F57224]"
+                            className="rounded-full bg-muted/50 px-2 py-0.5 text-[10px] text-muted-foreground/70 transition-colors hover:bg-[#F57224]/20 hover:text-[#F57224]"
                           >
                             {code}
                           </button>
@@ -423,17 +423,17 @@ export default function CartPage() {
                 <CardContent className="p-5 space-y-4">
                   <div className="flex items-center gap-2">
                     <CreditCard className="size-4 text-[#F57224]" />
-                    <h2 className="font-semibold text-white">Order Summary</h2>
+                    <h2 className="font-semibold text-foreground">Order Summary</h2>
                   </div>
 
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
-                      <span className="text-white/60">Subtotal</span>
-                      <span className="text-white">{formatUSD(subtotal)}</span>
+                      <span className="text-muted-foreground">Subtotal</span>
+                      <span className="text-foreground">{formatUSD(subtotal)}</span>
                     </div>
                     <div className="flex justify-between text-sm">
-                      <span className="text-white/60">Shipping</span>
-                      <span className="text-white">
+                      <span className="text-muted-foreground">Shipping</span>
+                      <span className="text-foreground">
                         {shipping === 0 ? (
                           <span className="text-emerald-400">Free</span>
                         ) : (
@@ -453,10 +453,10 @@ export default function CartPage() {
                     )}
                   </div>
 
-                  <Separator className="bg-white/10" />
+                  <Separator className="bg-muted/30" />
 
                   <div className="flex justify-between text-lg font-bold">
-                    <span className="text-white">Total</span>
+                    <span className="text-foreground">Total</span>
                     <span className="text-2xl text-[#F57224]">{formatUSD(total)}</span>
                   </div>
 
@@ -477,7 +477,7 @@ export default function CartPage() {
                   >
                     {isCheckingOut ? (
                       <div className="flex items-center gap-2">
-                        <div className="size-4 animate-spin rounded-full border-2 border-white/20 border-t-white" />
+                        <div className="size-4 animate-spin rounded-full border-2 border-border border-t-white" />
                         Processing...
                       </div>
                     ) : (
@@ -489,7 +489,7 @@ export default function CartPage() {
                   </Button>
 
                   <Link href="/products">
-                    <Button variant="ghost" className="w-full text-white/60 hover:text-white" size="sm">
+                    <Button variant="ghost" className="w-full text-muted-foreground hover:text-foreground" size="sm">
                       <ArrowLeft className="mr-2 size-3.5" />
                       Continue Shopping
                     </Button>
@@ -505,7 +505,7 @@ export default function CartPage() {
               transition={{ delay: 0.3 }}
               className="text-center"
             >
-              <div className="flex items-center justify-center gap-2 text-xs text-white/30">
+              <div className="flex items-center justify-center gap-2 text-xs text-foreground/30">
                 <Shield className="size-3" />
                 <span>Secure Checkout</span>
                 <span>•</span>
