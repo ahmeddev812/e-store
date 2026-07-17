@@ -3,6 +3,7 @@ import { Playfair_Display, Inter, Space_Grotesk } from "next/font/google"
 import "./globals.css"
 import { Providers } from "./providers"
 import { Navbar } from "@/components/layout/navbar"
+import { AnnouncementBar } from "@/components/layout/announcement-bar"
 import { Footer } from "@/components/layout/footer"
 
 const playfair = Playfair_Display({
@@ -76,6 +77,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               {/* Glass Navigation Overlay */}
               <div className="fixed inset-x-0 top-0 z-40 h-20 bg-gradient-to-b from-black/20 to-transparent pointer-events-none" />
 
+              <AnnouncementBar />
               <Navbar />
               
               <main className="relative z-10 flex-1">

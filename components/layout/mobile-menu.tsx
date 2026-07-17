@@ -1,36 +1,41 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { useUIStore } from "@/store/ui"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import { useUser, useClerk } from "@clerk/nextjs"
 import {
   X, Home, Package, Grid, Info, Phone, Heart, ShoppingBag, LogOut, User,
+  Sparkles, Flame, Award, Truck, Settings, MapPin,
 } from "lucide-react"
 
-const mobileLinks = [
+const guestLinks = [
   { href: "/", label: "Home", icon: Home },
-  { href: "/products", label: "Products", icon: Package },
+  { href: "/products", label: "Shop", icon: Package },
   { href: "/categories", label: "Categories", icon: Grid },
+  { href: "/new-arrivals", label: "New Arrivals", icon: Sparkles },
+  { href: "/flash-sales", label: "Flash Sales", icon: Flame },
   { href: "/about", label: "About", icon: Info },
   { href: "/contact", label: "Contact", icon: Phone },
+]
+
+const authLinks = [
+  { href: "/", label: "Home", icon: Home },
+  { href: "/products", label: "Shop", icon: Package },
+  { href: "/categories", label: "Categories", icon: Grid },
+  { href: "/dashboard", label: "Dashboard", icon: Award },
 ]
 
 function MobileMenu() {
   const pathname = usePathname()
   const router = useRouter()
   const { isMobileMenuOpen, setMobileMenuOpen } = useUIStore()
-  const [user, setUser] = useState<any>(null)
-
-  useEffect(() => {
-    const stored = localStorage.getItem("user_session")
-    if (stored) {
-      try { setUser(JSON.parse(stored)) } catch {}
-    }
-  }, [isMobileMenuOpen])
+  const { isSignedIn, user } = useUser()
+  const { signOut } = useClerk()
 
   useEffect(() => {
     if (isMobileMenuOpen) {
@@ -46,11 +51,11 @@ function MobileMenu() {
   }, [pathname, setMobileMenuOpen])
 
   const handleLogout = () => {
-    localStorage.removeItem("user_session")
-    setUser(null)
     setMobileMenuOpen(false)
-    router.push("/")
+    signOut({ redirectUrl: "/" })
   }
+
+  const currentLinks = isSignedIn ? authLinks : guestLinks
 
   return (
     <AnimatePresence>
@@ -81,14 +86,14 @@ function MobileMenu() {
             </div>
 
             <div className="border-b border-white/10 px-4 py-4">
-              {user ? (
+              {isSignedIn && user ? (
                 <div className="flex items-center gap-3">
                   <div className="flex size-10 items-center justify-center rounded-full bg-[#F57224]/10 text-[#F57224]">
                     <User className="size-5" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium">{user.name}</p>
-                    <p className="text-xs text-white/40">{user.email}</p>
+                    <p className="text-sm font-medium">{user.fullName || user.firstName || "User"}</p>
+                    <p className="text-xs text-white/40">{user.primaryEmailAddress?.emailAddress}</p>
                   </div>
                 </div>
               ) : (
@@ -105,7 +110,7 @@ function MobileMenu() {
 
             <nav className="flex-1 overflow-y-auto px-2 py-4">
               <div className="space-y-1">
-                {mobileLinks.map((link) => (
+                {currentLinks.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
@@ -123,24 +128,47 @@ function MobileMenu() {
               </div>
               <hr className="my-4 border-white/10" />
               <div className="space-y-1">
-                <Link href="/wishlist" className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-white/70 hover:bg-white/10" onClick={() => setMobileMenuOpen(false)}>
-                  <Heart className="size-5" />
-                  Wishlist
-                </Link>
-                <Link href="/cart" className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-white/70 hover:bg-white/10" onClick={() => setMobileMenuOpen(false)}>
-                  <ShoppingBag className="size-5" />
-                  Cart
-                </Link>
+                {isSignedIn ? (
+                  <>
+                    <Link href="/wishlist" className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-white/70 hover:bg-white/10" onClick={() => setMobileMenuOpen(false)}>
+                      <Heart className="size-5" />
+                      Wishlist
+                    </Link>
+                    <Link href="/order-tracking" className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-white/70 hover:bg-white/10" onClick={() => setMobileMenuOpen(false)}>
+                      <Truck className="size-5" />
+                      Order Tracking
+                    </Link>
+                    <Link href="/profile-settings" className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-white/70 hover:bg-white/10" onClick={() => setMobileMenuOpen(false)}>
+                      <Settings className="size-5" />
+                      Profile Settings
+                    </Link>
+                    <Link href="/help" className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-white/70 hover:bg-white/10" onClick={() => setMobileMenuOpen(false)}>
+                      <Info className="size-5" />
+                      Support
+                    </Link>
+                    <hr className="my-4 border-white/10" />
+                    <button onClick={handleLogout} className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-red-400 hover:bg-white/10">
+                      <LogOut className="size-5" />
+                      Sign Out
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <Link href="/cart" className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-white/70 hover:bg-white/10" onClick={() => setMobileMenuOpen(false)}>
+                      <ShoppingBag className="size-5" />
+                      Cart
+                    </Link>
+                    <Link href="/new-arrivals" className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-white/70 hover:bg-white/10" onClick={() => setMobileMenuOpen(false)}>
+                      <Sparkles className="size-5" />
+                      New Arrivals
+                    </Link>
+                    <Link href="/flash-sales" className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-white/70 hover:bg-white/10" onClick={() => setMobileMenuOpen(false)}>
+                      <Flame className="size-5" />
+                      Flash Sales
+                    </Link>
+                  </>
+                )}
               </div>
-              {user && (
-                <>
-                  <hr className="my-4 border-white/10" />
-                  <button onClick={handleLogout} className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-red-400 hover:bg-white/10">
-                    <LogOut className="size-5" />
-                    Sign Out
-                  </button>
-                </>
-              )}
             </nav>
 
             <div className="border-t border-white/10 px-4 py-4">

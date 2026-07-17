@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import { useUser, useClerk } from "@clerk/nextjs"
+import { useUser } from "@clerk/nextjs"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import {
@@ -10,20 +10,15 @@ import {
   Heart,
   Settings,
   MapPin,
-  LogOut,
   ShoppingBag,
   Calendar,
-  DollarSign,
   XCircle,
   User,
-  Clock,
 } from "lucide-react"
-import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Separator } from "@/components/ui/separator"
-import { cn, formatUSD, getInitials } from "@/lib/utils"
+import { formatUSD, getInitials } from "@/lib/utils"
 
 interface StoredOrder {
   id: string
@@ -45,7 +40,6 @@ interface Order {
 export default function DashboardPage() {
   const router = useRouter()
   const { user, isLoaded, isSignedIn } = useUser()
-  const { signOut } = useClerk()
   const [orders, setOrders] = useState<Order[]>([])
 
   useEffect(() => {
@@ -77,10 +71,6 @@ export default function DashboardPage() {
       // localStorage unavailable or corrupt data
     }
   }, [])
-
-  const handleLogout = () => {
-    signOut({ redirectUrl: "/" })
-  }
 
   function cancelOrder(orderId: string) {
     const updated = orders.map((o) => (o.id === orderId ? { ...o, status: "cancelled" } : o))
@@ -122,7 +112,7 @@ export default function DashboardPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-[#0B1120] p-4 md:p-8 bg-[radial-gradient(ellipse_at_top,rgba(245,114,36,0.03)_0%,transparent_60%)]">
+    <div className="bg-[radial-gradient(ellipse_at_top,rgba(245,114,36,0.03)_0%,transparent_60%)]">
       <div className="mx-auto max-w-5xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
           <div className="mb-8 flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
@@ -142,10 +132,6 @@ export default function DashboardPage() {
                 </p>
               </div>
             </div>
-            <Button onClick={handleLogout} variant="outline" className="gap-2 border-red-500/30 text-red-400 hover:bg-red-500/10">
-              <LogOut className="size-4" />
-              Logout
-            </Button>
           </div>
 
           <div className="mb-8 grid grid-cols-2 gap-4 sm:grid-cols-3">
@@ -168,7 +154,7 @@ export default function DashboardPage() {
             })}
           </div>
 
-          <Card>
+          <Card id="orders">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <ShoppingBag className="size-5 text-[#F57224]" />

@@ -18,15 +18,23 @@ import { Input } from "@/components/ui/input"
 import { useRouter, usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { Badge } from "@/components/ui/badge"
-import { useUser, SignInButton, UserButton } from "@clerk/nextjs"
+import { useUser, useClerk, SignInButton, UserButton } from "@clerk/nextjs"
 
-const navLinks = [
+const guestLinks = [
   { name: "Home", href: "/", icon: Home, luxury: true },
-  { name: "Products", href: "/products", icon: Diamond, luxury: true },
+  { name: "Shop", href: "/products", icon: Diamond, luxury: true },
   { name: "Categories", href: "/categories", icon: Grid, luxury: false },
-  { name: "Checkout", href: "/checkout", icon: ShoppingCart, luxury: false },
-  { name: "About", href: "/about", icon: Sparkles, luxury: false },
-  { name: "Contact", href: "/contact", icon: Award, luxury: false },
+  { name: "New Arrivals", href: "/new-arrivals", icon: Sparkles, luxury: false },
+  { name: "Flash Sales", href: "/flash-sales", icon: Flame, luxury: false },
+  { name: "About", href: "/about", icon: Crown, luxury: false },
+  { name: "Contact", href: "/contact", icon: Phone, luxury: false },
+]
+
+const authLinks = [
+  { name: "Home", href: "/", icon: Home, luxury: true },
+  { name: "Shop", href: "/products", icon: Diamond, luxury: true },
+  { name: "Categories", href: "/categories", icon: Grid, luxury: false },
+  { name: "Dashboard", href: "/dashboard", icon: Award, luxury: false },
 ]
 
 export function Navbar() {
@@ -38,6 +46,7 @@ export function Navbar() {
   const [searchSuggestions, setSearchSuggestions] = useState<string[]>([])
   const { theme, setTheme } = useTheme()
   const { isSignedIn, user } = useUser()
+  const { signOut } = useClerk()
   const itemCount = useCartStore((s) => s.getItemCount())
   const wishlistCount = useWishlistStore((s) => s.items.length)
   const router = useRouter()
@@ -53,12 +62,7 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-    }
-    document.addEventListener("mousedown", handleClickOutside)
-    return () => document.removeEventListener("mousedown", handleClickOutside)
-  }, [])
+  const currentLinks = isSignedIn ? authLinks : guestLinks
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
@@ -160,9 +164,9 @@ export function Navbar() {
                 </Badge>
               </Link>
 
-              {/* Desktop Navigation - Ultra Luxury */}
+              {/* Desktop Navigation - switches based on auth */}
               <div className="hidden items-center gap-2 lg:flex">
-                {navLinks.map((link) => (
+                {currentLinks.map((link) => (
                   <Link
                     key={link.name}
                     href={link.href}
@@ -188,7 +192,7 @@ export function Navbar() {
               </div>
             </div>
 
-            {/* Right Section - Ultra Luxury Icons */}
+            {/* Right Section */}
             <div className="flex items-center gap-2 lg:gap-3">
               {/* Search Button */}
               <motion.button
@@ -200,7 +204,7 @@ export function Navbar() {
                 <Search className="size-4 text-white/70 group-hover:text-[#D4A853]" />
               </motion.button>
 
-              {/* Theme Toggle - Luxury */}
+              {/* Theme Toggle */}
               {mounted && (
                 <motion.button
                   whileHover={{ scale: 1.1 }}
@@ -212,24 +216,26 @@ export function Navbar() {
                 </motion.button>
               )}
 
-              {/* Wishlist - Luxury with Animation */}
-              <Link href="/wishlist" className="group relative rounded-full p-2.5 transition-all duration-300 hover:bg-[#D4A853]/20">
-                <Heart className="size-4 text-white/70 transition-all duration-300 group-hover:scale-110 group-hover:text-[#D4A853]" />
-                {mounted && wishlistCount > 0 && (
-                  <AnimatePresence>
-                    <motion.span
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      exit={{ scale: 0 }}
-                      className="absolute -right-0.5 -top-0.5 flex size-4 items-center justify-center rounded-full bg-gradient-to-r from-[#D4A853] to-[#F57224] text-[9px] font-bold text-white shadow-glow"
-                    >
-                      {wishlistCount}
-                    </motion.span>
-                  </AnimatePresence>
-                )}
-              </Link>
+              {/* Wishlist - only for authenticated users */}
+              {isSignedIn ? (
+                <Link href="/wishlist" className="group relative rounded-full p-2.5 transition-all duration-300 hover:bg-[#D4A853]/20">
+                  <Heart className="size-4 text-white/70 transition-all duration-300 group-hover:scale-110 group-hover:text-[#D4A853]" />
+                  {mounted && wishlistCount > 0 && (
+                    <AnimatePresence>
+                      <motion.span
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        exit={{ scale: 0 }}
+                        className="absolute -right-0.5 -top-0.5 flex size-4 items-center justify-center rounded-full bg-gradient-to-r from-[#D4A853] to-[#F57224] text-[9px] font-bold text-white shadow-glow"
+                      >
+                        {wishlistCount}
+                      </motion.span>
+                    </AnimatePresence>
+                  )}
+                </Link>
+              ) : null}
 
-              {/* Cart - Luxury with Animation */}
+              {/* Cart */}
               <Link href="/cart" className="group relative rounded-full p-2.5 transition-all duration-300 hover:bg-[#D4A853]/20">
                 <ShoppingCart className="size-4 text-white/70 transition-all duration-300 group-hover:scale-110 group-hover:text-[#D4A853]" />
                 {mounted && itemCount > 0 && (
@@ -246,23 +252,69 @@ export function Navbar() {
                 )}
               </Link>
 
-              {/* User Section - Clerk Auth */}
+              {/* User Section */}
               {isSignedIn ? (
                 <div className="flex items-center gap-2">
-                  <Link
-                    href="/dashboard"
-                    className="hidden rounded-full p-2 transition-all duration-300 hover:bg-[#D4A853]/20 sm:block"
-                  >
-                    <User className="size-4 text-white/70" />
-                  </Link>
                   <UserButton
                     appearance={{
                       elements: {
                         userButtonAvatarBox: "size-7 border-2 border-[#F57224]/30",
                         userButtonTrigger: "focus:shadow-none",
+                        userButtonPopoverCard: "shadow-[0_20px_60px_rgba(0,0,0,0.5)] border border-white/10",
+                        userButtonPopoverActionButton: "text-white/80 hover:text-white hover:bg-white/5",
+                        userButtonPopoverActionButtonText: "text-sm",
+                        userButtonPopoverFooter: "hidden",
                       },
                     }}
-                  />
+                  >
+                    <UserButton.MenuItems>
+                      <UserButton.Link
+                        label="Dashboard"
+                        labelIcon={<Award className="size-4" />}
+                        href="/dashboard"
+                      />
+                      <UserButton.Link
+                        label="My Orders"
+                        labelIcon={<ShoppingBag className="size-4" />}
+                        href="/dashboard"
+                      />
+                      <UserButton.Link
+                        label="Wishlist"
+                        labelIcon={<Heart className="size-4" />}
+                        href="/wishlist"
+                      />
+                      <UserButton.Link
+                        label="Order Tracking"
+                        labelIcon={<MapPinIcon className="size-4" />}
+                        href="/order-tracking"
+                      />
+                      <UserButton.Link
+                        label="Saved Addresses"
+                        labelIcon={<MapPinIcon className="size-4" />}
+                        href="/profile-settings"
+                      />
+                      <UserButton.Link
+                        label="Profile Settings"
+                        labelIcon={<SettingsIcon className="size-4" />}
+                        href="/profile-settings"
+                      />
+                      <UserButton.Link
+                        label="Payment Methods"
+                        labelIcon={<CreditCardIcon className="size-4" />}
+                        href="/profile-settings"
+                      />
+                      <UserButton.Link
+                        label="Support"
+                        labelIcon={<HeadphoneIcon className="size-4" />}
+                        href="/help"
+                      />
+                      <UserButton.Action
+                        label="Logout"
+                        labelIcon={<LogOutIcon className="size-4" />}
+                        onClick={() => signOut({ redirectUrl: "/" })}
+                      />
+                    </UserButton.MenuItems>
+                  </UserButton>
                 </div>
               ) : (
                 <SignInButton mode="modal">
@@ -272,7 +324,7 @@ export function Navbar() {
                 </SignInButton>
               )}
 
-              {/* Mobile Menu Button - Luxury */}
+              {/* Mobile Menu Button */}
               <motion.button
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setMobileOpen(!mobileOpen)}
@@ -284,7 +336,7 @@ export function Navbar() {
           </div>
         </div>
 
-        {/* Search Bar Dropdown - Luxury */}
+        {/* Search Bar Dropdown */}
         <AnimatePresence>
           {searchOpen && (
             <motion.div
@@ -330,7 +382,7 @@ export function Navbar() {
           )}
         </AnimatePresence>
 
-        {/* Mobile Menu - Luxury */}
+        {/* Mobile Menu */}
         <AnimatePresence>
           {mobileOpen && (
             <motion.div
@@ -340,7 +392,7 @@ export function Navbar() {
               className="border-t border-[#D4A853]/20 bg-gradient-to-b from-black/95 to-black/90 backdrop-blur-2xl lg:hidden"
             >
               <div className="space-y-2 px-6 py-6">
-                {navLinks.map((link) => (
+                {currentLinks.map((link) => (
                   <Link
                     key={link.name}
                     href={link.href}
@@ -355,24 +407,9 @@ export function Navbar() {
                     {link.name}
                   </Link>
                 ))}
+                {/* Mobile extra links */}
                 {isSignedIn ? (
                   <>
-                    <Link
-                      href="/dashboard"
-                      className="flex items-center gap-4 rounded-xl px-4 py-4 text-base text-white/70 transition-all duration-300 hover:bg-white/10"
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      <User className="size-5" />
-                      My Account
-                    </Link>
-                    <Link
-                      href="/checkout"
-                      className="flex items-center gap-4 rounded-xl px-4 py-4 text-base text-white/70 transition-all duration-300 hover:bg-white/10"
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      <ShoppingCart className="size-5" />
-                      Checkout
-                    </Link>
                     <Link
                       href="/wishlist"
                       className="flex items-center gap-4 rounded-xl px-4 py-4 text-base text-white/70 transition-all duration-300 hover:bg-white/10"
@@ -381,16 +418,58 @@ export function Navbar() {
                       <Heart className="size-5" />
                       Wishlist
                     </Link>
+                    <Link
+                      href="/order-tracking"
+                      className="flex items-center gap-4 rounded-xl px-4 py-4 text-base text-white/70 transition-all duration-300 hover:bg-white/10"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      <TruckIcon className="size-5" />
+                      Order Tracking
+                    </Link>
+                    <Link
+                      href="/profile-settings"
+                      className="flex items-center gap-4 rounded-xl px-4 py-4 text-base text-white/70 transition-all duration-300 hover:bg-white/10"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      <SettingsIcon className="size-5" />
+                      Profile Settings
+                    </Link>
                   </>
                 ) : (
-                  <Link
-                    href="/login"
-                    className="flex items-center gap-4 rounded-xl px-4 py-4 text-base text-[#F57224] transition-all duration-300 hover:bg-[#F57224]/10"
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    <User className="size-5" />
-                    Sign In
-                  </Link>
+                  <>
+                    <Link
+                      href="/login"
+                      className="flex items-center gap-4 rounded-xl px-4 py-4 text-base text-[#F57224] transition-all duration-300 hover:bg-[#F57224]/10"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      <User className="size-5" />
+                      Sign In
+                    </Link>
+                    <Link
+                      href="/register"
+                      className="flex items-center gap-4 rounded-xl px-4 py-4 text-base text-white/70 transition-all duration-300 hover:bg-white/10"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      <User className="size-5" />
+                      Register
+                    </Link>
+                    <Link
+                      href="/new-arrivals"
+                      className="flex items-center gap-4 rounded-xl px-4 py-4 text-base text-white/70 transition-all duration-300 hover:bg-white/10"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      <Sparkles className="size-5" />
+                      New Arrivals
+                    </Link>
+                    <Link
+                      href="/flash-sales"
+                      className="flex items-center gap-4 rounded-xl px-4 py-4 text-base text-white/70 transition-all duration-300 hover:bg-white/10"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      <Flame className="size-5" />
+                      Flash Sales
+                    </Link>
+                  </>
                 )}
               </div>
             </motion.div>
@@ -401,8 +480,18 @@ export function Navbar() {
   )
 }
 
-// Helper components
-function Truck(props: any) { return <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><path d="M5 21a2 2 0 100-4 2 2 0 000 4z"/><path d="M18 21a2 2 0 100-4 2 2 0 000 4z"/></svg> }
-function RotateCcw(props: any) { return <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M1 12a9 9 0 109-9"/><path d="M3 5v4h4"/></svg> }
-function Shield(props: any) { return <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> }
-function Headphones(props: any) { return <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 18v-6a9 9 0 0118 0v6"/><path d="M21 19a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3z"/><path d="M3 19a2 2 0 002 2h1a2 2 0 002-2v-3a2 2 0 00-2-2H3z"/></svg> }
+function MapPinIcon(props: any) {
+  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+}
+
+function SettingsIcon(props: any) {
+  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+}
+
+function CreditCardIcon(props: any) {
+  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+}
+
+function LogOutIcon(props: any) {
+  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+}

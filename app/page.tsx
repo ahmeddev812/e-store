@@ -472,33 +472,166 @@ export default function HomePage() {
 
   return (
     <div className="overflow-x-hidden">
-      {/* NEW PREMIUM HERO SECTION */}
+      {/* HERO */}
       <PremiumHero />
 
-      {/* Stats Bar */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
-        className="relative mx-auto -mt-8 max-w-7xl px-6 z-20"
-      >
-        <div className="grid grid-cols-2 gap-4 rounded-2xl glass-premium p-6 md:grid-cols-4">
-          {stats.map((stat, idx) => (
-            <div key={stat.label} className="text-center">
-              <div className="flex items-center justify-center gap-2">
-                <stat.icon className="size-5 text-[#F57224]" />
-                <span className="text-2xl font-bold text-white">{stat.value}</span>
-              </div>
-              <p className="mt-1 text-xs text-white/40">{stat.label}</p>
-            </div>
+      {/* FEATURED CATEGORIES */}
+      <section className="mx-auto max-w-7xl px-6 py-16">
+        <div className="mb-10 text-center">
+          <Badge className="mb-4 bg-gradient-to-r from-[#F57224]/20 to-[#F57224]/5 text-[#F57224] border-none">
+            Shop by Category
+          </Badge>
+          <h2 className="text-3xl font-bold text-white">Featured Categories</h2>
+          <p className="mt-2 text-white/50">Browse through our curated collections</p>
+        </div>
+
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {categoriesWithCount.map((category, index) => (
+            <LuxuryCategoryCard key={category.id} category={category} index={index} />
           ))}
         </div>
-      </motion.div>
+      </section>
 
-      {/* Brand Marquee */}
-      <BrandMarquee />
+      {/* FLASH SALES */}
+      <section className="mx-auto max-w-7xl px-6 py-16">
+        <div className="relative mb-10 overflow-hidden rounded-2xl bg-gradient-to-r from-[#F57224]/20 via-[#F57224]/10 to-transparent p-8">
+          <div className="absolute right-0 top-0 -mr-20 -mt-20 size-40 rounded-full bg-[#F57224]/20 blur-3xl" />
+          <div className="relative flex flex-wrap items-center justify-between gap-4">
+            <div className="flex items-center gap-4">
+              <div className="rounded-2xl bg-gradient-to-br from-[#F57224]/20 to-[#F57224]/5 p-3">
+                <Flame className="size-8 text-[#F57224]" />
+              </div>
+              <div>
+                <h2 className="text-3xl font-bold text-white">Flash Sales</h2>
+                <p className="text-sm text-white/50">Limited time offers - Up to 70% off</p>
+              </div>
+            </div>
+            <CountdownTimer target={flashSaleTarget} />
+          </div>
+        </div>
 
-      {/* Features Section - Premium */}
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {flashProducts.map((product, index) => (
+            <UltraPremiumProductCard key={product.id} product={product} index={index} />
+          ))}
+        </div>
+      </section>
+
+      {/* TRENDING PRODUCTS */}
+      <section className="mx-auto max-w-7xl px-6 py-16">
+        <div className="mb-10 flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
+            <div className="rounded-2xl bg-gradient-to-br from-[#F57224]/20 to-[#F57224]/5 p-3">
+              <Diamond className="size-8 text-[#F57224]" />
+            </div>
+            <div>
+              <h2 className="text-3xl font-bold text-white">Trending Products</h2>
+              <p className="text-sm text-white/50">Handpicked selections for you</p>
+            </div>
+          </div>
+          <Link href="/products">
+            <Button variant="ghost" className="group text-[#F57224] hover:bg-[#F57224]/10">
+              View Collection <ChevronRight className="ml-1 size-4 transition-transform group-hover:translate-x-1" />
+            </Button>
+          </Link>
+        </div>
+
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {featured.map((product, index) => (
+            <UltraPremiumProductCard key={product.id} product={product} index={index} />
+          ))}
+        </div>
+      </section>
+
+      {/* NEW ARRIVALS */}
+      <section className="mx-auto max-w-7xl px-6 py-16">
+        <div className="mb-10 flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
+            <div className="rounded-2xl bg-gradient-to-br from-emerald-500/20 to-teal-500/5 p-3">
+              <Sparkles className="size-8 text-emerald-500" />
+            </div>
+            <div>
+              <h2 className="text-3xl font-bold text-white">New Arrivals</h2>
+              <p className="text-sm text-white/50">Fresh from the collection</p>
+            </div>
+          </div>
+          <Link href="/products?sort=newest">
+            <Button variant="ghost" className="group text-[#F57224] hover:bg-[#F57224]/10">
+              Explore New <ChevronRight className="ml-1 size-4 transition-transform group-hover:translate-x-1" />
+            </Button>
+          </Link>
+        </div>
+
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {newArrivals.slice(0, 4).map((product, index) => (
+            <UltraPremiumProductCard key={product.id} product={product} index={index} />
+          ))}
+        </div>
+      </section>
+
+      {/* BEST SELLERS */}
+      <section className="mx-auto max-w-7xl px-6 py-16">
+        <div className="mb-10 flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
+            <div className="rounded-2xl bg-gradient-to-br from-yellow-500/20 to-amber-500/5 p-3">
+              <Crown className="size-8 text-yellow-500" />
+            </div>
+            <div>
+              <h2 className="text-3xl font-bold text-white">Best Sellers</h2>
+              <p className="text-sm text-white/50">What everyone's loving</p>
+            </div>
+          </div>
+          <Link href="/products?sort=rating-desc">
+            <Button variant="ghost" className="group text-[#F57224] hover:bg-[#F57224]/10">
+              View All <ChevronRight className="ml-1 size-4 transition-transform group-hover:translate-x-1" />
+            </Button>
+          </Link>
+        </div>
+
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {bestsellers.map((product, index) => (
+            <UltraPremiumProductCard key={product.id} product={product} index={index} />
+          ))}
+        </div>
+      </section>
+
+      {/* FEATURED COLLECTION (CTA) */}
+      <section className="mx-auto max-w-7xl px-6 py-20">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#1a1a2e] via-[#2d1b2e] to-[#1a1a2e] p-12 text-center"
+        >
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNENEE4NTMiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBvbHlsaW5lIHBvaW50cz0iMzAgMCA2MCAzMCAzMCA2MCAwIDMwIi8+PC9nPjwvZz48L3N2Zz4=')] opacity-20" />
+          <div className="absolute -right-20 -top-20 size-40 rounded-full bg-[#F57224]/20 blur-3xl" />
+          <div className="absolute -left-20 -bottom-20 size-40 rounded-full bg-[#D4A853]/20 blur-3xl" />
+          
+          <div className="relative">
+            <div className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-br from-[#D4A853]/20 to-[#F57224]/10 p-4 mb-6">
+              <Crown className="size-10 text-[#D4A853]" />
+            </div>
+              <h2 className="text-3xl font-bold text-white">Featured Collection</h2>
+              <p className="mx-auto mt-2 max-w-md text-white/60">
+                Discover our exclusive premium collection, handpicked for the discerning shopper
+              </p>
+            <div className="mt-6 flex flex-wrap gap-4 justify-center">
+              <Link href="/products">
+                <Button className="bg-gradient-to-r from-[#D4A853] to-[#F57224] shadow-glow">
+                  Shop Now <ArrowRight className="ml-2 size-4" />
+                </Button>
+              </Link>
+              <Link href="/new-arrivals">
+                <Button variant="outline" className="border-white/20 hover:border-[#D4A853]/50">
+                  View New Arrivals
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* WHY CHOOSE US */}
       <section className="mx-auto max-w-7xl px-6 py-20">
         <div className="mb-12 text-center">
           <Badge className="mb-4 bg-gradient-to-r from-[#F57224]/20 to-[#F57224]/5 text-[#F57224] border-none">
@@ -534,160 +667,31 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Flash Sale Section - Premium */}
-      <section className="mx-auto max-w-7xl px-6 py-16">
-        <div className="relative mb-10 overflow-hidden rounded-2xl bg-gradient-to-r from-[#F57224]/20 via-[#F57224]/10 to-transparent p-8">
-          <div className="absolute right-0 top-0 -mr-20 -mt-20 size-40 rounded-full bg-[#F57224]/20 blur-3xl" />
-          <div className="relative flex flex-wrap items-center justify-between gap-4">
-            <div className="flex items-center gap-4">
-              <div className="rounded-2xl bg-gradient-to-br from-[#F57224]/20 to-[#F57224]/5 p-3">
-                <Flame className="size-8 text-[#F57224]" />
+      {/* TESTIMONIALS / STATS */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3 }}
+        className="relative mx-auto -mt-8 max-w-7xl px-6 z-20"
+      >
+        <div className="grid grid-cols-2 gap-4 rounded-2xl glass-premium p-6 md:grid-cols-4">
+          {stats.map((stat, idx) => (
+            <div key={stat.label} className="text-center">
+              <div className="flex items-center justify-center gap-2">
+                <stat.icon className="size-5 text-[#F57224]" />
+                <span className="text-2xl font-bold text-white">{stat.value}</span>
               </div>
-              <div>
-                <h2 className="text-3xl font-bold text-white">Flash Sale</h2>
-                <p className="text-sm text-white/50">Limited time offers - Up to 70% off</p>
-              </div>
+              <p className="mt-1 text-xs text-white/40">{stat.label}</p>
             </div>
-            <CountdownTimer target={flashSaleTarget} />
-          </div>
-        </div>
-
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {flashProducts.map((product, index) => (
-            <UltraPremiumProductCard key={product.id} product={product} index={index} />
           ))}
         </div>
-      </section>
+      </motion.div>
 
-      {/* Featured Products Section */}
-      <section className="mx-auto max-w-7xl px-6 py-16">
-        <div className="mb-10 flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
-            <div className="rounded-2xl bg-gradient-to-br from-[#F57224]/20 to-[#F57224]/5 p-3">
-              <Diamond className="size-8 text-[#F57224]" />
-            </div>
-            <div>
-              <h2 className="text-3xl font-bold text-white">Curated for You</h2>
-              <p className="text-sm text-white/50">Handpicked selections for you</p>
-            </div>
-          </div>
-          <Link href="/products">
-            <Button variant="ghost" className="group text-[#F57224] hover:bg-[#F57224]/10">
-              View Collection <ChevronRight className="ml-1 size-4 transition-transform group-hover:translate-x-1" />
-            </Button>
-          </Link>
-        </div>
+      {/* BRAND PARTNERS */}
+      <BrandMarquee />
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {featured.map((product, index) => (
-            <UltraPremiumProductCard key={product.id} product={product} index={index} />
-          ))}
-        </div>
-      </section>
-
-      {/* Bestsellers Section */}
-      <section className="mx-auto max-w-7xl px-6 py-16">
-        <div className="mb-10 flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
-            <div className="rounded-2xl bg-gradient-to-br from-yellow-500/20 to-amber-500/5 p-3">
-              <Crown className="size-8 text-yellow-500" />
-            </div>
-            <div>
-              <h2 className="text-3xl font-bold text-white">Bestsellers</h2>
-              <p className="text-sm text-white/50">What everyone's loving</p>
-            </div>
-          </div>
-          <Link href="/products?sort=rating-desc">
-            <Button variant="ghost" className="group text-[#F57224] hover:bg-[#F57224]/10">
-              View All <ChevronRight className="ml-1 size-4 transition-transform group-hover:translate-x-1" />
-            </Button>
-          </Link>
-        </div>
-
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {bestsellers.map((product, index) => (
-            <UltraPremiumProductCard key={product.id} product={product} index={index} />
-          ))}
-        </div>
-      </section>
-
-      {/* Categories Section - Luxury Grid */}
-      <section className="mx-auto max-w-7xl px-6 py-16">
-        <div className="mb-10 text-center">
-          <Badge className="mb-4 bg-gradient-to-r from-[#F57224]/20 to-[#F57224]/5 text-[#F57224] border-none">
-            Shop by Category
-          </Badge>
-          <h2 className="text-3xl font-bold text-white">Discover Collections</h2>
-          <p className="mt-2 text-white/50">Browse through our curated luxury categories</p>
-        </div>
-
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {categoriesWithCount.map((category, index) => (
-            <LuxuryCategoryCard key={category.id} category={category} index={index} />
-          ))}
-        </div>
-      </section>
-
-      {/* New Arrivals Section */}
-      <section className="mx-auto max-w-7xl px-6 py-16">
-        <div className="mb-10 flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
-            <div className="rounded-2xl bg-gradient-to-br from-emerald-500/20 to-teal-500/5 p-3">
-              <Sparkles className="size-8 text-emerald-500" />
-            </div>
-            <div>
-              <h2 className="text-3xl font-bold text-white">New Arrivals</h2>
-              <p className="text-sm text-white/50">Fresh from the collection</p>
-            </div>
-          </div>
-          <Link href="/products?sort=newest">
-            <Button variant="ghost" className="group text-[#F57224] hover:bg-[#F57224]/10">
-              Explore New <ChevronRight className="ml-1 size-4 transition-transform group-hover:translate-x-1" />
-            </Button>
-          </Link>
-        </div>
-
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {newArrivals.slice(0, 4).map((product, index) => (
-            <UltraPremiumProductCard key={product.id} product={product} index={index} />
-          ))}
-        </div>
-      </section>
-
-      {/* Premium CTA Banner */}
-      <section className="mx-auto max-w-7xl px-6 py-20">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#1a1a2e] via-[#2d1b2e] to-[#1a1a2e] p-12 text-center"
-        >
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNENEE4NTMiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBvbHlsaW5lIHBvaW50cz0iMzAgMCA2MCAzMCAzMCA2MCAwIDMwIi8+PC9nPjwvZz48L3N2Zz4=')] opacity-20" />
-          <div className="absolute -right-20 -top-20 size-40 rounded-full bg-[#F57224]/20 blur-3xl" />
-          <div className="absolute -left-20 -bottom-20 size-40 rounded-full bg-[#D4A853]/20 blur-3xl" />
-          
-          <div className="relative">
-            <div className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-br from-[#D4A853]/20 to-[#F57224]/10 p-4 mb-6">
-              <Crown className="size-10 text-[#D4A853]" />
-            </div>
-              <h2 className="text-3xl font-bold text-white">Join the Blaze Circle</h2>
-              <p className="mx-auto mt-2 max-w-md text-white/60">
-                Get exclusive access to premium drops, early sales, and VIP benefits
-              </p>
-            <div className="mt-6 flex flex-wrap gap-4 justify-center">
-              <Button className="bg-gradient-to-r from-[#D4A853] to-[#F57224] shadow-glow">
-                Become a Member <ArrowRight className="ml-2 size-4" />
-              </Button>
-              <Button variant="outline" className="border-white/20 hover:border-[#D4A853]/50">
-                Learn More
-              </Button>
-            </div>
-          </div>
-        </motion.div>
-      </section>
-
-      {/* Newsletter Section */}
-      <section className="mx-auto max-w-7xl px-6 pb-20">
+      {/* NEWSLETTER */}
+      <section className="mx-auto max-w-7xl px-6 pb-20 pt-16">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

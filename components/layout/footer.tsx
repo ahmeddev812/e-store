@@ -7,54 +7,78 @@ import {
   Mail, Phone, MapPin, Clock, Shield, Truck, 
   RotateCcw, CreditCard, Heart, ArrowUp, Sparkles,
   Crown, Gift, Star, Award, Globe, Headphones,
-  Package, DollarSign, Zap, CheckCircle
+  Package, DollarSign, Zap, CheckCircle, Info, BookOpen,
+  HelpCircle, Search, ShoppingBag, FileText, ShieldCheck,
+  Users, Briefcase, Target,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
-import Image from "next/image"
 
 const footerSections = {
   company: {
     title: "Company",
     icon: Crown,
     links: [
-      { name: "About Us", href: "/about", icon: Star },
-      { name: "Careers", href: "/careers", icon: Award, badge: "Hiring" },
+      { name: "About Us", href: "/about", icon: Info },
+      { name: "Our Story", href: "/about", icon: BookOpen },
+      { name: "Careers", href: "/careers", icon: Briefcase, badge: "Hiring" },
       { name: "Press", href: "/press", icon: Globe },
       { name: "Blog", href: "/blog", icon: Sparkles },
+      { name: "Contact", href: "/contact", icon: Mail },
+    ],
+  },
+  customerCare: {
+    title: "Customer Care",
+    icon: Headphones,
+    links: [
+      { name: "Help Center", href: "/help", icon: HelpCircle },
+      { name: "FAQs", href: "/faq", icon: CheckCircle },
+      { name: "Shipping Information", href: "/help", icon: Truck },
+      { name: "Returns & Refunds", href: "/returns", icon: RotateCcw },
+      { name: "Track Order", href: "/order-tracking", icon: Search },
     ],
   },
   shop: {
     title: "Shop",
     icon: Package,
     links: [
-      { name: "All Products", href: "/products", icon: Package },
+      { name: "All Products", href: "/products", icon: ShoppingBag },
       { name: "Categories", href: "/categories", icon: GridIcon },
-      { name: "Flash Sales", href: "/flash-sales", icon: Zap, badge: "Hot" },
       { name: "New Arrivals", href: "/new-arrivals", icon: Sparkles },
       { name: "Best Sellers", href: "/best-sellers", icon: Crown },
-    ],
-  },
-  support: {
-    title: "Support",
-    icon: Headphones,
-    links: [
-      { name: "Help Center", href: "/help", icon: Headphones },
-      { name: "Order Tracking", href: "/order-tracking", icon: Truck },
-      { name: "Returns & Refunds", href: "/returns", icon: RotateCcw },
-      { name: "FAQs", href: "/faq", icon: CheckCircle },
-      { name: "Contact Us", href: "/contact", icon: Mail },
+      { name: "Flash Sales", href: "/flash-sales", icon: Zap, badge: "Hot" },
     ],
   },
   legal: {
     title: "Legal",
     icon: Shield,
     links: [
-      { name: "Terms of Service", href: "/terms", icon: Shield },
-      { name: "Privacy Policy", href: "/privacy", icon: LockIcon },
+      { name: "Privacy Policy", href: "/privacy", icon: ShieldCheck },
+      { name: "Terms of Service", href: "/terms", icon: FileText },
       { name: "Cookie Policy", href: "/cookies", icon: CookieIcon },
-      { name: "GDPR", href: "/gdpr", icon: Globe },
+      { name: "Accessibility", href: "/help", icon: Globe },
+    ],
+  },
+  partners: {
+    title: "Partners",
+    icon: Users,
+    links: [
+      { name: "Become a Seller", href: "/contact", icon: Briefcase },
+      { name: "Affiliate Program", href: "/contact", icon: Target },
+      { name: "Business Accounts", href: "/contact", icon: Users },
+      { name: "Gift Cards", href: "/products", icon: Gift },
+    ],
+  },
+  follow: {
+    title: "Follow Us",
+    icon: Globe,
+    links: [
+      { name: "Instagram", href: "https://instagram.com", icon: InstagramIcon, external: true },
+      { name: "Facebook", href: "https://facebook.com", icon: FacebookIcon, external: true },
+      { name: "X", href: "https://x.com", icon: XIcon, external: true },
+      { name: "LinkedIn", href: "https://linkedin.com", icon: LinkedinIcon, external: true },
+      { name: "GitHub", href: "https://github.com", icon: GithubIcon, external: true },
     ],
   },
 }
@@ -68,14 +92,6 @@ const paymentIcons = [
   { name: "EasyPaisa", icon: "📱", color: "from-red-500 to-rose-500" },
 ]
 
-const socialIcons = [
-  { name: "Facebook", href: "https://facebook.com", color: "hover:bg-[#1877F2]" },
-  { name: "Twitter", href: "https://twitter.com", color: "hover:bg-[#1DA1F2]" },
-  { name: "Instagram", href: "https://instagram.com", color: "hover:bg-gradient-to-r from-[#E4405F] to-[#F56040]" },
-  { name: "LinkedIn", href: "https://linkedin.com", color: "hover:bg-[#0A66C2]" },
-  { name: "YouTube", href: "https://youtube.com", color: "hover:bg-[#FF0000]" },
-] as const
-
 const features = [
   { icon: Truck, title: "Free Shipping", description: "On orders over $50" },
   { icon: RotateCcw, title: "Easy Returns", description: "30-day return policy" },
@@ -85,32 +101,32 @@ const features = [
   { icon: Gift, title: "Rewards", description: "Exclusive perks" },
 ]
 
-// Inline SVG icons for non-lucide icon names
 function GridIcon(props: any) {
   return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" /><rect x="3" y="14" width="7" height="7" /><rect x="14" y="14" width="7" height="7" /></svg>
 }
-function LockIcon(props: any) {
-  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0110 0v4" /></svg>
-}
+
 function CookieIcon(props: any) {
   return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5" /><path d="M8.5 8.5v.01" /><path d="M16 15.5v.01" /><path d="M12 12v.01" /><path d="M11 17v.01" /><path d="M7 14v.01" /></svg>
 }
 
-// Social media SVG icons
-function FacebookSvg(props: any) {
-  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" /></svg>
-}
-function TwitterSvg(props: any) {
-  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" /></svg>
-}
-function InstagramSvg(props: any) {
+function InstagramIcon(props: any) {
   return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><rect x="2" y="2" width="20" height="20" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" /></svg>
 }
-function LinkedinSvg(props: any) {
+
+function FacebookIcon(props: any) {
+  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" /></svg>
+}
+
+function XIcon(props: any) {
+  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M4 4l11.733 16h4.267l-11.733 -16z" /><path d="M4 20l6.768 -6.768m2.46 -2.46L20 4" /></svg>
+}
+
+function LinkedinIcon(props: any) {
   return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" /></svg>
 }
-function YoutubeSvg(props: any) {
-  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.94 2C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" /><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" /></svg>
+
+function GithubIcon(props: any) {
+  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" /></svg>
 }
 
 export function Footer() {
@@ -141,7 +157,7 @@ export function Footer() {
   }
 
   return (
-    <footer ref={footerRef} className="relative overflow-hidden">  {/* REMOVED mt-20 */}
+    <footer ref={footerRef} className="relative overflow-hidden">
       {/* Premium Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 size-96 rounded-full bg-[#F57224]/10 blur-[120px]" />
@@ -177,44 +193,44 @@ export function Footer() {
 
       {/* Main Footer Content */}
       <div className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-5">
+        <div className="grid gap-8 md:grid-cols-3 lg:grid-cols-6">
           {/* Brand Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="lg:col-span-1"
+            className="md:col-span-3 lg:col-span-6 mb-4"
           >
-            <Link href="/" className="flex items-center gap-2">
-              <div className="rounded-xl bg-gradient-to-br from-[#F57224]/20 to-[#F57224]/5 p-2">
-                <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="size-6">
-                  <defs><linearGradient id="flameGradFooter" x1="0" y1="1" x2="0" y2="0">
-                    <stop offset="0%" stopColor="#F57224" /><stop offset="60%" stopColor="#F97316" /><stop offset="100%" stopColor="#D4A853" />
-                  </linearGradient></defs>
-                  <path d="M16 2C16 2 8 10 8 17C8 21.4183 11.5817 25 16 25C20.4183 25 24 21.4183 24 17C24 10 16 2 16 2Z" fill="url(#flameGradFooter)" />
-                  <path d="M16 8C16 8 12 13 12 16C12 18.2091 13.7909 20 16 20C18.2091 20 20 18.2091 20 16C20 13 16 8 16 8Z" fill="white" fillOpacity="0.4" />
-                  <path d="M14 20C14 22 15.5 24 16 26C16.5 24 18 22 18 20H14Z" fill="#D4A853" fillOpacity="0.6" />
-                </svg>
-              </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-[#F57224] to-orange-400 bg-clip-text text-transparent">
-                BlazeCart
-              </span>
-              <Badge className="ml-2 bg-gradient-to-r from-[#F57224] to-orange-500 text-[10px] border-none">
-                Premium
-              </Badge>
-            </Link>
-            <p className="mt-4 text-sm text-white/50 leading-relaxed">
-              Ignite your style with premium products at unbeatable prices. Shop with confidence and experience luxury shopping.
-            </p>
-            
-            {/* Trust Badges */}
-            <div className="mt-4 flex gap-2">
-              {[4.8, 4.9, 5.0].map((rating, i) => (
-                <div key={i} className="flex items-center gap-1 rounded-lg bg-white/5 px-2 py-1">
-                  <Star className="size-3 fill-yellow-500 text-yellow-500" />
-                  <span className="text-xs text-white">{rating}</span>
+            <div className="flex flex-col items-start gap-4">
+              <Link href="/" className="flex items-center gap-2">
+                <div className="rounded-xl bg-gradient-to-br from-[#F57224]/20 to-[#F57224]/5 p-2">
+                  <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="size-6">
+                    <defs><linearGradient id="flameGradFooter" x1="0" y1="1" x2="0" y2="0">
+                      <stop offset="0%" stopColor="#F57224" /><stop offset="60%" stopColor="#F97316" /><stop offset="100%" stopColor="#D4A853" />
+                    </linearGradient></defs>
+                    <path d="M16 2C16 2 8 10 8 17C8 21.4183 11.5817 25 16 25C20.4183 25 24 21.4183 24 17C24 10 16 2 16 2Z" fill="url(#flameGradFooter)" />
+                    <path d="M16 8C16 8 12 13 12 16C12 18.2091 13.7909 20 16 20C18.2091 20 20 18.2091 20 16C20 13 16 8 16 8Z" fill="white" fillOpacity="0.4" />
+                    <path d="M14 20C14 22 15.5 24 16 26C16.5 24 18 22 18 20H14Z" fill="#D4A853" fillOpacity="0.6" />
+                  </svg>
                 </div>
-              ))}
+                <span className="text-xl font-bold bg-gradient-to-r from-[#F57224] to-orange-400 bg-clip-text text-transparent">
+                  BlazeCart
+                </span>
+                <Badge className="ml-2 bg-gradient-to-r from-[#F57224] to-orange-500 text-[10px] border-none">
+                  Premium
+                </Badge>
+              </Link>
+              <p className="text-sm text-white/50 leading-relaxed max-w-lg">
+                Ignite your style with premium products at unbeatable prices. Shop with confidence and experience luxury shopping.
+              </p>
+              <div className="flex gap-2">
+                {[4.8, 4.9, 5.0].map((rating, i) => (
+                  <div key={i} className="flex items-center gap-1 rounded-lg bg-white/5 px-2 py-1">
+                    <Star className="size-3 fill-yellow-500 text-yellow-500" />
+                    <span className="text-xs text-white">{rating}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </motion.div>
 
@@ -236,18 +252,30 @@ export function Footer() {
               <ul className="space-y-3">
                 {section.links.map((link) => (
                   <li key={link.name}>
-                    <Link
-                      href={link.href}
-                      className="group flex items-center gap-2 text-sm text-white/50 transition-all duration-300 hover:text-[#F57224]"
-                    >
-                      <link.icon className="size-3 opacity-0 transition-all duration-300 group-hover:opacity-100" />
-                      <span>{link.name}</span>
-                      {link.badge && (
-                        <Badge className="ml-2 bg-[#F57224]/20 text-[#F57224] text-[9px] border-none">
-                          {link.badge}
-                        </Badge>
-                      )}
-                    </Link>
+                    {link.external ? (
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group flex items-center gap-2 text-sm text-white/50 transition-all duration-300 hover:text-[#F57224]"
+                      >
+                        <link.icon className="size-3.5 opacity-0 transition-all duration-300 group-hover:opacity-100" />
+                        <span>{link.name}</span>
+                      </a>
+                    ) : (
+                      <Link
+                        href={link.href}
+                        className="group flex items-center gap-2 text-sm text-white/50 transition-all duration-300 hover:text-[#F57224]"
+                      >
+                        <link.icon className="size-3.5 opacity-0 transition-all duration-300 group-hover:opacity-100" />
+                        <span>{link.name}</span>
+                        {link.badge && (
+                          <Badge className="ml-2 bg-[#F57224]/20 text-[#F57224] text-[9px] border-none">
+                            {link.badge}
+                          </Badge>
+                        )}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -315,29 +343,6 @@ export function Footer() {
                 {payment.icon} {payment.name}
               </div>
             ))}
-          </div>
-
-          {/* Social Links */}
-          <div className="flex gap-2">
-            {socialIcons.map((social) => {
-              const Icon = social.name === "Facebook" ? FacebookSvg
-                : social.name === "Twitter" ? TwitterSvg
-                : social.name === "Instagram" ? InstagramSvg
-                : social.name === "LinkedIn" ? LinkedinSvg
-                : YoutubeSvg
-              return (
-                <motion.a
-                  key={social.name}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  className={`rounded-full bg-white/5 p-2 transition-all duration-300 ${social.color}`}
-                >
-                  <Icon className="size-4 text-white/70 hover:text-white" />
-                </motion.a>
-              )
-            })}
           </div>
         </div>
       </div>
