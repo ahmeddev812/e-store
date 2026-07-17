@@ -48,6 +48,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [searchSuggestions, setSearchSuggestions] = useState<string[]>([])
   const { theme, setTheme } = useTheme()
+  const isDark = theme === 'dark'
   const { isSignedIn } = useUser()
   const { signOut } = useClerk()
   const { setMobileMenuOpen } = useUIStore()
@@ -92,13 +93,17 @@ export function Navbar() {
 
   return (
     <>
-      {/* Ultra Luxury Top Bar */}
+      {/* Ultra Luxury Top Bar - Theme Aware */}
       <motion.div 
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        className="relative hidden md:block overflow-hidden bg-gradient-to-r from-[#1a1a2e] via-[#2d1b2e] to-[#1a1a2e] border-b border-[#D4A853]/20"
+        className={`relative hidden md:block overflow-hidden border-b ${
+          isDark 
+            ? 'bg-gradient-to-r from-[#1a1a2e] via-[#2d1b2e] to-[#1a1a2e] border-[#D4A853]/20' 
+            : 'bg-gradient-to-r from-gray-100 via-gray-50 to-gray-100 border-gray-200'
+        }`}
       >
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNENEE4NTMiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBvbHlsaW5lIHBvaW50cz0iMzAgMCA2MCAzMCAzMCA2MCAwIDMwIi8+PC9nPjwvZz48L3N2Zz4=')] opacity-20" />
+        <div className={`absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNENEE4NTMiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBvbHlsaW5lIHBvaW50cz0iMzAgMCA2MCAzMCAzMCA2MCAwIDMwIi8+PC9nPjwvZz48L3N2Zz4=')] ${isDark ? 'opacity-20' : 'opacity-10'}`} />
         <div className="relative flex items-center justify-between px-6 py-2 text-xs">
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-1">
@@ -106,24 +111,24 @@ export function Navbar() {
               <span className="text-[#D4A853] font-medium">Elite Member Benefits</span>
             </div>
             <div className="flex items-center gap-1">
-              <TruckIcon className="size-3 text-muted-foreground" />
-              <span className="text-muted-foreground">Free Global Shipping</span>
+              <TruckIcon className={`size-3 ${isDark ? 'text-muted-foreground' : 'text-gray-500'}`} />
+              <span className={isDark ? 'text-muted-foreground' : 'text-gray-600'}>Free Global Shipping</span>
             </div>
             <div className="flex items-center gap-1">
-              <RotateIcon className="size-3 text-muted-foreground" />
-              <span className="text-muted-foreground">30-Day Returns</span>
+              <RotateIcon className={`size-3 ${isDark ? 'text-muted-foreground' : 'text-gray-500'}`} />
+              <span className={isDark ? 'text-muted-foreground' : 'text-gray-600'}>30-Day Returns</span>
             </div>
           </div>
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-1">
-              <ShieldIcon className="size-3 text-muted-foreground" />
-              <span className="text-muted-foreground">100% Authentic</span>
+              <ShieldIcon className={`size-3 ${isDark ? 'text-muted-foreground' : 'text-gray-500'}`} />
+              <span className={isDark ? 'text-muted-foreground' : 'text-gray-600'}>100% Authentic</span>
             </div>
             <div className="flex items-center gap-1">
-              <HeadphoneIcon className="size-3 text-muted-foreground" />
-              <span className="text-muted-foreground">24/7 Concierge</span>
+              <HeadphoneIcon className={`size-3 ${isDark ? 'text-muted-foreground' : 'text-gray-500'}`} />
+              <span className={isDark ? 'text-muted-foreground' : 'text-gray-600'}>24/7 Concierge</span>
             </div>
-            <div className="flex items-center gap-1 bg-[#D4A853]/20 px-3 py-1 rounded-full">
+            <div className={`flex items-center gap-1 ${isDark ? 'bg-[#D4A853]/20' : 'bg-[#D4A853]/10'} px-3 py-1 rounded-full`}>
               <Sparkles className="size-3 text-[#D4A853]" />
               <span className="text-[#D4A853] font-medium">VIP Access</span>
             </div>
@@ -131,9 +136,15 @@ export function Navbar() {
         </div>
       </motion.div>
 
-      {/* Main Navbar */}
+      {/* Main Navbar - Theme Aware */}
       <nav className={`sticky top-0 z-50 transition-all duration-700 ${
-        scrolled ? "glass-premium shadow-[0_20px_40px_rgba(0,0,0,0.3)] border-b border-[#D4A853]/20" : "glass-navbar"
+        scrolled 
+          ? isDark 
+            ? "glass-premium shadow-[0_20px_40px_rgba(0,0,0,0.3)] border-b border-[#D4A853]/20" 
+            : "bg-white/80 backdrop-blur-md shadow-[0_20px_40px_rgba(0,0,0,0.05)] border-b border-gray-200"
+          : isDark 
+            ? "glass-navbar" 
+            : "bg-white/60 backdrop-blur-sm border-b border-gray-100"
       }`} role="navigation" aria-label="Main navigation">
         <div className="mx-auto max-w-[100rem] px-6 sm:px-8 lg:px-10">
           <div className="flex h-16 items-center justify-between lg:h-20">
@@ -142,7 +153,7 @@ export function Navbar() {
               <Link href="/" className="group relative flex items-center gap-3" aria-label="BlazeCart Home">
                 <div className="relative">
                   <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-[#D4A853] to-[#F57224] blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-500" />
-                  <div className="relative rounded-xl bg-gradient-to-br from-[#D4A853]/20 to-[#F57224]/10 p-2 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3">
+                  <div className={`relative rounded-xl ${isDark ? 'bg-gradient-to-br from-[#D4A853]/20 to-[#F57224]/10' : 'bg-gradient-to-br from-[#D4A853]/10 to-[#F57224]/5'} p-2 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3`}>
                     <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="size-6" aria-hidden="true">
                       <defs>
                         <linearGradient id="flameGrad" x1="0" y1="1" x2="0" y2="0">
@@ -158,10 +169,10 @@ export function Navbar() {
                   </div>
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-xl font-bold tracking-wider bg-gradient-to-r from-[#D4A853] via-[#F57224] to-[#D4A853] bg-clip-text text-transparent lg:text-2xl animate-gradient-shift">
+                  <span className={`text-xl font-bold tracking-wider bg-gradient-to-r from-[#D4A853] via-[#F57224] to-[#D4A853] bg-clip-text text-transparent lg:text-2xl animate-gradient-shift`}>
                     BLAZECART
                   </span>
-                  <span className="text-[8px] tracking-[0.2em] text-[#D4A853]/60 hidden lg:block">IGNITE YOUR STYLE</span>
+                  <span className={`text-[8px] tracking-[0.2em] ${isDark ? 'text-[#D4A853]/60' : 'text-[#D4A853]/40'} hidden lg:block`}>IGNITE YOUR STYLE</span>
                 </div>
                 <Badge className="absolute -right-10 -top-2 bg-gradient-to-r from-[#D4A853] to-[#F57224] text-white border-none text-[8px] px-2 hidden lg:block">
                   PREMIUM
@@ -179,7 +190,9 @@ export function Navbar() {
                       className={`group relative rounded-lg px-4 py-2 text-sm font-medium transition-all duration-500 ${
                         active
                           ? "text-[#D4A853]"
-                          : "text-foreground/70 hover:text-[#D4A853]"
+                          : isDark 
+                            ? "text-foreground/70 hover:text-[#D4A853]" 
+                            : "text-gray-600 hover:text-[#D4A853]"
                       }`}
                       aria-current={active ? "page" : undefined}
                     >
@@ -206,11 +219,13 @@ export function Navbar() {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setSearchOpen(!searchOpen)}
-                className="relative rounded-full p-2.5 transition-all duration-300 hover:bg-[#D4A853]/20 hover:text-[#D4A853]"
+                className={`relative rounded-full p-2.5 transition-all duration-300 ${
+                  isDark ? 'hover:bg-[#D4A853]/20' : 'hover:bg-[#D4A853]/10'
+                } hover:text-[#D4A853]`}
                 aria-label="Toggle search"
                 aria-expanded={searchOpen}
               >
-                <Search className="size-4 text-foreground/70" />
+                <Search className={`size-4 ${isDark ? 'text-foreground/70' : 'text-gray-600'}`} />
               </motion.button>
 
               {/* Theme Toggle */}
@@ -219,10 +234,15 @@ export function Navbar() {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                  className="rounded-full p-2.5 transition-all duration-300 hover:bg-[#D4A853]/20"
+                  className={`rounded-full p-2.5 transition-all duration-300 ${
+                    isDark ? 'hover:bg-[#D4A853]/20' : 'hover:bg-[#D4A853]/10'
+                  }`}
                   aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
                 >
-                  {theme === "dark" ? <Sun className="size-4 text-foreground/70" /> : <Moon className="size-4 text-foreground/70" />}
+                  {theme === "dark" ? 
+                    <Sun className={`size-4 ${isDark ? 'text-foreground/70' : 'text-gray-600'}`} /> : 
+                    <Moon className={`size-4 ${isDark ? 'text-foreground/70' : 'text-gray-600'}`} />
+                  }
                 </motion.button>
               )}
 
@@ -230,10 +250,12 @@ export function Navbar() {
               {isSignedIn ? (
                 <Link
                   href="/wishlist"
-                  className="group relative rounded-full p-2.5 transition-all duration-300 hover:bg-[#D4A853]/20"
+                  className={`group relative rounded-full p-2.5 transition-all duration-300 ${
+                    isDark ? 'hover:bg-[#D4A853]/20' : 'hover:bg-[#D4A853]/10'
+                  }`}
                   aria-label={`Wishlist (${wishlistCount} items)`}
                 >
-                  <Heart className="size-4 text-foreground/70 transition-all duration-300 group-hover:scale-110 group-hover:text-[#D4A853]" />
+                  <Heart className={`size-4 ${isDark ? 'text-foreground/70' : 'text-gray-600'} transition-all duration-300 group-hover:scale-110 group-hover:text-[#D4A853]`} />
                   {mounted && wishlistCount > 0 && (
                     <AnimatePresence>
                       <motion.span
@@ -253,10 +275,12 @@ export function Navbar() {
               {/* Cart */}
               <Link
                 href="/cart"
-                className="group relative rounded-full p-2.5 transition-all duration-300 hover:bg-[#D4A853]/20"
+                className={`group relative rounded-full p-2.5 transition-all duration-300 ${
+                  isDark ? 'hover:bg-[#D4A853]/20' : 'hover:bg-[#D4A853]/10'
+                }`}
                 aria-label={`Shopping cart (${itemCount} items)`}
               >
-                <ShoppingCart className="size-4 text-foreground/70 transition-all duration-300 group-hover:scale-110 group-hover:text-[#D4A853]" />
+                <ShoppingCart className={`size-4 ${isDark ? 'text-foreground/70' : 'text-gray-600'} transition-all duration-300 group-hover:scale-110 group-hover:text-[#D4A853]`} />
                 {mounted && itemCount > 0 && (
                   <AnimatePresence>
                     <motion.span
@@ -280,8 +304,8 @@ export function Navbar() {
                       elements: {
                         userButtonAvatarBox: "size-7 border-2 border-[#F57224]/30",
                         userButtonTrigger: "focus:shadow-none",
-                        userButtonPopoverCard: "shadow-[0_20px_60px_rgba(0,0,0,0.5)] border border-border",
-                        userButtonPopoverActionButton: "text-foreground/80 hover:text-foreground hover:bg-muted/50",
+                        userButtonPopoverCard: `shadow-[0_20px_60px_rgba(0,0,0,0.5)] ${isDark ? 'border-border' : 'border-gray-200'}`,
+                        userButtonPopoverActionButton: `${isDark ? 'text-foreground/80 hover:text-foreground hover:bg-muted/50' : 'text-gray-600 hover:text-gray-800 hover:bg-gray-100'}`,
                         userButtonPopoverActionButtonText: "text-sm",
                         userButtonPopoverFooter: "hidden",
                       },
@@ -338,8 +362,8 @@ export function Navbar() {
                 </div>
               ) : (
                 <SignInButton mode="modal">
-                  <button className="rounded-full p-2 transition-all duration-300 hover:bg-[#D4A853]/20" aria-label="Sign in">
-                    <User className="size-4 text-foreground/70" />
+                  <button className={`rounded-full p-2 transition-all duration-300 ${isDark ? 'hover:bg-[#D4A853]/20' : 'hover:bg-[#D4A853]/10'}`} aria-label="Sign in">
+                    <User className={`size-4 ${isDark ? 'text-foreground/70' : 'text-gray-600'}`} />
                   </button>
                 </SignInButton>
               )}
@@ -348,23 +372,23 @@ export function Navbar() {
               <motion.button
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setMobileMenuOpen(true)}
-                className="rounded-full p-2.5 transition-all duration-300 hover:bg-[#D4A853]/20 lg:hidden"
+                className={`rounded-full p-2.5 transition-all duration-300 ${isDark ? 'hover:bg-[#D4A853]/20' : 'hover:bg-[#D4A853]/10'} lg:hidden`}
                 aria-label="Open mobile menu"
               >
-                <Menu className="size-4 text-foreground/70" />
+                <Menu className={`size-4 ${isDark ? 'text-foreground/70' : 'text-gray-600'}`} />
               </motion.button>
             </div>
           </div>
         </div>
 
-        {/* Search Bar Dropdown */}
+        {/* Search Bar Dropdown - Theme Aware */}
         <AnimatePresence>
           {searchOpen && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="border-t border-[#D4A853]/20 bg-gradient-to-b from-background/95 to-background/85 backdrop-blur-2xl"
+              className={`border-t ${isDark ? 'border-[#D4A853]/20 bg-gradient-to-b from-background/95 to-background/85' : 'border-gray-200 bg-gradient-to-b from-white/95 to-white/85'} backdrop-blur-2xl`}
             >
               <form onSubmit={handleSearch} className="mx-auto max-w-[100rem] px-6 py-6 sm:px-8 lg:px-10" role="search">
                 <div className="relative">
@@ -376,12 +400,12 @@ export function Navbar() {
                     placeholder="Search products..."
                     value={searchQuery}
                     onChange={handleSearchChange}
-                    className="w-full border-[#D4A853]/30 bg-muted/50 pl-12 pr-4 py-6 text-foreground placeholder:text-muted-foreground/70 focus:border-[#D4A853] focus:ring-[#D4A853]/20 text-lg rounded-xl"
+                    className={`w-full ${isDark ? 'border-[#D4A853]/30 bg-muted/50 text-foreground placeholder:text-muted-foreground/70' : 'border-gray-300 bg-gray-50 text-gray-800 placeholder:text-gray-400'} pl-12 pr-4 py-6 focus:border-[#D4A853] focus:ring-[#D4A853]/20 text-lg rounded-xl`}
                     autoFocus
                     aria-label="Search products"
                   />
                   {searchSuggestions.length > 0 && (
-                    <div className="absolute left-0 right-0 top-full mt-3 overflow-hidden rounded-xl glass-premium border border-[#D4A853]/20" role="listbox">
+                    <div className={`absolute left-0 right-0 top-full mt-3 overflow-hidden rounded-xl ${isDark ? 'glass-premium border border-[#D4A853]/20' : 'bg-white border border-gray-200 shadow-lg'}`} role="listbox">
                       {searchSuggestions.map((suggestion) => (
                         <button
                           key={suggestion}
@@ -390,7 +414,11 @@ export function Navbar() {
                             router.push(`/search?q=${encodeURIComponent(suggestion)}`)
                             setSearchOpen(false)
                           }}
-                          className="flex w-full items-center gap-3 px-4 py-3 text-sm text-foreground/70 transition-all duration-300 hover:bg-[#D4A853]/20 hover:text-[#D4A853]"
+                          className={`flex w-full items-center gap-3 px-4 py-3 text-sm transition-all duration-300 ${
+                            isDark 
+                              ? 'text-foreground/70 hover:bg-[#D4A853]/20 hover:text-[#D4A853]' 
+                              : 'text-gray-600 hover:bg-[#D4A853]/10 hover:text-[#D4A853]'
+                          }`}
                           role="option"
                         >
                           <Search className="size-3" />

@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react"
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
+import { useTheme } from "next-themes"
 import { 
   Mail, Phone, MapPin, Clock, Send, CheckCircle, 
   Sparkles, MessageCircle, Headphones, Award, 
@@ -24,7 +25,6 @@ const contactInfo = [
     icon: Mail,
     title: "Email Us",
     details: ["support@blazecart.com", "sales@blazecart.com"],
-
     link: "mailto:support@blazecart.com",
   },
   {
@@ -123,6 +123,8 @@ export default function ContactPage() {
   const heroRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll()
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
+  const { theme } = useTheme()
+  const isDark = theme === 'dark'
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -174,14 +176,17 @@ export default function ContactPage() {
 
   if (isSuccess) {
     return (
-      <div className="min-h-screen overflow-x-hidden">
-        <div className="fixed inset-0 bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]" />
+      <div className={`min-h-screen overflow-x-hidden ${isDark ? 'bg-background' : 'bg-gray-50'}`}>
+        <div className={`fixed inset-0 ${isDark 
+          ? 'bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]' 
+          : 'bg-gradient-to-br from-gray-100 via-gray-50 to-white'
+        }`} />
         <div className="relative flex min-h-screen flex-col items-center justify-center px-4">
           <motion.div
             initial={{ scale: 0, rotate: -180 }}
             animate={{ scale: 1, rotate: 0 }}
             transition={{ type: "spring", duration: 0.8 }}
-            className="mb-8 rounded-full bg-gradient-to-br from-emerald-500/20 to-emerald-500/5 p-8"
+            className={`mb-8 rounded-full ${isDark ? 'bg-emerald-500/20' : 'bg-emerald-500/10'} p-8`}
           >
             <CheckCircle className="size-20 text-emerald-500" />
           </motion.div>
@@ -189,7 +194,7 @@ export default function ContactPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-3xl font-bold text-foreground mb-4"
+            className={`text-3xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'} mb-4`}
           >
             Message Sent!
           </motion.h2>
@@ -197,7 +202,7 @@ export default function ContactPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="text-muted-foreground max-w-md text-center mb-8"
+            className={`${isDark ? 'text-muted-foreground' : 'text-gray-600'} max-w-md text-center mb-8`}
           >
             Thank you for reaching out. We've received your message and will get back to you within 24 hours.
           </motion.p>
@@ -206,7 +211,7 @@ export default function ContactPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
-            <Button onClick={() => setIsSuccess(false)} className="bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow">
+            <Button onClick={() => setIsSuccess(false)} className="bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow text-white">
               Send Another Message
               <ArrowRight className="ml-2 size-4" />
             </Button>
@@ -217,12 +222,15 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="min-h-screen overflow-x-hidden">
-      {/* Premium Background */}
-      <div className="fixed inset-0 bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]">
-        <div className="absolute top-20 left-10 size-72 rounded-full bg-[#F57224]/20 blur-[120px] animate-pulse" />
-        <div className="absolute bottom-20 right-10 size-96 rounded-full bg-[#F57224]/10 blur-[140px] animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-[500px] rounded-full bg-orange-500/5 blur-[100px]" />
+    <div className={`min-h-screen overflow-x-hidden ${isDark ? 'bg-background' : 'bg-gray-50'}`}>
+      {/* Premium Background - Theme Aware */}
+      <div className={`fixed inset-0 ${isDark 
+        ? 'bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]' 
+        : 'bg-gradient-to-br from-gray-100 via-gray-50 to-white'
+      }`}>
+        <div className={`absolute top-20 left-10 size-72 rounded-full ${isDark ? 'bg-[#F57224]/20' : 'bg-[#F57224]/10'} blur-[120px] animate-pulse`} />
+        <div className={`absolute bottom-20 right-10 size-96 rounded-full ${isDark ? 'bg-[#F57224]/10' : 'bg-[#F57224]/5'} blur-[140px] animate-pulse delay-1000`} />
+        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-[500px] rounded-full ${isDark ? 'bg-orange-500/5' : 'bg-orange-500/3'} blur-[100px]`} />
       </div>
 
       {/* Hero Section */}
@@ -245,11 +253,11 @@ export default function ContactPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl font-bold text-foreground sm:text-5xl lg:text-6xl"
+            className={`text-4xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'} sm:text-5xl lg:text-6xl`}
           >
             Contact{" "}
             <span className="relative inline-block">
-              <span className="absolute -inset-1 rounded-lg bg-gradient-to-r from-[#F57224]/30 to-[#F57224]/20 blur-xl" />
+              <span className={`absolute -inset-1 rounded-lg ${isDark ? 'bg-gradient-to-r from-[#F57224]/30 to-[#F57224]/20' : 'bg-gradient-to-r from-[#F57224]/20 to-[#F57224]/10'} blur-xl`} />
               <span className="relative bg-gradient-to-r from-[#F57224] to-orange-400 bg-clip-text text-transparent">
                 Our Team
               </span>
@@ -260,7 +268,7 @@ export default function ContactPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mx-auto mt-4 max-w-2xl text-muted-foreground"
+            className={`mx-auto mt-4 max-w-2xl ${isDark ? 'text-muted-foreground' : 'text-gray-600'}`}
           >
             Have questions? We're here to help. Reach out to us through any of the channels below.
           </motion.p>
@@ -278,13 +286,13 @@ export default function ContactPage() {
               transition={{ delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <Card className="glass-premium text-center p-4 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(245,114,36,0.2)]">
+              <Card className={`${isDark ? 'glass-premium' : 'bg-white border border-gray-200 shadow-md'} text-center p-4 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(245,114,36,0.2)]`}>
                 <CardContent className="p-3">
                   <div className="inline-flex items-center justify-center rounded-xl bg-[#F57224]/10 p-2 mb-3">
                     <stat.icon className="size-5 text-[#F57224]" />
                   </div>
-                  <div className="text-xl font-bold text-foreground">{stat.value}</div>
-                  <div className="text-xs text-muted-foreground/70">{stat.label}</div>
+                  <div className={`text-xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>{stat.value}</div>
+                  <div className={`text-xs ${isDark ? 'text-muted-foreground/70' : 'text-gray-500'}`}>{stat.label}</div>
                 </CardContent>
               </Card>
             </motion.div>
@@ -304,18 +312,18 @@ export default function ContactPage() {
               viewport={{ once: true }}
               whileHover={{ y: -5 }}
             >
-              <Card className="glass-premium group h-full transition-all duration-500 hover:border-[#F57224]/30 hover:shadow-[0_0_40px_rgba(245,114,36,0.2)]">
+              <Card className={`${isDark ? 'glass-premium' : 'bg-white border border-gray-200 shadow-md'} group h-full transition-all duration-500 hover:border-[#F57224]/30 hover:shadow-[0_0_40px_rgba(245,114,36,0.2)]`}>
                 <CardContent className="p-6">
                   <div className="mb-4 inline-flex items-center justify-center rounded-xl bg-gradient-to-br from-[#F57224]/20 to-[#F57224]/5 p-3 transition-all duration-300 group-hover:scale-110">
                     <info.icon className="size-6 text-[#F57224]" />
                   </div>
-                  <h3 className="mb-2 text-lg font-semibold text-foreground">{info.title}</h3>
+                  <h3 className={`mb-2 text-lg font-semibold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>{info.title}</h3>
                   {info.details.map((detail, idx) => (
-                    <p key={idx} className="text-sm text-muted-foreground">
+                    <p key={idx} className={`text-sm ${isDark ? 'text-muted-foreground' : 'text-gray-600'}`}>
                       {detail}
                     </p>
                   ))}
-                  <p className="mt-2 text-xs text-foreground/30">{info.description}</p>
+                  <p className={`mt-2 text-xs ${isDark ? 'text-foreground/30' : 'text-gray-400'}`}>{info.description}</p>
                   {info.link && (
                     <Link href={info.link} target="_blank">
                       <Button variant="ghost" size="sm" className="mt-3 text-[#F57224] hover:bg-[#F57224]/10">
@@ -340,33 +348,33 @@ export default function ContactPage() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <Card className="glass-premium overflow-hidden">
+            <Card className={`${isDark ? 'glass-premium' : 'bg-white border border-gray-200 shadow-lg'} overflow-hidden`}>
               <CardContent className="p-6 md:p-8">
                 <div className="mb-6 flex items-center gap-3">
                   <div className="rounded-xl bg-gradient-to-br from-[#F57224]/20 to-[#F57224]/5 p-2">
                     <MessageCircle className="size-5 text-[#F57224]" />
                   </div>
                   <div>
-                    <h2 className="text-xl font-bold text-foreground">Send us a Message</h2>
-                    <p className="text-sm text-muted-foreground/70">We'll get back to you within 24 hours</p>
+                    <h2 className={`text-xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>Send us a Message</h2>
+                    <p className={`text-sm ${isDark ? 'text-muted-foreground/70' : 'text-gray-500'}`}>We'll get back to you within 24 hours</p>
                   </div>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="grid gap-5 md:grid-cols-2">
                     <div className="space-y-2">
-                      <Label htmlFor="name" className="text-foreground/70">Full Name</Label>
+                      <Label htmlFor="name" className={isDark ? 'text-foreground/70' : 'text-gray-700'}>Full Name</Label>
                       <Input
                         id="name"
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
                         placeholder="John Doe"
-                        className="border-border bg-muted/50 text-foreground placeholder:text-foreground/30 focus:border-[#F57224]/50"
+                        className={`${isDark ? 'border-border bg-muted/50 text-foreground placeholder:text-foreground/30' : 'border-gray-300 bg-white text-gray-800 placeholder:text-gray-400'} focus:border-[#F57224]/50`}
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="email" className="text-foreground/70">Email Address</Label>
+                      <Label htmlFor="email" className={isDark ? 'text-foreground/70' : 'text-gray-700'}>Email Address</Label>
                       <Input
                         id="email"
                         name="email"
@@ -374,36 +382,36 @@ export default function ContactPage() {
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="john@example.com"
-                        className="border-border bg-muted/50 text-foreground placeholder:text-foreground/30 focus:border-[#F57224]/50"
+                        className={`${isDark ? 'border-border bg-muted/50 text-foreground placeholder:text-foreground/30' : 'border-gray-300 bg-white text-gray-800 placeholder:text-gray-400'} focus:border-[#F57224]/50`}
                       />
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="subject" className="text-foreground/70">Subject</Label>
+                    <Label htmlFor="subject" className={isDark ? 'text-foreground/70' : 'text-gray-700'}>Subject</Label>
                     <Input
                       id="subject"
                       name="subject"
                       value={formData.subject}
                       onChange={handleChange}
                       placeholder="How can we help you?"
-                      className="border-border bg-muted/50 text-foreground placeholder:text-foreground/30 focus:border-[#F57224]/50"
+                      className={`${isDark ? 'border-border bg-muted/50 text-foreground placeholder:text-foreground/30' : 'border-gray-300 bg-white text-gray-800 placeholder:text-gray-400'} focus:border-[#F57224]/50`}
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="message" className="text-foreground/70">Message</Label>
+                    <Label htmlFor="message" className={isDark ? 'text-foreground/70' : 'text-gray-700'}>Message</Label>
                     <Textarea
                       id="message"
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
                       placeholder="Write your message here..."
-                      className="min-h-32 resize-none border-border bg-muted/50 text-foreground placeholder:text-foreground/30 focus:border-[#F57224]/50"
+                      className={`min-h-32 resize-none ${isDark ? 'border-border bg-muted/50 text-foreground placeholder:text-foreground/30' : 'border-gray-300 bg-white text-gray-800 placeholder:text-gray-400'} focus:border-[#F57224]/50`}
                     />
                   </div>
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow md:w-auto"
+                    className="w-full bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow text-white md:w-auto"
                   >
                     {isSubmitting ? (
                       <>
@@ -430,14 +438,14 @@ export default function ContactPage() {
             className="space-y-6"
           >
             {/* Map */}
-            <Card className="glass-premium overflow-hidden">
+            <Card className={`${isDark ? 'glass-premium' : 'bg-white border border-gray-200 shadow-lg'} overflow-hidden`}>
               <CardContent className="p-0">
-                <div className="relative h-64 overflow-hidden">
-                  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#F57224]/10 to-[#F57224]/5">
+                <div className={`relative h-64 overflow-hidden ${isDark ? 'bg-gradient-to-br from-[#F57224]/10 to-[#F57224]/5' : 'bg-gradient-to-br from-[#F57224]/5 to-[#F57224]/3'}`}>
+                  <div className="absolute inset-0 flex items-center justify-center">
                     <div className="text-center">
                       <MapPin className="mx-auto mb-2 size-10 text-[#F57224]" />
-                      <p className="text-muted-foreground">Interactive Map View</p>
-                      <p className="text-xs text-foreground/30">123 Commerce Street, Tech City</p>
+                      <p className={`${isDark ? 'text-muted-foreground' : 'text-gray-600'}`}>Interactive Map View</p>
+                      <p className={`text-xs ${isDark ? 'text-foreground/30' : 'text-gray-400'}`}>123 Commerce Street, Tech City</p>
                       <Button variant="link" className="mt-2 text-[#F57224]">
                         Open in Google Maps
                         <ArrowRight className="ml-1 size-3" />
@@ -449,9 +457,9 @@ export default function ContactPage() {
             </Card>
 
             {/* Social Links */}
-            <Card className="glass-premium">
+            <Card className={`${isDark ? 'glass-premium' : 'bg-white border border-gray-200 shadow-lg'}`}>
               <CardContent className="p-6">
-                <h3 className="mb-4 font-semibold text-foreground">Connect With Us</h3>
+                <h3 className={`mb-4 font-semibold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>Connect With Us</h3>
                 <div className="flex flex-wrap gap-3">
                   {socialLinks.map((social) => {
                     const Icon = social.name === "Facebook" ? FacebookSvg
@@ -478,11 +486,11 @@ export default function ContactPage() {
             </Card>
 
             {/* Support Badge */}
-            <Card className="glass-premium bg-gradient-to-r from-[#F57224]/10 to-[#F57224]/5">
+            <Card className={`${isDark ? 'glass-premium bg-gradient-to-r from-[#F57224]/10 to-[#F57224]/5' : 'bg-gradient-to-r from-[#F57224]/5 to-[#F57224]/3 border border-gray-200'}`}>
               <CardContent className="p-4 text-center">
                 <Headphones className="mx-auto mb-2 size-8 text-[#F57224]" />
-                <p className="text-sm font-medium text-foreground">24/7 Premium Support</p>
-                <p className="text-xs text-muted-foreground/70">Our team is always here for you</p>
+                <p className={`text-sm font-medium ${isDark ? 'text-foreground' : 'text-gray-800'}`}>24/7 Premium Support</p>
+                <p className={`text-xs ${isDark ? 'text-muted-foreground/70' : 'text-gray-500'}`}>Our team is always here for you</p>
               </CardContent>
             </Card>
           </motion.div>
@@ -500,8 +508,8 @@ export default function ContactPage() {
           <Badge className="mb-4 bg-gradient-to-r from-[#F57224]/20 to-[#F57224]/5 text-[#F57224] border-none">
             FAQs
           </Badge>
-          <h2 className="text-2xl font-bold text-foreground">Frequently Asked Questions</h2>
-          <p className="mt-2 text-muted-foreground">Find quick answers to common questions</p>
+          <h2 className={`text-2xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>Frequently Asked Questions</h2>
+          <p className={`mt-2 ${isDark ? 'text-muted-foreground' : 'text-gray-600'}`}>Find quick answers to common questions</p>
         </motion.div>
 
         <div className="mx-auto max-w-3xl space-y-3">
@@ -512,13 +520,13 @@ export default function ContactPage() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="glass-premium rounded-xl overflow-hidden"
+              className={`${isDark ? 'glass-premium' : 'bg-white border border-gray-200 shadow-sm'} rounded-xl overflow-hidden`}
             >
               <button
                 onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                className="flex w-full items-center justify-between p-5 text-left transition-colors hover:bg-muted/50"
+                className={`flex w-full items-center justify-between p-5 text-left transition-colors ${isDark ? 'hover:bg-muted/50' : 'hover:bg-gray-50'}`}
               >
-                <span className="font-medium text-foreground">{faq.question}</span>
+                <span className={`font-medium ${isDark ? 'text-foreground' : 'text-gray-800'}`}>{faq.question}</span>
                 <ChevronRight className={`size-5 text-[#F57224] transition-transform duration-300 ${openFaq === index ? "rotate-90" : ""}`} />
               </button>
               <AnimatePresence>
@@ -528,9 +536,9 @@ export default function ContactPage() {
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="border-t border-border px-5 pb-5"
+                    className={`border-t ${isDark ? 'border-border' : 'border-gray-200'} px-5 pb-5`}
                   >
-                    <p className="pt-3 text-sm text-muted-foreground">{faq.answer}</p>
+                    <p className={`pt-3 text-sm ${isDark ? 'text-muted-foreground' : 'text-gray-600'}`}>{faq.answer}</p>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -539,20 +547,20 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* CTA Banner */}
+      {/* CTA Banner - Theme Aware */}
       <section className="relative mx-auto max-w-7xl px-6 pb-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="glass-premium relative overflow-hidden rounded-3xl p-12 text-center"
+          className={`${isDark ? 'glass-premium' : 'bg-white border border-gray-200 shadow-lg'} relative overflow-hidden rounded-3xl p-12 text-center`}
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-[#F57224]/10 via-transparent to-[#F57224]/5" />
+          <div className={`absolute inset-0 bg-gradient-to-r ${isDark ? 'from-[#F57224]/10 via-transparent to-[#F57224]/5' : 'from-[#F57224]/5 via-transparent to-[#F57224]/3'}`} />
           <div className="relative">
             <Gift className="mx-auto mb-4 size-12 text-[#F57224]" />
-            <h2 className="text-2xl font-bold text-foreground">Need Immediate Assistance?</h2>
-            <p className="mt-2 text-muted-foreground">Chat with our support team for instant help</p>
-            <Button className="mt-6 bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow">
+            <h2 className={`text-2xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>Need Immediate Assistance?</h2>
+            <p className={`mt-2 ${isDark ? 'text-muted-foreground' : 'text-gray-600'}`}>Chat with our support team for instant help</p>
+            <Button className="mt-6 bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow text-white">
               Start Live Chat
               <MessageCircle className="ml-2 size-4" />
             </Button>

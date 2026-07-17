@@ -3,6 +3,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { motion } from "framer-motion"
+import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
@@ -13,21 +14,26 @@ import { Sparkles, Clock, ShoppingBag, ArrowRight, Star, Eye, Heart, Tag } from 
 
 export default function NewArrivalsPage() {
   const products = getNewArrivals(12)
+  const { theme } = useTheme()
+  const isDark = theme === 'dark'
 
   if (products.length === 0) {
     return (
-      <div className="min-h-screen overflow-x-hidden">
-        <div className="fixed inset-0 bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]" />
+      <div className={`min-h-screen overflow-x-hidden ${isDark ? 'bg-background' : 'bg-gray-50'}`}>
+        <div className={`fixed inset-0 ${isDark 
+          ? 'bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]' 
+          : 'bg-gradient-to-br from-gray-100 via-gray-50 to-white'
+        }`} />
         <div className="relative flex flex-col items-center justify-center min-h-[70vh] px-4 animate-fade-in">
-          <div className="rounded-full bg-muted/50 backdrop-blur-xl border border-border p-6 mb-6">
-            <Sparkles className="size-16 text-white/20" />
+          <div className={`rounded-full ${isDark ? 'bg-muted/50 backdrop-blur-xl border-border' : 'bg-white/80 border-gray-200'} border p-6 mb-6`}>
+            <Sparkles className={`size-16 ${isDark ? 'text-white/20' : 'text-gray-300'}`} />
           </div>
-          <h1 className="text-2xl font-bold text-foreground mb-2">No new arrivals yet</h1>
-          <p className="text-muted-foreground mb-8 text-center max-w-md">
+          <h1 className={`text-2xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'} mb-2`}>No new arrivals yet</h1>
+          <p className={`${isDark ? 'text-muted-foreground' : 'text-gray-600'} mb-8 text-center max-w-md`}>
             Check back soon for our latest products and fresh additions.
           </p>
           <Link href="/products">
-            <Button className="shadow-glow">
+            <Button className="bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow text-white">
               <ShoppingBag className="size-4" />
               Browse Products
             </Button>
@@ -38,11 +44,15 @@ export default function NewArrivalsPage() {
   }
 
   return (
-    <div className="min-h-screen overflow-x-hidden">
-      <div className="fixed inset-0 bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]">
-        <div className="absolute top-20 right-10 size-72 rounded-full bg-[#D4A853]/20 blur-[120px] animate-pulse" />
-        <div className="absolute bottom-20 left-10 size-96 rounded-full bg-[#F57224]/10 blur-[140px] animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-[500px] rounded-full bg-orange-500/5 blur-[100px]" />
+    <div className={`min-h-screen overflow-x-hidden ${isDark ? 'bg-background' : 'bg-gray-50'}`}>
+      {/* Premium Background - Theme Aware */}
+      <div className={`fixed inset-0 ${isDark 
+        ? 'bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]' 
+        : 'bg-gradient-to-br from-gray-100 via-gray-50 to-white'
+      }`}>
+        <div className={`absolute top-20 right-10 size-72 rounded-full ${isDark ? 'bg-[#D4A853]/20' : 'bg-[#D4A853]/10'} blur-[120px] animate-pulse`} />
+        <div className={`absolute bottom-20 left-10 size-96 rounded-full ${isDark ? 'bg-[#F57224]/10' : 'bg-[#F57224]/5'} blur-[140px] animate-pulse delay-1000`} />
+        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-[500px] rounded-full ${isDark ? 'bg-orange-500/5' : 'bg-orange-500/3'} blur-[100px]`} />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 py-8">
@@ -52,7 +62,7 @@ export default function NewArrivalsPage() {
           className="mb-6"
         >
           <Link href="/products">
-            <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
+            <Button variant="ghost" size="sm" className={`${isDark ? 'text-muted-foreground hover:text-foreground' : 'text-gray-500 hover:text-gray-700'}`}>
               <ArrowRight className="size-4 mr-1 rotate-180" />
               Back to Products
             </Button>
@@ -69,7 +79,7 @@ export default function NewArrivalsPage() {
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ type: "spring", stiffness: 200, delay: 0.1 }}
-              className="inline-flex items-center justify-center size-14 rounded-full bg-gradient-to-br from-[#F57224]/20 to-[#D4A853]/20 border border-[#F57224]/30 backdrop-blur-sm"
+              className={`inline-flex items-center justify-center size-14 rounded-full ${isDark ? 'bg-gradient-to-br from-[#F57224]/20 to-[#D4A853]/20 border-[#F57224]/30' : 'bg-gradient-to-br from-[#F57224]/10 to-[#D4A853]/10 border-[#F57224]/20'} border backdrop-blur-sm`}
             >
               <Sparkles className="size-6 text-[#F57224]" />
             </motion.div>
@@ -78,7 +88,7 @@ export default function NewArrivalsPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.15 }}
-                className="text-4xl sm:text-5xl font-bold text-foreground"
+                className={`text-4xl sm:text-5xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'}`}
               >
                 New{" "}
                 <span className="bg-gradient-to-r from-[#F57224] via-[#D4A853] to-[#F57224] bg-clip-text text-transparent">
@@ -89,7 +99,7 @@ export default function NewArrivalsPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.25 }}
-                className="mt-3 text-muted-foreground text-lg max-w-xl mx-auto"
+                className={`mt-3 ${isDark ? 'text-muted-foreground' : 'text-gray-600'} text-lg max-w-xl mx-auto`}
               >
                 Fresh from the collection
               </motion.p>
@@ -98,10 +108,10 @@ export default function NewArrivalsPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.35 }}
-              className="inline-flex items-center gap-2 bg-muted/50 backdrop-blur-sm border border-border rounded-full px-4 py-1.5"
+              className={`inline-flex items-center gap-2 ${isDark ? 'bg-muted/50 border-border' : 'bg-white/80 border-gray-200'} backdrop-blur-sm border rounded-full px-4 py-1.5`}
             >
               <Clock className="size-3.5 text-[#D4A853]" />
-              <span className="text-sm text-muted-foreground">
+              <span className={`text-sm ${isDark ? 'text-muted-foreground' : 'text-gray-600'}`}>
                 {products.length} new item{products.length !== 1 ? "s" : ""} added recently
               </span>
             </motion.div>
@@ -122,8 +132,8 @@ export default function NewArrivalsPage() {
                 whileHover={{ y: -8 }}
               >
                 <Link href={`/products/${product.slug}`}>
-                  <Card variant="premium" className="group h-full">
-                    <div className="relative overflow-hidden bg-gradient-to-br from-gray-900 to-black">
+                  <Card variant="premium" className={`group h-full ${isDark ? 'bg-card border-border' : 'bg-white border-gray-200'}`}>
+                    <div className={`relative overflow-hidden ${isDark ? 'bg-gradient-to-br from-gray-900 to-black' : 'bg-gray-100'}`}>
                       <Image
                         src={product.thumbnail}
                         alt={product.title}
@@ -134,13 +144,13 @@ export default function NewArrivalsPage() {
 
                       <div className="absolute left-3 top-3 z-10 flex flex-col gap-2">
                         {product.isNew && (
-                          <Badge className="bg-gradient-to-r from-[#F57224] to-orange-500 border-none shadow-glow">
+                          <Badge className="bg-gradient-to-r from-[#F57224] to-orange-500 border-none shadow-glow text-white">
                             <Sparkles className="size-3 mr-1" />
                             Just Added
                           </Badge>
                         )}
                         {product.discountPercentage > 0 && !product.isNew && (
-                          <Badge className="bg-gradient-to-r from-[#F57224] to-orange-500 border-none shadow-glow">
+                          <Badge className="bg-gradient-to-r from-[#F57224] to-orange-500 border-none shadow-glow text-white">
                             <Tag className="size-3 mr-1" />
                             -{product.discountPercentage}%
                           </Badge>
@@ -149,17 +159,17 @@ export default function NewArrivalsPage() {
 
                       {product.discountPercentage > 0 && product.isNew && (
                         <div className="absolute right-3 top-3 z-10">
-                          <Badge className="bg-gradient-to-r from-[#F57224] to-orange-500 border-none shadow-glow">
+                          <Badge className="bg-gradient-to-r from-[#F57224] to-orange-500 border-none shadow-glow text-white">
                             <Tag className="size-3 mr-1" />
                             -{product.discountPercentage}%
                           </Badge>
                         </div>
                       )}
 
-                      <div className="absolute inset-0 flex items-center justify-center bg-background/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300">
+                      <div className={`absolute inset-0 flex items-center justify-center ${isDark ? 'bg-background/60' : 'bg-white/60'} backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300`}>
                         <Button
                           variant="outline"
-                          className="border-border bg-muted/30 text-foreground hover:bg-[#F57224] hover:text-white hover:border-[#F57224]"
+                          className={`${isDark ? 'border-border bg-muted/30 text-foreground' : 'border-gray-300 bg-white/90 text-gray-700'} hover:bg-[#F57224] hover:text-white hover:border-[#F57224]`}
                           onClick={(e) => {
                             e.preventDefault()
                             window.location.href = `/products/${product.slug}`
@@ -172,11 +182,11 @@ export default function NewArrivalsPage() {
                     </div>
 
                     <CardContent className="p-4 space-y-3">
-                      <p className="text-xs text-muted-foreground/70 uppercase tracking-wider">
+                      <p className={`text-xs ${isDark ? 'text-muted-foreground/70' : 'text-gray-500'} uppercase tracking-wider`}>
                         {product.brand || product.categoryName}
                       </p>
 
-                      <h3 className="font-semibold text-foreground line-clamp-2 group-hover:text-[#F57224] transition-colors">
+                      <h3 className={`font-semibold ${isDark ? 'text-foreground' : 'text-gray-800'} line-clamp-2 group-hover:text-[#F57224] transition-colors`}>
                         {product.title}
                       </h3>
 
@@ -185,7 +195,7 @@ export default function NewArrivalsPage() {
                           {formatUSD(discountedPrice)}
                         </span>
                         {product.discountPercentage > 0 && (
-                          <span className="text-xs text-muted-foreground/70 line-through">
+                          <span className={`text-xs ${isDark ? 'text-muted-foreground/70' : 'text-gray-400'} line-through`}>
                             {formatUSD(product.price)}
                           </span>
                         )}
@@ -214,7 +224,7 @@ export default function NewArrivalsPage() {
           className="mt-12 text-center"
         >
           <Link href="/products">
-            <Button className="bg-gradient-to-r from-[#F57224] via-[#D4A853] to-[#F57224] bg-[length:200%_100%] animate-gradient-shift shadow-lg shadow-[#F57224]/20">
+            <Button className="bg-gradient-to-r from-[#F57224] via-[#D4A853] to-[#F57224] bg-[length:200%_100%] animate-gradient-shift shadow-lg shadow-[#F57224]/20 text-white">
               View All Products
               <ArrowRight className="size-4 ml-2" />
             </Button>

@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { useRef, useState, useEffect } from "react"
+import { useTheme } from "next-themes"
 import { 
   Mail, Shield, Truck, 
   RotateCcw, Heart, ArrowUp, Sparkles,
@@ -135,6 +136,8 @@ export function Footer() {
   const [isSubscribed, setIsSubscribed] = useState(false)
   const [showScrollTop, setShowScrollTop] = useState(false)
   const footerRef = useRef<HTMLElement>(null)
+  const { theme } = useTheme()
+  const isDark = theme === 'dark'
 
   useEffect(() => {
     const handleScroll = () => {
@@ -159,15 +162,18 @@ export function Footer() {
 
   return (
     <footer ref={footerRef} className="relative overflow-hidden">
-      {/* Premium Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 size-96 rounded-full bg-[#F57224]/10 blur-[120px]" />
-        <div className="absolute bottom-0 left-0 size-72 rounded-full bg-[#F57224]/5 blur-[100px]" />
-        <div className="absolute top-1/2 right-0 size-80 rounded-full bg-orange-500/5 blur-[100px]" />
+      {/* Premium Background - Theme Aware */}
+      <div className={`absolute inset-0 ${isDark 
+        ? 'bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]' 
+        : 'bg-gradient-to-br from-gray-100 via-gray-50 to-white'
+      }`}>
+        <div className={`absolute top-0 left-1/2 -translate-x-1/2 size-96 rounded-full ${isDark ? 'bg-[#F57224]/10' : 'bg-[#F57224]/5'} blur-[120px]`} />
+        <div className={`absolute bottom-0 left-0 size-72 rounded-full ${isDark ? 'bg-[#F57224]/5' : 'bg-[#F57224]/3'} blur-[100px]`} />
+        <div className={`absolute top-1/2 right-0 size-80 rounded-full ${isDark ? 'bg-orange-500/5' : 'bg-orange-500/3'} blur-[100px]`} />
       </div>
 
-      {/* Features Bar */}
-      <div className="relative border-b border-border bg-muted/50 backdrop-blur-sm">
+      {/* Features Bar - Theme Aware */}
+      <div className={`relative border-b ${isDark ? 'border-border bg-muted/50' : 'border-gray-200 bg-gray-100/50'} backdrop-blur-sm`}>
         <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
             {features.map((feature, index) => (
@@ -177,14 +183,16 @@ export function Footer() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.05 }}
                 viewport={{ once: true }}
-                className="flex items-center gap-3 rounded-xl bg-muted/50 p-3 transition-all duration-300 hover:bg-accent"
+                className={`flex items-center gap-3 rounded-xl p-3 transition-all duration-300 ${
+                  isDark ? 'bg-muted/50 hover:bg-accent' : 'bg-white/50 hover:bg-gray-100'
+                }`}
               >
-                <div className="rounded-lg bg-[#F57224]/10 p-2">
+                <div className={`rounded-lg ${isDark ? 'bg-[#F57224]/10' : 'bg-[#F57224]/5'} p-2`}>
                   <feature.icon className="size-4 text-[#F57224]" />
                 </div>
                 <div className="hidden sm:block">
-                  <p className="text-xs font-medium text-foreground">{feature.title}</p>
-                  <p className="text-[10px] text-muted-foreground/70">{feature.description}</p>
+                  <p className={`text-xs font-medium ${isDark ? 'text-foreground' : 'text-gray-800'}`}>{feature.title}</p>
+                  <p className={`text-[10px] ${isDark ? 'text-muted-foreground/70' : 'text-gray-500'}`}>{feature.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -204,7 +212,7 @@ export function Footer() {
           >
             <div className="flex flex-col items-start gap-4">
               <Link href="/" className="flex items-center gap-2">
-                <div className="rounded-xl bg-gradient-to-br from-[#F57224]/20 to-[#F57224]/5 p-2">
+                <div className={`rounded-xl ${isDark ? 'bg-[#F57224]/20' : 'bg-[#F57224]/10'} p-2`}>
                   <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="size-6">
                     <defs><linearGradient id="flameGradFooter" x1="0" y1="1" x2="0" y2="0">
                       <stop offset="0%" stopColor="#F57224" /><stop offset="60%" stopColor="#F97316" /><stop offset="100%" stopColor="#D4A853" />
@@ -217,18 +225,18 @@ export function Footer() {
                 <span className="text-xl font-bold bg-gradient-to-r from-[#F57224] to-orange-400 bg-clip-text text-transparent">
                   BlazeCart
                 </span>
-                <Badge className="ml-2 bg-gradient-to-r from-[#F57224] to-orange-500 text-[10px] border-none">
+                <Badge className="ml-2 bg-gradient-to-r from-[#F57224] to-orange-500 text-[10px] border-none text-white">
                   Premium
                 </Badge>
               </Link>
-              <p className="text-sm text-muted-foreground leading-relaxed max-w-lg">
+              <p className={`text-sm ${isDark ? 'text-muted-foreground' : 'text-gray-600'} leading-relaxed max-w-lg`}>
                 Ignite your style with premium products at unbeatable prices. Shop with confidence and experience luxury shopping.
               </p>
               <div className="flex gap-2">
                 {[4.8, 4.9, 5.0].map((rating, i) => (
-                  <div key={i} className="flex items-center gap-1 rounded-lg bg-muted/50 px-2 py-1">
+                  <div key={i} className={`flex items-center gap-1 rounded-lg ${isDark ? 'bg-muted/50' : 'bg-gray-100'} px-2 py-1`}>
                     <Star className="size-3 fill-yellow-500 text-yellow-500" />
-                    <span className="text-xs text-foreground">{rating}</span>
+                    <span className={`text-xs ${isDark ? 'text-foreground' : 'text-gray-800'}`}>{rating}</span>
                   </div>
                 ))}
               </div>
@@ -246,7 +254,7 @@ export function Footer() {
             >
               <div className="flex items-center gap-2 mb-4">
                 <section.icon className="size-4 text-[#F57224]" />
-                <h3 className="text-sm font-semibold text-foreground/90 uppercase tracking-wider">
+                <h3 className={`text-sm font-semibold uppercase tracking-wider ${isDark ? 'text-foreground/90' : 'text-gray-800'}`}>
                   {section.title}
                 </h3>
               </div>
@@ -258,7 +266,7 @@ export function Footer() {
                         href={link.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group flex items-center gap-2 text-sm text-muted-foreground transition-all duration-300 hover:text-[#F57224]"
+                        className={`group flex items-center gap-2 text-sm ${isDark ? 'text-muted-foreground' : 'text-gray-600'} transition-all duration-300 hover:text-[#F57224]`}
                       >
                         <link.icon className="size-3.5 opacity-0 transition-all duration-300 group-hover:opacity-100" />
                         <span>{link.name}</span>
@@ -266,7 +274,7 @@ export function Footer() {
                     ) : (
                       <Link
                         href={link.href}
-                        className="group flex items-center gap-2 text-sm text-muted-foreground transition-all duration-300 hover:text-[#F57224]"
+                        className={`group flex items-center gap-2 text-sm ${isDark ? 'text-muted-foreground' : 'text-gray-600'} transition-all duration-300 hover:text-[#F57224]`}
                       >
                         <link.icon className="size-3.5 opacity-0 transition-all duration-300 group-hover:opacity-100" />
                         <span>{link.name}</span>
@@ -284,21 +292,21 @@ export function Footer() {
           ))}
         </div>
 
-        {/* Newsletter Section */}
+        {/* Newsletter Section - Theme Aware */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-12 rounded-2xl bg-gradient-to-r from-[#F57224]/10 via-transparent to-[#F57224]/5 p-6"
+          className={`mt-12 rounded-2xl ${isDark ? 'bg-gradient-to-r from-[#F57224]/10 via-transparent to-[#F57224]/5' : 'bg-gradient-to-r from-[#F57224]/5 via-transparent to-[#F57224]/3 border border-gray-200'} p-6`}
         >
           <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
             <div className="flex items-center gap-3">
-              <div className="rounded-xl bg-[#F57224]/20 p-3">
+              <div className={`rounded-xl ${isDark ? 'bg-[#F57224]/20' : 'bg-[#F57224]/10'} p-3`}>
                 <Mail className="size-6 text-[#F57224]" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-foreground">Subscribe to Newsletter</h3>
-                <p className="text-sm text-muted-foreground/70">Get 10% off your first purchase + exclusive deals</p>
+                <h3 className={`text-lg font-semibold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>Subscribe to Newsletter</h3>
+                <p className={`text-sm ${isDark ? 'text-muted-foreground/70' : 'text-gray-600'}`}>Get 10% off your first purchase + exclusive deals</p>
               </div>
             </div>
             <form onSubmit={handleSubscribe} className="flex w-full max-w-md gap-2">
@@ -307,12 +315,12 @@ export function Footer() {
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="flex-1 border-border bg-muted/50 text-foreground placeholder:text-muted-foreground/70"
+                className={`flex-1 ${isDark ? 'border-border bg-muted/50 text-foreground placeholder:text-muted-foreground/70' : 'border-gray-300 bg-white text-gray-800 placeholder:text-gray-400'}`}
                 required
               />
               <Button
                 type="submit"
-                className="bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow whitespace-nowrap"
+                className="bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow whitespace-nowrap text-white"
               >
                 {isSubscribed ? (
                   <span className="flex items-center gap-1">
@@ -327,9 +335,9 @@ export function Footer() {
           </div>
         </motion.div>
 
-        {/* Bottom Bar */}
-        <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 sm:flex-row">
-          <p className="text-xs text-foreground/30">
+        {/* Bottom Bar - Theme Aware */}
+        <div className={`mt-8 flex flex-col items-center justify-between gap-4 border-t ${isDark ? 'border-border' : 'border-gray-200'} pt-8 sm:flex-row`}>
+          <p className={`text-xs ${isDark ? 'text-foreground/30' : 'text-gray-400'}`}>
             &copy; {new Date().getFullYear()} BlazeCart. All rights reserved. | Crafted with{" "}
             <Heart className="inline size-3 text-red-500" /> for premium ecommerce
           </p>
@@ -339,7 +347,7 @@ export function Footer() {
             {paymentIcons.map((payment) => (
               <div
                 key={payment.name}
-                className={`rounded-lg bg-gradient-to-r ${payment.color} px-2 py-1 text-xs font-medium text-foreground shadow-lg`}
+                className={`rounded-lg bg-gradient-to-r ${payment.color} px-2 py-1 text-xs font-medium text-white shadow-lg`}
               >
                 {payment.icon} {payment.name}
               </div>
@@ -355,9 +363,9 @@ export function Footer() {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0 }}
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 z-50 rounded-full bg-gradient-to-r from-[#F57224] to-orange-500 p-3 shadow-glow transition-all duration-300 hover:scale-110"
+          className="fixed bottom-8 right-8 z-50 rounded-full bg-gradient-to-r from-[#F57224] to-orange-500 p-3 shadow-glow transition-all duration-300 hover:scale-110 text-white"
         >
-          <ArrowUp className="size-5 text-foreground" />
+          <ArrowUp className="size-5" />
         </motion.button>
       )}
     </footer>

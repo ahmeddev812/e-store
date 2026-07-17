@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { useTheme } from "next-themes"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -126,18 +127,23 @@ const contactOptions = [
 export default function HelpPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
   const [searchQuery, setSearchQuery] = useState("")
+  const { theme } = useTheme()
+  const isDark = theme === 'dark'
 
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index)
   }
 
   return (
-    <div className="min-h-screen overflow-x-hidden">
-      {/* Premium Background */}
-      <div className="fixed inset-0 bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]">
-        <div className="absolute top-20 left-10 size-72 rounded-full bg-[#F57224]/20 blur-[120px] animate-pulse" />
-        <div className="absolute bottom-20 right-10 size-96 rounded-full bg-[#D4A853]/10 blur-[140px] animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-[500px] rounded-full bg-orange-500/5 blur-[100px]" />
+    <div className={`min-h-screen overflow-x-hidden ${isDark ? 'bg-background' : 'bg-gray-50'}`}>
+      {/* Premium Background - Theme Aware */}
+      <div className={`fixed inset-0 ${isDark 
+        ? 'bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]' 
+        : 'bg-gradient-to-br from-gray-100 via-gray-50 to-white'
+      }`}>
+        <div className={`absolute top-20 left-10 size-72 rounded-full ${isDark ? 'bg-[#F57224]/20' : 'bg-[#F57224]/10'} blur-[120px] animate-pulse`} />
+        <div className={`absolute bottom-20 right-10 size-96 rounded-full ${isDark ? 'bg-[#D4A853]/10' : 'bg-[#D4A853]/5'} blur-[140px] animate-pulse delay-1000`} />
+        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-[500px] rounded-full ${isDark ? 'bg-orange-500/5' : 'bg-orange-500/3'} blur-[100px]`} />
       </div>
 
       {/* Back Navigation */}
@@ -150,7 +156,7 @@ export default function HelpPage() {
           <Link href="/">
             <Button
               variant="ghost"
-              className="group text-muted-foreground hover:text-[#F57224] hover:bg-[#F57224]/10"
+              className={`group ${isDark ? 'text-muted-foreground hover:text-[#F57224] hover:bg-[#F57224]/10' : 'text-gray-500 hover:text-[#F57224] hover:bg-[#F57224]/10'}`}
             >
               <Home className="mr-2 size-4" />
               <span className="text-sm">Back to Home</span>
@@ -177,11 +183,11 @@ export default function HelpPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl font-bold text-foreground sm:text-5xl lg:text-6xl"
+            className={`text-4xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'} sm:text-5xl lg:text-6xl`}
           >
             Help{" "}
             <span className="relative inline-block">
-              <span className="absolute -inset-1 rounded-lg bg-gradient-to-r from-[#F57224]/30 to-[#D4A853]/20 blur-xl" />
+              <span className={`absolute -inset-1 rounded-lg ${isDark ? 'bg-gradient-to-r from-[#F57224]/30 to-[#D4A853]/20' : 'bg-gradient-to-r from-[#F57224]/20 to-[#D4A853]/10'} blur-xl`} />
               <span className="relative bg-gradient-to-r from-[#F57224] to-[#D4A853] bg-clip-text text-transparent">
                 Center
               </span>
@@ -192,7 +198,7 @@ export default function HelpPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mx-auto mt-4 max-w-2xl text-muted-foreground"
+            className={`mx-auto mt-4 max-w-2xl ${isDark ? 'text-muted-foreground' : 'text-gray-600'}`}
           >
             Find answers to your questions, browse help topics, or get in touch with our support team.
           </motion.p>
@@ -205,13 +211,13 @@ export default function HelpPage() {
             className="mx-auto mt-8 max-w-xl"
           >
             <div className="relative">
-              <Search className="absolute left-4 top-1/2 size-4 -translate-y-1/2 text-muted-foreground/70" />
+              <Search className={`absolute left-4 top-1/2 size-4 -translate-y-1/2 ${isDark ? 'text-muted-foreground/70' : 'text-gray-400'}`} />
               <input
                 type="text"
                 placeholder="Search for help topics..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full rounded-xl border border-border bg-muted/50 py-3.5 pl-11 pr-4 text-sm text-foreground placeholder:text-muted-foreground/70 outline-none transition-all focus:border-[#F57224]/50 focus:bg-muted/30 focus:shadow-[0_0_30px_rgba(245,114,36,0.15)]"
+                className={`w-full rounded-xl border ${isDark ? 'border-border bg-muted/50 text-foreground placeholder:text-muted-foreground/70' : 'border-gray-300 bg-white text-gray-800 placeholder:text-gray-400'} py-3.5 pl-11 pr-4 text-sm outline-none transition-all focus:border-[#F57224]/50 focus:bg-muted/30 focus:shadow-[0_0_30px_rgba(245,114,36,0.15)]`}
               />
             </div>
           </motion.div>
@@ -224,7 +230,7 @@ export default function HelpPage() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-2 text-center text-2xl font-bold text-foreground"
+          className={`mb-2 text-center text-2xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'}`}
         >
           How can we help you?
         </motion.h2>
@@ -233,7 +239,7 @@ export default function HelpPage() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
           viewport={{ once: true }}
-          className="mb-10 text-center text-sm text-muted-foreground/70"
+          className={`mb-10 text-center text-sm ${isDark ? 'text-muted-foreground/70' : 'text-gray-500'}`}
         >
           Browse through our help categories to find what you need
         </motion.p>
@@ -249,17 +255,17 @@ export default function HelpPage() {
               whileHover={{ y: -5 }}
             >
               <Link href={category.link}>
-                <Card className="glass-premium group h-full cursor-pointer transition-all duration-500 hover:border-[#F57224]/30 hover:shadow-[0_0_40px_rgba(245,114,36,0.15)]">
+                <Card className={`${isDark ? 'glass-premium' : 'bg-white border border-gray-200 shadow-md'} group h-full cursor-pointer transition-all duration-500 hover:border-[#F57224]/30 hover:shadow-[0_0_40px_rgba(245,114,36,0.15)]`}>
                   <CardContent className="p-6">
                     <div
                       className={`mb-4 inline-flex items-center justify-center rounded-xl bg-gradient-to-br ${category.color} p-3 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg`}
                     >
                       <category.icon className="size-6 text-[#F57224]" />
                     </div>
-                    <h3 className="mb-2 text-lg font-semibold text-foreground group-hover:text-[#F57224] transition-colors">
+                    <h3 className={`mb-2 text-lg font-semibold ${isDark ? 'text-foreground' : 'text-gray-800'} group-hover:text-[#F57224] transition-colors`}>
                       {category.title}
                     </h3>
-                    <p className="mb-4 text-sm text-muted-foreground leading-relaxed">
+                    <p className={`mb-4 text-sm ${isDark ? 'text-muted-foreground' : 'text-gray-600'} leading-relaxed`}>
                       {category.description}
                     </p>
                     <span className="inline-flex items-center gap-1 text-xs font-medium text-[#F57224] opacity-0 translate-y-1 transition-all group-hover:opacity-100 group-hover:translate-y-0">
@@ -285,8 +291,8 @@ export default function HelpPage() {
             <HelpCircle className="size-3.5 text-[#D4A853]" />
             <span className="text-xs font-medium text-[#D4A853]">FAQs</span>
           </div>
-          <h2 className="text-2xl font-bold text-foreground">Frequently Asked Questions</h2>
-          <p className="mt-2 text-sm text-muted-foreground">
+          <h2 className={`text-2xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>Frequently Asked Questions</h2>
+          <p className={`mt-2 text-sm ${isDark ? 'text-muted-foreground' : 'text-gray-600'}`}>
             Quick answers to the most common questions
           </p>
         </motion.div>
@@ -300,19 +306,19 @@ export default function HelpPage() {
               transition={{ delay: index * 0.08 }}
               viewport={{ once: true }}
             >
-              <Card className="glass-premium overflow-hidden transition-all duration-300 hover:border-[#D4A853]/20">
+              <Card className={`${isDark ? 'glass-premium' : 'bg-white border border-gray-200 shadow-md'} overflow-hidden transition-all duration-300 hover:border-[#D4A853]/20`}>
                 <CardContent className="p-0">
                   <button
                     onClick={() => toggleFaq(index)}
-                    className="flex w-full items-center justify-between px-6 py-5 text-left transition-colors hover:bg-accent/10"
+                    className={`flex w-full items-center justify-between px-6 py-5 text-left transition-colors ${isDark ? 'hover:bg-accent/10' : 'hover:bg-gray-50'}`}
                   >
-                    <span className="flex-1 pr-4 font-semibold text-foreground group-hover:text-[#F57224] transition-colors">
+                    <span className={`flex-1 pr-4 font-semibold ${isDark ? 'text-foreground' : 'text-gray-800'} group-hover:text-[#F57224] transition-colors`}>
                       {item.question}
                     </span>
                     <motion.span
                       animate={{ rotate: openFaq === index ? 180 : 0 }}
                       transition={{ duration: 0.3 }}
-                      className="flex-shrink-0 rounded-full bg-[#D4A853]/10 p-1.5 text-[#D4A853]"
+                      className={`flex-shrink-0 rounded-full ${isDark ? 'bg-[#D4A853]/10' : 'bg-[#D4A853]/10'} p-1.5 text-[#D4A853]`}
                     >
                       <ChevronDown className="size-4" />
                     </motion.span>
@@ -325,8 +331,8 @@ export default function HelpPage() {
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.3 }}
                       >
-                        <div className="border-t border-border px-6 pb-5">
-                          <p className="pt-3 text-sm text-muted-foreground leading-relaxed">
+                        <div className={`border-t ${isDark ? 'border-border' : 'border-gray-200'} px-6 pb-5`}>
+                          <p className={`pt-3 text-sm ${isDark ? 'text-muted-foreground' : 'text-gray-600'} leading-relaxed`}>
                             {item.answer}
                           </p>
                         </div>
@@ -369,8 +375,8 @@ export default function HelpPage() {
             <Headphones className="size-3.5 text-[#F57224]" />
             <span className="text-xs font-medium text-[#F57224]">Contact Us</span>
           </div>
-          <h2 className="text-2xl font-bold text-foreground">Still need help?</h2>
-          <p className="mt-2 text-sm text-muted-foreground">
+          <h2 className={`text-2xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>Still need help?</h2>
+          <p className={`mt-2 text-sm ${isDark ? 'text-muted-foreground' : 'text-gray-600'}`}>
             Choose your preferred way to get in touch
           </p>
         </motion.div>
@@ -385,22 +391,22 @@ export default function HelpPage() {
               viewport={{ once: true }}
               whileHover={{ y: -5 }}
             >
-              <Card className="glass-premium group h-full text-center transition-all duration-500 hover:border-[#F57224]/30 hover:shadow-[0_0_40px_rgba(245,114,36,0.15)]">
+              <Card className={`${isDark ? 'glass-premium' : 'bg-white border border-gray-200 shadow-md'} group h-full text-center transition-all duration-500 hover:border-[#F57224]/30 hover:shadow-[0_0_40px_rgba(245,114,36,0.15)]`}>
                 <CardContent className="p-8">
                   <div className="mb-5 inline-flex items-center justify-center rounded-2xl bg-gradient-to-br from-accent/10 to-accent/5 p-4 transition-all duration-300 group-hover:scale-110">
                     <option.icon className="size-8 text-[#F57224]" />
                   </div>
-                  <h3 className="mb-2 text-lg font-semibold text-foreground">{option.title}</h3>
-                  <p className="mb-6 text-sm text-muted-foreground">{option.description}</p>
+                  <h3 className={`mb-2 text-lg font-semibold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>{option.title}</h3>
+                  <p className={`mb-6 text-sm ${isDark ? 'text-muted-foreground' : 'text-gray-600'}`}>{option.description}</p>
                   {option.actionLink ? (
                     <Link href={option.actionLink}>
-                      <Button className={`bg-gradient-to-r ${option.color} shadow-lg`}>
+                      <Button className={`bg-gradient-to-r ${option.color} shadow-lg text-white`}>
                         {option.action}
                         <ArrowRight className="ml-2 size-4" />
                       </Button>
                     </Link>
                   ) : (
-                    <Button className={`bg-gradient-to-r ${option.color} shadow-lg`}>
+                    <Button className={`bg-gradient-to-r ${option.color} shadow-lg text-white`}>
                       {option.action}
                       <ArrowRight className="ml-2 size-4" />
                     </Button>
@@ -412,30 +418,30 @@ export default function HelpPage() {
         </div>
       </section>
 
-      {/* CTA Banner */}
+      {/* CTA Banner - Theme Aware */}
       <section className="relative mx-auto max-w-7xl px-6 pb-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="glass-premium relative overflow-hidden rounded-3xl p-12 text-center"
+          className={`${isDark ? 'glass-premium' : 'bg-white border border-gray-200 shadow-lg'} relative overflow-hidden rounded-3xl p-12 text-center`}
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-[#F57224]/10 via-transparent to-[#D4A853]/5" />
+          <div className={`absolute inset-0 bg-gradient-to-r ${isDark ? 'from-[#F57224]/10 via-transparent to-[#D4A853]/5' : 'from-[#F57224]/5 via-transparent to-[#D4A853]/3'}`} />
           <div className="relative">
             <HelpCircle className="mx-auto mb-4 size-12 text-[#F57224]" />
-            <h2 className="text-2xl font-bold text-foreground">We're here for you</h2>
-            <p className="mt-2 text-muted-foreground max-w-md mx-auto">
+            <h2 className={`text-2xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>We're here for you</h2>
+            <p className={`mt-2 ${isDark ? 'text-muted-foreground' : 'text-gray-600'} max-w-md mx-auto`}>
               Our support team is available 24/7 to assist you with any questions or concerns.
             </p>
             <div className="mt-6 flex flex-wrap gap-4 justify-center">
               <Link href="/contact">
-                <Button className="bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow">
+                <Button className="bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow text-white">
                   Contact Support
                   <MessageCircle className="ml-2 size-4" />
                 </Button>
               </Link>
               <Link href="/">
-                <Button variant="outline" className="border-border hover:border-[#F57224]/50 hover:text-[#F57224]">
+                <Button variant="outline" className={`${isDark ? 'border-border hover:border-[#F57224]/50' : 'border-gray-300 hover:border-[#F57224]/50'} hover:text-[#F57224]`}>
                   Continue Shopping
                   <ArrowRight className="ml-2 size-4" />
                 </Button>

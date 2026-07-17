@@ -13,7 +13,7 @@ export function Providers({
     <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY!}>
       <ThemeProvider
         attribute="class"
-        defaultTheme="dark"
+        defaultTheme="system"  // Changed from "dark" to "system"
         enableSystem
         disableTransitionOnChange
       >

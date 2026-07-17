@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { useTheme } from "next-themes"
 import { Truck, Flame, Star, Shield, Sparkles } from "lucide-react"
 
 const announcements = [
@@ -13,6 +14,8 @@ const announcements = [
 
 export function AnnouncementBar() {
   const [current, setCurrent] = useState(0)
+  const { theme } = useTheme()
+  const isDark = theme === 'dark'
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -24,7 +27,11 @@ export function AnnouncementBar() {
   const announcement = announcements[current]
 
   return (
-    <div className="relative bg-gradient-to-r from-muted/80 via-muted to-muted/80 dark:from-[#1a1a2e] dark:via-[#2d1b2e] dark:to-[#1a1a2e] border-b border-[#D4A853]/10 overflow-hidden">
+    <div className={`relative border-b overflow-hidden ${
+      isDark 
+        ? 'bg-gradient-to-r from-[#1a1a2e] via-[#2d1b2e] to-[#1a1a2e] border-[#D4A853]/10' 
+        : 'bg-gradient-to-r from-gray-100 via-gray-50 to-gray-100 border-gray-200'
+    }`}>
       <div className="mx-auto flex h-8 items-center justify-center px-4">
         <AnimatePresence mode="wait">
           <motion.div
@@ -36,8 +43,10 @@ export function AnnouncementBar() {
             className="flex items-center gap-2 text-xs font-medium"
           >
             <announcement.icon className={`size-3.5 ${announcement.color}`} />
-            <span className="text-foreground/80 dark:text-foreground/80">{announcement.text}</span>
-            <Sparkles className="size-3 text-[#D4A853]/60" />
+            <span className={isDark ? 'text-foreground/80' : 'text-gray-700'}>
+              {announcement.text}
+            </span>
+            <Sparkles className={`size-3 ${isDark ? 'text-[#D4A853]/60' : 'text-[#D4A853]/40'}`} />
           </motion.div>
         </AnimatePresence>
       </div>
