@@ -3,6 +3,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { motion } from "framer-motion"
+import { useTheme } from "next-themes"
 import { Crown, Star, TrendingUp, ShoppingBag, ArrowRight, Eye, Heart, Award, Flame } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -13,6 +14,8 @@ import { getBestsellers } from "@/data/products"
 
 export default function BestSellersPage() {
   const products = getBestsellers(12).sort((a, b) => b.rating - a.rating)
+  const { theme } = useTheme()
+  const isDark = theme === 'dark'
 
   const totalProducts = products.length
   const avgRating =
@@ -29,22 +32,25 @@ export default function BestSellersPage() {
 
   if (products.length === 0) {
     return (
-      <div className="min-h-screen overflow-x-hidden">
-        <div className="fixed inset-0 bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]" />
+      <div className={`min-h-screen overflow-x-hidden ${isDark ? 'bg-background' : 'bg-gray-50'}`}>
+        <div className={`fixed inset-0 ${isDark 
+          ? 'bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]' 
+          : 'bg-gradient-to-br from-gray-100 via-gray-50 to-white'
+        }`} />
         <div className="relative flex flex-col items-center justify-center min-h-[70vh] px-4">
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="rounded-full bg-muted/50 backdrop-blur-xl border border-border p-6 mb-6"
+            className={`rounded-full ${isDark ? 'bg-muted/50 backdrop-blur-xl border-border' : 'bg-white/80 border-gray-200'} border p-6 mb-6`}
           >
-            <Crown className="size-16 text-white/20" />
+            <Crown className={`size-16 ${isDark ? 'text-white/20' : 'text-gray-300'}`} />
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15 }}
-            className="text-2xl font-bold text-foreground mb-2"
+            className={`text-2xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'} mb-2`}
           >
             No Best Sellers Yet
           </motion.h1>
@@ -52,7 +58,7 @@ export default function BestSellersPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.25 }}
-            className="text-muted-foreground text-center max-w-md mb-8"
+            className={`${isDark ? 'text-muted-foreground' : 'text-gray-600'} text-center max-w-md mb-8`}
           >
             Our top-rated products haven&apos;t been decided yet. Check back soon for the
             items everyone&apos;s loving.
@@ -63,7 +69,7 @@ export default function BestSellersPage() {
             transition={{ delay: 0.35 }}
           >
             <Link href="/products">
-              <Button className="shadow-glow">
+              <Button className="bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow text-white">
                 <ShoppingBag className="size-4" />
                 Browse All Products
               </Button>
@@ -75,11 +81,15 @@ export default function BestSellersPage() {
   }
 
   return (
-    <div className="min-h-screen overflow-x-hidden">
-      <div className="fixed inset-0 bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]">
-        <div className="absolute top-20 left-10 size-72 rounded-full bg-[#F57224]/20 blur-[120px] animate-pulse" />
-        <div className="absolute bottom-20 right-10 size-96 rounded-full bg-[#F57224]/10 blur-[140px] animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-[500px] rounded-full bg-orange-500/5 blur-[100px]" />
+    <div className={`min-h-screen overflow-x-hidden ${isDark ? 'bg-background' : 'bg-gray-50'}`}>
+      {/* Premium Background - Theme Aware */}
+      <div className={`fixed inset-0 ${isDark 
+        ? 'bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]' 
+        : 'bg-gradient-to-br from-gray-100 via-gray-50 to-white'
+      }`}>
+        <div className={`absolute top-20 left-10 size-72 rounded-full ${isDark ? 'bg-[#F57224]/20' : 'bg-[#F57224]/10'} blur-[120px] animate-pulse`} />
+        <div className={`absolute bottom-20 right-10 size-96 rounded-full ${isDark ? 'bg-[#F57224]/10' : 'bg-[#F57224]/5'} blur-[140px] animate-pulse delay-1000`} />
+        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-[500px] rounded-full ${isDark ? 'bg-orange-500/5' : 'bg-orange-500/3'} blur-[100px]`} />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 py-8">
@@ -92,7 +102,7 @@ export default function BestSellersPage() {
             <Button
               variant="ghost"
               size="sm"
-              className="text-muted-foreground hover:text-foreground"
+              className={`${isDark ? 'text-muted-foreground hover:text-foreground' : 'text-gray-500 hover:text-gray-800'}`}
             >
               <ArrowRight className="size-4 mr-1 rotate-180" />
               Back to Products
@@ -106,50 +116,52 @@ export default function BestSellersPage() {
             animate={{ opacity: 1, y: 0 }}
             className="flex flex-col items-center text-center"
           >
-            <div className="inline-flex items-center justify-center size-14 rounded-full bg-gradient-to-br from-[#F57224]/30 to-[#F57224]/10 border border-[#F57224]/30 backdrop-blur-xl mb-4">
+            <div className={`inline-flex items-center justify-center size-14 rounded-full ${isDark ? 'bg-gradient-to-br from-[#F57224]/30 to-[#F57224]/10 border-[#F57224]/30' : 'bg-gradient-to-br from-[#F57224]/20 to-[#F57224]/5 border-[#F57224]/20'} border backdrop-blur-xl mb-4`}>
               <Crown className="size-7 text-[#F57224]" />
             </div>
-            <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-3">
+            <h1 className={`text-4xl sm:text-5xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'} mb-3`}>
               Best{" "}
               <span className="bg-gradient-to-r from-[#F57224] to-orange-400 bg-clip-text text-transparent">
                 Sellers
               </span>
             </h1>
-            <p className="text-muted-foreground text-lg max-w-xl">
+            <p className={`${isDark ? 'text-muted-foreground' : 'text-gray-600'} text-lg max-w-xl`}>
               What everyone&apos;s loving — the most popular picks, hand-picked for you.
             </p>
           </motion.div>
         </section>
 
+        {/* Stats Cards - Theme Aware */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
           className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12"
         >
-          <div className="glass-card rounded-xl p-5 text-center backdrop-blur-md border border-border">
+          <div className={`${isDark ? 'glass-card' : 'bg-white border border-gray-200 shadow-md'} rounded-xl p-5 text-center backdrop-blur-md`}>
             <div className="inline-flex items-center justify-center size-10 rounded-full bg-[#F57224]/20 mb-3">
               <Award className="size-5 text-[#F57224]" />
             </div>
-            <p className="text-2xl font-bold text-foreground">{totalProducts}</p>
-            <p className="text-sm text-muted-foreground">Total Products</p>
+            <p className={`text-2xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>{totalProducts}</p>
+            <p className={`text-sm ${isDark ? 'text-muted-foreground' : 'text-gray-500'}`}>Total Products</p>
           </div>
-          <div className="glass-card rounded-xl p-5 text-center backdrop-blur-md border border-border">
+          <div className={`${isDark ? 'glass-card' : 'bg-white border border-gray-200 shadow-md'} rounded-xl p-5 text-center backdrop-blur-md`}>
             <div className="inline-flex items-center justify-center size-10 rounded-full bg-amber-500/20 mb-3">
               <Star className="size-5 text-amber-400" />
             </div>
-            <p className="text-2xl font-bold text-foreground">{avgRating.toFixed(1)}</p>
-            <p className="text-sm text-muted-foreground">Average Rating</p>
+            <p className={`text-2xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>{avgRating.toFixed(1)}</p>
+            <p className={`text-sm ${isDark ? 'text-muted-foreground' : 'text-gray-500'}`}>Average Rating</p>
           </div>
-          <div className="glass-card rounded-xl p-5 text-center backdrop-blur-md border border-border">
+          <div className={`${isDark ? 'glass-card' : 'bg-white border border-gray-200 shadow-md'} rounded-xl p-5 text-center backdrop-blur-md`}>
             <div className="inline-flex items-center justify-center size-10 rounded-full bg-emerald-500/20 mb-3">
               <TrendingUp className="size-5 text-emerald-400" />
             </div>
-            <p className="text-2xl font-bold text-foreground">{topCategory}</p>
-            <p className="text-sm text-muted-foreground">Top Category</p>
+            <p className={`text-2xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>{topCategory}</p>
+            <p className={`text-sm ${isDark ? 'text-muted-foreground' : 'text-gray-500'}`}>Top Category</p>
           </div>
         </motion.div>
 
+        {/* Products Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {products.map((product, index) => {
             const discountedPrice = getDiscountPrice(
@@ -169,9 +181,9 @@ export default function BestSellersPage() {
                 <Link href={`/products/${product.slug}`}>
                   <Card
                     variant="premium"
-                    className="group relative overflow-hidden h-full"
+                    className={`group relative overflow-hidden h-full ${isDark ? 'bg-card border-border' : 'bg-white border-gray-200'}`}
                   >
-                    <div className="relative overflow-hidden bg-gradient-to-br from-gray-900 to-black">
+                    <div className={`relative overflow-hidden ${isDark ? 'bg-gradient-to-br from-gray-900 to-black' : 'bg-gray-100'}`}>
                       <Image
                         src={product.thumbnail}
                         alt={product.title}
@@ -181,14 +193,14 @@ export default function BestSellersPage() {
                       />
 
                       <div className="absolute left-3 top-3 z-10 flex flex-col gap-2">
-                        <Badge className="bg-gradient-to-r from-[#F57224] to-orange-500 border-none shadow-glow text-[10px] px-2 py-0.5">
+                        <Badge className="bg-gradient-to-r from-[#F57224] to-orange-500 border-none shadow-glow text-[10px] px-2 py-0.5 text-white">
                           <Flame className="size-3 mr-1" />
                           #{index + 1}
                         </Badge>
                         {isTopRated && (
                           <Badge
                             variant="secondary"
-                            className="bg-yellow-500/20 text-yellow-400 border-yellow-500/30 backdrop-blur-sm text-[10px] px-2 py-0.5"
+                            className={`${isDark ? 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30' : 'bg-yellow-100 text-yellow-700 border-yellow-300'} backdrop-blur-sm text-[10px] px-2 py-0.5`}
                           >
                             <Award className="size-3 mr-1" />
                             Bestseller
@@ -198,7 +210,7 @@ export default function BestSellersPage() {
 
                       {product.discountPercentage > 0 && (
                         <div className="absolute right-3 top-3 z-10">
-                          <Badge className="bg-red-500/80 border-none text-[10px] px-2 py-0.5">
+                          <Badge className="bg-red-500/80 border-none text-[10px] px-2 py-0.5 text-white">
                             -{product.discountPercentage}%
                           </Badge>
                         </div>
@@ -207,11 +219,11 @@ export default function BestSellersPage() {
                       <motion.div
                         initial={{ opacity: 0 }}
                         whileHover={{ opacity: 1 }}
-                        className="absolute inset-0 flex items-center justify-center bg-background/60 backdrop-blur-sm"
+                        className={`absolute inset-0 flex items-center justify-center ${isDark ? 'bg-background/60' : 'bg-white/60'} backdrop-blur-sm`}
                       >
                         <Button
                           variant="outline"
-                          className="border-border bg-muted/30 text-foreground hover:bg-[#F57224] hover:text-white hover:border-[#F57224]"
+                          className={`${isDark ? 'border-border bg-muted/30 text-foreground' : 'border-gray-300 bg-white/90 text-gray-700'} hover:bg-[#F57224] hover:text-white hover:border-[#F57224]`}
                           onClick={(e) => {
                             e.preventDefault()
                             window.location.href = `/products/${product.slug}`
@@ -224,10 +236,10 @@ export default function BestSellersPage() {
                     </div>
 
                     <CardContent className="p-4">
-                      <p className="text-xs text-muted-foreground/70 uppercase tracking-wider">
+                      <p className={`text-xs ${isDark ? 'text-muted-foreground/70' : 'text-gray-500'} uppercase tracking-wider`}>
                         {product.brand}
                       </p>
-                      <h3 className="mt-1 font-semibold text-foreground line-clamp-2 group-hover:text-[#F57224] transition-colors">
+                      <h3 className={`mt-1 font-semibold ${isDark ? 'text-foreground' : 'text-gray-800'} line-clamp-2 group-hover:text-[#F57224] transition-colors`}>
                         {product.title}
                       </h3>
 
@@ -236,7 +248,7 @@ export default function BestSellersPage() {
                           {formatUSD(discountedPrice)}
                         </span>
                         {product.discountPercentage > 0 && (
-                          <span className="text-xs text-muted-foreground/70 line-through">
+                          <span className={`text-xs ${isDark ? 'text-muted-foreground/70' : 'text-gray-400'} line-through`}>
                             {formatUSD(product.price)}
                           </span>
                         )}
@@ -244,7 +256,7 @@ export default function BestSellersPage() {
 
                       <div className="mt-2 flex items-center justify-between">
                         <Rating value={product.rating} size="sm" readonly showValue />
-                        <div className="flex items-center gap-1 text-[10px] text-muted-foreground/70">
+                        <div className={`flex items-center gap-1 text-[10px] ${isDark ? 'text-muted-foreground/70' : 'text-gray-400'}`}>
                           <Heart className="size-3" />
                           {product.stock > 0 ? "In Stock" : "Out of Stock"}
                         </div>
@@ -267,7 +279,7 @@ export default function BestSellersPage() {
             <Button
               variant="glass"
               size="lg"
-              className="gap-2"
+              className={`gap-2 ${isDark ? '' : 'bg-white/80 text-gray-800 hover:bg-white border-gray-200'}`}
             >
               <ShoppingBag className="size-4" />
               View All Products

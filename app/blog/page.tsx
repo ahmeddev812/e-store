@@ -2,6 +2,7 @@
 
 import { useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
+import { useTheme } from "next-themes"
 import {
   Clock,
   User,
@@ -111,16 +112,21 @@ export default function BlogPage() {
   const { scrollYProgress } = useScroll()
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
   const heroScale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95])
+  const { theme } = useTheme()
+  const isDark = theme === 'dark'
 
   return (
-    <div ref={sectionRef} className="min-h-screen overflow-x-hidden">
-      {/* Background */}
-      <div className="fixed inset-0 bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]">
-        <div className="absolute top-20 left-10 size-72 rounded-full bg-[#F57224]/20 blur-[120px] animate-pulse" />
-        <div className="absolute bottom-20 right-10 size-96 rounded-full bg-[#F57224]/10 blur-[140px] animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-[500px] rounded-full bg-orange-500/5 blur-[100px]" />
-        <div className="absolute top-1/4 right-1/4 size-48 rounded-full bg-[#D4A853]/10 blur-[100px] animate-pulse delay-500" />
-        <div className="absolute bottom-1/4 left-1/4 size-40 rounded-full bg-[#D4A853]/5 blur-[80px] animate-pulse delay-1500" />
+    <div ref={sectionRef} className={`min-h-screen overflow-x-hidden ${isDark ? 'bg-background' : 'bg-gray-50'}`}>
+      {/* Background - Theme Aware */}
+      <div className={`fixed inset-0 ${isDark 
+        ? 'bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]' 
+        : 'bg-gradient-to-br from-gray-100 via-gray-50 to-white'
+      }`}>
+        <div className={`absolute top-20 left-10 size-72 rounded-full ${isDark ? 'bg-[#F57224]/20' : 'bg-[#F57224]/10'} blur-[120px] animate-pulse`} />
+        <div className={`absolute bottom-20 right-10 size-96 rounded-full ${isDark ? 'bg-[#F57224]/10' : 'bg-[#F57224]/5'} blur-[140px] animate-pulse delay-1000`} />
+        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-[500px] rounded-full ${isDark ? 'bg-orange-500/5' : 'bg-orange-500/3'} blur-[100px]`} />
+        <div className={`absolute top-1/4 right-1/4 size-48 rounded-full ${isDark ? 'bg-[#D4A853]/10' : 'bg-[#D4A853]/5'} blur-[100px] animate-pulse delay-500`} />
+        <div className={`absolute bottom-1/4 left-1/4 size-40 rounded-full ${isDark ? 'bg-[#D4A853]/5' : 'bg-[#D4A853]/3'} blur-[80px] animate-pulse delay-1500`} />
       </div>
 
       {/* Back Navigation */}
@@ -132,7 +138,7 @@ export default function BlogPage() {
         >
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-[#F57224] transition-colors group"
+            className={`inline-flex items-center gap-2 text-sm ${isDark ? 'text-muted-foreground hover:text-[#F57224]' : 'text-gray-500 hover:text-[#F57224]'} transition-colors group`}
           >
             <ArrowRight className="size-4 rotate-180 group-hover:-translate-x-1 transition-transform" />
             Back to Home
@@ -161,16 +167,16 @@ export default function BlogPage() {
               <span className="text-sm font-medium text-[#F57224]">Our Journal</span>
             </motion.div>
 
-            <h1 className="text-5xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+            <h1 className={`text-5xl font-bold tracking-tight ${isDark ? 'text-foreground' : 'text-gray-800'} sm:text-6xl lg:text-7xl`}>
               Our{" "}
               <span className="relative inline-block">
-                <span className="absolute -inset-1 rounded-lg bg-gradient-to-r from-[#F57224]/30 to-[#F57224]/20 blur-xl" />
+                <span className={`absolute -inset-1 rounded-lg ${isDark ? 'bg-gradient-to-r from-[#F57224]/30 to-[#F57224]/20' : 'bg-gradient-to-r from-[#F57224]/20 to-[#F57224]/10'} blur-xl`} />
                 <span className="relative bg-gradient-to-r from-[#F57224] to-[#D4A853] bg-clip-text text-transparent">
                   Blog
                 </span>
               </span>
             </h1>
-            <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className={`mt-6 text-lg ${isDark ? 'text-muted-foreground' : 'text-gray-600'} max-w-2xl mx-auto`}>
               Discover the latest in premium fashion, style guides, brand stories, and expert tips
               to elevate your shopping experience.
             </p>
@@ -189,7 +195,7 @@ export default function BlogPage() {
             transition={{ repeat: Infinity, repeatType: "loop", duration: 1.5 }}
             className="flex items-center justify-center"
           >
-            <ArrowRight className="size-5 rotate-90 text-foreground/30" />
+            <ArrowRight className={`size-5 rotate-90 ${isDark ? 'text-foreground/30' : 'text-gray-400'}`} />
           </motion.div>
         </motion.div>
       </section>
@@ -213,7 +219,7 @@ export default function BlogPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <Card className="glass-premium overflow-hidden transition-all duration-500 hover:shadow-[0_0_50px_rgba(245,114,36,0.15)] group">
+            <Card className={`${isDark ? 'glass-premium' : 'bg-white border border-gray-200 shadow-lg'} overflow-hidden transition-all duration-500 hover:shadow-[0_0_50px_rgba(245,114,36,0.15)] group`}>
               <div className="grid lg:grid-cols-2">
                 <div className="relative overflow-hidden min-h-[300px] lg:min-h-full">
                   <div className="absolute inset-0 bg-gradient-to-r from-[#F57224]/20 to-transparent z-10" />
@@ -230,18 +236,18 @@ export default function BlogPage() {
                     <Badge className="bg-gradient-to-r from-[#F57224] to-orange-500 text-white border-none text-xs">
                       {featuredPost.category}
                     </Badge>
-                    <span className="flex items-center gap-1 text-xs text-muted-foreground/70">
+                    <span className={`flex items-center gap-1 text-xs ${isDark ? 'text-muted-foreground/70' : 'text-gray-500'}`}>
                       <Clock className="size-3" />
                       {featuredPost.readTime}
                     </span>
                   </div>
-                  <h3 className="text-2xl font-bold text-foreground mb-3 group-hover:text-[#F57224] transition-colors">
+                  <h3 className={`text-2xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'} mb-3 group-hover:text-[#F57224] transition-colors`}>
                     {featuredPost.title}
                   </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+                  <p className={`${isDark ? 'text-muted-foreground' : 'text-gray-600'} text-sm leading-relaxed mb-6`}>
                     {featuredPost.excerpt}
                   </p>
-                  <div className="flex flex-wrap items-center gap-4 text-xs text-muted-foreground/70 mb-6">
+                  <div className={`flex flex-wrap items-center gap-4 text-xs ${isDark ? 'text-muted-foreground/70' : 'text-gray-500'} mb-6`}>
                     <span className="flex items-center gap-1">
                       <Calendar className="size-3" />
                       {featuredPost.date}
@@ -260,7 +266,7 @@ export default function BlogPage() {
                     </span>
                   </div>
                   <Link href="#">
-                    <Button className="w-fit bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow hover:shadow-glow-orange group/btn">
+                    <Button className="w-fit bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow hover:shadow-glow-orange text-white group/btn">
                       Read Article
                       <ArrowRight className="ml-2 size-4 transition-transform group-hover/btn:translate-x-1" />
                     </Button>
@@ -302,8 +308,8 @@ export default function BlogPage() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.08 }}
                 >
-                  <Card className="glass-premium overflow-hidden h-full transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_8px_40px_rgba(245,114,36,0.15)] group">
-                    <div className="relative h-48 overflow-hidden">
+                  <Card className={`${isDark ? 'glass-premium' : 'bg-white border border-gray-200 shadow-md'} overflow-hidden h-full transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_8px_40px_rgba(245,114,36,0.15)] group`}>
+                    <div className={`relative h-48 overflow-hidden ${isDark ? 'bg-gray-800' : 'bg-gray-100'}`}>
                       <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent z-10" />
                       <Image
                         src={post.image}
@@ -318,18 +324,18 @@ export default function BlogPage() {
                         <Badge className="bg-[#F57224]/10 text-[#F57224] border-none text-[10px]">
                           {post.category}
                         </Badge>
-                        <span className="flex items-center gap-1 text-[10px] text-muted-foreground/70">
+                        <span className={`flex items-center gap-1 text-[10px] ${isDark ? 'text-muted-foreground/70' : 'text-gray-500'}`}>
                           <Clock className="size-3" />
                           {post.readTime}
                         </span>
                       </div>
-                      <h3 className="font-bold text-foreground mb-2 group-hover:text-[#F57224] transition-colors line-clamp-2">
+                      <h3 className={`font-bold ${isDark ? 'text-foreground' : 'text-gray-800'} mb-2 group-hover:text-[#F57224] transition-colors line-clamp-2`}>
                         {post.title}
                       </h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-2">
+                      <p className={`text-sm ${isDark ? 'text-muted-foreground' : 'text-gray-600'} leading-relaxed mb-4 line-clamp-2`}>
                         {post.excerpt}
                       </p>
-                      <div className="flex flex-wrap items-center gap-3 text-[10px] text-foreground/30 mb-4">
+                      <div className={`flex flex-wrap items-center gap-3 text-[10px] ${isDark ? 'text-foreground/30' : 'text-gray-400'} mb-4`}>
                         <span className="flex items-center gap-1">
                           <User className="size-3" />
                           {post.author}
@@ -370,23 +376,23 @@ export default function BlogPage() {
           >
             <div className="sticky top-24 space-y-6">
               {/* Categories */}
-              <Card className="glass-premium">
+              <Card className={`${isDark ? 'glass-premium' : 'bg-white border border-gray-200 shadow-md'}`}>
                 <CardContent className="p-5">
                   <div className="flex items-center gap-2 mb-4">
                     <Tag className="size-4 text-[#F57224]" />
-                    <h3 className="font-semibold text-foreground">Categories</h3>
+                    <h3 className={`font-semibold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>Categories</h3>
                   </div>
                   <div className="space-y-2">
                     {categories.map((cat) => (
                       <button
                         key={cat.name}
-                        className="flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm text-muted-foreground hover:bg-gradient-to-r hover:from-[#F57224]/20 hover:to-[#F57224]/5 hover:text-[#F57224] transition-all duration-300 group"
+                        className={`flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm ${isDark ? 'text-muted-foreground hover:bg-gradient-to-r hover:from-[#F57224]/20 hover:to-[#F57224]/5 hover:text-[#F57224]' : 'text-gray-600 hover:bg-gradient-to-r hover:from-[#F57224]/10 hover:to-[#F57224]/5 hover:text-[#F57224]'} transition-all duration-300 group`}
                       >
                         <span className="flex items-center gap-2">
-                          <span className="size-1.5 rounded-full bg-muted/20 group-hover:bg-[#F57224] hover:text-white transition-colors" />
+                          <span className={`size-1.5 rounded-full ${isDark ? 'bg-muted/20 group-hover:bg-[#F57224]' : 'bg-gray-300 group-hover:bg-[#F57224]'} transition-colors`} />
                           <span>{cat.name}</span>
                         </span>
-                        <Badge className="bg-muted/30 text-muted-foreground/70 text-[9px] border-none group-hover:bg-[#F57224]/20 group-hover:text-[#F57224] transition-colors">
+                        <Badge className={`${isDark ? 'bg-muted/30 text-muted-foreground/70 group-hover:bg-[#F57224]/20 group-hover:text-[#F57224]' : 'bg-gray-100 text-gray-500 group-hover:bg-[#F57224]/20 group-hover:text-[#F57224]'} text-[9px] border-none transition-colors`}>
                           {cat.count}
                         </Badge>
                       </button>
@@ -396,17 +402,17 @@ export default function BlogPage() {
               </Card>
 
               {/* Tags */}
-              <Card className="glass-premium">
+              <Card className={`${isDark ? 'glass-premium' : 'bg-white border border-gray-200 shadow-md'}`}>
                 <CardContent className="p-5">
                   <div className="flex items-center gap-2 mb-4">
                     <BookOpen className="size-4 text-[#F57224]" />
-                    <h3 className="font-semibold text-foreground">Popular Tags</h3>
+                    <h3 className={`font-semibold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>Popular Tags</h3>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {tags.map((tag) => (
                       <span
                         key={tag}
-                        className="px-3 py-1.5 rounded-full text-[11px] font-medium bg-muted/50 text-muted-foreground border border-border hover:bg-[#F57224]/20 hover:text-[#F57224] hover:border-[#F57224]/30 transition-all duration-300 cursor-pointer"
+                        className={`px-3 py-1.5 rounded-full text-[11px] font-medium ${isDark ? 'bg-muted/50 text-muted-foreground border-border hover:bg-[#F57224]/20 hover:text-[#F57224] hover:border-[#F57224]/30' : 'bg-gray-100 text-gray-600 border-gray-200 hover:bg-[#F57224]/20 hover:text-[#F57224] hover:border-[#F57224]/30'} border transition-all duration-300 cursor-pointer`}
                       >
                         {tag}
                       </span>
@@ -416,16 +422,16 @@ export default function BlogPage() {
               </Card>
 
               {/* Newsletter Card */}
-              <Card className="glass-premium bg-gradient-to-br from-[#F57224]/10 to-[#F57224]/5">
+              <Card className={`${isDark ? 'glass-premium bg-gradient-to-br from-[#F57224]/10 to-[#F57224]/5' : 'bg-gradient-to-br from-[#F57224]/5 to-[#F57224]/3 border border-gray-200 shadow-md'}`}>
                 <CardContent className="p-5 text-center">
-                  <div className="mb-4 inline-flex items-center justify-center rounded-xl bg-[#F57224]/20 p-3">
+                  <div className={`mb-4 inline-flex items-center justify-center rounded-xl ${isDark ? 'bg-[#F57224]/20' : 'bg-[#F57224]/10'} p-3`}>
                     <MessageCircle className="size-6 text-[#F57224]" />
                   </div>
-                  <h3 className="mb-2 font-semibold text-foreground">Stay Updated</h3>
-                  <p className="mb-4 text-xs text-muted-foreground/70">
+                  <h3 className={`mb-2 font-semibold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>Stay Updated</h3>
+                  <p className={`mb-4 text-xs ${isDark ? 'text-muted-foreground/70' : 'text-gray-500'}`}>
                     Get the latest articles and style tips delivered to your inbox.
                   </p>
-                  <Button className="w-full bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow text-xs">
+                  <Button className="w-full bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow text-white text-xs">
                     Subscribe Now
                     <ArrowRight className="ml-2 size-3" />
                   </Button>
@@ -436,32 +442,32 @@ export default function BlogPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA Section - Theme Aware */}
       <section className="relative mx-auto max-w-7xl px-6 pb-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="glass-premium relative overflow-hidden rounded-3xl p-12 text-center"
+          className={`${isDark ? 'glass-premium' : 'bg-white border border-gray-200 shadow-lg'} relative overflow-hidden rounded-3xl p-12 text-center`}
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-[#F57224]/10 via-transparent to-[#F57224]/5" />
+          <div className={`absolute inset-0 bg-gradient-to-r ${isDark ? 'from-[#F57224]/10 via-transparent to-[#F57224]/5' : 'from-[#F57224]/5 via-transparent to-[#F57224]/3'}`} />
           <div className="relative">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-[#F57224]/20 to-[#F57224]/5 mb-6">
+            <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl ${isDark ? 'bg-gradient-to-br from-[#F57224]/20 to-[#F57224]/5' : 'bg-gradient-to-br from-[#F57224]/10 to-[#F57224]/5'} mb-6`}>
               <Heart className="size-8 text-[#F57224]" />
             </div>
-            <h2 className="text-3xl font-bold text-foreground">Join Our Community</h2>
-            <p className="mt-2 text-muted-foreground max-w-md mx-auto">
+            <h2 className={`text-3xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>Join Our Community</h2>
+            <p className={`mt-2 ${isDark ? 'text-muted-foreground' : 'text-gray-600'} max-w-md mx-auto`}>
               Stay ahead of the trends. Subscribe to our newsletter for exclusive content and premium insights.
             </p>
             <div className="mt-6 flex flex-wrap gap-4 justify-center">
               <Link href="/products">
-                <Button className="bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow hover:shadow-glow-orange">
+                <Button className="bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow hover:shadow-glow-orange text-white">
                   Shop Premium
                   <ArrowRight className="ml-2 size-4" />
                 </Button>
               </Link>
               <Link href="/">
-                <Button variant="outline" className="border-border hover:border-[#F57224]/50">
+                <Button variant="outline" className={`${isDark ? 'border-border hover:border-[#F57224]/50' : 'border-gray-300 hover:border-[#F57224]/50'}`}>
                   Explore More
                 </Button>
               </Link>

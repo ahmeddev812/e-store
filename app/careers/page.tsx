@@ -2,6 +2,7 @@
 
 import { useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
+import { useTheme } from "next-themes"
 import Link from "next/link"
 import { Briefcase, MapPin, Clock, Users, Heart, Star, Award, GraduationCap, ArrowRight, Sparkles, ChevronRight } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
@@ -72,14 +73,19 @@ export default function CareersPage() {
   const { scrollYProgress } = useScroll()
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
   const heroScale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95])
+  const { theme } = useTheme()
+  const isDark = theme === 'dark'
 
   return (
-    <div ref={sectionRef} className="overflow-x-hidden">
-      {/* Background */}
-      <div className="fixed inset-0 bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]">
-        <div className="absolute top-20 left-10 size-72 rounded-full bg-[#F57224]/20 blur-[120px] animate-pulse" />
-        <div className="absolute bottom-20 right-10 size-96 rounded-full bg-[#D4A853]/10 blur-[140px] animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-[500px] rounded-full bg-orange-500/5 blur-[100px]" />
+    <div ref={sectionRef} className={`overflow-x-hidden ${isDark ? 'bg-background' : 'bg-gray-50'}`}>
+      {/* Background - Theme Aware */}
+      <div className={`fixed inset-0 ${isDark 
+        ? 'bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]' 
+        : 'bg-gradient-to-br from-gray-100 via-gray-50 to-white'
+      }`}>
+        <div className={`absolute top-20 left-10 size-72 rounded-full ${isDark ? 'bg-[#F57224]/20' : 'bg-[#F57224]/10'} blur-[120px] animate-pulse`} />
+        <div className={`absolute bottom-20 right-10 size-96 rounded-full ${isDark ? 'bg-[#D4A853]/10' : 'bg-[#D4A853]/5'} blur-[140px] animate-pulse delay-1000`} />
+        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-[500px] rounded-full ${isDark ? 'bg-orange-500/5' : 'bg-orange-500/3'} blur-[100px]`} />
       </div>
 
       {/* Hero Section */}
@@ -104,16 +110,16 @@ export default function CareersPage() {
               <span className="text-sm font-medium text-[#F57224]">Careers at BlazeCart</span>
             </motion.div>
 
-            <h1 className="text-5xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+            <h1 className={`text-5xl font-bold tracking-tight ${isDark ? 'text-foreground' : 'text-gray-800'} sm:text-6xl lg:text-7xl`}>
               Join{" "}
               <span className="relative inline-block">
-                <span className="absolute -inset-1 rounded-lg bg-gradient-to-r from-[#F57224]/30 to-[#D4A853]/20 blur-xl" />
+                <span className={`absolute -inset-1 rounded-lg ${isDark ? 'bg-gradient-to-r from-[#F57224]/30 to-[#D4A853]/20' : 'bg-gradient-to-r from-[#F57224]/20 to-[#D4A853]/10'} blur-xl`} />
                 <span className="relative bg-gradient-to-r from-[#F57224] to-[#D4A853] bg-clip-text text-transparent">
                   Our Team
                 </span>
               </span>
             </h1>
-            <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className={`mt-6 text-lg ${isDark ? 'text-muted-foreground' : 'text-gray-600'} max-w-2xl mx-auto`}>
               At BlazeCart, we&apos;re building the future of ecommerce. Join a passionate team
               dedicated to delivering premium shopping experiences to millions worldwide.
             </p>
@@ -125,12 +131,12 @@ export default function CareersPage() {
               className="mt-8 flex flex-wrap gap-4 justify-center"
             >
               <Link href="#openings">
-                <Button className="bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow hover:shadow-glow-orange text-base px-8 py-6">
+                <Button className="bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow hover:shadow-glow-orange text-base px-8 py-6 text-white">
                   View Openings <ArrowRight className="ml-2 size-5" />
                 </Button>
               </Link>
               <Link href="/">
-                <Button variant="outline" className="border-border hover:border-[#F57224]/50 text-base px-8 py-6">
+                <Button variant="outline" className={`${isDark ? 'border-border hover:border-[#F57224]/50' : 'border-gray-300 hover:border-[#F57224]/50'} text-base px-8 py-6`}>
                   Back to Home
                 </Button>
               </Link>
@@ -138,7 +144,7 @@ export default function CareersPage() {
           </motion.div>
         </motion.div>
 
-        {/* Scroll Indicator */}
+        {/* Scroll Indicator - Theme Aware */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -146,13 +152,13 @@ export default function CareersPage() {
           className="absolute bottom-8 left-1/2 -translate-x-1/2"
         >
           <div className="flex flex-col items-center gap-2">
-            <span className="text-xs text-muted-foreground/70">Explore opportunities</span>
+            <span className={`text-xs ${isDark ? 'text-muted-foreground/70' : 'text-gray-500'}`}>Explore opportunities</span>
             <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ repeat: Infinity, repeatType: "loop", duration: 1.5 }}
-              className="flex items-center justify-center size-6 rounded-full border border-border"
+              className={`flex items-center justify-center size-6 rounded-full border ${isDark ? 'border-border' : 'border-gray-300'}`}
             >
-              <ChevronRight className="size-4 rotate-90 text-muted-foreground/70" />
+              <ChevronRight className={`size-4 rotate-90 ${isDark ? 'text-muted-foreground/70' : 'text-gray-500'}`} />
             </motion.div>
           </div>
         </motion.div>
@@ -169,10 +175,10 @@ export default function CareersPage() {
           <Badge className="mb-4 bg-gradient-to-r from-[#F57224]/20 to-[#D4A853]/10 text-[#F57224] border-[#F57224]/30">
             Why Join Us
           </Badge>
-          <h2 className="text-3xl font-bold text-foreground">
+          <h2 className={`text-3xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>
             Perks & <span className="text-gradient">Benefits</span>
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto mt-2">
+          <p className={`${isDark ? 'text-muted-foreground' : 'text-gray-600'} max-w-2xl mx-auto mt-2`}>
             We believe in taking care of our team members with industry-leading benefits.
           </p>
         </motion.div>
@@ -186,13 +192,13 @@ export default function CareersPage() {
         >
           {benefits.map((benefit) => (
             <motion.div key={benefit.title} variants={itemVariants}>
-              <Card className="glass-premium p-6 h-full text-center transition-all duration-300 hover:border-[#F57224]/30 hover:shadow-[0_8px_40px_rgba(245,114,36,0.15)] group">
+              <Card className={`${isDark ? 'glass-premium' : 'bg-white border border-gray-200 shadow-md'} p-6 h-full text-center transition-all duration-300 hover:border-[#F57224]/30 hover:shadow-[0_8px_40px_rgba(245,114,36,0.15)] group`}>
                 <CardContent className="pt-6">
                   <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-[#F57224]/20 to-[#D4A853]/10 text-[#F57224] mb-4 group-hover:scale-110 transition-transform">
                     <benefit.icon className="size-7" />
                   </div>
-                  <h3 className="text-lg font-semibold text-foreground mb-2">{benefit.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{benefit.description}</p>
+                  <h3 className={`text-lg font-semibold ${isDark ? 'text-foreground' : 'text-gray-800'} mb-2`}>{benefit.title}</h3>
+                  <p className={`text-sm ${isDark ? 'text-muted-foreground' : 'text-gray-600'} leading-relaxed`}>{benefit.description}</p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -211,10 +217,10 @@ export default function CareersPage() {
           <Badge className="mb-4 bg-gradient-to-r from-[#F57224]/20 to-[#D4A853]/10 text-[#F57224] border-[#F57224]/30">
             Open Positions
           </Badge>
-          <h2 className="text-3xl font-bold text-foreground">
+          <h2 className={`text-3xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>
             Current <span className="text-gradient">Opportunities</span>
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto mt-2">
+          <p className={`${isDark ? 'text-muted-foreground' : 'text-gray-600'} max-w-2xl mx-auto mt-2`}>
             Find your place at BlazeCart and help shape the future of ecommerce.
           </p>
         </motion.div>
@@ -228,13 +234,13 @@ export default function CareersPage() {
         >
           {openPositions.map((position, index) => (
             <motion.div key={position.title} variants={itemVariants} whileHover={{ y: -5 }}>
-              <Card className="glass-premium p-6 h-full transition-all duration-300 hover:border-[#F57224]/30 hover:shadow-[0_8px_40px_rgba(245,114,36,0.15)] group">
+              <Card className={`${isDark ? 'glass-premium' : 'bg-white border border-gray-200 shadow-md'} p-6 h-full transition-all duration-300 hover:border-[#F57224]/30 hover:shadow-[0_8px_40px_rgba(245,114,36,0.15)] group`}>
                 <CardContent className="pt-6 flex flex-col h-full">
                   <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-[#F57224]/20 to-[#D4A853]/10 text-[#F57224] mb-4 group-hover:scale-110 transition-transform">
                     <Briefcase className="size-6" />
                   </div>
 
-                  <h3 className="text-xl font-semibold text-foreground group-hover:text-[#F57224] transition-colors">
+                  <h3 className={`text-xl font-semibold ${isDark ? 'text-foreground' : 'text-gray-800'} group-hover:text-[#F57224] transition-colors`}>
                     {position.title}
                   </h3>
 
@@ -242,22 +248,22 @@ export default function CareersPage() {
                     {position.department}
                   </Badge>
 
-                  <p className="text-sm text-muted-foreground mt-3 leading-relaxed flex-1">
+                  <p className={`text-sm ${isDark ? 'text-muted-foreground' : 'text-gray-600'} mt-3 leading-relaxed flex-1`}>
                     {position.description}
                   </p>
 
-                  <div className="mt-4 pt-4 border-t border-border space-y-2">
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <div className={`mt-4 pt-4 border-t ${isDark ? 'border-border' : 'border-gray-200'} space-y-2`}>
+                    <div className={`flex items-center gap-2 text-sm ${isDark ? 'text-muted-foreground' : 'text-gray-600'}`}>
                       <MapPin className="size-4 text-[#F57224]" />
                       {position.location}
                     </div>
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <div className={`flex items-center gap-2 text-sm ${isDark ? 'text-muted-foreground' : 'text-gray-600'}`}>
                       <Clock className="size-4 text-[#D4A853]" />
                       {position.type}
                     </div>
                   </div>
 
-                  <Button className="mt-4 w-full bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow hover:shadow-glow-orange group/btn">
+                  <Button className="mt-4 w-full bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow hover:shadow-glow-orange text-white group/btn">
                     Apply Now <ArrowRight className="ml-2 size-4 transition-transform group-hover/btn:translate-x-1" />
                   </Button>
                 </CardContent>
@@ -283,16 +289,16 @@ export default function CareersPage() {
               transition={{ delay: index * 0.1, type: "spring" }}
               viewport={{ once: true }}
             >
-              <Card className="glass-premium text-center p-6 transition-all duration-300 hover:scale-105 hover:shadow-[0_8px_40px_rgba(245,114,36,0.2)] group">
+              <Card className={`${isDark ? 'glass-premium' : 'bg-white border border-gray-200 shadow-md'} text-center p-6 transition-all duration-300 hover:scale-105 hover:shadow-[0_8px_40px_rgba(245,114,36,0.2)] group`}>
                 <CardContent className="pt-6">
                   <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-[#F57224]/20 to-[#D4A853]/10 text-[#F57224] mb-4 group-hover:scale-110 transition-transform">
                     <stat.icon className="size-7" />
                   </div>
-                  <div className="text-4xl font-bold text-foreground mb-2">
+                  <div className={`text-4xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'} mb-2`}>
                     {stat.value}
                     {stat.suffix && <span className="text-xl text-[#F57224]">{stat.suffix}</span>}
                   </div>
-                  <div className="text-sm text-muted-foreground">{stat.label}</div>
+                  <div className={`text-sm ${isDark ? 'text-muted-foreground' : 'text-gray-500'}`}>{stat.label}</div>
                 </CardContent>
               </Card>
             </motion.div>
@@ -300,30 +306,30 @@ export default function CareersPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA Section - Theme Aware */}
       <section className="mx-auto max-w-7xl px-6 py-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="glass-premium relative overflow-hidden rounded-3xl p-12 text-center"
+          className={`${isDark ? 'glass-premium' : 'bg-white border border-gray-200 shadow-lg'} relative overflow-hidden rounded-3xl p-12 text-center`}
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-[#F57224]/10 via-transparent to-[#D4A853]/5" />
+          <div className={`absolute inset-0 bg-gradient-to-r ${isDark ? 'from-[#F57224]/10 via-transparent to-[#D4A853]/5' : 'from-[#F57224]/5 via-transparent to-[#D4A853]/3'}`} />
           <div className="relative">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-[#F57224]/20 to-[#D4A853]/10 mb-6">
+            <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl ${isDark ? 'bg-gradient-to-br from-[#F57224]/20 to-[#D4A853]/10' : 'bg-gradient-to-br from-[#F57224]/10 to-[#D4A853]/5'} mb-6`}>
               <Users className="size-8 text-[#F57224]" />
             </div>
-            <h2 className="text-3xl font-bold text-foreground">Ready to Make an Impact?</h2>
-            <p className="mt-2 text-muted-foreground max-w-md mx-auto">
+            <h2 className={`text-3xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>Ready to Make an Impact?</h2>
+            <p className={`mt-2 ${isDark ? 'text-muted-foreground' : 'text-gray-600'} max-w-md mx-auto`}>
               Don&apos;t see the perfect role? Send us your resume and we&apos;ll keep you in mind
               for future opportunities.
             </p>
             <div className="mt-6 flex flex-wrap gap-4 justify-center">
-              <Button className="bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow hover:shadow-glow-orange text-base px-8 py-6">
+              <Button className="bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow hover:shadow-glow-orange text-base px-8 py-6 text-white">
                 Submit Resume <ArrowRight className="ml-2 size-5" />
               </Button>
               <Link href="/">
-                <Button variant="outline" className="border-border hover:border-[#F57224]/50 text-base px-8 py-6">
+                <Button variant="outline" className={`${isDark ? 'border-border hover:border-[#F57224]/50' : 'border-gray-300 hover:border-[#F57224]/50'} text-base px-8 py-6`}>
                   Back to Home
                 </Button>
               </Link>
