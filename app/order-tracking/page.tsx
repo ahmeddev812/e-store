@@ -65,6 +65,7 @@ export default function OrderTrackingPage() {
   const [error, setError] = useState("")
   const [searched, setSearched] = useState(false)
 
+
   const handleLookup = () => {
     const trimmed = searchId.trim()
     if (!trimmed) {
@@ -247,7 +248,7 @@ export default function OrderTrackingPage() {
       {!order && !error && !searched && (
         <div className="text-center py-12 animate-fade-in">
           <div className="inline-flex rounded-full bg-muted/50 backdrop-blur-xl border border-border p-6 mb-4">
-            <Truck className="size-12 text-white/20" />
+            <Truck className="size-12 text-foreground/20" />
           </div>
           <p className="text-muted-foreground/70 text-sm">Enter an order ID above to track your package.</p>
         </div>

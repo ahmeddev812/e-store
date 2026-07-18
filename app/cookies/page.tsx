@@ -61,13 +61,13 @@ const sections: {
   id: string
   title: string
   icon: React.ElementType
-  content: React.ReactNode
+  content: () => React.ReactNode
 }[] = [
   {
     id: "what-are-cookies",
     title: "What Are Cookies",
     icon: Info,
-    content: (
+    content: () => (
       <div className="space-y-4 text-muted-foreground leading-relaxed">
         <p>
           Cookies are small text files that are stored on your device (computer, tablet, or mobile phone)
@@ -85,7 +85,7 @@ const sections: {
           assigned to your browser and can only be read by the website that set them. This means that
           a cookie set by premium-ecommerce.com cannot be read by any other website you visit.
         </p>
-        <div className="rounded-xl bg-[#F57224]/5 border border-[#F57224]/10 p-4">
+        <div className="rounded-xl bg-[#F57224]/5 border-[#F57224]/15 border p-4">
           <p className="text-sm">
             <strong className="text-foreground">Did you know?</strong> The term &ldquo;cookie&rdquo; was
             coined by web browser programmer Lou Montulli in 1994, derived from the term
@@ -99,12 +99,12 @@ const sections: {
     id: "how-we-use-cookies",
     title: "How We Use Cookies",
     icon: Cookie,
-    content: (
+    content: () => (
       <div className="space-y-6">
         {cookieTypes.map((type) => (
           <div
             key={type.category}
-            className="rounded-xl bg-accent/10 border border-border/50 p-5 transition-all hover:border-[#F57224]/20 hover:bg-[#F57224]/[0.02]"
+            className="rounded-xl bg-accent/10 border-border/50 border p-5 transition-all hover:border-[#F57224]/20 hover:bg-[#F57224]/[0.02]"
           >
             <div className="flex items-start gap-4">
               <div className="rounded-lg bg-[#F57224]/10 p-2.5 flex-shrink-0">
@@ -124,7 +124,7 @@ const sections: {
                   {type.examples.map((ex) => (
                     <span
                       key={ex}
-                      className="text-[10px] px-2 py-0.5 rounded-full bg-muted/50 text-muted-foreground/70 border border-border/50"
+                      className="text-[10px] px-2 py-0.5 rounded-full bg-muted/50 text-muted-foreground/70 border-border/50 border"
                     >
                       {ex}
                     </span>
@@ -144,14 +144,14 @@ const sections: {
     id: "third-party",
     title: "Third-Party Cookies",
     icon: ExternalLink,
-    content: (
+    content: () => (
       <div className="space-y-4 text-muted-foreground leading-relaxed">
         <p>
           Some cookies on our website are placed by third-party service providers on our behalf.
           These third parties may use cookies to collect information about your online activities
           across different websites and over time for analytics, advertising, and other purposes.
         </p>
-        <div className="rounded-xl bg-accent/10 border border-border/50 p-5 space-y-4">
+        <div className="rounded-xl bg-accent/10 border-border/50 border p-5 space-y-4">
           <div className="flex items-start gap-3">
             <div className="rounded-lg bg-blue-500/10 p-2 flex-shrink-0">
               <Shield className="size-4 text-blue-400" />
@@ -206,14 +206,14 @@ const sections: {
     id: "managing-cookies",
     title: "Managing Cookies",
     icon: Settings,
-    content: (
+    content: () => (
       <div className="space-y-4 text-muted-foreground leading-relaxed">
         <p>
           Most web browsers allow you to control cookies through their settings preferences.
           You can choose to block all cookies, delete existing cookies, or set up notifications
           for when a cookie is being placed on your device.
         </p>
-        <div className="rounded-xl bg-accent/10 border border-border/50 p-5 space-y-3">
+        <div className="rounded-xl bg-accent/10 border-border/50 border p-5 space-y-3">
           <p className="text-sm font-semibold text-foreground mb-2">
             How to manage cookies in popular browsers:
           </p>
@@ -232,7 +232,7 @@ const sections: {
             </div>
           ))}
         </div>
-        <div className="rounded-xl bg-amber-500/5 border border-amber-500/10 p-4 flex items-start gap-3">
+        <div className="rounded-xl bg-amber-500/5 border-amber-500/10 border p-4 flex items-start gap-3">
           <AlertTriangle className="size-5 text-amber-400 flex-shrink-0 mt-0.5" />
           <div className="text-sm">
             <strong className="text-amber-300">Important:</strong> If you disable or block cookies,
@@ -248,13 +248,13 @@ const sections: {
     id: "your-choices",
     title: "Your Choices",
     icon: CheckCircle,
-    content: (
+    content: () => (
       <div className="space-y-4 text-muted-foreground leading-relaxed">
         <p>
           You have several options when it comes to controlling cookies and your data privacy:
         </p>
         <div className="grid gap-4 sm:grid-cols-2">
-          <div className="rounded-xl bg-accent/10 border border-border/50 p-5">
+          <div className="rounded-xl bg-accent/10 border-border/50 border p-5">
             <div className="rounded-lg bg-[#F57224]/10 p-2 w-fit mb-3">
               <Settings className="size-4 text-[#F57224]" />
             </div>
@@ -264,7 +264,7 @@ const sections: {
               granular control over which cookies are stored on your device.
             </p>
           </div>
-          <div className="rounded-xl bg-accent/10 border border-border/50 p-5">
+          <div className="rounded-xl bg-accent/10 border-border/50 border p-5">
             <div className="rounded-lg bg-[#F57224]/10 p-2 w-fit mb-3">
               <XCircle className="size-4 text-[#F57224]" />
             </div>
@@ -274,7 +274,7 @@ const sections: {
               page or the Digital Advertising Alliance (DAA) opt-out tool.
             </p>
           </div>
-          <div className="rounded-xl bg-accent/10 border border-border/50 p-5">
+          <div className="rounded-xl bg-accent/10 border-border/50 border p-5">
             <div className="rounded-lg bg-[#F57224]/10 p-2 w-fit mb-3">
               <Shield className="size-4 text-[#F57224]" />
             </div>
@@ -284,7 +284,7 @@ const sections: {
               websites to disable tracking. We respect DNT signals where technically feasible.
             </p>
           </div>
-          <div className="rounded-xl bg-accent/10 border border-border/50 p-5">
+          <div className="rounded-xl bg-accent/10 border-border/50 border p-5">
             <div className="rounded-lg bg-[#F57224]/10 p-2 w-fit mb-3">
               <FileText className="size-4 text-[#F57224]" />
             </div>
@@ -322,12 +322,12 @@ export default function CookiesPage() {
   }
 
   return (
-    <div className="min-h-screen overflow-x-hidden">
-      {/* Premium Background */}
-      <div className="fixed inset-0 bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]">
-        <div className="absolute top-20 left-10 size-72 rounded-full bg-[#F57224]/20 blur-[120px] animate-pulse" />
-        <div className="absolute bottom-20 right-10 size-96 rounded-full bg-[#F57224]/10 blur-[140px] animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-[500px] rounded-full bg-orange-500/5 blur-[100px]" />
+    <div className={`min-h-screen overflow-x-hidden bg-background`}>
+      {/* Premium Background - Theme Aware */}
+      <div className="fixed inset-0 bg-gradient-to-br from-muted/30 via-muted/10 to-background">
+        <div className="absolute top-20 left-10 size-72 rounded-full bg-[#F57224]/15 blur-[120px] animate-pulse" />
+        <div className="absolute bottom-20 right-10 size-96 rounded-full bg-[#F57224]/8 blur-[140px] animate-pulse delay-1000" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-[500px] rounded-full bg-orange-500/4 blur-[100px]" />
       </div>
 
       {/* Back Navigation */}
@@ -340,7 +340,7 @@ export default function CookiesPage() {
           >
             <Link
               href="/"
-              className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-[#F57224] group"
+              className={`inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-[#F57224] transition-colors group`}
             >
               <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-1" />
               Back to Home
@@ -369,11 +369,11 @@ export default function CookiesPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl font-bold text-foreground sm:text-5xl lg:text-6xl"
+            className={`text-4xl font-bold text-foreground sm:text-5xl lg:text-6xl`}
           >
             Cookie{" "}
             <span className="relative inline-block">
-              <span className="absolute -inset-1 rounded-lg bg-gradient-to-r from-[#F57224]/30 to-[#F57224]/20 blur-xl" />
+              <span className="absolute -inset-1 rounded-lg bg-gradient-to-r from-[#F57224]/25 to-[#F57224]/15 blur-xl" />
               <span className="relative bg-gradient-to-r from-[#F57224] to-orange-400 bg-clip-text text-transparent">
                 Policy
               </span>
@@ -384,7 +384,7 @@ export default function CookiesPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mx-auto mt-4 max-w-2xl text-muted-foreground"
+            className={`mx-auto mt-4 max-w-2xl text-muted-foreground`}
           >
             How we use cookies and similar technologies to enhance your shopping experience
           </motion.p>
@@ -405,7 +405,7 @@ export default function CookiesPage() {
       {/* Main Content */}
       <div className="relative mx-auto max-w-7xl px-6 pb-20">
         <div className="grid gap-8 lg:grid-cols-4">
-          {/* Sidebar */}
+          {/* Sidebar - Theme Aware */}
           <motion.aside
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -414,9 +414,9 @@ export default function CookiesPage() {
           >
             <div className="sticky top-24 space-y-6">
               {/* Table of Contents */}
-              <Card className="glass-premium" padding="none">
+              <Card className={`glass-premium`}>
                 <CardContent className="p-5">
-                  <h3 className="mb-4 flex items-center gap-2 text-sm font-semibold text-foreground">
+                  <h3 className={`mb-4 flex items-center gap-2 text-sm font-semibold text-foreground`}>
                     <FileText className="size-4 text-[#F57224]" />
                     On This Page
                   </h3>
@@ -425,7 +425,7 @@ export default function CookiesPage() {
                       <a
                         key={section.id}
                         href={`#section-${section.id}`}
-                        className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-muted-foreground transition-all hover:bg-muted/50 hover:text-[#F57224]"
+                        className={`flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-muted-foreground hover:bg-muted/50 hover:text-[#F57224] transition-all`}
                       >
                         <section.icon className="size-3" />
                         {section.title}
@@ -436,16 +436,16 @@ export default function CookiesPage() {
               </Card>
 
               {/* Quick Links */}
-              <Card className="glass-premium" padding="none">
+              <Card className={`glass-premium`}>
                 <CardContent className="p-5">
-                  <h3 className="mb-4 flex items-center gap-2 text-sm font-semibold text-foreground">
+                  <h3 className={`mb-4 flex items-center gap-2 text-sm font-semibold text-foreground`}>
                     <ArrowRight className="size-4 text-[#F57224]" />
                     Related Policies
                   </h3>
                   <div className="space-y-2">
                     <Link
                       href="/privacy"
-                      className="flex items-center justify-between rounded-lg p-2 text-sm text-muted-foreground transition-all hover:bg-muted/50 hover:text-[#F57224]"
+                      className={`flex items-center justify-between rounded-lg p-2 text-sm text-muted-foreground hover:bg-muted/50 hover:text-[#F57224] transition-all`}
                     >
                       <span className="flex items-center gap-2">
                         <Shield className="size-3" />
@@ -455,7 +455,7 @@ export default function CookiesPage() {
                     </Link>
                     <Link
                       href="/gdpr"
-                      className="flex items-center justify-between rounded-lg p-2 text-sm text-muted-foreground transition-all hover:bg-muted/50 hover:text-[#F57224]"
+                      className={`flex items-center justify-between rounded-lg p-2 text-sm text-muted-foreground hover:bg-muted/50 hover:text-[#F57224] transition-all`}
                     >
                       <span className="flex items-center gap-2">
                         <FileText className="size-3" />
@@ -465,7 +465,7 @@ export default function CookiesPage() {
                     </Link>
                     <Link
                       href="/terms"
-                      className="flex items-center justify-between rounded-lg p-2 text-sm text-muted-foreground transition-all hover:bg-muted/50 hover:text-[#F57224]"
+                      className={`flex items-center justify-between rounded-lg p-2 text-sm text-muted-foreground hover:bg-muted/50 hover:text-[#F57224] transition-all`}
                     >
                       <span className="flex items-center gap-2">
                         <AlertTriangle className="size-3" />
@@ -478,16 +478,16 @@ export default function CookiesPage() {
               </Card>
 
               {/* Consent Summary Card */}
-              <Card className="glass-premium bg-gradient-to-br from-[#F57224]/10 to-[#F57224]/5" padding="none">
+              <Card className="glass-premium bg-gradient-to-br from-[#F57224]/8 to-[#F57224]/4">
                 <CardContent className="p-5">
-                  <h3 className="mb-3 flex items-center gap-2 text-sm font-semibold text-foreground">
+                  <h3 className={`mb-3 flex items-center gap-2 text-sm font-semibold text-foreground`}>
                     <CheckCircle className="size-4 text-[#F57224]" />
                     Cookie Preferences
                   </h3>
-                  <p className="mb-4 text-xs text-muted-foreground/70">
+                  <p className={`mb-4 text-xs text-muted-foreground/70`}>
                     You can review and update your cookie consent preferences at any time.
                   </p>
-                  <Button className="w-full bg-gradient-to-r from-[#F57224] to-orange-500 text-sm shadow-glow">
+                  <Button className="w-full bg-gradient-to-r from-[#F57224] to-orange-500 text-sm shadow-glow text-white">
                     <Settings className="mr-2 size-3" />
                     Manage Consent
                   </Button>
@@ -504,10 +504,10 @@ export default function CookiesPage() {
             className="lg:col-span-3 space-y-6"
           >
             {/* Introduction Card */}
-            <Card className="glass-premium" padding="none">
+            <Card className={`glass-premium`}>
               <CardContent className="p-6 md:p-8">
-                <div className="rounded-xl bg-gradient-to-r from-[#F57224]/5 to-transparent border border-[#F57224]/10 p-5 mb-6">
-                  <p className="text-sm text-muted-foreground leading-relaxed">
+                <div className="rounded-xl bg-gradient-to-r from-[#F57224]/5 to-transparent border-[#F57224]/15 border p-5 mb-6">
+                  <p className={`text-sm text-muted-foreground leading-relaxed`}>
                     This Cookie Policy explains what cookies are, how we use them, the types of
                     cookies we use, and how you can control them. By using our website, you consent
                     to the use of cookies in accordance with this policy. If you do not agree to
@@ -519,23 +519,23 @@ export default function CookiesPage() {
                 {/* Expandable Sections */}
                 {sections.map((section, index) => (
                   <div key={section.id} id={`section-${section.id}`}>
-                    <div className="border-b border-border last:border-b-0">
+                    <div className={`border-b border-border last:border-b-0`}>
                       <button
                         onClick={() => toggleSection(section.id)}
                         className="flex w-full items-center justify-between py-5 text-left transition-all duration-300 hover:pl-2 group"
                       >
                         <div className="flex items-center gap-3">
-                          <div className="rounded-lg bg-[#F57224]/10 p-2 group-hover:bg-[#F57224]/20 transition-colors">
+                          <div className={`rounded-lg bg-[#F57224]/10 group-hover:bg-[#F57224]/20 p-2 transition-colors`}>
                             <section.icon className="size-5 text-[#F57224]" />
                           </div>
-                          <h2 className="text-lg font-bold text-foreground group-hover:text-[#F57224] transition-colors">
+                          <h2 className={`text-lg font-bold text-foreground group-hover:text-[#F57224] transition-colors`}>
                             {section.title}
                           </h2>
                         </div>
                         <motion.span
                           animate={{ rotate: openSections.has(section.id) ? 180 : 0 }}
                           transition={{ duration: 0.3 }}
-                          className="flex-shrink-0 rounded-full bg-[#F57224]/10 p-1.5 text-[#F57224]"
+                          className={`flex-shrink-0 rounded-full bg-[#F57224]/10 p-1.5 text-[#F57224]`}
                         >
                           <ChevronDown className="size-4" />
                         </motion.span>
@@ -550,7 +550,7 @@ export default function CookiesPage() {
                             transition={{ duration: 0.3, ease: "easeInOut" }}
                           >
                             <div className="pb-6 pl-0 md:pl-14">
-                              {section.content}
+                              {section.content()}
                             </div>
                           </motion.div>
                         )}
@@ -565,10 +565,10 @@ export default function CookiesPage() {
             </Card>
 
             {/* Cookie Types Table */}
-            <Card className="glass-premium" padding="none">
+            <Card className={`glass-premium`}>
               <CardContent className="p-6 md:p-8">
-                <h2 className="text-xl font-bold text-foreground mb-6 flex items-center gap-3">
-                  <div className="rounded-lg bg-[#F57224]/10 p-2">
+                <h2 className={`text-xl font-bold text-foreground mb-6 flex items-center gap-3`}>
+                  <div className={`rounded-lg bg-[#F57224]/10 p-2`}>
                     <Cookie className="size-5 text-[#F57224]" />
                   </div>
                   Cookie Types Overview
@@ -578,29 +578,29 @@ export default function CookiesPage() {
                 <div className="hidden md:block overflow-x-auto">
                   <table className="w-full text-left">
                     <thead>
-                      <tr className="border-b border-border">
-                        <th className="pb-3 pr-4 text-sm font-semibold text-foreground">Type</th>
-                        <th className="pb-3 pr-4 text-sm font-semibold text-foreground">Purpose</th>
-                        <th className="pb-3 pr-4 text-sm font-semibold text-foreground">Duration</th>
-                        <th className="pb-3 text-sm font-semibold text-foreground">Control</th>
+                      <tr className={`border-b border-border`}>
+                        <th className={`pb-3 pr-4 text-sm font-semibold text-foreground`}>Type</th>
+                        <th className={`pb-3 pr-4 text-sm font-semibold text-foreground`}>Purpose</th>
+                        <th className={`pb-3 pr-4 text-sm font-semibold text-foreground`}>Duration</th>
+                        <th className={`pb-3 text-sm font-semibold text-foreground`}>Control</th>
                       </tr>
                     </thead>
                     <tbody>
                       {cookieTypes.map((type) => (
-                        <tr key={type.category} className="border-b border-border/50 last:border-0">
+                        <tr key={type.category} className={`border-b border-border/50 last:border-0`}>
                           <td className="py-4 pr-4">
                             <div className="flex items-center gap-2">
-                              <div className="rounded-md bg-[#F57224]/10 p-1.5">
+                              <div className={`rounded-md bg-[#F57224]/10 p-1.5`}>
                                 <type.icon className="size-4 text-[#F57224]" />
                               </div>
-                              <span className="text-sm font-medium text-foreground">{type.category}</span>
+                              <span className={`text-sm font-medium text-foreground`}>{type.category}</span>
                             </div>
                           </td>
                           <td className="py-4 pr-4">
-                            <p className="text-sm text-muted-foreground max-w-xs">{type.purpose}</p>
+                            <p className={`text-sm text-muted-foreground max-w-xs`}>{type.purpose}</p>
                           </td>
                           <td className="py-4 pr-4">
-                            <span className="text-sm text-muted-foreground">{type.duration}</span>
+                            <span className={`text-sm text-muted-foreground`}>{type.duration}</span>
                           </td>
                           <td className="py-4">
                             {type.alwaysOn ? (
@@ -608,7 +608,7 @@ export default function CookiesPage() {
                                 Always Active
                               </Badge>
                             ) : (
-                              <Badge className="bg-muted/30 text-muted-foreground border-none text-[10px]">
+                              <Badge className={`bg-muted/30 text-muted-foreground border-none text-[10px]`}>
                                 Optional
                               </Badge>
                             )}
@@ -622,24 +622,23 @@ export default function CookiesPage() {
                 {/* Mobile Cards */}
                 <div className="md:hidden space-y-3">
                   {cookieTypes.map((type) => (
-                    <div key={type.category} className="rounded-xl bg-accent/10 border border-border/50 p-4">
+                    <div key={type.category} className={`rounded-xl bg-accent/10 border-border/50 border p-4`}>
                       <div className="flex items-center gap-2 mb-2">
-                        <div className="rounded-md bg-[#F57224]/10 p-1.5">
+                        <div className={`rounded-md bg-[#F57224]/10 p-1.5`}>
                           <type.icon className="size-4 text-[#F57224]" />
                         </div>
-                        <span className="font-semibold text-foreground text-sm">{type.category}</span>
+                        <span className={`font-semibold text-foreground text-sm`}>{type.category}</span>
                         {type.alwaysOn ? (
                           <Badge className="bg-emerald-500/10 text-emerald-400 border-none text-[9px] ml-auto">
-                            Always Active
-                          </Badge>
+                            Always Active                          </Badge>
                         ) : (
-                          <Badge className="bg-muted/30 text-muted-foreground border-none text-[9px] ml-auto">
+                          <Badge className={`bg-muted/30 text-muted-foreground border-none text-[9px] ml-auto`}>
                             Optional
                           </Badge>
                         )}
                       </div>
-                      <p className="text-sm text-muted-foreground mb-1">{type.purpose}</p>
-                      <p className="text-[11px] text-foreground/30">Duration: {type.duration}</p>
+                      <p className={`text-sm text-muted-foreground mb-1`}>{type.purpose}</p>
+                      <p className={`text-[11px] text-foreground/30`}>Duration: {type.duration}</p>
                     </div>
                   ))}
                 </div>
@@ -647,29 +646,29 @@ export default function CookiesPage() {
             </Card>
 
             {/* Policy Footer */}
-            <Card className="glass-premium bg-gradient-to-br from-[#F57224]/5 to-transparent" padding="none">
+            <Card className="glass-premium bg-gradient-to-br from-[#F57224]/5 to-transparent">
               <CardContent className="p-6 md:p-8">
                 <div className="flex flex-col md:flex-row items-start gap-6">
-                  <div className="rounded-xl bg-[#F57224]/10 p-3 flex-shrink-0">
+                  <div className={`rounded-xl bg-[#F57224]/10 p-3 flex-shrink-0`}>
                     <Shield className="size-8 text-[#F57224]" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-lg font-bold text-foreground mb-2">
+                    <h3 className={`text-lg font-bold text-foreground mb-2`}>
                       Questions About Our Cookie Policy?
                     </h3>
-                    <p className="text-sm text-muted-foreground mb-4">
+                    <p className={`text-sm text-muted-foreground mb-4`}>
                       If you have any questions or concerns about how we use cookies, please
                       review our full Privacy Policy or contact our Data Protection Officer.
                     </p>
                     <div className="flex flex-wrap gap-3">
                       <Link href="/privacy">
-                        <Button className="bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow text-sm">
+                        <Button className="bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow text-sm text-white">
                           <Shield className="mr-2 size-3" />
                           Privacy Policy
                         </Button>
                       </Link>
                       <Link href="/contact">
-                        <Button variant="outline" className="border-border hover:border-[#F57224]/50 text-sm">
+                        <Button variant="outline" className={`border-border hover:border-[#F57224]/50 text-sm`}>
                           <ExternalLink className="mr-2 size-3" />
                           Contact Us
                         </Button>
@@ -681,12 +680,12 @@ export default function CookiesPage() {
             </Card>
 
             {/* GDPR & Compliance Note */}
-            <div className="rounded-xl bg-gradient-to-r from-[#F57224]/10 to-transparent border border-[#F57224]/10 p-5">
+            <div className="rounded-xl bg-gradient-to-r from-[#F57224]/8 to-transparent border-[#F57224]/15 border p-5">
               <div className="flex items-start gap-3">
                 <CheckCircle className="size-5 text-emerald-400 flex-shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="font-semibold text-foreground text-sm mb-1">GDPR & ePrivacy Compliance</h4>
-                  <p className="text-sm text-muted-foreground">
+                  <h4 className={`font-semibold text-foreground text-sm mb-1`}>GDPR & ePrivacy Compliance</h4>
+                  <p className={`text-sm text-muted-foreground`}>
                     We comply with the General Data Protection Regulation (GDPR), the ePrivacy
                     Directive, and all applicable data protection laws. Our cookie usage follows
                     the principles of data minimization, purpose limitation, and user consent.

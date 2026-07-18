@@ -4,7 +4,7 @@ import { Suspense, useMemo, useState, useEffect, useRef } from "react"
 import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
-import { useTheme } from "next-themes"
+
 
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import { 
@@ -38,8 +38,6 @@ const sortOptions = [
 function ProductCard({ product, index }: { product: any; index: number }) {
   const [isHovered, setIsHovered] = useState(false)
   const discountedPrice = getDiscountPrice(product.price, product.discountPercentage)
-  const { theme } = useTheme()
-  const isDark = theme === 'dark'
 
   return (
     <motion.div
@@ -51,9 +49,9 @@ function ProductCard({ product, index }: { product: any; index: number }) {
       onHoverEnd={() => setIsHovered(false)}
     >
       <Link href={`/products/${product.slug}`}>
-        <Card className={`group relative overflow-hidden transition-all duration-500 hover:border-[#F57224]/30 hover:shadow-[0_0_40px_rgba(245,114,36,0.2)] ${isDark ? 'bg-card border-border' : 'bg-white border-gray-200'}`}>
+        <Card className="group relative overflow-hidden transition-all duration-500 hover:border-[#F57224]/30 hover:shadow-[0_0_40px_rgba(245,114,36,0.2)] bg-card border-border">
           {/* Image Container */}
-          <div className={`relative overflow-hidden ${isDark ? 'bg-gray-900' : 'bg-gray-100'}`}>
+          <div className="relative overflow-hidden bg-muted">
             <Image
               src={product.thumbnail}
               alt={product.title}
@@ -74,7 +72,7 @@ function ProductCard({ product, index }: { product: any; index: number }) {
             {/* Top Rated Badge */}
             {product.rating >= 4.5 && (
               <div className="absolute right-3 top-3 z-10">
-                <Badge variant="secondary" className={`${isDark ? 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30' : 'bg-yellow-100 text-yellow-700 border-yellow-300'} backdrop-blur-sm`}>
+                <Badge variant="secondary" className="bg-yellow-500/20 text-yellow-400 border-yellow-500/30 backdrop-blur-sm">
                   <Star className="mr-1 size-3 fill-yellow-500" /> Top Rated
                 </Badge>
               </div>
@@ -87,11 +85,11 @@ function ProductCard({ product, index }: { product: any; index: number }) {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 20 }}
-                  className={`absolute inset-0 flex items-center justify-center ${isDark ? 'bg-background/60' : 'bg-white/60'} backdrop-blur-sm`}
+                  className="absolute inset-0 flex items-center justify-center bg-background/60 backdrop-blur-sm"
                 >
                   <Button 
                     variant="outline" 
-                    className={`${isDark ? 'border-border bg-muted/30 text-foreground' : 'border-gray-300 bg-white/90 text-gray-700'} hover:bg-[#F57224] hover:text-white hover:border-[#F57224]`}
+                    className="border-border bg-muted/30 text-foreground hover:bg-[#F57224] hover:text-white hover:border-[#F57224]"
                     onClick={(e) => {
                       e.preventDefault()
                       window.location.href = `/products/${product.slug}`
@@ -107,8 +105,8 @@ function ProductCard({ product, index }: { product: any; index: number }) {
 
           {/* Content */}
           <CardContent className="p-4">
-            <p className={`text-xs ${isDark ? 'text-muted-foreground/70' : 'text-gray-500'} uppercase tracking-wider`}>{product.brand}</p>
-            <h3 className={`mt-1 font-semibold ${isDark ? 'text-foreground' : 'text-gray-800'} line-clamp-2 group-hover:text-[#F57224] transition-colors`}>
+            <p className="text-xs text-muted-foreground/70 uppercase tracking-wider">{product.brand}</p>
+            <h3 className="mt-1 font-semibold text-foreground line-clamp-2 group-hover:text-[#F57224] transition-colors">
               {truncate(product.title, 45)}
             </h3>
             
@@ -116,7 +114,7 @@ function ProductCard({ product, index }: { product: any; index: number }) {
             <div className="mt-2 flex items-baseline gap-2">
               <span className="text-xl font-bold text-[#F57224]">{formatUSD(discountedPrice)}</span>
               {product.discountPercentage > 0 && (
-                <span className={`text-xs ${isDark ? 'text-muted-foreground/70' : 'text-gray-400'} line-through`}>{formatUSD(product.price)}</span>
+                <span className="text-xs text-muted-foreground/70 line-through">{formatUSD(product.price)}</span>
               )}
             </div>
             
@@ -134,7 +132,7 @@ function ProductCard({ product, index }: { product: any; index: number }) {
             {/* Progress Bar */}
             {product.stock < 30 && product.stock > 0 && (
               <div className="mt-3">
-                <div className={`h-1.5 rounded-full ${isDark ? 'bg-muted/30' : 'bg-gray-200'} overflow-hidden`}>
+                <div className="h-1.5 rounded-full bg-muted/30 overflow-hidden">
                   <motion.div
                     initial={{ width: 0 }}
                     whileInView={{ width: `${(product.stock / 100) * 100}%` }}
@@ -159,13 +157,11 @@ function FilterSidebar({
   onClose 
 }: any) {
   const [localPriceRange, setLocalPriceRange] = useState(priceRange)
-  const { theme } = useTheme()
-  const isDark = theme === 'dark'
   
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between lg:hidden">
-        <h3 className={`font-semibold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>Filters</h3>
+        <h3 className="font-semibold text-foreground">Filters</h3>
         <Button variant="ghost" size="sm" onClick={onClose}>
           <X className="size-4" />
         </Button>
@@ -173,14 +169,14 @@ function FilterSidebar({
 
       {/* Categories */}
       <div>
-        <h4 className={`mb-3 text-sm font-medium ${isDark ? 'text-foreground' : 'text-gray-800'}`}>Categories</h4>
+        <h4 className="mb-3 text-sm font-medium text-foreground">Categories</h4>
         <div className="space-y-2">
           <button
             onClick={() => setCategory("")}
             className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all ${
               category === "" 
                 ? "bg-gradient-to-r from-[#F57224]/20 to-[#F57224]/5 text-[#F57224]" 
-                : isDark ? "text-muted-foreground hover:bg-muted/50 hover:text-foreground" : "text-gray-600 hover:bg-gray-100 hover:text-gray-800"
+                : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
             }`}
           >
             All Categories
@@ -192,11 +188,11 @@ function FilterSidebar({
               className={`flex w-full items-center justify-between px-3 py-2 rounded-lg text-sm transition-all ${
                 category === cat.slug 
                   ? "bg-gradient-to-r from-[#F57224]/20 to-[#F57224]/5 text-[#F57224]" 
-                  : isDark ? "text-muted-foreground hover:bg-muted/50 hover:text-foreground" : "text-gray-600 hover:bg-gray-100 hover:text-gray-800"
+                  : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
               }`}
             >
               <span>{cat.name}</span>
-              <Badge className={`${isDark ? 'bg-muted/30 text-muted-foreground/70' : 'bg-gray-100 text-gray-500'} text-[9px] border-none`}>
+              <Badge className="bg-muted/30 text-muted-foreground/70 text-[9px] border-none">
                 {cat._count.products}
               </Badge>
             </button>
@@ -206,7 +202,7 @@ function FilterSidebar({
 
       {/* Price Range */}
       <div>
-        <h4 className={`mb-3 text-sm font-medium ${isDark ? 'text-foreground' : 'text-gray-800'}`}>Price Range</h4>
+        <h4 className="mb-3 text-sm font-medium text-foreground">Price Range</h4>
         <div className="px-2">
           <input
             type="range"
@@ -219,10 +215,10 @@ function FilterSidebar({
             }}
             className="w-full h-2 rounded-lg appearance-none bg-gradient-to-r from-[#F57224] to-orange-500"
             style={{
-              background: `linear-gradient(to right, #F57224 0%, #F57224 ${(localPriceRange / 2000) * 100}%, ${isDark ? 'rgba(128,128,128,0.15)' : 'rgba(200,200,200,0.3)'} ${(localPriceRange / 2000) * 100}%)`
+              background: `linear-gradient(to right, #F57224 0%, #F57224 ${(localPriceRange / 2000) * 100}%, rgba(128,128,128,0.15) ${(localPriceRange / 2000) * 100}%)`
             }}
           />
-          <div className={`mt-2 flex justify-between text-xs ${isDark ? 'text-muted-foreground/70' : 'text-gray-500'}`}>
+          <div className="mt-2 flex justify-between text-xs text-muted-foreground/70">
             <span>$0</span>
             <span>${localPriceRange}</span>
             <span>$2000+</span>
@@ -232,21 +228,21 @@ function FilterSidebar({
 
       {/* Availability */}
       <div>
-        <h4 className={`mb-3 text-sm font-medium ${isDark ? 'text-foreground' : 'text-gray-800'}`}>Availability</h4>
+        <h4 className="mb-3 text-sm font-medium text-foreground">Availability</h4>
         <label className="flex items-center gap-2 cursor-pointer">
           <input
             type="checkbox"
             checked={inStock}
             onChange={(e) => setInStock(e.target.checked)}
-            className={`rounded ${isDark ? 'border-border bg-muted/50' : 'border-gray-300 bg-white'} text-[#F57224] focus:ring-[#F57224] focus:ring-offset-0`}
+            className="rounded border-border bg-muted/50 text-[#F57224] focus:ring-[#F57224] focus:ring-offset-0"
           />
-          <span className={`text-sm ${isDark ? 'text-muted-foreground' : 'text-gray-600'}`}>In Stock Only</span>
+          <span className="text-sm text-muted-foreground">In Stock Only</span>
         </label>
       </div>
 
       <Button 
         variant="outline" 
-        className={`w-full ${isDark ? 'border-border' : 'border-gray-300'}`}
+        className="w-full border-border"
         onClick={() => {
           setCategory("")
           setPriceRange(2000)
@@ -269,20 +265,18 @@ export default function ProductsPage() {
 }
 
 function ProductsPageSkeleton() {
-  const { theme } = useTheme()
-  const isDark = theme === 'dark'
   
   return (
     <div className="min-h-screen overflow-x-hidden">
-      <div className={`fixed inset-0 ${isDark ? 'bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]' : 'bg-gradient-to-br from-gray-100 via-gray-50 to-white'}`} />
+      <div className="fixed inset-0 bg-gradient-to-br from-muted/30 via-muted/10 to-background" />
       <div className="relative mx-auto max-w-7xl px-6 py-8">
         <div className="mb-8">
-          <div className={`h-8 w-48 rounded-lg ${isDark ? 'bg-muted/30' : 'bg-gray-200'} animate-pulse`} />
-          <div className={`mt-1 h-4 w-32 rounded-lg ${isDark ? 'bg-muted/30' : 'bg-gray-200'} animate-pulse`} />
+          <div className="h-8 w-48 rounded-lg bg-muted/30 animate-pulse" />
+          <div className="mt-1 h-4 w-32 rounded-lg bg-muted/30 animate-pulse" />
         </div>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {Array.from({ length: 8 }).map((_, i) => (
-            <div key={i} className={`aspect-[3/4] rounded-xl ${isDark ? 'bg-muted/20' : 'bg-gray-200'} animate-pulse`} />
+            <div key={i} className="aspect-[3/4] rounded-xl bg-muted/20 animate-pulse" />
           ))}
         </div>
       </div>
@@ -296,9 +290,6 @@ function ProductsPageContent() {
   const sortParam = searchParams.get("sort") || "default"
   const pageParam = parseInt(searchParams.get("page") || "1", 10)
   const qParam = searchParams.get("q") || ""
-
-  const { theme } = useTheme()
-  const isDark = theme === 'dark'
 
   const [category, setCategory] = useState(categoryParam)
   const [sort, setSort] = useState(sortParam)
@@ -384,15 +375,12 @@ function ProductsPageContent() {
   ].filter(Boolean).length
 
   return (
-    <div className={`min-h-screen overflow-x-hidden ${isDark ? 'bg-background' : 'bg-gray-50'}`}>
+    <div className="min-h-screen overflow-x-hidden bg-background">
       {/* Premium Background - Theme Aware */}
-      <div className={`fixed inset-0 ${isDark 
-        ? 'bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]' 
-        : 'bg-gradient-to-br from-gray-100 via-gray-50 to-white'
-      }`}>
-        <div className={`absolute top-20 left-10 size-72 rounded-full ${isDark ? 'bg-[#F57224]/20' : 'bg-[#F57224]/10'} blur-[120px] animate-pulse`} />
-        <div className={`absolute bottom-20 right-10 size-96 rounded-full ${isDark ? 'bg-[#F57224]/10' : 'bg-[#F57224]/5'} blur-[140px] animate-pulse delay-1000`} />
-        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-[500px] rounded-full ${isDark ? 'bg-orange-500/5' : 'bg-orange-500/3'} blur-[100px]`} />
+      <div className="fixed inset-0 bg-gradient-to-br from-muted/30 via-muted/10 to-background">
+        <div className="absolute top-20 left-10 size-72 rounded-full bg-[#F57224]/15 blur-[120px] animate-pulse" />
+        <div className="absolute bottom-20 right-10 size-96 rounded-full bg-[#F57224]/8 blur-[140px] animate-pulse delay-1000" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-[500px] rounded-full bg-orange-500/4 blur-[100px]" />
       </div>
 
       {/* Hero Section */}
@@ -411,7 +399,7 @@ function ProductsPageContent() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className={`text-3xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'} lg:text-4xl`}
+              className="text-3xl font-bold text-foreground lg:text-4xl"
             >
               Explore Our{" "}
               <span className="bg-gradient-to-r from-[#F57224] to-orange-400 bg-clip-text text-transparent">
@@ -422,7 +410,7 @@ function ProductsPageContent() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className={isDark ? 'text-muted-foreground' : 'text-gray-600'}
+              className="text-muted-foreground"
             >
               {filtered.length} products available
             </motion.p>
@@ -430,20 +418,20 @@ function ProductsPageContent() {
         </motion.div>
       </section>
 
-      {/* Filters Bar - Theme Aware */}
-      <div className={`sticky top-16 z-30 border-b ${isDark ? 'border-border bg-muted/50' : 'border-gray-200 bg-gray-100/50'} backdrop-blur-xl`}>
+      {/* Filters Bar */}
+      <div className="sticky top-16 z-30 border-b border-border bg-muted/50 backdrop-blur-xl">
         <div className="mx-auto max-w-7xl px-6 py-4">
           <div className="flex flex-wrap items-center gap-4">
             {/* Search */}
             <div className="flex flex-1 items-center gap-2">
               <div className="relative flex-1 max-w-md">
-                <Search className={`absolute left-3 top-1/2 size-4 -translate-y-1/2 ${isDark ? 'text-muted-foreground/70' : 'text-gray-400'}`} />
+                <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground/70" />
                 <Input
                   placeholder="Search products..."
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-                  className={`pl-10 ${isDark ? 'border-border bg-muted/50 text-foreground placeholder:text-muted-foreground/70' : 'border-gray-300 bg-white text-gray-800 placeholder:text-gray-400'}`}
+                  className="pl-10 border-border bg-muted/50 text-foreground placeholder:text-muted-foreground/70"
                 />
               </div>
               <Button variant="default" onClick={handleSearch} className="bg-gradient-to-r from-[#F57224] to-orange-500 text-white">
@@ -455,7 +443,7 @@ function ProductsPageContent() {
             <Button
               variant="outline"
               onClick={() => setIsFilterOpen(true)}
-              className={`lg:hidden ${isDark ? 'border-border' : 'border-gray-300'}`}
+              className="lg:hidden border-border"
             >
               <Filter className="mr-2 size-4" />
               Filters {activeFiltersCount > 0 && `(${activeFiltersCount})`}
@@ -464,7 +452,7 @@ function ProductsPageContent() {
             {/* Sort & View */}
             <div className="flex items-center gap-2">
               <Select value={sort} onValueChange={(v: string | null) => { setSort(v ?? "default"); setPage(1) }}>
-                <SelectTrigger className={`w-44 ${isDark ? 'border-border bg-muted/50' : 'border-gray-300 bg-white'}`}>
+                <SelectTrigger className="w-44 border-border bg-muted/50">
                   <SlidersHorizontal className="mr-1 size-4 text-muted-foreground" />
                   <SelectValue placeholder="Sort by" />
                 </SelectTrigger>
@@ -481,16 +469,16 @@ function ProductsPageContent() {
               </Select>
 
               {/* View Toggle */}
-              <div className={`hidden rounded-lg ${isDark ? 'bg-muted/50' : 'bg-gray-100'} p-1 sm:flex`}>
+              <div className="hidden rounded-lg bg-muted/50 p-1 sm:flex">
                 <button
                   onClick={() => setViewMode("grid")}
-                  className={`rounded-md p-1.5 transition-all ${viewMode === "grid" ? "bg-[#F57224] text-white" : isDark ? "text-muted-foreground/70 hover:text-foreground" : "text-gray-500 hover:text-gray-700"}`}
+                  className={`rounded-md p-1.5 transition-all ${viewMode === "grid" ? "bg-[#F57224] text-white" : "text-muted-foreground/70 hover:text-foreground"}`}
                 >
                   <Grid className="size-4" />
                 </button>
                 <button
                   onClick={() => setViewMode("list")}
-                  className={`rounded-md p-1.5 transition-all ${viewMode === "list" ? "bg-[#F57224] text-white" : isDark ? "text-muted-foreground/70 hover:text-foreground" : "text-gray-500 hover:text-gray-700"}`}
+                  className={`rounded-md p-1.5 transition-all ${viewMode === "list" ? "bg-[#F57224] text-white" : "text-muted-foreground/70 hover:text-foreground"}`}
                 >
                   <List className="size-4" />
                 </button>
@@ -521,7 +509,7 @@ function ProductsPageContent() {
             {/* Active Filters */}
             {activeFiltersCount > 0 && (
               <div className="mb-4 flex flex-wrap items-center gap-2">
-                <span className={`text-sm ${isDark ? 'text-muted-foreground/70' : 'text-gray-500'}`}>Active filters:</span>
+                <span className="text-sm text-muted-foreground/70">Active filters:</span>
                 {category && (
                   <Badge className="flex items-center gap-1 bg-[#F57224]/20 text-[#F57224]">
                     {categoriesWithCount.find(c => c.slug === category)?.name}
@@ -565,7 +553,7 @@ function ProductsPageContent() {
                     setSearchInput("")
                     setSort("default")
                   }}
-                  className={`text-xs ${isDark ? 'text-muted-foreground/70 hover:text-foreground' : 'text-gray-500 hover:text-gray-700'}`}
+                  className="text-xs text-muted-foreground/70 hover:text-foreground"
                 >
                   Clear all
                 </Button>
@@ -574,7 +562,7 @@ function ProductsPageContent() {
 
             {/* Results Count */}
             <div className="mb-4 flex items-center justify-between">
-              <p className={`text-sm ${isDark ? 'text-muted-foreground/70' : 'text-gray-500'}`}>
+              <p className="text-sm text-muted-foreground/70">
                 Showing {(currentPage - 1) * ITEMS_PER_PAGE + 1} - {Math.min(currentPage * ITEMS_PER_PAGE, filtered.length)} of {filtered.length} products
               </p>
             </div>
@@ -582,8 +570,8 @@ function ProductsPageContent() {
             {/* Products Grid/List */}
             {paginated.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-20">
-                <Package className={`mb-4 size-16 ${isDark ? 'text-white/20' : 'text-gray-300'}`} />
-                <p className={`text-lg ${isDark ? 'text-muted-foreground' : 'text-gray-500'}`}>No products found</p>
+                <Package className="mb-4 size-16 text-foreground/20" />
+                <p className="text-lg text-muted-foreground">No products found</p>
                 <Button
                   variant="outline"
                   className="mt-4"
@@ -621,7 +609,7 @@ function ProductsPageContent() {
                   size="sm"
                   disabled={currentPage <= 1}
                   onClick={() => setPage(currentPage - 1)}
-                  className={isDark ? 'border-border' : 'border-gray-300'}
+                  className="border-border"
                 >
                   <ArrowLeft className="size-4" />
                 </Button>
@@ -641,7 +629,7 @@ function ProductsPageContent() {
                       key={pageNum}
                       variant={pageNum === currentPage ? "default" : "outline"}
                       size="sm"
-                      className={pageNum === currentPage ? "bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow text-white" : isDark ? "border-border" : "border-gray-300"}
+                      className={pageNum === currentPage ? "bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow text-white" : "border-border"}
                       onClick={() => setPage(pageNum)}
                     >
                       {pageNum}
@@ -653,7 +641,7 @@ function ProductsPageContent() {
                   size="sm"
                   disabled={currentPage >= totalPages}
                   onClick={() => setPage(currentPage + 1)}
-                  className={isDark ? 'border-border' : 'border-gray-300'}
+                  className="border-border"
                 >
                   <ArrowRight className="size-4" />
                 </Button>
@@ -671,7 +659,7 @@ function ProductsPageContent() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className={`fixed inset-0 z-50 ${isDark ? 'bg-background/80' : 'bg-black/30'} backdrop-blur-sm`}
+              className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm"
               onClick={() => setIsFilterOpen(false)}
             />
             <motion.div
@@ -679,7 +667,7 @@ function ProductsPageContent() {
               animate={{ x: 0 }}
               exit={{ x: "-100%" }}
               transition={{ type: "spring", damping: 25 }}
-              className={`fixed inset-y-0 left-0 z-50 w-80 overflow-y-auto ${isDark ? 'bg-background' : 'bg-white'} p-6 shadow-2xl`}
+              className="fixed inset-y-0 left-0 z-50 w-80 overflow-y-auto bg-background p-6 shadow-2xl"
             >
               <FilterSidebar
                 category={category}

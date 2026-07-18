@@ -67,7 +67,7 @@ function SelectPopup({
         <SelectPrimitive.Popup
           data-slot="select-popup"
           className={cn(
-            "min-w-[var(--anchor-width)] overflow-hidden rounded-lg border border-border bg-[#1E293B]/95 backdrop-blur-xl p-1 shadow-2xl data-[ending-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:scale-95 data-[starting-style]:opacity-0",
+            "min-w-[var(--anchor-width)] overflow-hidden rounded-lg border border-border bg-popover backdrop-blur-xl p-1 shadow-2xl data-[ending-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:scale-95 data-[starting-style]:opacity-0",
             className
           )}
           {...props}

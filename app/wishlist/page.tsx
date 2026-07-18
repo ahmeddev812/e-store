@@ -38,14 +38,14 @@ export default function WishlistPage() {
     return (
       <div className="flex flex-col items-center justify-center min-h-[70vh] px-4 animate-fade-in">
         <div className="rounded-full bg-muted/50 backdrop-blur-xl border border-border p-6 mb-6">
-          <Heart className="size-16 text-white/20" />
+          <Heart className={`size-16 $text-foreground/20`} />
         </div>
         <h1 className="text-2xl font-bold text-foreground mb-2">Your wishlist is empty</h1>
         <p className="text-muted-foreground mb-8 text-center max-w-md">
           Save items you love to your wishlist and come back to them anytime.
         </p>
         <Link href="/products">
-          <Button className="shadow-glow">
+          <Button className="bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow text-white">
             <ShoppingCart className="size-4" />
             Browse Products
           </Button>

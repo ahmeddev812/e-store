@@ -4,7 +4,6 @@ import Link from "next/link"
 import Image from "next/image"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { useRef } from "react"
-import { useTheme } from "next-themes"
 import { categoriesWithCount } from "@/data/products"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -69,19 +68,14 @@ export default function CategoriesPage() {
   const { scrollYProgress } = useScroll()
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
   const heroScale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95])
-  const { theme } = useTheme()
-  const isDark = theme === 'dark'
 
   return (
-    <div className={`min-h-screen overflow-x-hidden ${isDark ? 'bg-background' : 'bg-gray-50'}`}>
+    <div className="min-h-screen overflow-x-hidden bg-background">
       {/* Premium Background - Theme Aware */}
-      <div className={`fixed inset-0 ${isDark 
-        ? 'bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]' 
-        : 'bg-gradient-to-br from-gray-100 via-gray-50 to-white'
-      }`}>
-        <div className={`absolute top-20 left-10 size-72 rounded-full ${isDark ? 'bg-[#F57224]/20' : 'bg-[#F57224]/10'} blur-[120px] animate-pulse`} />
-        <div className={`absolute bottom-20 right-10 size-96 rounded-full ${isDark ? 'bg-[#F57224]/10' : 'bg-[#F57224]/5'} blur-[140px] animate-pulse delay-1000`} />
-        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-[500px] rounded-full ${isDark ? 'bg-orange-500/5' : 'bg-orange-500/3'} blur-[100px]`} />
+      <div className="fixed inset-0 bg-gradient-to-br from-muted/30 via-muted/10 to-background">
+        <div className="absolute top-20 left-10 size-72 rounded-full bg-[#F57224]/15 blur-[120px] animate-pulse" />
+        <div className="absolute bottom-20 right-10 size-96 rounded-full bg-[#F57224]/8 blur-[140px] animate-pulse delay-1000" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-[500px] rounded-full bg-orange-500/4 blur-[100px]" />
       </div>
 
       {/* Hero Section */}
@@ -104,11 +98,11 @@ export default function CategoriesPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className={`text-4xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'} sm:text-5xl lg:text-6xl`}
+            className="text-4xl font-bold text-foreground sm:text-5xl lg:text-6xl"
           >
             Explore Our{" "}
             <span className="relative inline-block">
-              <span className={`absolute -inset-1 rounded-lg ${isDark ? 'bg-gradient-to-r from-[#F57224]/30 to-[#F57224]/20' : 'bg-gradient-to-r from-[#F57224]/20 to-[#F57224]/10'} blur-xl`} />
+              <span className="absolute -inset-1 rounded-lg bg-gradient-to-r from-[#F57224]/25 to-[#F57224]/15 blur-xl" />
               <span className="relative bg-gradient-to-r from-[#F57224] to-orange-400 bg-clip-text text-transparent">
                 Collections
               </span>
@@ -119,7 +113,7 @@ export default function CategoriesPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className={`mx-auto mt-4 max-w-2xl ${isDark ? 'text-muted-foreground' : 'text-gray-600'}`}
+            className="mx-auto mt-4 max-w-2xl text-muted-foreground"
           >
             Discover thousands of products across our curated categories. 
             Find exactly what you're looking for.
@@ -131,10 +125,10 @@ export default function CategoriesPage() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="mt-6 flex items-center justify-center gap-2 text-sm text-muted-foreground/70"
           >
-            <Badge variant="outline" className={`${isDark ? 'border-border bg-muted/50' : 'border-gray-300 bg-gray-100'} text-muted-foreground`}>
+            <Badge variant="outline" className="border-border bg-muted/50 text-muted-foreground">
               {categoriesWithCount.length} Categories
             </Badge>
-            <Badge variant="outline" className={`${isDark ? 'border-border bg-muted/50' : 'border-gray-300 bg-gray-100'} text-muted-foreground`}>
+            <Badge variant="outline" className="border-border bg-muted/50 text-muted-foreground">
               {categoriesWithCount.reduce((sum, cat) => sum + cat._count.products, 0)}+ Products
             </Badge>
           </motion.div>
@@ -149,8 +143,8 @@ export default function CategoriesPage() {
           viewport={{ once: true }}
           className="mb-8 text-center"
         >
-          <h2 className={`text-2xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>Featured Categories</h2>
-          <p className={isDark ? 'text-muted-foreground' : 'text-gray-600'}>Most popular collections</p>
+          <h2 className="text-2xl font-bold text-foreground">Featured Categories</h2>
+          <p className="text-muted-foreground">Most popular collections</p>
         </motion.div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -168,21 +162,21 @@ export default function CategoriesPage() {
                 whileHover={{ y: -5 }}
               >
                 <Link href={`/products?category=${cat.slug}`}>
-                  <div className={`group relative overflow-hidden rounded-2xl ${isDark ? 'bg-gradient-to-br from-accent/5 to-transparent' : 'bg-white border border-gray-200 shadow-sm'} p-6 transition-all duration-500 hover:shadow-[0_0_40px_rgba(245,114,36,0.2)]`}>
-                    <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 transition-opacity duration-500 group-hover:${isDark ? 'opacity-10' : 'opacity-5'}`} />
+                  <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-accent/5 to-transparent p-6 transition-all duration-500 hover:shadow-[0_0_40px_rgba(245,114,36,0.2)]">
+                    <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 transition-opacity duration-500 group-hover:opacity-10`} />
                     
                     <div className="relative flex items-center justify-between">
                       <div>
                         <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#F57224]/20 to-[#F57224]/5">
                           <Icon className="size-6 text-[#F57224]" />
                         </div>
-                        <h3 className={`text-xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'} group-hover:text-[#F57224] transition-colors`}>
+                        <h3 className="text-xl font-bold text-foreground group-hover:text-[#F57224] transition-colors">
                           {cat.name}
                         </h3>
-                        <p className={`mt-1 text-sm ${isDark ? 'text-muted-foreground/70' : 'text-gray-500'}`}>{cat._count.products} Products</p>
+                        <p className="mt-1 text-sm text-muted-foreground/70">{cat._count.products} Products</p>
                       </div>
-                      <div className={`flex h-10 w-10 items-center justify-center rounded-full ${isDark ? 'bg-muted/50' : 'bg-gray-100'} transition-all duration-300 group-hover:bg-[#F57224] group-hover:text-white group-hover:scale-110`}>
-                        <ArrowRight className={`size-4 ${isDark ? 'text-muted-foreground' : 'text-gray-500'} group-hover:text-white`} />
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-muted/50 transition-all duration-300 group-hover:bg-[#F57224] group-hover:text-white group-hover:scale-110">
+                        <ArrowRight className="size-4 text-muted-foreground group-hover:text-white" />
                       </div>
                     </div>
 
@@ -205,10 +199,10 @@ export default function CategoriesPage() {
           className="mb-8 flex items-center justify-between"
         >
           <div>
-            <h2 className={`text-2xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>All Categories</h2>
-            <p className={isDark ? 'text-muted-foreground' : 'text-gray-600'}>Browse our complete collection</p>
+            <h2 className="text-2xl font-bold text-foreground">All Categories</h2>
+            <p className="text-muted-foreground">Browse our complete collection</p>
           </div>
-          <div className={`flex items-center gap-1 text-sm ${isDark ? 'text-foreground/30' : 'text-gray-400'}`}>
+          <div className="flex items-center gap-1 text-sm text-foreground/30">
             <TrendingUp className="size-3" />
             <span>{categoriesWithCount.length} available</span>
           </div>
@@ -228,7 +222,7 @@ export default function CategoriesPage() {
             return (
               <motion.div key={cat.id} variants={itemVariants}>
                 <Link href={`/products?category=${cat.slug}`}>
-                  <Card className={`group relative overflow-hidden transition-all duration-500 hover:border-[#F57224]/30 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(245,114,36,0.2)] ${isDark ? 'glass-premium' : 'bg-white border-gray-200 shadow-sm'}`}>
+                  <Card className="group relative overflow-hidden transition-all duration-500 hover:border-[#F57224]/30 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(245,114,36,0.2)] glass-premium">
                     <div className="relative overflow-hidden">
                       <Image
                         src={cat.image}
@@ -242,7 +236,7 @@ export default function CategoriesPage() {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
                       
                       {/* Category Icon Overlay */}
-                      <div className={`absolute left-3 top-3 rounded-lg ${isDark ? 'bg-background/70' : 'bg-white/90'} p-1.5 backdrop-blur-sm`}>
+                      <div className="absolute left-3 top-3 rounded-lg bg-background/70 p-1.5 backdrop-blur-sm">
                         <Icon className="size-4 text-[#F57224]" />
                       </div>
                       
@@ -276,9 +270,9 @@ export default function CategoriesPage() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className={`${isDark ? 'glass-premium' : 'bg-white border border-gray-200 shadow-lg'} relative overflow-hidden rounded-3xl p-12 text-center`}
+          className="glass-premium relative overflow-hidden rounded-3xl p-12 text-center"
         >
-          <div className={`absolute inset-0 bg-gradient-to-r ${isDark ? 'from-[#F57224]/10 via-transparent to-[#F57224]/5' : 'from-[#F57224]/5 via-transparent to-[#F57224]/3'}`} />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#F57224]/8 via-transparent to-[#F57224]/4" />
           <div className="absolute -right-20 -top-20 h-40 w-40 rounded-full bg-[#F57224]/20 blur-3xl" />
           <div className="absolute -left-20 -bottom-20 h-40 w-40 rounded-full bg-[#F57224]/10 blur-3xl" />
           
@@ -286,8 +280,8 @@ export default function CategoriesPage() {
             <div className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-br from-[#F57224]/20 to-[#F57224]/5 p-3 mb-6">
               <Gift className="size-10 text-[#F57224]" />
             </div>
-            <h2 className={`text-3xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>Can't Find What You're Looking For?</h2>
-            <p className={`mt-2 ${isDark ? 'text-muted-foreground' : 'text-gray-600'} max-w-md mx-auto`}>
+            <h2 className="text-3xl font-bold text-foreground">Can't Find What You're Looking For?</h2>
+            <p className="mt-2 text-muted-foreground max-w-md mx-auto">
               Browse all products or contact our support team for personalized assistance
             </p>
             <div className="mt-6 flex flex-wrap gap-4 justify-center">
@@ -298,7 +292,7 @@ export default function CategoriesPage() {
                 </Button>
               </Link>
               <Link href="/contact">
-                <Button variant="outline" className={`${isDark ? 'border-border hover:border-[#F57224]/50' : 'border-gray-300 hover:border-[#F57224]/50'}`}>
+                <Button variant="outline" className="border-border hover:border-[#F57224]/50">
                   Contact Support
                 </Button>
               </Link>
@@ -320,14 +314,12 @@ export default function CategoriesPage() {
           className="flex cursor-pointer flex-col items-center gap-1"
           onClick={() => window.scrollTo({ top: window.innerHeight, behavior: "smooth" })}
         >
-          <span className={`text-[10px] ${isDark ? 'text-foreground/30' : 'text-gray-400'}`}>Scroll</span>
-          <div className={`flex h-8 w-8 items-center justify-center rounded-full border ${isDark ? 'border-border bg-muted/50' : 'border-gray-200 bg-white/80'} backdrop-blur-sm`}>
-            <ArrowRight className={`size-3 rotate-90 ${isDark ? 'text-muted-foreground/70' : 'text-gray-400'}`} />
+          <span className="text-[10px] text-foreground/30">Scroll</span>
+          <div className="flex h-8 w-8 items-center justify-center rounded-full border border-border bg-muted/50 backdrop-blur-sm">
+            <ArrowRight className="size-3 rotate-90 text-muted-foreground/70" />
           </div>
         </motion.div>
       </motion.div>
-
-      
     </div>
   )
 }

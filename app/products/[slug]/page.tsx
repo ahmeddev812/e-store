@@ -5,7 +5,7 @@ import { useParams, useRouter } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
-import { useTheme } from "next-themes"
+
 import { 
   ChevronLeft, Heart, ShoppingCart, Truck, ShieldCheck, RotateCcw,
   Star, Share2, Zap, Clock, CheckCircle, TrendingUp, 
@@ -29,8 +29,6 @@ function ImageGallery({ images, title, discount }: { images: string[]; title: st
   const [selectedImage, setSelectedImage] = useState(0)
   const [isZoomed, setIsZoomed] = useState(false)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const { theme } = useTheme()
-  const isDark = theme === 'dark'
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect()
@@ -42,7 +40,7 @@ function ImageGallery({ images, title, discount }: { images: string[]; title: st
   return (
     <div className="space-y-4">
       <motion.div 
-        className={`relative overflow-hidden rounded-2xl ${isDark ? 'glass-premium' : 'bg-white border border-gray-200 shadow-lg'}`}
+        className="relative overflow-hidden rounded-2xl glass-premium"
         whileHover={{ scale: 1.01 }}
       >
         <div 
@@ -69,10 +67,10 @@ function ImageGallery({ images, title, discount }: { images: string[]; title: st
           </div>
         )}
         <button 
-          className={`absolute right-4 top-4 rounded-full ${isDark ? 'bg-background/70' : 'bg-white/90'} p-2 backdrop-blur-sm transition-all hover:bg-[#F57224] hover:text-white shadow-md`}
+          className="absolute right-4 top-4 rounded-full bg-background/70 p-2 backdrop-blur-sm transition-all hover:bg-[#F57224] hover:text-white shadow-md"
           onClick={() => setIsZoomed(!isZoomed)}
         >
-          <Maximize2 className={`size-4 ${isDark ? 'text-foreground' : 'text-gray-700'}`} />
+          <Maximize2 className="size-4 text-foreground" />
         </button>
       </motion.div>
       
@@ -86,7 +84,7 @@ function ImageGallery({ images, title, discount }: { images: string[]; title: st
               whileTap={{ scale: 0.95 }}
               className={`relative size-20 overflow-hidden rounded-lg transition-all ${
                 i === selectedImage 
-                  ? `ring-2 ring-[#F57224] ring-offset-2 ${isDark ? 'ring-offset-black' : 'ring-offset-white'}` 
+                  ? `ring-2 ring-[#F57224] ring-offset-2 ring-offset-background` 
                   : `opacity-60 hover:opacity-100`
               }`}
             >
@@ -102,14 +100,12 @@ function ImageGallery({ images, title, discount }: { images: string[]; title: st
 // Review Component - Theme Aware
 function ReviewCard({ review }: { review: any }) {
   const [helpful, setHelpful] = useState(false)
-  const { theme } = useTheme()
-  const isDark = theme === 'dark'
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className={`${isDark ? 'glass-premium' : 'bg-white border border-gray-200 shadow-sm'} rounded-xl p-5 transition-all duration-300 hover:border-[#F57224]/30`}
+      className="glass-premium rounded-xl p-5 transition-all duration-300 hover:border-[#F57224]/30"
     >
       <div className="flex items-start justify-between gap-4">
         <div className="flex-1">
@@ -120,8 +116,8 @@ function ReviewCard({ review }: { review: any }) {
               </span>
             </div>
             <div>
-              <p className={`font-semibold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>{review.userName}</p>
-              <p className={`text-xs ${isDark ? 'text-muted-foreground/70' : 'text-gray-500'}`}>
+              <p className="font-semibold text-foreground">{review.userName}</p>
+              <p className="text-xs text-muted-foreground/70">
                 {new Date(review.createdAt).toLocaleDateString('en-US', { 
                   year: 'numeric', 
                   month: 'long', 
@@ -132,12 +128,12 @@ function ReviewCard({ review }: { review: any }) {
           </div>
           <Rating value={review.rating} size="sm" readonly className="mb-2" />
           {review.comment && (
-            <p className={`text-sm ${isDark ? 'text-foreground/70' : 'text-gray-600'} leading-relaxed mt-2`}>{review.comment}</p>
+            <p className="text-sm text-foreground/70 leading-relaxed mt-2">{review.comment}</p>
           )}
         </div>
         <button
           onClick={() => setHelpful(!helpful)}
-          className={`flex items-center gap-1 rounded-lg ${isDark ? 'bg-muted/50 text-muted-foreground/70' : 'bg-gray-100 text-gray-500'} px-3 py-1.5 text-xs transition-all hover:bg-[#F57224]/10 hover:text-[#F57224]`}
+          className="flex items-center gap-1 rounded-lg bg-muted/50 text-muted-foreground/70 px-3 py-1.5 text-xs transition-all hover:bg-[#F57224]/10 hover:text-[#F57224]"
         >
           <ThumbsUp className={`size-3 ${helpful ? "fill-[#F57224] text-[#F57224]" : ""}`} />
           <span>Helpful</span>
@@ -151,8 +147,6 @@ export default function ProductDetailPage() {
   const params = useParams()
   const router = useRouter()
   const slug = params.slug as string
-  const { theme } = useTheme()
-  const isDark = theme === 'dark'
   
   const found = getProductBySlug(slug)
   const [quantity, setQuantity] = useState(1)
@@ -167,19 +161,19 @@ export default function ProductDetailPage() {
 
   if (!found) {
     return (
-      <div className={`min-h-screen overflow-x-hidden ${isDark ? 'bg-background' : 'bg-gray-50'}`}>
-        <div className={`fixed inset-0 ${isDark ? 'bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]' : 'bg-gradient-to-br from-gray-100 via-gray-50 to-white'}`} />
+      <div className="min-h-screen overflow-x-hidden bg-background">
+        <div className="fixed inset-0 bg-gradient-to-br from-muted/30 via-muted/10 to-background" />
         <div className="relative flex min-h-screen flex-col items-center justify-center px-4">
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ type: "spring", duration: 0.6 }}
-            className={`mb-6 rounded-full ${isDark ? 'bg-[#F57224]/20' : 'bg-[#F57224]/10'} p-6`}
+            className="mb-6 rounded-full bg-[#F57224]/15 p-6"
           >
-            <Package className={`size-16 ${isDark ? 'text-[#F57224]/40' : 'text-[#F57224]/60'}`} />
+            <Package className="size-16 text-[#F57224]/40" />
           </motion.div>
-          <h1 className={`text-2xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'} mb-2`}>Product Not Found</h1>
-          <p className={`${isDark ? 'text-muted-foreground' : 'text-gray-600'} text-center mb-6`}>The product you're looking for doesn't exist or has been removed.</p>
+          <h1 className="text-2xl font-bold text-foreground mb-2">Product Not Found</h1>
+          <p className="text-muted-foreground text-center mb-6">The product you're looking for doesn't exist or has been removed.</p>
           <Link href="/products">
             <Button className="bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow text-white">
               <ChevronLeft className="mr-2 size-4" /> Back to Products
@@ -248,14 +242,11 @@ export default function ProductDetailPage() {
   }
 
   return (
-    <div className={`min-h-screen overflow-x-hidden ${isDark ? 'bg-background' : 'bg-gray-50'}`}>
-      {/* Premium Background - Theme Aware */}
-      <div className={`fixed inset-0 ${isDark 
-        ? 'bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]' 
-        : 'bg-gradient-to-br from-gray-100 via-gray-50 to-white'
-      }`}>
-        <div className={`absolute top-20 left-10 size-72 rounded-full ${isDark ? 'bg-[#F57224]/20' : 'bg-[#F57224]/10'} blur-[120px] animate-pulse`} />
-        <div className={`absolute bottom-20 right-10 size-96 rounded-full ${isDark ? 'bg-[#F57224]/10' : 'bg-[#F57224]/5'} blur-[140px] animate-pulse delay-1000`} />
+    <div className="min-h-screen overflow-x-hidden bg-background">
+      {/* Premium Background */}
+      <div className="fixed inset-0 bg-gradient-to-br from-muted/30 via-muted/10 to-background">
+        <div className="absolute top-20 left-10 size-72 rounded-full bg-[#F57224]/15 blur-[120px] animate-pulse" />
+        <div className="absolute bottom-20 right-10 size-96 rounded-full bg-[#F57224]/8 blur-[140px] animate-pulse delay-1000" />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-6 py-8">
@@ -265,11 +256,11 @@ export default function ProductDetailPage() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-6 flex items-center gap-2 text-sm"
         >
-          <Link href="/" className={`${isDark ? 'text-muted-foreground/70 hover:text-foreground' : 'text-gray-500 hover:text-gray-700'} transition-colors`}>Home</Link>
-          <span className={isDark ? 'text-white/20' : 'text-gray-300'}>/</span>
-          <Link href="/products" className={`${isDark ? 'text-muted-foreground/70 hover:text-foreground' : 'text-gray-500 hover:text-gray-700'} transition-colors`}>Products</Link>
-          <span className={isDark ? 'text-white/20' : 'text-gray-300'}>/</span>
-          <span className={isDark ? 'text-muted-foreground' : 'text-gray-600'}>{product.title}</span>
+          <Link href="/" className="text-muted-foreground/70 hover:text-foreground transition-colors">Home</Link>
+          <span className="text-foreground/20">/</span>
+          <Link href="/products" className="text-muted-foreground/70 hover:text-foreground transition-colors">Products</Link>
+          <span className="text-foreground/20">/</span>
+          <span className="text-muted-foreground">{product.title}</span>
         </motion.div>
 
         <div className="grid gap-10 lg:grid-cols-2">
@@ -309,19 +300,19 @@ export default function ProductDetailPage() {
                   </Badge>
                 )}
               </div>
-              <h1 className={`text-3xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'} lg:text-4xl`}>{product.title}</h1>
+              <h1 className="text-3xl font-bold text-foreground lg:text-4xl">{product.title}</h1>
             </div>
 
             {/* Rating */}
             <div className="flex items-center gap-4">
               <Rating value={product.rating} readonly showValue size="default" />
-              <span className={isDark ? 'text-foreground/30' : 'text-gray-300'}>|</span>
-              <Link href="#reviews" className={`text-sm ${isDark ? 'text-muted-foreground hover:text-[#F57224]' : 'text-gray-500 hover:text-[#F57224]'} transition-colors`}>
+              <span className="text-foreground/30">|</span>
+              <Link href="#reviews" className="text-sm text-muted-foreground hover:text-[#F57224] transition-colors">
                 {reviews.length} Customer Reviews
               </Link>
               <button
                 onClick={() => setIsShareOpen(!isShareOpen)}
-                className={`relative flex items-center gap-1 text-sm ${isDark ? 'text-muted-foreground hover:text-[#F57224]' : 'text-gray-500 hover:text-[#F57224]'} transition-colors`}
+                className="relative flex items-center gap-1 text-sm text-muted-foreground hover:text-[#F57224] transition-colors"
               >
                 <Share2 className="size-4" />
                 Share
@@ -332,7 +323,7 @@ export default function ProductDetailPage() {
                     initial={{ opacity: 0, y: 10, scale: 0.95 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                    className={`absolute top-8 right-0 z-10 flex gap-2 rounded-xl ${isDark ? 'glass-premium' : 'bg-white border border-gray-200 shadow-lg'} p-2`}
+                    className="absolute top-8 right-0 z-10 flex gap-2 rounded-xl glass-premium p-2"
                   >
                     {[
                       { icon: FacebookSvg, name: 'facebook', color: '#1877F2' },
@@ -358,7 +349,7 @@ export default function ProductDetailPage() {
               <span className="text-4xl font-bold text-[#F57224]">{formatUSD(discountedPrice)}</span>
               {product.discountPercentage > 0 && (
                 <>
-                  <span className={`text-xl ${isDark ? 'text-muted-foreground/70' : 'text-gray-400'} line-through`}>{formatUSD(product.price)}</span>
+                  <span className="text-xl text-muted-foreground/70 line-through">{formatUSD(product.price)}</span>
                   <Badge className="bg-gradient-to-r from-[#F57224] to-orange-500 border-none text-white">
                     Save {product.discountPercentage}%
                   </Badge>
@@ -367,23 +358,23 @@ export default function ProductDetailPage() {
             </div>
 
             {/* Description */}
-            <p className={`${isDark ? 'text-muted-foreground' : 'text-gray-600'} leading-relaxed`}>{product.description}</p>
+            <p className="text-muted-foreground leading-relaxed">{product.description}</p>
 
             {/* Product Specs */}
-            <div className={`grid grid-cols-2 gap-4 rounded-xl ${isDark ? 'glass-premium' : 'bg-white border border-gray-200 shadow-sm'} p-4`}>
+            <div className="grid grid-cols-2 gap-4 rounded-xl glass-premium p-4">
               <div className="flex items-center gap-2">
                 <Package className="size-4 text-[#F57224]" />
                 <div>
-                  <p className={`text-xs ${isDark ? 'text-muted-foreground/70' : 'text-gray-500'}`}>SKU</p>
-                  <p className={`text-sm ${isDark ? 'text-foreground' : 'text-gray-800'}`}>{product.sku || 'N/A'}</p>
+                  <p className="text-xs text-muted-foreground/70">SKU</p>
+                  <p className="text-sm text-foreground">{product.sku || 'N/A'}</p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
                 <Globe className="size-4 text-[#F57224]" />
                 <div>
-                  <p className={`text-xs ${isDark ? 'text-muted-foreground/70' : 'text-gray-500'}`}>Category</p>
+                  <p className="text-xs text-muted-foreground/70">Category</p>
                   <Link href={`/products?category=${categoriesWithCount.find(c => c.id === product.categoryId)?.slug}`}>
-                    <p className={`text-sm ${isDark ? 'text-foreground hover:text-[#F57224]' : 'text-gray-800 hover:text-[#F57224]'} transition-colors`}>{product.categoryName}</p>
+                    <p className="text-sm text-foreground hover:text-[#F57224] transition-colors">{product.categoryName}</p>
                   </Link>
                 </div>
               </div>
@@ -392,19 +383,19 @@ export default function ProductDetailPage() {
             {/* Quantity & Actions */}
             <div className="space-y-4">
               <div className="flex items-center gap-4">
-                <div className={`flex items-center gap-2 rounded-xl ${isDark ? 'glass-premium' : 'bg-white border border-gray-200 shadow-sm'} p-1`}>
+                <div className="flex items-center gap-2 rounded-xl glass-premium p-1">
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className={`rounded-lg p-2 transition-colors ${isDark ? 'hover:bg-[#F57224]/20' : 'hover:bg-[#F57224]/10'}`}
+                    className="rounded-lg p-2 transition-colors hover:bg-[#F57224]/15"
                   >
-                    <Minus className={`size-4 ${isDark ? 'text-foreground' : 'text-gray-700'}`} />
+                    <Minus className="size-4 text-foreground" />
                   </button>
-                  <span className={`w-12 text-center font-medium ${isDark ? 'text-foreground' : 'text-gray-800'}`}>{quantity}</span>
+                  <span className="w-12 text-center font-medium text-foreground">{quantity}</span>
                   <button
                     onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
-                    className={`rounded-lg p-2 transition-colors ${isDark ? 'hover:bg-[#F57224]/20' : 'hover:bg-[#F57224]/10'}`}
+                    className="rounded-lg p-2 transition-colors hover:bg-[#F57224]/15"
                   >
-                    <Plus className={`size-4 ${isDark ? 'text-foreground' : 'text-gray-700'}`} />
+                    <Plus className="size-4 text-foreground" />
                   </button>
                 </div>
                 <Button
@@ -420,15 +411,15 @@ export default function ProductDetailPage() {
                   variant="outline"
                   size="icon"
                   onClick={handleToggleWishlist}
-                  className={`size-12 rounded-xl ${isDark ? 'border-border' : 'border-gray-200'}`}
+                  className="size-12 rounded-xl border-border"
                 >
-                  <Heart className={`size-5 transition-all ${wishlisted ? "fill-[#F57224] text-[#F57224]" : isDark ? 'text-foreground' : 'text-gray-700'}`} />
+                  <Heart className={`size-5 transition-all ${wishlisted ? "fill-[#F57224] text-[#F57224]" : 'text-foreground'}`} />
                 </Button>
               </div>
             </div>
 
             {/* Shipping Features */}
-            <div className={`grid grid-cols-3 gap-3 rounded-xl ${isDark ? 'glass-premium' : 'bg-white border border-gray-200 shadow-sm'} p-4`}>
+            <div className="grid grid-cols-3 gap-3 rounded-xl glass-premium p-4">
               {[
                 { icon: Truck, label: "Free Shipping", desc: "Orders over $50" },
                 { icon: ShieldCheck, label: "Secure Checkout", desc: "SSL encrypted" },
@@ -436,8 +427,8 @@ export default function ProductDetailPage() {
               ].map(({ icon: Icon, label, desc }) => (
                 <div key={label} className="text-center">
                   <Icon className="mx-auto size-5 text-[#F57224]" />
-                  <p className={`mt-1 text-xs font-medium ${isDark ? 'text-foreground' : 'text-gray-800'}`}>{label}</p>
-                  <p className={`text-[10px] ${isDark ? 'text-muted-foreground/70' : 'text-gray-500'}`}>{desc}</p>
+                  <p className="mt-1 text-xs font-medium text-foreground">{label}</p>
+                  <p className="text-[10px] text-muted-foreground/70">{desc}</p>
                 </div>
               ))}
             </div>
@@ -451,7 +442,7 @@ export default function ProductDetailPage() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mt-16"
         >
-          <div className={`flex gap-2 border-b ${isDark ? 'border-border' : 'border-gray-200'}`}>
+          <div className="flex gap-2 border-b border-border">
             {[
               { id: "details", label: "Product Details", icon: Package },
               { id: "reviews", label: `Reviews (${reviews.length})`, icon: MessageCircle },
@@ -462,9 +453,7 @@ export default function ProductDetailPage() {
                 className={`flex items-center gap-2 px-6 py-3 text-sm font-medium transition-all ${
                   selectedTab === tab.id
                     ? "border-b-2 border-[#F57224] text-[#F57224]"
-                    : isDark 
-                      ? "text-muted-foreground/70 hover:text-foreground" 
-                      : "text-gray-500 hover:text-gray-800"
+                    : "text-muted-foreground/70 hover:text-foreground"
                 }`}
               >
                 <tab.icon className="size-4" />
@@ -475,27 +464,27 @@ export default function ProductDetailPage() {
 
           <div className="py-6">
             {selectedTab === "details" && (
-              <div className={`space-y-4 ${isDark ? 'text-muted-foreground' : 'text-gray-600'}`}>
-                <h3 className={`text-lg font-semibold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>Product Specifications</h3>
+              <div className="space-y-4 text-muted-foreground">
+                <h3 className="text-lg font-semibold text-foreground">Product Specifications</h3>
                 <div className="grid gap-2 sm:grid-cols-2">
-                  <div className={`flex justify-between border-b ${isDark ? 'border-border' : 'border-gray-200'} py-2`}>
+                  <div className="flex justify-between border-b border-border py-2">
                     <span>Brand</span>
-                    <span className={isDark ? 'text-foreground' : 'text-gray-800'}>{product.brand}</span>
+                    <span className="text-foreground">{product.brand}</span>
                   </div>
-                  <div className={`flex justify-between border-b ${isDark ? 'border-border' : 'border-gray-200'} py-2`}>
+                  <div className="flex justify-between border-b border-border py-2">
                     <span>Stock Status</span>
-                    <span className={isDark ? 'text-foreground' : 'text-gray-800'}>{product.stock} units</span>
+                    <span className="text-foreground">{product.stock} units</span>
                   </div>
-                  <div className={`flex justify-between border-b ${isDark ? 'border-border' : 'border-gray-200'} py-2`}>
+                  <div className="flex justify-between border-b border-border py-2">
                     <span>Category</span>
-                    <span className={isDark ? 'text-foreground' : 'text-gray-800'}>{product.categoryName}</span>
+                    <span className="text-foreground">{product.categoryName}</span>
                   </div>
                   {product.tags.length > 0 && (
-                    <div className={`flex justify-between border-b ${isDark ? 'border-border' : 'border-gray-200'} py-2`}>
+                    <div className="flex justify-between border-b border-border py-2">
                       <span>Tags</span>
                       <div className="flex gap-1">
                         {product.tags.slice(0, 3).map(tag => (
-                          <Badge key={tag} className={`${isDark ? 'bg-muted/30 text-muted-foreground' : 'bg-gray-100 text-gray-600'} text-[9px]`}>
+                          <Badge key={tag} className="bg-muted/30 text-muted-foreground text-[9px]">
                             {tag}
                           </Badge>
                         ))}
@@ -509,23 +498,23 @@ export default function ProductDetailPage() {
             {selectedTab === "reviews" && (
               <div id="reviews" className="space-y-6">
                 {/* Rating Summary */}
-                <div className={`flex flex-wrap gap-8 rounded-xl ${isDark ? 'glass-premium' : 'bg-white border border-gray-200 shadow-sm'} p-6`}>
+                <div className="flex flex-wrap gap-8 rounded-xl glass-premium p-6">
                   <div className="text-center">
-                    <div className={`text-5xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>{totalRating.toFixed(1)}</div>
+                    <div className="text-5xl font-bold text-foreground">{totalRating.toFixed(1)}</div>
                     <Rating value={totalRating} size="sm" readonly className="justify-center my-2" />
-                    <div className={`text-sm ${isDark ? 'text-muted-foreground/70' : 'text-gray-500'}`}>Based on {reviews.length} reviews</div>
+                    <div className="text-sm text-muted-foreground/70">Based on {reviews.length} reviews</div>
                   </div>
                   <div className="flex-1 space-y-2">
                     {ratingDistribution.map((item) => (
                       <div key={item.star} className="flex items-center gap-2">
-                        <span className={`w-8 text-sm ${isDark ? 'text-muted-foreground' : 'text-gray-500'}`}>{item.star}★</span>
-                        <div className={`flex-1 h-2 rounded-full ${isDark ? 'bg-muted/30' : 'bg-gray-200'} overflow-hidden`}>
+                        <span className="w-8 text-sm text-muted-foreground">{item.star}★</span>
+                        <div className="flex-1 h-2 rounded-full bg-muted/30 overflow-hidden">
                           <div 
                             className="h-full rounded-full bg-gradient-to-r from-[#F57224] to-orange-500"
                             style={{ width: `${item.percentage}%` }}
                           />
                         </div>
-                        <span className={`w-8 text-sm ${isDark ? 'text-muted-foreground/70' : 'text-gray-500'}`}>{item.count}</span>
+                        <span className="w-8 text-sm text-muted-foreground/70">{item.count}</span>
                       </div>
                     ))}
                   </div>
@@ -534,8 +523,8 @@ export default function ProductDetailPage() {
                 {/* Reviews List */}
                 <div className="space-y-4">
                   {reviews.length === 0 ? (
-                    <div className={`text-center py-12 ${isDark ? 'text-muted-foreground/70' : 'text-gray-500'}`}>
-                      <MessageCircle className={`mx-auto mb-3 size-12 ${isDark ? 'text-white/20' : 'text-gray-300'}`} />
+                    <div className="text-center py-12 text-muted-foreground/70">
+                      <MessageCircle className="mx-auto mb-3 size-12 text-foreground/20" />
                       <p>No reviews yet. Be the first to review!</p>
                     </div>
                   ) : (
@@ -559,7 +548,7 @@ export default function ProductDetailPage() {
             className="mt-16"
           >
             <div className="flex items-center justify-between mb-6">
-              <h2 className={`text-2xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>You May Also Like</h2>
+              <h2 className="text-2xl font-bold text-foreground">You May Also Like</h2>
               <Link href="/products">
                 <Button variant="ghost" className="text-[#F57224]">
                   View All <ArrowRight className="ml-1 size-4" />
@@ -569,8 +558,8 @@ export default function ProductDetailPage() {
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {related.slice(0, 4).map((rp) => (
                 <Link key={rp.id} href={`/products/${rp.slug}`}>
-                  <Card className={`group h-full overflow-hidden transition-all hover:border-[#F57224]/30 hover:shadow-[0_0_30px_rgba(245,114,36,0.15)] ${isDark ? 'bg-card border-border' : 'bg-white border-gray-200'}`}>
-                    <div className={`relative overflow-hidden ${isDark ? 'bg-gray-900' : 'bg-gray-100'}`}>
+                  <Card className="group h-full overflow-hidden transition-all hover:border-[#F57224]/30 hover:shadow-[0_0_30px_rgba(245,114,36,0.15)] bg-card border-border">
+                    <div className="relative overflow-hidden bg-muted">
                       <Image
                         src={rp.thumbnail}
                         alt={rp.title}
@@ -585,13 +574,13 @@ export default function ProductDetailPage() {
                       )}
                     </div>
                     <CardContent className="p-4">
-                      <h3 className={`font-medium ${isDark ? 'text-foreground' : 'text-gray-800'} line-clamp-1`}>{rp.title}</h3>
+                      <h3 className="font-medium text-foreground line-clamp-1">{rp.title}</h3>
                       <div className="mt-2 flex items-center gap-2">
                         <span className="text-lg font-bold text-[#F57224]">
                           {formatUSD(getDiscountPrice(rp.price, rp.discountPercentage))}
                         </span>
                         {rp.discountPercentage > 0 && (
-                          <span className={`text-sm ${isDark ? 'text-muted-foreground/70' : 'text-gray-400'} line-through`}>{formatUSD(rp.price)}</span>
+                          <span className="text-sm text-muted-foreground/70 line-through">{formatUSD(rp.price)}</span>
                         )}
                       </div>
                       <Rating value={rp.rating} size="sm" readonly />
@@ -611,11 +600,11 @@ export default function ProductDetailPage() {
             initial={{ y: 100 }}
             animate={{ y: 0 }}
             exit={{ y: 100 }}
-            className={`fixed bottom-0 left-0 right-0 z-50 ${isDark ? 'bg-background/80 backdrop-blur-xl border-t border-border' : 'bg-white/90 backdrop-blur-xl border-t border-gray-200 shadow-lg'} p-4 md:hidden`}
+            className="fixed bottom-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-t border-border p-4 md:hidden"
           >
             <div className="flex items-center gap-3">
               <div className="flex-1">
-                <p className={`text-sm font-semibold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>{product.title}</p>
+                <p className="text-sm font-semibold text-foreground">{product.title}</p>
                 <p className="text-lg font-bold text-[#F57224]">{formatUSD(discountedPrice)}</p>
               </div>
               <Button onClick={handleAddToCart} className="bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow text-white">

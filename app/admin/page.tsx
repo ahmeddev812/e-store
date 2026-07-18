@@ -133,10 +133,10 @@ export default function AdminPage() {
   return (
     <div ref={sectionRef} className="min-h-screen overflow-x-hidden bg-background">
       {/* Premium Background */}
-      <div className="fixed inset-0 bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]">
-        <div className="absolute top-20 left-10 size-72 rounded-full bg-[#F57224]/20 blur-[120px] animate-pulse" />
-        <div className="absolute bottom-20 right-10 size-96 rounded-full bg-[#F57224]/10 blur-[140px] animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-[500px] rounded-full bg-orange-500/5 blur-[100px]" />
+      <div className={`fixed inset-0 bg-gradient-to-br from-muted/30 via-muted/10 to-background`}>
+        <div className={`absolute top-20 left-10 size-72 rounded-full bg-[#F57224]/15 blur-[120px] animate-pulse`} />
+        <div className={`absolute bottom-20 right-10 size-96 rounded-full bg-[#F57224]/8 blur-[140px] animate-pulse delay-1000`} />
+        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-[500px] rounded-full bg-orange-500/4 blur-[100px]`} />
       </div>
 
       <div className="relative mx-auto max-w-7xl p-4 md:p-8">

@@ -4,7 +4,6 @@ import { useEffect, useMemo, useState, useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
-import { useTheme } from "next-themes"
 import { 
   Clock, ArrowRight, Sparkles, TrendingUp, Star, Shield, 
   Truck, RotateCcw, Headphones, Zap, Gift, 
@@ -23,8 +22,6 @@ import { formatUSD, getDiscountPrice, truncate } from "@/lib/utils"
 // Premium Countdown Timer - Theme Aware
 function CountdownTimer({ target }: { target: Date }) {
   const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 })
-  const { theme } = useTheme()
-  const isDark = theme === 'dark'
 
   useEffect(() => {
     function tick() {
@@ -50,21 +47,13 @@ function CountdownTimer({ target }: { target: Date }) {
           { value: timeLeft.seconds, label: "Secs" },
         ].map((item, idx) => (
           <div key={idx} className="flex flex-col items-center">
-            <div className={`relative overflow-hidden rounded-xl p-2 min-w-[60px] backdrop-blur-sm border ${
-              isDark 
-                ? 'bg-gradient-to-br from-[#F57224]/20 to-[#F57224]/5 border-border' 
-                : 'bg-gradient-to-br from-[#F57224]/10 to-[#F57224]/5 border-gray-200'
-            }`}>
+            <div className="relative overflow-hidden rounded-xl p-2 min-w-[60px] backdrop-blur-sm border bg-gradient-to-br from-[#F57224]/15 to-[#F57224]/5 border-border">
               <span className="text-2xl font-bold tabular-nums text-[#F57224]">
                 {String(item.value).padStart(2, "0")}
               </span>
-              <div className={`absolute inset-x-0 top-1/2 h-px bg-gradient-to-r from-transparent ${
-                isDark ? 'via-muted-foreground/20' : 'via-gray-300'
-              } to-transparent`} />
+              <div className="absolute inset-x-0 top-1/2 h-px bg-gradient-to-r from-transparent via-muted-foreground/20 to-transparent" />
             </div>
-            <span className={`mt-1 text-[9px] uppercase tracking-wider ${
-              isDark ? 'text-muted-foreground/70' : 'text-gray-500'
-            }`}>{item.label}</span>
+            <span className="mt-1 text-[9px] uppercase tracking-wider text-muted-foreground/70">{item.label}</span>
           </div>
         ))}
       </div>
@@ -76,8 +65,6 @@ function CountdownTimer({ target }: { target: Date }) {
 function UltraPremiumProductCard({ product, index }: { product: any; index: number }) {
   const [isWishlisted, setIsWishlisted] = useState(false)
   const discountedPrice = getDiscountPrice(product.price, product.discountPercentage)
-  const { theme } = useTheme()
-  const isDark = theme === 'dark'
 
   return (
     <motion.div
@@ -92,9 +79,7 @@ function UltraPremiumProductCard({ product, index }: { product: any; index: numb
         <div className="relative">
           <div className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-[#F57224] via-[#D4A853] to-[#F57224] opacity-0 blur-xl transition-all duration-500 group-hover:opacity-30" />
           
-          <div className={`relative overflow-hidden rounded-2xl shadow-lg transition-all duration-500 hover:shadow-2xl ${
-            isDark ? 'bg-card border-border' : 'bg-white'
-          }`}>
+          <div className="relative overflow-hidden rounded-2xl shadow-lg transition-all duration-500 hover:shadow-2xl bg-card border-border">
             <div className="absolute left-3 top-3 z-20 flex gap-2">
               {product.discountPercentage > 0 && (
                 <Badge className="bg-gradient-to-r from-[#F57224] to-orange-500 border-none shadow-glow text-[10px] text-white">
@@ -110,14 +95,12 @@ function UltraPremiumProductCard({ product, index }: { product: any; index: numb
             
             <button 
               onClick={(e) => { e.preventDefault(); e.stopPropagation(); setIsWishlisted(!isWishlisted); }}
-              className={`absolute right-3 top-3 z-20 rounded-full p-2 opacity-0 transition-all duration-300 group-hover:opacity-100 hover:bg-[#F57224] hover:text-white shadow-md ${
-                isDark ? 'bg-background/70 backdrop-blur-xl' : 'bg-white/80 backdrop-blur-xl'
-              }`}
+              className="absolute right-3 top-3 z-20 rounded-full p-2 opacity-0 transition-all duration-300 group-hover:opacity-100 hover:bg-[#F57224] hover:text-white shadow-md bg-background/70 backdrop-blur-xl"
             >
-              <Heart className={`size-4 transition-all ${isWishlisted ? "fill-[#F57224] text-[#F57224]" : isDark ? "text-foreground" : "text-gray-700"}`} />
+              <Heart className={`size-4 transition-all ${isWishlisted ? "fill-[#F57224] text-[#F57224]" : "text-foreground"}`} />
             </button>
 
-            <div className={`relative overflow-hidden ${isDark ? 'bg-gray-900' : 'bg-gray-100'}`}>
+            <div className="relative overflow-hidden bg-muted">
               <Image
                 src={product.thumbnail}
                 alt={product.title}
@@ -127,26 +110,18 @@ function UltraPremiumProductCard({ product, index }: { product: any; index: numb
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
               <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-500 group-hover:opacity-100">
-                <Button size="sm" className={`${
-                  isDark 
-                    ? 'bg-background/90 backdrop-blur-xl text-foreground' 
-                    : 'bg-white/90 backdrop-blur-xl text-gray-800'
-                } hover:bg-[#F57224] hover:text-white transform translate-y-4 group-hover:translate-y-0 transition-all shadow-lg`}>
+                <Button size="sm" className="bg-background/90 backdrop-blur-xl text-foreground hover:bg-[#F57224] hover:text-white transform translate-y-4 group-hover:translate-y-0 transition-all shadow-lg">
                   <Eye className="mr-2 size-3" /> Quick View
                 </Button>
               </div>
             </div>
 
-            <CardContent className={`p-5 ${isDark ? 'bg-card' : 'bg-white'}`}>
+            <CardContent className="p-5 bg-card">
               <div className="mb-2 flex items-center justify-between">
-                <span className={`text-[10px] uppercase tracking-wider ${
-                  isDark ? 'text-muted-foreground/70' : 'text-gray-500'
-                }`}>{product.categoryName}</span>
+                <span className="text-[10px] uppercase tracking-wider text-muted-foreground/70">{product.categoryName}</span>
                 <Rating value={product.rating} size="sm" readonly />
               </div>
-              <h3 className={`text-base font-semibold line-clamp-2 group-hover:text-[#F57224] transition-colors ${
-                isDark ? 'text-foreground' : 'text-gray-800'
-              }`}>
+              <h3 className="text-base font-semibold line-clamp-2 group-hover:text-[#F57224] transition-colors text-foreground">
                 {truncate(product.title, 40)}
               </h3>
               <div className="mt-3 flex items-baseline gap-2">
@@ -154,21 +129,17 @@ function UltraPremiumProductCard({ product, index }: { product: any; index: numb
                   {formatUSD(discountedPrice)}
                 </span>
                 {product.discountPercentage > 0 && (
-                  <span className={`text-xs line-through ${
-                    isDark ? 'text-muted-foreground/70' : 'text-gray-400'
-                  }`}>{formatUSD(product.price)}</span>
+                  <span className="text-xs line-through text-muted-foreground/70">{formatUSD(product.price)}</span>
                 )}
               </div>
               <div className="mt-3 flex items-center justify-between">
                 <div className="flex items-center gap-1">
                   <div className="flex -space-x-1">
                     {[...Array(3)].map((_, i) => (
-                      <div key={i} className={`size-4 rounded-full bg-gradient-to-r from-[#F57224] to-orange-500 ring-2 ${
-                        isDark ? 'ring-background' : 'ring-white'
-                      }`} />
+                      <div key={i} className="size-4 rounded-full bg-gradient-to-r from-[#F57224] to-orange-500 ring-2 ring-background" />
                     ))}
                   </div>
-                  <span className={`text-[10px] ${isDark ? 'text-muted-foreground/30' : 'text-gray-400'}`}>+{product.stock} bought</span>
+                  <span className="text-[10px] text-muted-foreground/30">+{product.stock} bought</span>
                 </div>
                 <Button size="sm" className="bg-[#F57224] hover:bg-[#F57224]/80 shadow-glow text-white">
                   <ShoppingBag className="mr-1 size-3" /> Buy
@@ -184,8 +155,6 @@ function UltraPremiumProductCard({ product, index }: { product: any; index: numb
 
 // Luxury Category Card - Theme Aware
 function LuxuryCategoryCard({ category, index }: { category: any; index: number }) {
-  const { theme } = useTheme()
-  const isDark = theme === 'dark'
   
   const categoryIcons: Record<string, any> = {
     electronics: Smartphone,
@@ -213,9 +182,7 @@ function LuxuryCategoryCard({ category, index }: { category: any; index: number 
       whileHover={{ y: -5 }}
     >
       <Link href={`/products?category=${category.slug}`}>
-        <div className={`group relative overflow-hidden rounded-2xl p-6 transition-all duration-500 hover:shadow-[0_0_40px_rgba(245,114,36,0.2)] shadow-md ${
-          isDark ? 'bg-card border-border' : 'bg-white'
-        }`}>
+        <div className="group relative overflow-hidden rounded-2xl p-6 transition-all duration-500 hover:shadow-[0_0_40px_rgba(245,114,36,0.2)] shadow-md bg-card border-border">
           <div className="absolute inset-0 bg-gradient-to-br from-[#F57224]/0 to-[#F57224]/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
           
           <div className="relative flex items-center justify-between">
@@ -223,16 +190,12 @@ function LuxuryCategoryCard({ category, index }: { category: any; index: number 
               <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#F57224]/20 to-[#F57224]/5 group-hover:scale-110 transition-transform">
                 <Icon className="size-6 text-[#F57224]" />
               </div>
-              <h3 className={`text-lg font-bold group-hover:text-[#F57224] transition-colors ${
-                isDark ? 'text-foreground' : 'text-gray-800'
-              }`}>
+              <h3 className="text-lg font-bold group-hover:text-[#F57224] transition-colors text-foreground">
                 {category.name}
               </h3>
-              <p className={`mt-1 text-sm ${isDark ? 'text-muted-foreground/70' : 'text-gray-500'}`}>{category._count.products} Products</p>
+              <p className="mt-1 text-sm text-muted-foreground/70">{category._count.products} Products</p>
             </div>
-            <div className={`flex h-10 w-10 items-center justify-center rounded-full transition-all duration-300 group-hover:bg-[#F57224] group-hover:text-white group-hover:scale-110 ${
-              isDark ? 'bg-muted/50 text-muted-foreground' : 'bg-gray-100 text-gray-600'
-            }`}>
+            <div className="flex h-10 w-10 items-center justify-center rounded-full transition-all duration-300 group-hover:bg-[#F57224] group-hover:text-white group-hover:scale-110 bg-muted/50 text-muted-foreground">
               <ArrowRight className="size-4" />
             </div>
           </div>
@@ -246,8 +209,6 @@ function LuxuryCategoryCard({ category, index }: { category: any; index: number 
 function PremiumHero() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const heroRef = useRef<HTMLDivElement>(null)
-  const { theme } = useTheme()
-  const isDark = theme === 'dark'
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -266,33 +227,30 @@ function PremiumHero() {
   return (
     <div ref={heroRef} className="relative min-h-[85vh] overflow-hidden rounded-3xl">
       {/* Theme-aware Gradient Background */}
-      <div className={`absolute inset-0 ${isDark 
-        ? 'bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]' 
-        : 'bg-gradient-to-br from-white via-gray-50 to-white'
-      }`}>
+      <div className="absolute inset-0 bg-gradient-to-br from-muted/30 via-muted/10 to-background">
         {/* Interactive Mouse-Follow Orb */}
         <div 
-          className={`absolute size-96 rounded-full ${isDark ? 'bg-[#F57224]/20' : 'bg-[#F57224]/10'} blur-[120px] transition-transform duration-300 ease-out`}
+          className="absolute size-96 rounded-full bg-[#F57224]/15 blur-[120px] transition-transform duration-300 ease-out"
           style={{ 
             left: `${mousePosition.x}%`, 
             top: `${mousePosition.y}%`,
             transform: 'translate(-50%, -50%)'
           }}
         />
-        <div className={`absolute top-40 right-20 size-72 rounded-full ${isDark ? 'bg-[#D4A853]/15' : 'bg-[#D4A853]/10'} blur-[100px] animate-pulse`} />
-        <div className={`absolute bottom-20 left-40 size-96 rounded-full ${isDark ? 'bg-[#F57224]/10' : 'bg-[#F57224]/5'} blur-[140px] animate-pulse delay-1000`} />
+        <div className="absolute top-40 right-20 size-72 rounded-full bg-[#D4A853]/12 blur-[100px] animate-pulse" />
+        <div className="absolute bottom-20 left-40 size-96 rounded-full bg-[#F57224]/8 blur-[140px] animate-pulse delay-1000" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-[600px] rounded-full bg-orange-500/5 blur-[120px]" />
       </div>
 
       {/* Luxury Grid Pattern */}
-      <div className={`absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNENEE4NTMiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBvbHlsaW5lIHBvaW50cz0iNDAgMCA4MCA0MCA0MCA4MCAwIDQwIi8+PC9nPjwvZz48L3N2Zz4=')] ${isDark ? 'opacity-30' : 'opacity-20'}`} />
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNENEE4NTMiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBvbHlsaW5lIHBvaW50cz0iNDAgMCA4MCA0MCA0MCA4MCAwIDQwIi8+PC9nPjwvZz48L3N2Zz4=')] opacity-25" />
 
       {/* Floating Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className={`absolute top-20 left-[10%] size-2 rounded-full ${isDark ? 'bg-[#D4A853]/40' : 'bg-[#D4A853]/30'} animate-float`} />
-        <div className={`absolute top-40 right-[15%] size-3 rounded-full ${isDark ? 'bg-[#F57224]/30' : 'bg-[#F57224]/20'} animate-float-delay`} />
-        <div className={`absolute bottom-32 left-[20%] size-1.5 rounded-full ${isDark ? 'bg-[#D4A853]/50' : 'bg-[#D4A853]/30'} animate-float-slow`} />
-        <div className={`absolute bottom-40 right-[25%] size-2 rounded-full ${isDark ? 'bg-[#F57224]/40' : 'bg-[#F57224]/20'} animate-float-fast`} />
+        <div className="absolute top-20 left-[10%] size-2 rounded-full bg-[#D4A853]/35 animate-float" />
+        <div className="absolute top-40 right-[15%] size-3 rounded-full bg-[#F57224]/25 animate-float-delay" />
+        <div className="absolute bottom-32 left-[20%] size-1.5 rounded-full bg-[#D4A853]/40 animate-float-slow" />
+        <div className="absolute bottom-40 right-[25%] size-2 rounded-full bg-[#F57224]/30 animate-float-fast" />
       </div>
 
       {/* Main Content */}
@@ -311,10 +269,10 @@ function PremiumHero() {
             </div>
 
             {/* Main Title */}
-            <h1 className={`text-5xl font-bold tracking-tight ${isDark ? 'text-foreground' : 'text-gray-900'} sm:text-6xl lg:text-7xl`}>
+            <h1 className="text-5xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
               Where{" "}
               <span className="relative inline-block">
-                <span className={`absolute -inset-1 rounded-lg ${isDark ? 'bg-gradient-to-r from-[#F57224]/30 to-[#D4A853]/20' : 'bg-gradient-to-r from-[#F57224]/20 to-[#D4A853]/10'} blur-xl`} />
+                <span className="absolute -inset-1 rounded-lg bg-gradient-to-r from-[#F57224]/25 to-[#D4A853]/15 blur-xl" />
                 <span className="relative bg-gradient-to-r from-[#F57224] via-[#D4A853] to-[#F57224] bg-clip-text text-transparent animate-gradient-shift">
                   Luxury
                 </span>
@@ -324,7 +282,7 @@ function PremiumHero() {
             </h1>
 
             {/* Description */}
-            <p className={`mt-6 text-lg leading-relaxed ${isDark ? 'text-muted-foreground' : 'text-gray-600'} max-w-lg`}>
+            <p className="mt-6 text-lg leading-relaxed text-muted-foreground max-w-lg">
               Ignite your style with our curated collection of premium products. 
               Elegance redefined for the discerning connoisseur.
             </p>
@@ -333,15 +291,15 @@ function PremiumHero() {
             <div className="mt-6 flex flex-wrap gap-4">
               <div className="flex items-center gap-2">
                 <ShieldCheck className="size-4 text-emerald-500" />
-                <span className={`text-xs ${isDark ? 'text-muted-foreground' : 'text-gray-600'}`}>100% Authentic</span>
+                <span className="text-xs text-muted-foreground">100% Authentic</span>
               </div>
               <div className="flex items-center gap-2">
                 <Medal className="size-4 text-[#D4A853]" />
-                <span className={`text-xs ${isDark ? 'text-muted-foreground' : 'text-gray-600'}`}>Award Winning</span>
+                <span className="text-xs text-muted-foreground">Award Winning</span>
               </div>
               <div className="flex items-center gap-2">
                 <BadgeCheck className="size-4 text-blue-500" />
-                <span className={`text-xs ${isDark ? 'text-muted-foreground' : 'text-gray-600'}`}>Verified Quality</span>
+                <span className="text-xs text-muted-foreground">Verified Quality</span>
               </div>
             </div>
 
@@ -359,7 +317,7 @@ function PremiumHero() {
                 </Link>
               </motion.div>
               <Link href="/categories">
-                <Button variant="outline" size="lg" className={`${isDark ? 'border-border hover:border-[#D4A853]/50' : 'border-gray-300 hover:border-[#D4A853]/50'} hover:bg-[#D4A853]/10 ${isDark ? '' : 'text-gray-700'}`}>
+                <Button variant="outline" size="lg" className="border-border hover:border-[#D4A853]/50 hover:bg-[#D4A853]/10">
                   <Play className="mr-2 size-4" />
                   Watch Showcase
                 </Button>
@@ -367,12 +325,12 @@ function PremiumHero() {
             </div>
 
             {/* Customer Stats */}
-            <div className={`mt-12 flex items-center gap-6 border-t ${isDark ? 'border-border' : 'border-gray-200'} pt-8`}>
+            <div className="mt-12 flex items-center gap-6 border-t border-border pt-8">
               <div className="flex -space-x-3">
                 {[1, 2, 3, 4].map((i) => (
                   <div
                     key={i}
-                    className={`size-10 rounded-full border-2 ${isDark ? 'border-black' : 'border-white'} bg-gradient-to-r from-[#D4A853] to-[#F57224]`}
+                    className="size-10 rounded-full border-2 border-background bg-gradient-to-r from-[#D4A853] to-[#F57224]"
                   />
                 ))}
               </div>
@@ -381,9 +339,9 @@ function PremiumHero() {
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="size-3 fill-yellow-500 text-yellow-500" />
                   ))}
-                  <span className={`ml-2 text-sm font-semibold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>4.9</span>
+                  <span className="ml-2 text-sm font-semibold text-foreground">4.9</span>
                 </div>
-                <p className={`text-xs ${isDark ? 'text-muted-foreground/70' : 'text-gray-500'}`}>Trusted by 50,000+ customers</p>
+                <p className="text-xs text-muted-foreground/70">Trusted by 50,000+ customers</p>
               </div>
             </div>
           </motion.div>
@@ -398,12 +356,12 @@ function PremiumHero() {
           >
             <div className="relative">
               {/* Glow Behind */}
-              <div className={`absolute -inset-10 rounded-full bg-gradient-to-r ${isDark ? 'from-[#F57224]/20 via-[#D4A853]/20 to-[#F57224]/10' : 'from-[#F57224]/10 via-[#D4A853]/10 to-[#F57224]/5'} blur-3xl`} />
+              <div className="absolute -inset-10 rounded-full bg-gradient-to-r from-[#F57224]/15 via-[#D4A853]/15 to-[#F57224]/8 blur-3xl" />
               
               {/* Main Feature Product */}
               <div className="relative mb-6">
                 <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-[#F57224] via-[#D4A853] to-[#F57224] opacity-0 blur-xl transition-all duration-500 group-hover:opacity-100" />
-                <div className={`relative overflow-hidden rounded-2xl ${isDark ? 'bg-gradient-to-br from-accent/10 to-accent/5' : 'bg-white'} p-1 shadow-xl ${isDark ? '' : 'border border-gray-100'}`}>
+                <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-accent/10 to-accent/5 p-1 shadow-xl">
                   <Image
                     src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&h=600&fit=crop"
                     alt="Featured Product"
@@ -421,7 +379,7 @@ function PremiumHero() {
               </div>
 
               {/* Floating Small Cards */}
-              <div className={`absolute -top-8 -right-8 rotate-12 ${isDark ? 'glass-premium' : 'bg-white border border-gray-100'} rounded-xl p-2 shadow-2xl`}>
+              <div className="absolute -top-8 -right-8 rotate-12 glass-premium rounded-xl p-2 shadow-2xl">
                 <Image
                   src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=150&h=150&fit=crop"
                   alt="Product"
@@ -429,10 +387,10 @@ function PremiumHero() {
                   height={80}
                   className="rounded-lg"
                 />
-                <p className={`mt-1 text-center text-[10px] ${isDark ? 'text-muted-foreground' : 'text-gray-600'}`}>-20% OFF</p>
+                <p className="mt-1 text-center text-[10px] text-muted-foreground">-20% OFF</p>
               </div>
               
-              <div className={`absolute -bottom-6 -left-6 -rotate-12 ${isDark ? 'glass-premium' : 'bg-white border border-gray-100'} rounded-xl p-2 shadow-2xl`}>
+              <div className="absolute -bottom-6 -left-6 -rotate-12 glass-premium rounded-xl p-2 shadow-2xl">
                 <Image
                   src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=150&h=150&fit=crop"
                   alt="Product"
@@ -440,7 +398,7 @@ function PremiumHero() {
                   height={80}
                   className="rounded-lg"
                 />
-                <p className={`mt-1 text-center text-[10px] ${isDark ? 'text-muted-foreground' : 'text-gray-600'}`}>Bestseller</p>
+                <p className="mt-1 text-center text-[10px] text-muted-foreground">Bestseller</p>
               </div>
 
               {/* Price Tag */}
@@ -460,13 +418,13 @@ function PremiumHero() {
         className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2"
       >
         <div className="flex flex-col items-center gap-2">
-          <span className={`text-[10px] uppercase tracking-wider ${isDark ? 'text-muted-foreground/70' : 'text-gray-500'}`}>Scroll to Explore</span>
+          <span className="text-[10px] uppercase tracking-wider text-muted-foreground/70">Scroll to Explore</span>
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ repeat: Infinity, duration: 1.5 }}
-            className={`flex h-8 w-8 items-center justify-center rounded-full ${isDark ? 'border-border' : 'border border-gray-300 bg-white/50 backdrop-blur-sm'}`}
+            className="flex h-8 w-8 items-center justify-center rounded-full border-border"
           >
-            <ChevronRight className={`size-4 rotate-90 ${isDark ? 'text-muted-foreground/70' : 'text-gray-500'}`} />
+            <ChevronRight className="size-4 rotate-90 text-muted-foreground/70" />
           </motion.div>
         </div>
       </motion.div>
@@ -476,21 +434,18 @@ function PremiumHero() {
 
 // Brand Marquee - Theme Aware
 function BrandMarquee() {
-  const { theme } = useTheme()
-  const isDark = theme === 'dark'
-  
   const brands = [
     "Apple", "Samsung", "Nike", "Adidas", "Gucci", "Louis Vuitton", "Rolex", "Sony", "Dior", "Chanel"
   ]
 
   return (
     <div className="relative overflow-hidden py-8">
-      <div className={`absolute inset-0 bg-gradient-to-r from-transparent ${isDark ? 'via-[#F57224]/10' : 'via-[#F57224]/5'} to-transparent`} />
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#F57224]/8 to-transparent" />
       <div className="flex animate-marquee whitespace-nowrap">
         {[...brands, ...brands].map((brand, idx) => (
           <div
             key={idx}
-            className={`mx-8 flex items-center gap-2 text-base font-semibold ${isDark ? 'text-muted-foreground/70' : 'text-gray-600'}`}
+            className="mx-8 flex items-center gap-2 text-base font-semibold text-muted-foreground/70"
           >
             <Crown className="size-4 text-[#D4A853]" />
             {brand}
@@ -503,8 +458,6 @@ function BrandMarquee() {
 
 export default function HomePage() {
   const [flashSaleTarget] = useState(() => new Date(Date.now() + 2 * 3600000))
-  const { theme } = useTheme()
-  const isDark = theme === 'dark'
   
   const featured = getFeaturedProducts(8)
   const flashProducts = getFlashSaleProducts(4)
@@ -519,7 +472,7 @@ export default function HomePage() {
   ]
 
   return (
-    <div className={`overflow-x-hidden ${isDark ? 'bg-transparent' : 'bg-gray-50'}`}>
+    <div className="overflow-x-hidden bg-transparent">
       {/* HERO */}
       <PremiumHero />
 
@@ -529,8 +482,8 @@ export default function HomePage() {
           <Badge className="mb-4 bg-gradient-to-r from-[#F57224]/20 to-[#F57224]/5 text-[#F57224] border-none">
             Shop by Category
           </Badge>
-          <h2 className={`text-3xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>Featured Categories</h2>
-          <p className={`mt-2 ${isDark ? 'text-muted-foreground' : 'text-gray-600'}`}>Browse through our curated collections</p>
+          <h2 className="text-3xl font-bold text-foreground">Featured Categories</h2>
+          <p className="mt-2 text-muted-foreground">Browse through our curated collections</p>
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -542,7 +495,7 @@ export default function HomePage() {
 
       {/* FLASH SALES */}
       <section className="mx-auto max-w-7xl px-6 py-16">
-        <div className={`relative mb-10 overflow-hidden rounded-2xl ${isDark ? 'bg-gradient-to-r from-[#F57224]/20 via-[#F57224]/10 to-transparent' : 'bg-gradient-to-r from-[#F57224]/10 via-[#F57224]/5 to-transparent border border-gray-200'} p-8`}>
+        <div className="relative mb-10 overflow-hidden rounded-2xl bg-gradient-to-r from-[#F57224]/15 via-[#F57224]/8 to-transparent p-8">
           <div className="absolute right-0 top-0 -mr-20 -mt-20 size-40 rounded-full bg-[#F57224]/20 blur-3xl" />
           <div className="relative flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-4">
@@ -550,8 +503,8 @@ export default function HomePage() {
                 <Flame className="size-8 text-[#F57224]" />
               </div>
               <div>
-                <h2 className={`text-3xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>Flash Sales</h2>
-                <p className={`text-sm ${isDark ? 'text-muted-foreground' : 'text-gray-600'}`}>Limited time offers - Up to 70% off</p>
+                <h2 className="text-3xl font-bold text-foreground">Flash Sales</h2>
+                <p className="text-sm text-muted-foreground">Limited time offers - Up to 70% off</p>
               </div>
             </div>
             <CountdownTimer target={flashSaleTarget} />
@@ -573,8 +526,8 @@ export default function HomePage() {
               <Diamond className="size-8 text-[#F57224]" />
             </div>
             <div>
-              <h2 className={`text-3xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>Trending Products</h2>
-              <p className={`text-sm ${isDark ? 'text-muted-foreground' : 'text-gray-600'}`}>Handpicked selections for you</p>
+              <h2 className="text-3xl font-bold text-foreground">Trending Products</h2>
+              <p className="text-sm text-muted-foreground">Handpicked selections for you</p>
             </div>
           </div>
           <Link href="/products">
@@ -599,8 +552,8 @@ export default function HomePage() {
               <Sparkles className="size-8 text-emerald-500" />
             </div>
             <div>
-              <h2 className={`text-3xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>New Arrivals</h2>
-              <p className={`text-sm ${isDark ? 'text-muted-foreground' : 'text-gray-600'}`}>Fresh from the collection</p>
+              <h2 className="text-3xl font-bold text-foreground">New Arrivals</h2>
+              <p className="text-sm text-muted-foreground">Fresh from the collection</p>
             </div>
           </div>
           <Link href="/products?sort=newest">
@@ -625,8 +578,8 @@ export default function HomePage() {
               <Crown className="size-8 text-yellow-500" />
             </div>
             <div>
-              <h2 className={`text-3xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>Best Sellers</h2>
-              <p className={`text-sm ${isDark ? 'text-muted-foreground' : 'text-gray-600'}`}>What everyone's loving</p>
+              <h2 className="text-3xl font-bold text-foreground">Best Sellers</h2>
+              <p className="text-sm text-muted-foreground">What everyone's loving</p>
             </div>
           </div>
           <Link href="/products?sort=rating-desc">
@@ -649,10 +602,7 @@ export default function HomePage() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className={`relative overflow-hidden rounded-3xl p-12 text-center ${isDark 
-            ? 'bg-gradient-to-r from-[#1a1a2e] via-[#2d1b2e] to-[#1a1a2e]' 
-            : 'bg-gradient-to-r from-gray-100 via-gray-50 to-gray-100 border border-gray-200'
-          }`}
+          className="relative overflow-hidden rounded-3xl p-12 text-center bg-gradient-to-r from-muted/30 via-muted/10 to-background"
         >
           <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNENEE4NTMiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBvbHlsaW5lIHBvaW50cz0iMzAgMCA2MCAzMCAzMCA2MCAwIDMwIi8+PC9nPjwvZz48L3N2Zz4=')] opacity-20" />
           <div className="absolute -right-20 -top-20 size-40 rounded-full bg-[#F57224]/20 blur-3xl" />
@@ -662,8 +612,8 @@ export default function HomePage() {
             <div className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-br from-[#D4A853]/20 to-[#F57224]/10 p-4 mb-6">
               <Crown className="size-10 text-[#D4A853]" />
             </div>
-            <h2 className={`text-3xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>Featured Collection</h2>
-            <p className={`mx-auto mt-2 max-w-md ${isDark ? 'text-muted-foreground' : 'text-gray-600'}`}>
+            <h2 className="text-3xl font-bold text-foreground">Featured Collection</h2>
+            <p className="mx-auto mt-2 max-w-md text-muted-foreground">
               Discover our exclusive premium collection, handpicked for the discerning shopper
             </p>
             <div className="mt-6 flex flex-wrap gap-4 justify-center">
@@ -673,7 +623,7 @@ export default function HomePage() {
                 </Button>
               </Link>
               <Link href="/new-arrivals">
-                <Button variant="outline" className={`${isDark ? 'border-border hover:border-[#D4A853]/50' : 'border-gray-300 hover:border-[#D4A853]/50'} ${isDark ? '' : 'text-gray-700'}`}>
+                <Button variant="outline" className="border-border hover:border-[#D4A853]/50">
                   View New Arrivals
                 </Button>
               </Link>
@@ -688,8 +638,8 @@ export default function HomePage() {
           <Badge className="mb-4 bg-gradient-to-r from-[#F57224]/20 to-[#F57224]/5 text-[#F57224] border-none">
             Why Choose Us
           </Badge>
-          <h2 className={`text-3xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>The Blaze Experience</h2>
-          <p className={`mt-2 ${isDark ? 'text-muted-foreground' : 'text-gray-600'}`}>Premium shopping redefined with exceptional service</p>
+          <h2 className="text-3xl font-bold text-foreground">The Blaze Experience</h2>
+          <p className="mt-2 text-muted-foreground">Premium shopping redefined with exceptional service</p>
         </div>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {[
@@ -706,13 +656,13 @@ export default function HomePage() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.08 }}
               viewport={{ once: true }}
-              className={`${isDark ? 'glass-premium' : 'bg-white shadow-md'} rounded-2xl p-6 text-center transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_rgba(245,114,36,0.2)]`}
+              className="glass-premium rounded-2xl p-6 text-center transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_rgba(245,114,36,0.2)]"
             >
               <div className="mx-auto mb-4 flex size-14 items-center justify-center rounded-xl bg-gradient-to-br from-[#F57224]/20 to-[#F57224]/5">
                 <feature.icon className="size-7 text-[#F57224]" />
               </div>
-              <h3 className={`text-lg font-semibold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>{feature.title}</h3>
-              <p className={`mt-1 text-sm ${isDark ? 'text-muted-foreground/70' : 'text-gray-600'}`}>{feature.description}</p>
+              <h3 className="text-lg font-semibold text-foreground">{feature.title}</h3>
+              <p className="mt-1 text-sm text-muted-foreground/70">{feature.description}</p>
             </motion.div>
           ))}
         </div>
@@ -725,14 +675,14 @@ export default function HomePage() {
         transition={{ delay: 0.3 }}
         className="relative mx-auto -mt-8 max-w-7xl px-6 z-20"
       >
-        <div className={`grid grid-cols-2 gap-4 rounded-2xl ${isDark ? 'glass-premium' : 'bg-white shadow-lg'} p-6 md:grid-cols-4`}>
+        <div className="grid grid-cols-2 gap-4 rounded-2xl glass-premium p-6 md:grid-cols-4">
           {stats.map((stat, idx) => (
             <div key={stat.label} className="text-center">
               <div className="flex items-center justify-center gap-2">
                 <stat.icon className="size-5 text-[#F57224]" />
-                <span className={`text-2xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>{stat.value}</span>
+                <span className="text-2xl font-bold text-foreground">{stat.value}</span>
               </div>
-              <p className={`mt-1 text-xs ${isDark ? 'text-muted-foreground/70' : 'text-gray-500'}`}>{stat.label}</p>
+              <p className="mt-1 text-xs text-muted-foreground/70">{stat.label}</p>
             </div>
           ))}
         </div>
@@ -747,24 +697,20 @@ export default function HomePage() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className={`${isDark ? 'glass-premium' : 'bg-white shadow-lg border border-gray-200'} relative overflow-hidden rounded-3xl p-12 text-center`}
+          className="glass-premium relative overflow-hidden rounded-3xl p-12 text-center"
         >
-          <div className={`absolute inset-0 bg-gradient-to-r ${isDark ? 'from-[#F57224]/10 via-transparent to-[#F57224]/5' : 'from-[#F57224]/5 via-transparent to-[#F57224]/5'}`} />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#F57224]/8 via-transparent to-[#F57224]/5" />
           <div className="relative">
             <Gift className="mx-auto mb-4 size-12 text-[#F57224]" />
-            <h2 className={`text-2xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>Subscribe & Save 15%</h2>
-            <p className={`mx-auto mt-2 max-w-md ${isDark ? 'text-muted-foreground' : 'text-gray-600'}`}>
+            <h2 className="text-2xl font-bold text-foreground">Subscribe & Save 15%</h2>
+            <p className="mx-auto mt-2 max-w-md text-muted-foreground">
               Get exclusive deals, early access, and 15% off your first order
             </p>
             <div className="mx-auto mt-6 flex max-w-md gap-3">
               <input
                 type="email"
                 placeholder="Enter your email"
-                className={`flex-1 rounded-xl border px-4 py-3 focus:border-[#F57224] focus:outline-none ${
-                  isDark 
-                    ? 'border-border bg-muted/30 text-foreground placeholder:text-muted-foreground/70' 
-                    : 'border-gray-300 bg-gray-50 text-gray-800 placeholder:text-gray-400'
-                }`}
+                className="flex-1 rounded-xl border border-border bg-muted/30 text-foreground placeholder:text-muted-foreground/70 px-4 py-3 focus:border-[#F57224] focus:outline-none"
               />
               <Button className="bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow whitespace-nowrap text-white">
                 Subscribe <Sparkles className="ml-2 size-4" />

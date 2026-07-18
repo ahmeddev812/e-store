@@ -2,7 +2,6 @@
 
 import { useState, useMemo } from "react"
 import Image from "next/image"
-import { useTheme } from "next-themes"
 import { useCartStore } from "@/store/cart"
 import { validateCoupon } from "@/data/coupons"
 import { Button } from "@/components/ui/button"
@@ -20,8 +19,6 @@ import { useUser } from "@clerk/nextjs"
 export default function CheckoutPage() {
   const { isSignedIn } = useUser()
   const { items, clearCart } = useCartStore()
-  const { theme } = useTheme()
-  const isDark = theme === 'dark'
 
   const [shipping, setShipping] = useState({
     name: "",
@@ -151,13 +148,10 @@ export default function CheckoutPage() {
 
   if (!isSignedIn) {
     return (
-      <div className={`flex flex-col items-center justify-center min-h-[70vh] px-4 animate-fade-in ${isDark ? 'bg-background' : 'bg-gray-50'}`}>
-        <div className={`fixed inset-0 ${isDark 
-          ? 'bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]' 
-          : 'bg-gradient-to-br from-gray-100 via-gray-50 to-white'
-        } -z-10`} />
-        <h1 className={`text-2xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'} mb-2`}>Sign in to checkout</h1>
-        <p className={`${isDark ? 'text-muted-foreground' : 'text-gray-600'} mb-8`}>Please sign in to complete your purchase.</p>
+      <div className="flex flex-col items-center justify-center min-h-[70vh] px-4 animate-fade-in bg-background">
+        <div className="fixed inset-0 bg-gradient-to-br from-muted/30 via-muted/10 to-background -z-10" />
+        <h1 className="text-2xl font-bold text-foreground mb-2">Sign in to checkout</h1>
+        <p className="text-muted-foreground mb-8">Please sign in to complete your purchase.</p>
         <Link href="/login">
           <Button className="bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow text-white">Sign In</Button>
         </Link>
@@ -167,13 +161,10 @@ export default function CheckoutPage() {
 
   if (items.length === 0) {
     return (
-      <div className={`flex flex-col items-center justify-center min-h-[70vh] px-4 animate-fade-in ${isDark ? 'bg-background' : 'bg-gray-50'}`}>
-        <div className={`fixed inset-0 ${isDark 
-          ? 'bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]' 
-          : 'bg-gradient-to-br from-gray-100 via-gray-50 to-white'
-        } -z-10`} />
-        <h1 className={`text-2xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'} mb-2`}>Nothing to checkout</h1>
-        <p className={`${isDark ? 'text-muted-foreground' : 'text-gray-600'} mb-8`}>Your cart is empty. Add some items first.</p>
+      <div className="flex flex-col items-center justify-center min-h-[70vh] px-4 animate-fade-in bg-background">
+        <div className="fixed inset-0 bg-gradient-to-br from-muted/30 via-muted/10 to-background -z-10" />
+        <h1 className="text-2xl font-bold text-foreground mb-2">Nothing to checkout</h1>
+        <p className="text-muted-foreground mb-8">Your cart is empty. Add some items first.</p>
         <Link href="/products">
           <Button className="bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow text-white">Browse Products</Button>
         </Link>
@@ -182,104 +173,101 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className={`min-h-screen ${isDark ? 'bg-background' : 'bg-gray-50'}`}>
-      <div className={`fixed inset-0 ${isDark 
-        ? 'bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]' 
-        : 'bg-gradient-to-br from-gray-100 via-gray-50 to-white'
-      } -z-10`}>
-        <div className={`absolute top-20 left-10 size-72 rounded-full ${isDark ? 'bg-[#F57224]/20' : 'bg-[#F57224]/10'} blur-[120px] animate-pulse`} />
-        <div className={`absolute bottom-20 right-10 size-96 rounded-full ${isDark ? 'bg-[#F57224]/10' : 'bg-[#F57224]/5'} blur-[140px] animate-pulse delay-1000`} />
+    <div className="min-h-screen bg-background">
+      <div className="fixed inset-0 bg-gradient-to-br from-muted/30 via-muted/10 to-background -z-10">
+        <div className="absolute top-20 left-10 size-72 rounded-full bg-[#F57224]/15 blur-[120px] animate-pulse" />
+        <div className="absolute bottom-20 right-10 size-96 rounded-full bg-[#F57224]/8 blur-[140px] animate-pulse delay-1000" />
       </div>
 
       <div className="relative mx-auto max-w-6xl px-4 py-8 animate-fade-in">
         <div className="mb-8">
-          <Link href="/cart" className={`${isDark ? 'text-muted-foreground hover:text-foreground' : 'text-gray-500 hover:text-gray-800'} text-sm flex items-center gap-1 mb-2 transition-colors`}>
+          <Link href="/cart" className="text-muted-foreground hover:text-foreground text-sm flex items-center gap-1 mb-2 transition-colors">
             <ChevronLeft className="size-3.5" />
             Back to Cart
           </Link>
-          <h1 className={`text-2xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>Checkout</h1>
+          <h1 className="text-2xl font-bold text-foreground">Checkout</h1>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
           <div className="lg:col-span-3 space-y-6">
-            <Card className={`${isDark ? 'glass-premium' : 'bg-white border border-gray-200 shadow-md'}`}>
+            <Card className="glass-premium">
               <CardContent className="p-5">
-                <h2 className={`font-semibold ${isDark ? 'text-foreground' : 'text-gray-800'} mb-4`}>Shipping Information</h2>
+                <h2 className="font-semibold text-foreground mb-4">Shipping Information</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="sm:col-span-2 space-y-1.5">
-                    <Label htmlFor="name" className={isDark ? 'text-foreground/70' : 'text-gray-700'}>Full Name</Label>
+                    <Label htmlFor="name" className="text-foreground/70">Full Name</Label>
                     <Input
                       id="name"
                       placeholder="John Doe"
                       value={shipping.name}
                       onChange={(e) => setShipping((s) => ({ ...s, name: e.target.value }))}
-                      className={isDark ? 'border-border bg-muted/50 text-foreground placeholder:text-muted-foreground/70' : 'border-gray-300 bg-white text-gray-800 placeholder:text-gray-400'}
+                      className="border-border bg-muted/50 text-foreground placeholder:text-muted-foreground/70"
                     />
                   </div>
                   <div className="space-y-1.5">
-                    <Label htmlFor="email" className={isDark ? 'text-foreground/70' : 'text-gray-700'}>Email</Label>
+                    <Label htmlFor="email" className="text-foreground/70">Email</Label>
                     <Input
                       id="email"
                       type="email"
                       placeholder="john@example.com"
                       value={shipping.email}
                       onChange={(e) => setShipping((s) => ({ ...s, email: e.target.value }))}
-                      className={isDark ? 'border-border bg-muted/50 text-foreground placeholder:text-muted-foreground/70' : 'border-gray-300 bg-white text-gray-800 placeholder:text-gray-400'}
+                      className="border-border bg-muted/50 text-foreground placeholder:text-muted-foreground/70"
                     />
                   </div>
                   <div className="space-y-1.5">
-                    <Label htmlFor="phone" className={isDark ? 'text-foreground/70' : 'text-gray-700'}>Phone</Label>
+                    <Label htmlFor="phone" className="text-foreground/70">Phone</Label>
                     <Input
                       id="phone"
                       placeholder="+1 234 567 890"
                       value={shipping.phone}
                       onChange={(e) => setShipping((s) => ({ ...s, phone: e.target.value }))}
-                      className={isDark ? 'border-border bg-muted/50 text-foreground placeholder:text-muted-foreground/70' : 'border-gray-300 bg-white text-gray-800 placeholder:text-gray-400'}
+                      className="border-border bg-muted/50 text-foreground placeholder:text-muted-foreground/70"
                     />
                   </div>
                   <div className="sm:col-span-2 space-y-1.5">
-                    <Label htmlFor="address" className={isDark ? 'text-foreground/70' : 'text-gray-700'}>Address</Label>
+                    <Label htmlFor="address" className="text-foreground/70">Address</Label>
                     <Textarea
                       id="address"
                       placeholder="123 Main St, Apt 4B"
                       value={shipping.address}
                       onChange={(e) => setShipping((s) => ({ ...s, address: e.target.value }))}
-                      className={isDark ? 'border-border bg-muted/50 text-foreground placeholder:text-muted-foreground/70' : 'border-gray-300 bg-white text-gray-800 placeholder:text-gray-400'}
+                      className="border-border bg-muted/50 text-foreground placeholder:text-muted-foreground/70"
                     />
                   </div>
                   <div className="space-y-1.5">
-                    <Label htmlFor="city" className={isDark ? 'text-foreground/70' : 'text-gray-700'}>City</Label>
+                    <Label htmlFor="city" className="text-foreground/70">City</Label>
                     <Input
                       id="city"
                       placeholder="New York"
                       value={shipping.city}
                       onChange={(e) => setShipping((s) => ({ ...s, city: e.target.value }))}
-                      className={isDark ? 'border-border bg-muted/50 text-foreground placeholder:text-muted-foreground/70' : 'border-gray-300 bg-white text-gray-800 placeholder:text-gray-400'}
+                      className="border-border bg-muted/50 text-foreground placeholder:text-muted-foreground/70"
                     />
                   </div>
                   <div className="space-y-1.5">
-                    <Label htmlFor="zip" className={isDark ? 'text-foreground/70' : 'text-gray-700'}>ZIP Code</Label>
+                    <Label htmlFor="zip" className="text-foreground/70">ZIP Code</Label>
                     <Input
                       id="zip"
                       placeholder="10001"
                       value={shipping.zip}
                       onChange={(e) => setShipping((s) => ({ ...s, zip: e.target.value }))}
-                      className={isDark ? 'border-border bg-muted/50 text-foreground placeholder:text-muted-foreground/70' : 'border-gray-300 bg-white text-gray-800 placeholder:text-gray-400'}
+                      className="border-border bg-muted/50 text-foreground placeholder:text-muted-foreground/70"
                     />
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className={`${isDark ? 'glass-premium' : 'bg-white border border-gray-200 shadow-md'}`}>
+            <Card className="glass-premium">
               <CardContent className="p-5">
-                <h2 className={`font-semibold ${isDark ? 'text-foreground' : 'text-gray-800'} mb-4`}>Payment Method</h2>
+                <h2 className="font-semibold text-foreground mb-4">Payment Method</h2>
                 <div className="space-y-3">
-                  <div className={`flex items-center gap-3 rounded-lg border border-[#F57224] ${isDark ? 'bg-[#F57224]/10' : 'bg-[#F57224]/5'} p-3 shadow-[0_0_15px_rgba(245,114,36,0.2)]`}>
+                  <div className="flex items-center gap-3 rounded-lg border border-[#F57224] bg-[#F57224]/8 p-3 shadow-[0_0_15px_rgba(245,114,36,0.2)]">
                     <CreditCard className="size-5 text-[#F57224]" />
                     <div>
-                      <span className={`text-sm font-medium ${isDark ? 'text-foreground' : 'text-gray-800'}`}>Pay with Card (Stripe)</span>
-                      <p className={`text-xs ${isDark ? 'text-muted-foreground/70' : 'text-gray-500'}`}>Secure payment via Stripe Checkout</p>
+                      <span className="text-sm font-medium text-foreground">Pay with Card (Stripe)</span>
+                      <p className="text-xs text-muted-foreground/70">Secure payment via Stripe Checkout</p>
                     </div>
                   </div>
                 </div>
@@ -288,24 +276,24 @@ export default function CheckoutPage() {
           </div>
 
           <div className="lg:col-span-2 space-y-4">
-            <Card className={`${isDark ? 'glass-premium' : 'bg-white border border-gray-200 shadow-md'}`}>
+            <Card className="glass-premium">
               <CardContent className="p-5">
-                <h2 className={`font-semibold ${isDark ? 'text-foreground' : 'text-gray-800'} mb-4`}>Order Summary</h2>
+                <h2 className="font-semibold text-foreground mb-4">Order Summary</h2>
                 <div className="space-y-3">
                   {items.map((item) => {
                     const dp = getDiscountPrice(item.price, item.discountPercentage)
                     return (
                       <div key={item.productId} className="flex gap-3">
-                        <div className={`relative size-12 shrink-0 rounded-lg overflow-hidden ${isDark ? 'bg-muted/50' : 'bg-gray-100'}`}>
+                        <div className="relative size-12 shrink-0 rounded-lg overflow-hidden bg-muted/50">
                           <Image src={item.thumbnail} alt={item.title} fill className="object-cover" sizes="48px" />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className={`text-sm truncate ${isDark ? 'text-foreground' : 'text-gray-800'}`}>{item.title}</p>
-                          <p className={`text-xs ${isDark ? 'text-muted-foreground' : 'text-gray-500'}`}>
+                          <p className="text-sm truncate text-foreground">{item.title}</p>
+                          <p className="text-xs text-muted-foreground">
                             {formatUSD(dp)} x {item.quantity}
                           </p>
                         </div>
-                        <span className={`text-sm shrink-0 ${isDark ? 'text-foreground' : 'text-gray-800'}`}>{formatUSD(dp * item.quantity)}</span>
+                        <span className="text-sm shrink-0 text-foreground">{formatUSD(dp * item.quantity)}</span>
                       </div>
                     )
                   })}
@@ -313,11 +301,11 @@ export default function CheckoutPage() {
               </CardContent>
             </Card>
 
-            <Card className={`${isDark ? 'glass-premium' : 'bg-white border border-gray-200 shadow-md'}`}>
+            <Card className="glass-premium">
               <CardContent className="p-5">
-                <h2 className={`font-semibold ${isDark ? 'text-foreground' : 'text-gray-800'} mb-4`}>Coupon</h2>
+                <h2 className="font-semibold text-foreground mb-4">Coupon</h2>
                 {appliedCoupon ? (
-                  <div className={`flex items-center justify-between ${isDark ? 'bg-emerald-500/10 border border-emerald-500/20' : 'bg-emerald-50 border border-emerald-200'} rounded-lg px-3 py-2.5`}>
+                  <div className="flex items-center justify-between bg-emerald-500/10 border border-emerald-500/20 rounded-lg px-3 py-2.5">
                     <div className="flex items-center gap-2">
                       <Tag className="size-4 text-emerald-400" />
                       <span className="text-emerald-400 text-sm font-medium">{appliedCoupon.code}</span>
@@ -328,7 +316,7 @@ export default function CheckoutPage() {
                         setCouponCode("")
                         setCouponError("")
                       }}
-                      className={`text-xs ${isDark ? 'text-muted-foreground/70 hover:text-foreground/70' : 'text-gray-500 hover:text-gray-800'}`}
+                      className="text-xs text-muted-foreground/70 hover:text-foreground/70"
                     >
                       Remove
                     </button>
@@ -343,20 +331,20 @@ export default function CheckoutPage() {
                         setCouponError("")
                       }}
                       onKeyDown={(e) => e.key === "Enter" && handleApplyCoupon()}
-                      className={isDark ? 'border-border bg-muted/50 text-foreground placeholder:text-muted-foreground/70' : 'border-gray-300 bg-white text-gray-800 placeholder:text-gray-400'}
+                      className="border-border bg-muted/50 text-foreground placeholder:text-muted-foreground/70"
                     />
-                    <Button variant="outline" onClick={handleApplyCoupon} className={isDark ? 'border-border' : 'border-gray-300'}>Apply</Button>
+                    <Button variant="outline" onClick={handleApplyCoupon} className="border-border">Apply</Button>
                   </div>
                 )}
                 {couponError && <p className="text-red-400 text-xs mt-2">{couponError}</p>}
               </CardContent>
             </Card>
 
-            <Card className={`${isDark ? 'glass-premium' : 'bg-white border border-gray-200 shadow-md'}`}>
+            <Card className="glass-premium">
               <CardContent className="p-5 space-y-3">
                 <div className="flex justify-between text-sm">
-                  <span className={isDark ? 'text-muted-foreground' : 'text-gray-600'}>Subtotal</span>
-                  <span className={isDark ? 'text-foreground' : 'text-gray-800'}>{formatUSD(subtotal)}</span>
+                  <span className="text-muted-foreground">Subtotal</span>
+                  <span className="text-foreground">{formatUSD(subtotal)}</span>
                 </div>
                 {discount > 0 && (
                   <div className="flex justify-between text-sm">
@@ -364,9 +352,9 @@ export default function CheckoutPage() {
                     <span className="text-emerald-400">-{formatUSD(discount)}</span>
                   </div>
                 )}
-                <Separator className={isDark ? 'bg-muted/30' : 'bg-gray-200'} />
+                <Separator className="bg-muted/30" />
                 <div className="flex justify-between text-base font-semibold">
-                  <span className={isDark ? 'text-foreground' : 'text-gray-800'}>Total</span>
+                  <span className="text-foreground">Total</span>
                   <span className="text-[#F57224]">{formatUSD(total)}</span>
                 </div>
                 <Button

@@ -183,12 +183,12 @@ export default function FAQPage() {
   }
 
   return (
-    <div className="min-h-screen overflow-x-hidden">
-      {/* Premium Background */}
-      <div className="fixed inset-0 bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]">
-        <div className="absolute top-20 left-10 size-72 rounded-full bg-[#F57224]/20 blur-[120px] animate-pulse" />
-        <div className="absolute bottom-20 right-10 size-96 rounded-full bg-[#F57224]/10 blur-[140px] animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-[500px] rounded-full bg-orange-500/5 blur-[100px]" />
+    <div className="min-h-screen overflow-x-hidden bg-background">
+      {/* Premium Background - Theme Aware */}
+      <div className="fixed inset-0 bg-gradient-to-br from-muted/30 via-muted/10 to-background">
+        <div className="absolute top-20 left-10 size-72 rounded-full bg-[#F57224]/15 blur-[120px] animate-pulse" />
+        <div className="absolute bottom-20 right-10 size-96 rounded-full bg-[#F57224]/8 blur-[140px] animate-pulse delay-1000" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-[500px] rounded-full bg-orange-500/4 blur-[100px]" />
       </div>
 
       {/* Hero Section */}
@@ -215,7 +215,7 @@ export default function FAQPage() {
           >
             Frequently Asked{" "}
             <span className="relative inline-block">
-              <span className="absolute -inset-1 rounded-lg bg-gradient-to-r from-[#F57224]/30 to-[#F57224]/20 blur-xl" />
+              <span className="absolute -inset-1 rounded-lg bg-gradient-to-r from-[#F57224]/25 to-[#F57224]/15 blur-xl" />
               <span className="relative bg-gradient-to-r from-[#F57224] to-orange-400 bg-clip-text text-transparent">
                 Questions
               </span>
@@ -246,14 +246,14 @@ export default function FAQPage() {
                 placeholder="Search FAQs..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="border-border bg-muted/50 pl-10 text-foreground placeholder:text-muted-foreground/70 focus:border-[#F57224]/50"
+                className="border-border bg-muted/50 text-foreground placeholder:text-muted-foreground/70 pl-10 focus:border-[#F57224]/50"
               />
             </form>
           </motion.div>
         </motion.div>
       </section>
 
-      {/* Quick Stats */}
+      {/* Quick Stats - Theme Aware */}
       <section className="relative mx-auto max-w-7xl px-6 pb-16">
         <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
           {quickStats.map((stat, index) => (
@@ -318,9 +318,9 @@ export default function FAQPage() {
               </Card>
 
               {/* Contact Support Card */}
-              <Card className="glass-premium bg-gradient-to-br from-[#F57224]/10 to-[#F57224]/5">
+              <Card className="glass-premium bg-gradient-to-br from-[#F57224]/8 to-[#F57224]/4">
                 <CardContent className="p-5 text-center">
-                  <div className="mb-4 inline-flex items-center justify-center rounded-xl bg-[#F57224]/20 p-3">
+                  <div className="mb-4 inline-flex items-center justify-center rounded-xl bg-[#F57224]/15 p-3">
                     <Headphones className="size-8 text-[#F57224]" />
                   </div>
                   <h3 className="mb-2 font-semibold text-foreground">Still have questions?</h3>
@@ -329,7 +329,7 @@ export default function FAQPage() {
                   </p>
                   <div className="space-y-2">
                     <Link href="/contact">
-                      <Button className="w-full bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow">
+                      <Button className="w-full bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow text-white">
                         Contact Support
                         <MessageCircle className="ml-2 size-3" />
                       </Button>
@@ -355,7 +355,7 @@ export default function FAQPage() {
               <CardContent className="p-6 md:p-8">
                 {filteredFaqs.length === 0 ? (
                   <div className="py-12 text-center">
-                    <HelpCircle className="mx-auto mb-4 size-12 text-white/20" />
+                    <HelpCircle className="mx-auto mb-4 size-12 text-foreground/30" />
                     <p className="text-muted-foreground">No results found for "{searchQuery}"</p>
                     <Button
                       variant="link"
@@ -388,7 +388,7 @@ export default function FAQPage() {
         </div>
       </section>
 
-      {/* CTA Banner */}
+      {/* CTA Banner - Theme Aware */}
       <section className="relative mx-auto max-w-7xl px-6 pb-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -396,7 +396,7 @@ export default function FAQPage() {
           viewport={{ once: true }}
           className="glass-premium relative overflow-hidden rounded-3xl p-12 text-center"
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-[#F57224]/10 via-transparent to-[#F57224]/5" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#F57224]/8 via-transparent to-[#F57224]/4" />
           <div className="relative">
             <Zap className="mx-auto mb-4 size-12 text-[#F57224]" />
             <h2 className="text-2xl font-bold text-foreground">Need Immediate Assistance?</h2>
@@ -405,7 +405,7 @@ export default function FAQPage() {
             </p>
             <div className="mt-6 flex flex-wrap gap-4 justify-center">
               <Link href="/contact">
-                <Button className="bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow">
+                <Button className="bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow text-white">
                   Contact Us
                   <ArrowRight className="ml-2 size-4" />
                 </Button>

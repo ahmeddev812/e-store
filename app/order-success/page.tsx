@@ -57,7 +57,7 @@ interface Order {
 function LoadingSpinner() {
   return (
     <div className="min-h-screen overflow-x-hidden">
-      <div className="fixed inset-0 bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]" />
+      <div className={`fixed inset-0 bg-gradient-to-br from-muted/30 via-muted/10 to-background`} />
       <div className="relative flex min-h-[70vh] items-center justify-center">
         <div className="size-10 rounded-full border-4 border-[#F57224] border-t-transparent animate-spin" />
       </div>
@@ -68,7 +68,7 @@ function LoadingSpinner() {
 function GenericSuccessPage() {
   return (
     <div className="min-h-screen overflow-x-hidden">
-      <div className="fixed inset-0 bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]" />
+      <div className={`fixed inset-0 bg-gradient-to-br from-muted/30 via-muted/10 to-background`} />
       <div className="relative flex min-h-[70vh] flex-col items-center justify-center px-4">
         <motion.div
           initial={{ scale: 0, rotate: -180 }}
@@ -215,12 +215,14 @@ function OrderSuccessContent() {
     { label: "Delivered", status: "pending" as const, date: estimatedDate, icon: Gift },
   ]
 
+
+
   return (
     <div className="min-h-screen overflow-x-hidden">
-      <div className="fixed inset-0 bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]">
-        <div className="absolute top-20 left-10 size-72 rounded-full bg-emerald-500/20 blur-[120px] animate-pulse" />
-        <div className="absolute bottom-20 right-10 size-96 rounded-full bg-[#F57224]/10 blur-[140px] animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-[500px] rounded-full bg-emerald-500/5 blur-[100px]" />
+      <div className={`fixed inset-0 bg-gradient-to-br from-muted/30 via-muted/10 to-background`}>
+        <div className={`absolute top-20 left-10 size-72 rounded-full bg-emerald-500/15 blur-[120px] animate-pulse`} />
+        <div className={`absolute bottom-20 right-10 size-96 rounded-full bg-[#F57224]/8 blur-[140px] animate-pulse delay-1000`} />
+        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-[500px] rounded-full bg-emerald-500/4 blur-[100px]`} />
       </div>
 
       <AnimatePresence>
