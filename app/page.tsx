@@ -1,18 +1,16 @@
 "use client"
 
-import { useEffect, useMemo, useState, useRef } from "react"
+import { useEffect, useState, useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
+import { motion } from "framer-motion"
 import { useTheme } from "next-themes"
 import { 
-  Clock, ArrowRight, Sparkles, TrendingUp, Star, Shield, 
-  Truck, RotateCcw, Headphones, Zap, Gift, 
-  Diamond, Flame, Eye, ShoppingBag, Heart, ChevronRight,
-  ChevronLeft,
-  Users, Award, Globe, Rocket, Coffee, Crown, Gem,
-  Palette, Briefcase, Watch, Camera, Headset, Smartphone,
-  Play, Pause, Volume2, VolumeX
+  ArrowRight, Sparkles, Star, ShoppingBag, Heart,
+  ChevronRight, Eye, Crown,
+  Smartphone, Palette, Briefcase, Gem, Flame, Zap,
+  Coffee, Watch, Camera, Rocket, Users, Award, Globe,
+  Headphones, Diamond, Shield, Truck, RotateCcw, Gift
 } from "lucide-react"
 import { products, categoriesWithCount, getFeaturedProducts, getNewArrivals, getFlashSaleProducts, getBestsellers } from "@/data/products"
 import { Button } from "@/components/ui/button"
@@ -22,193 +20,82 @@ import { Rating } from "@/components/ui/rating"
 import { formatUSD, getDiscountPrice, truncate } from "@/lib/utils"
 
 // ============================================
-// 1. ULTIMATE PREMIUM HERO WITH VIDEO + 3D
+// 1. ULTIMATE PREMIUM HERO WITH VIDEO
 // ============================================
 
-const heroProducts = [
-  {
-    id: 1,
-    title: "Premium Smart Watch",
-    price: "$299",
-    category: "Electronics",
-    image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=600&h=600&fit=crop",
-    badge: "Best Seller",
-  },
-  {
-    id: 2,
-    title: "Luxury Leather Bag",
-    price: "$149",
-    category: "Fashion",
-    image: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&h=600&fit=crop",
-    badge: "New Arrival",
-  },
-  {
-    id: 3,
-    title: "Premium Headphones",
-    price: "$199",
-    category: "Electronics",
-    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&h=600&fit=crop",
-    badge: "Top Rated",
-  },
-  {
-    id: 4,
-    title: "Designer Sunglasses",
-    price: "$89",
-    category: "Accessories",
-    image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&h=600&fit=crop",
-    badge: "Sale",
-  },
-]
-
 function PremiumHero() {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [isDragging, setIsDragging] = useState(false)
-  const [isVideoPlaying, setIsVideoPlaying] = useState(true)
-  const [isMuted, setIsMuted] = useState(true)
-  const [showVideo, setShowVideo] = useState(false)
-  
   const { theme } = useTheme()
   const isDark = theme === 'dark'
   const heroRef = useRef<HTMLDivElement>(null)
   
-  const mouseX = useMotionValue(0)
-  const mouseY = useMotionValue(0)
-  
-  const springConfig = { damping: 25, stiffness: 150 }
-  const rotateX = useSpring(useTransform(mouseY, [-300, 300], [15, -15]), springConfig)
-  const rotateY = useSpring(useTransform(mouseX, [-300, 300], [-15, 15]), springConfig)
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (!isDragging) {
-        setCurrentIndex((prev) => (prev + 1) % heroProducts.length)
-      }
-    }, 5000)
-    return () => clearInterval(interval)
-  }, [isDragging])
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    const rect = e.currentTarget.getBoundingClientRect()
-    const x = e.clientX - rect.left - rect.width / 2
-    const y = e.clientY - rect.top - rect.height / 2
-    mouseX.set(x)
-    mouseY.set(y)
-  }
-
-  const handleMouseLeave = () => {
-    mouseX.set(0)
-    mouseY.set(0)
-  }
-
-  const nextSlide = () => {
-    setIsDragging(true)
-    setCurrentIndex((prev) => (prev + 1) % heroProducts.length)
-    setTimeout(() => setIsDragging(false), 300)
-  }
-
-  const prevSlide = () => {
-    setIsDragging(true)
-    setCurrentIndex((prev) => (prev - 1 + heroProducts.length) % heroProducts.length)
-    setTimeout(() => setIsDragging(false), 300)
-  }
-
   return (
     <div ref={heroRef} className="relative min-h-[90vh] overflow-hidden">
-      <div className={`absolute inset-0 ${
-        isDark 
-          ? 'bg-gradient-to-br from-[#0a0a0f] via-[#1a0a0a] to-[#0a0a0f]' 
-          : 'bg-gradient-to-br from-gray-100 via-background to-white'
-      }`}>
-        <div className={`absolute -top-40 -right-40 size-[500px] rounded-full ${isDark ? 'bg-[#F57224]/15' : 'bg-[#F57224]/8'} blur-[150px] animate-pulse`} />
-        <div className={`absolute -bottom-40 -left-40 size-[400px] rounded-full ${isDark ? 'bg-[#D4A853]/10' : 'bg-[#D4A853]/5'} blur-[120px] animate-pulse delay-1000`} />
-        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-[600px] rounded-full ${isDark ? 'bg-orange-500/5' : 'bg-orange-500/3'} blur-[100px]`} />
+      <div className="absolute inset-0 z-0">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="h-full w-full object-cover"
+        >
+          <source src="/hero-video.mp4" type="video/mp4" />
+        </video>
+        <div className={`absolute inset-0 ${
+          isDark 
+            ? 'bg-gradient-to-br from-[#0a0a0f]/80 via-[#1a0a0a]/70 to-[#0a0a0f]/80' 
+            : 'bg-gradient-to-br from-gray-100/60 via-background/50 to-white/60'
+        }`}>
+          <div className={`absolute -top-40 -right-40 size-[500px] rounded-full ${isDark ? 'bg-[#F57224]/15' : 'bg-[#F57224]/8'} blur-[150px] animate-pulse`} />
+          <div className={`absolute -bottom-40 -left-40 size-[400px] rounded-full ${isDark ? 'bg-[#D4A853]/10' : 'bg-[#D4A853]/5'} blur-[120px] animate-pulse delay-1000`} />
+          <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-[600px] rounded-full ${isDark ? 'bg-orange-500/5' : 'bg-orange-500/3'} blur-[100px]`} />
+        </div>
       </div>
-
-      <div
-        className={`absolute size-[600px] rounded-full ${isDark ? 'bg-[#F57224]/10' : 'bg-[#F57224]/5'} blur-[150px] transition-transform duration-700 ease-out pointer-events-none`}
-        style={{
-          left: `${mouseX.get() + 50}%`,
-          top: `${mouseY.get() + 50}%`,
-          transform: 'translate(-50%, -50%)',
-        }}
-      />
 
       <div className={`absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNENEE4NTMiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBvbHlsaW5lIHBvaW50cz0iNDAgMCA4MCA0MCA0MCA4MCAwIDQwIi8+PC9nPjwvZz48L3N2Zz4=')] ${isDark ? 'opacity-20' : 'opacity-10'}`} />
 
       <div className="absolute inset-0 pointer-events-none">
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className={`absolute size-1 rounded-full ${isDark ? 'bg-[#D4A853]/30' : 'bg-[#D4A853]/20'}`}
-            initial={{ 
-              x: Math.random() * 100 + "%",
-              y: Math.random() * 100 + "%",
-              opacity: 0.3 + Math.random() * 0.5
-            }}
-            animate={{
-              y: ["0%", "-100%", "0%"],
-              x: ["0%", `${(Math.random() - 0.5) * 50}%`, "0%"],
-            }}
-            transition={{
-              duration: 15 + Math.random() * 20,
-              repeat: Infinity,
-              ease: "linear",
-              delay: Math.random() * 10,
-            }}
-          />
-        ))}
+        {[...Array(20)].map((_, i) => {
+          const seed = i * 137.508 + 42
+          const pSeed = (i * 73.123 + 17) % 10000
+          const sr = (s: number) => {
+            const x = Math.sin(s + seed) * 10000
+            return x - Math.floor(x)
+          }
+          const sr2 = (s: number) => {
+            const x = Math.sin(s + pSeed) * 10000
+            return x - Math.floor(x)
+          }
+          return (
+            <motion.div
+              key={i}
+              className={`absolute size-1 rounded-full ${isDark ? 'bg-[#D4A853]/30' : 'bg-[#D4A853]/20'}`}
+              initial={{ 
+                x: sr(1) * 100 + "%",
+                y: sr(2) * 100 + "%",
+                opacity: 0.3 + sr(3) * 0.5
+              }}
+              animate={{
+                y: ["0%", "-100%", "0%"],
+                x: ["0%", `${(sr2(4) - 0.5) * 50}%`, "0%"],
+              }}
+              transition={{
+                duration: 15 + sr2(5) * 20,
+                repeat: Infinity,
+                ease: "linear",
+                delay: sr2(6) * 10,
+              }}
+            />
+          )
+        })}
       </div>
-
-      <div className="absolute top-4 right-4 z-30 flex gap-2">
-        <button
-          onClick={() => setShowVideo(!showVideo)}
-          className="rounded-full bg-background/10 backdrop-blur-xl p-2.5 text-foreground hover:scale-110 transition-all duration-300"
-          aria-label={showVideo ? "Hide video showcase" : "Show video showcase"}
-        >
-          {showVideo ? <Volume2 className="size-4" /> : <Play className="size-4" />}
-        </button>
-      </div>
-
-      {showVideo && (
-        <div className="absolute inset-0 z-0">
-          <video
-            autoPlay={isVideoPlaying}
-            loop
-            muted={isMuted}
-            playsInline
-            className="h-full w-full object-cover"
-            aria-hidden="true"
-          >
-            <source src="/hero-video.mp4" type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 bg-background/60" />
-          
-          <div className="absolute bottom-4 right-4 z-10 flex gap-2">
-            <button
-              onClick={() => setIsVideoPlaying(!isVideoPlaying)}
-              className="rounded-full bg-background/20 backdrop-blur-xl p-2.5 text-foreground hover:bg-background/30 transition-all duration-300"
-              aria-label={isVideoPlaying ? "Pause video" : "Play video"}
-            >
-              {isVideoPlaying ? <Pause className="size-4" /> : <Play className="size-4" />}
-            </button>
-            <button
-              onClick={() => setIsMuted(!isMuted)}
-              className="rounded-full bg-background/20 backdrop-blur-xl p-2.5 text-foreground hover:bg-background/30 transition-all duration-300"
-              aria-label={isMuted ? "Unmute video" : "Mute video"}
-            >
-              {isMuted ? <VolumeX className="size-4" /> : <Volume2 className="size-4" />}
-            </button>
-          </div>
-        </div>
-      )}
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 py-20 lg:py-32">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
+        <div className="flex justify-center">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
-            className="space-y-8"
+            className="space-y-8 max-w-2xl text-center"
           >
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -242,7 +129,7 @@ function PremiumHero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.5 }}
-              className="text-lg text-muted-foreground max-w-lg leading-relaxed"
+              className="text-lg text-muted-foreground max-w-lg leading-relaxed mx-auto"
             >
               Discover curated luxury products with unprecedented quality.
               Handpicked for those who appreciate the finer things in life.
@@ -252,7 +139,7 @@ function PremiumHero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.5 }}
-              className="flex flex-wrap gap-4"
+              className="flex flex-wrap gap-4 justify-center"
             >
               <Link href="/products">
                 <Button size="xl" className="group bg-gradient-to-r from-[#F57224] to-orange-500 shadow-glow text-white">
@@ -261,20 +148,14 @@ function PremiumHero() {
                   <ArrowRight className="ml-2 size-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </Button>
               </Link>
-              <Button 
-                variant="outline" 
-                size="xl"
-                onClick={() => setShowVideo(!showVideo)}
-              >
-                {showVideo ? "Hide Showcase" : "Watch Showcase"}
-              </Button>
+
             </motion.div>
 
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6, duration: 0.5 }}
-              className="flex items-center gap-6 pt-6 border-t border-border"
+              className="flex items-center gap-6 pt-6 border-t border-border justify-center"
             >
               <div className="flex -space-x-2">
                 {[1, 2, 3, 4].map((i) => (
@@ -293,131 +174,6 @@ function PremiumHero() {
                 </div>
                 <p className="text-xs text-muted-foreground/80">Trusted by 50,000+ customers</p>
               </div>
-            </motion.div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8, rotateY: -15 }}
-            animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="relative"
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            style={{ perspective: 1200 }}
-          >
-            <motion.div
-              style={{
-                rotateX: rotateX,
-                rotateY: rotateY,
-                transition: "transform 0.1s ease-out",
-              }}
-              className="relative"
-            >
-              <div className="relative aspect-square max-w-md mx-auto">
-                <div className={`absolute -inset-4 rounded-full ${isDark ? 'bg-gradient-to-r from-[#F57224]/20 via-[#D4A853]/15 to-[#F57224]/10' : 'bg-gradient-to-r from-[#F57224]/10 via-[#D4A853]/5 to-[#F57224]/5'} blur-3xl`} />
-                
-                <motion.div
-                  key={currentIndex}
-                  initial={{ opacity: 0, scale: 0.8, rotateZ: -10 }}
-                  animate={{ opacity: 1, scale: 1, rotateZ: 0 }}
-                  exit={{ opacity: 0, scale: 0.8, rotateZ: 10 }}
-                  transition={{ duration: 0.5, type: "spring", stiffness: 200, damping: 20 }}
-                  className={`relative rounded-2xl ${isDark ? 'glass-premium' : 'bg-card border border-border shadow-2xl'} p-2`}
-                >
-                  <div className="relative overflow-hidden rounded-xl" role="group" aria-label={`Product: ${heroProducts[currentIndex].title}`}>
-                    <Image
-                      src={heroProducts[currentIndex].image}
-                      alt={heroProducts[currentIndex].title}
-                      width={500}
-                      height={500}
-                      className="aspect-square w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      priority
-                    />
-                    
-                    <div className="absolute inset-0 bg-gradient-to-tr from-black/50 via-transparent to-transparent" />
-                    
-                    <div className="absolute left-4 top-4 space-y-2">
-                      <Badge className="bg-gradient-to-r from-[#F57224] to-orange-500 border-none text-white shadow-glow">
-                        {heroProducts[currentIndex].badge}
-                      </Badge>
-                    </div>
-                    
-                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-                      <p className="text-xs text-[#D4A853] uppercase tracking-wider">
-                        {heroProducts[currentIndex].category}
-                      </p>
-                      <h3 className="text-xl font-bold text-white">
-                        {heroProducts[currentIndex].title}
-                      </h3>
-                      <p className="text-2xl font-bold text-[#F57224]">
-                        {heroProducts[currentIndex].price}
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-
-                <button
-                  onClick={prevSlide}
-                  className={`absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 rounded-full ${isDark ? 'bg-background/20 backdrop-blur-xl' : 'bg-background/30 backdrop-blur-xl'} p-3 text-foreground hover:bg-background/40 transition-all duration-300 hover:scale-110`}
-                  aria-label="Previous product"
-                >
-                  <ChevronLeft className="size-6" />
-                </button>
-                <button
-                  onClick={nextSlide}
-                  className={`absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 rounded-full ${isDark ? 'bg-background/20 backdrop-blur-xl' : 'bg-background/30 backdrop-blur-xl'} p-3 text-foreground hover:bg-background/40 transition-all duration-300 hover:scale-110`}
-                  aria-label="Next product"
-                >
-                  <ChevronRight className="size-6" />
-                </button>
-              </div>
-
-              <div className="flex justify-center gap-2 mt-6" role="tablist" aria-label="Product selection">
-                {heroProducts.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentIndex(index)}
-                    className={`h-2 rounded-full transition-all duration-300 ${
-                      index === currentIndex
-                        ? "w-8 bg-[#F57224]"
-                        : `w-2 ${isDark ? 'bg-foreground/20 hover:bg-foreground/40' : 'bg-foreground/20 hover:bg-foreground/40'}`
-                    }`}
-                    role="tab"
-                    aria-selected={index === currentIndex}
-                    aria-label={`Product ${index + 1}`}
-                  />
-                ))}
-              </div>
-
-              <motion.div
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                className={`absolute -top-6 -right-6 rotate-12 ${isDark ? 'glass-premium' : 'bg-card border border-border shadow-xl'} rounded-xl p-3 hidden sm:block`}
-              >
-                <Image
-                  src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=100&h=100&fit=crop"
-                  alt="Headphones product"
-                  width={60}
-                  height={60}
-                  className="rounded-lg"
-                />
-                <p className="mt-1 text-center text-[10px] text-muted-foreground">-20% OFF</p>
-              </motion.div>
-
-              <motion.div
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, delay: 1, ease: "easeInOut" }}
-                className={`absolute -bottom-6 -left-6 -rotate-12 ${isDark ? 'glass-premium' : 'bg-card border border-border shadow-xl'} rounded-xl p-3 hidden sm:block`}
-              >
-                <Image
-                  src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=100&h=100&fit=crop"
-                  alt="Nike shoe product"
-                  width={60}
-                  height={60}
-                  className="rounded-lg"
-                />
-                <p className="mt-1 text-center text-[10px] text-muted-foreground">Bestseller</p>
-              </motion.div>
             </motion.div>
           </motion.div>
         </div>

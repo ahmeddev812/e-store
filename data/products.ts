@@ -113,8 +113,8 @@ export const products: Product[] = [
     description: "True wireless earbuds with active noise cancellation, transparency mode, and 8-hour battery life. IPX5 water resistant for workouts.",
     price: 149.99, discountPercentage: 10, rating: 4.5, stock: 65, brand: "SoundMax",
     sku: "SM-NE-016", weight: 50, tags: ["electronics", "audio", "earbuds"],
-    thumbnail: "https://images.unsplash.com/photo-1590658268037-6bf12f032f55?w=600&h=600&fit=crop",
-    images: ["https://images.unsplash.com/photo-1590658268037-6bf12f032f55?w=600&h=600&fit=crop"],
+    thumbnail: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&h=600&fit=crop",
+    images: ["https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&h=600&fit=crop"],
     categoryId: "cat-1", categoryName: "Electronics", createdAt: "2025-04-15T10:00:00Z",
   },
   {
@@ -348,8 +348,8 @@ export const products: Product[] = [
     description: "4K dash camera with wide-angle lens, night vision, and GPS tracking. Loop recording, G-sensor for collision detection, and parking mode.",
     price: 129.99, discountPercentage: 30, rating: 4.3, stock: 55, brand: "AutoGuard",
     sku: "AG-DC-020", weight: 200, tags: ["automotive", "camera", "safety"],
-    thumbnail: "https://images.unsplash.com/photo-1625518070549-122b2ef8bc7b?w=600&h=600&fit=crop",
-    images: ["https://images.unsplash.com/photo-1625518070549-122b2ef8bc7b?w=600&h=600&fit=crop"],
+    thumbnail: "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=600&h=600&fit=crop",
+    images: ["https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=600&h=600&fit=crop"],
     categoryId: "cat-6", categoryName: "Automotive", createdAt: "2025-04-20T10:00:00Z",
   },
   {
