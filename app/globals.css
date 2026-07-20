@@ -358,6 +358,11 @@
   animation: shimmer 2s ease-in-out infinite;
 }
 
+@keyframes shimmer-skeleton {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
 /* ===== CUSTOM SCROLLBAR ===== */
 ::-webkit-scrollbar {
   width: 6px;
@@ -390,6 +395,13 @@ html {
   outline: none;
   box-shadow: 0 0 0 3px var(--focus-ring), 0 0 12px rgba(212, 168, 83, 0.15);
   border-radius: 0.375rem;
+  transition: box-shadow 0.2s ease;
+}
+
+/* High contrast focus for keyboard navigation */
+:focus-visible:not(:active) {
+  outline: 2px solid #F57224;
+  outline-offset: 2px;
 }
 
 /* ===== SELECTION ===== */
@@ -566,5 +578,9 @@ html {
   .hover-lift:hover,
   .card-3d:hover {
     transform: none !important;
+  }
+  .animate-gradient-shift {
+    background-size: 100% 100% !important;
+    animation: none !important;
   }
 }

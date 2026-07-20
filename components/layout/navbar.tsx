@@ -131,7 +131,7 @@ export function Navbar() {
       </motion.div>
 
       {/* Main Navbar - Theme Aware */}
-      <nav className={`sticky top-0 z-50 transition-all duration-700 ${
+      <nav className={`sticky top-0 z-50 transition-all duration-500 ${
         scrolled 
           ? "glass-premium shadow-lg border-b border-[#D4A853]/20" 
           : "glass-navbar"
@@ -220,7 +220,7 @@ export function Navbar() {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="rounded-full p-2.5 transition-all duration-300 hover:bg-[#D4A853]/15"
+                  className="rounded-full p-2.5 transition-all duration-300 hover:bg-[#D4A853]/15"
                 aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
                 >
                   {theme === "dark" ? 
