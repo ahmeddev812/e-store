@@ -193,7 +193,7 @@ function FilterSidebar({
             >
               <span>{cat.name}</span>
               <Badge className="bg-muted/30 text-muted-foreground/70 text-[9px] border-none">
-                {cat._count.products}
+                {cat.count}
               </Badge>
             </button>
           ))}

@@ -129,7 +129,7 @@ export default function CategoriesPage() {
               {categoriesWithCount.length} Categories
             </Badge>
             <Badge variant="outline" className="border-border bg-muted/50 text-muted-foreground">
-              {categoriesWithCount.reduce((sum, cat) => sum + cat._count.products, 0)}+ Products
+              {categoriesWithCount.reduce((sum, cat) => sum + cat.count, 0)}+ Products
             </Badge>
           </motion.div>
         </motion.div>
@@ -173,7 +173,7 @@ export default function CategoriesPage() {
                         <h3 className="text-xl font-bold text-foreground group-hover:text-[#F57224] transition-colors">
                           {cat.name}
                         </h3>
-                        <p className="mt-1 text-sm text-muted-foreground/70">{cat._count.products} Products</p>
+                        <p className="mt-1 text-sm text-muted-foreground/70">{cat.count} Products</p>
                       </div>
                       <div className="flex h-10 w-10 items-center justify-center rounded-full bg-muted/50 transition-all duration-300 group-hover:bg-[#F57224] group-hover:text-white group-hover:scale-110">
                         <ArrowRight className="size-4 text-muted-foreground group-hover:text-white" />
@@ -245,7 +245,7 @@ export default function CategoriesPage() {
                         <h3 className="text-lg font-bold text-white group-hover:text-[#F57224] transition-colors">
                           {cat.name}
                         </h3>
-                        <p className="text-sm text-white/70">{cat._count.products} Products</p>
+                        <p className="text-sm text-white/70">{cat.count} Products</p>
                       </div>
 
                       {/* Hover Badge */}

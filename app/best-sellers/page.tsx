@@ -9,10 +9,10 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { Rating } from "@/components/ui/rating"
 import { formatUSD, getDiscountPrice } from "@/lib/utils"
-import { getBestsellers } from "@/data/products"
+import { getBestSellerProducts } from "@/data/products"
 
 export default function BestSellersPage() {
-  const products = getBestsellers(12).sort((a, b) => b.rating - a.rating)
+  const products = getBestSellerProducts().slice(0, 12).sort((a, b) => b.rating - a.rating)
 
   const totalProducts = products.length
   const avgRating =

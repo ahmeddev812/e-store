@@ -12,7 +12,7 @@ import { getNewArrivals } from "@/data/products"
 import { Sparkles, Clock, ShoppingBag, ArrowRight, Star, Eye, Heart, Tag } from "lucide-react"
 
 export default function NewArrivalsPage() {
-  const products = getNewArrivals(12)
+  const products = getNewArrivals().slice(0, 12)
 
   if (products.length === 0) {
     return (
@@ -134,13 +134,13 @@ export default function NewArrivalsPage() {
                       />
 
                       <div className="absolute left-3 top-3 z-10 flex flex-col gap-2">
-                        {product.isNew && (
+                        {product.isNewArrival && (
                           <Badge className="bg-gradient-to-r from-[#F57224] to-orange-500 border-none shadow-glow text-white">
                             <Sparkles className="size-3 mr-1" />
                             Just Added
                           </Badge>
                         )}
-                        {product.discountPercentage > 0 && !product.isNew && (
+                        {product.discountPercentage > 0 && !product.isNewArrival && (
                           <Badge className="bg-gradient-to-r from-[#F57224] to-orange-500 border-none shadow-glow text-white">
                             <Tag className="size-3 mr-1" />
                             -{product.discountPercentage}%
@@ -148,7 +148,7 @@ export default function NewArrivalsPage() {
                         )}
                       </div>
 
-                      {product.discountPercentage > 0 && product.isNew && (
+                      {product.discountPercentage > 0 && product.isNewArrival && (
                         <div className="absolute right-3 top-3 z-10">
                           <Badge className="bg-gradient-to-r from-[#F57224] to-orange-500 border-none shadow-glow text-white">
                             <Tag className="size-3 mr-1" />

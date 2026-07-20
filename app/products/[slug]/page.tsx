@@ -195,7 +195,7 @@ export default function ProductDetailPage() {
 
   const product = found
   const reviews = getReviewsByProduct(product.id)
-  const related = getRelatedProducts(product)
+  const related = getRelatedProducts(product.id)
   const discountedPrice = getDiscountPrice(product.price, product.discountPercentage)
   const wishlisted = isInWishlist(product.id)
   const allImages = product.images.length > 0 ? product.images : [product.thumbnail]

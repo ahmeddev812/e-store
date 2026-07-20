@@ -13,7 +13,17 @@ import {
   Headphones, Diamond, Shield, Truck, RotateCcw, Gift,
   Play, Pause, Volume2, VolumeX
 } from "lucide-react"
-import { products, categoriesWithCount, getFeaturedProducts, getNewArrivals, getFlashSaleProducts, getBestsellers } from "@/data/products"
+// ============================================
+// IMPORT UPDATED: New data file with 138 products
+// ============================================
+import { 
+  products, 
+  categoriesWithCount, 
+  getFeaturedProducts, 
+  getNewArrivals, 
+  getTrendingProducts,
+  getBestSellerProducts
+} from "@/data/products"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -21,16 +31,14 @@ import { Rating } from "@/components/ui/rating"
 import { formatUSD, getDiscountPrice, truncate } from "@/lib/utils"
 
 // ============================================
-// 1. THE ULTIMATE CINEMATIC HERO
-// ============================================
-
-// ============================================
 // 1. THE ULTIMATE CINEMATIC HERO - FIXED BUTTONS
 // ============================================
 
 function PremiumHero() {
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
   const { theme } = useTheme()
-  const isDark = theme === 'dark'
+  const isDark = mounted && theme === 'dark'
   const heroRef = useRef<HTMLDivElement>(null)
   const [isVideoPlaying, setIsVideoPlaying] = useState(true)
   const [isMuted, setIsMuted] = useState(true)
@@ -322,14 +330,17 @@ function PremiumHero() {
     </div>
   )
 }
+
 // ============================================
 // 2. COUNTDOWN TIMER - THEME AWARE
 // ============================================
 
 function CountdownTimer({ target }: { target: Date }) {
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
   const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 })
   const { theme } = useTheme()
-  const isDark = theme === 'dark'
+  const isDark = mounted && theme === 'dark'
 
   useEffect(() => {
     function tick() {
@@ -374,11 +385,13 @@ function CountdownTimer({ target }: { target: Date }) {
 // ============================================
 
 function UltraPremiumProductCard({ product, index }: { product: any; index: number }) {
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
   const [isWishlisted, setIsWishlisted] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
   const discountedPrice = getDiscountPrice(product.price, product.discountPercentage)
   const { theme } = useTheme()
-  const isDark = theme === 'dark'
+  const isDark = mounted && theme === 'dark'
 
   return (
     <motion.div
@@ -479,8 +492,10 @@ function UltraPremiumProductCard({ product, index }: { product: any; index: numb
 // ============================================
 
 function LuxuryCategoryCard({ category, index }: { category: any; index: number }) {
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
   const { theme } = useTheme()
-  const isDark = theme === 'dark'
+  const isDark = mounted && theme === 'dark'
   
   const categoryIcons: Record<string, any> = {
     electronics: Smartphone,
@@ -519,7 +534,7 @@ function LuxuryCategoryCard({ category, index }: { category: any; index: number 
               <h3 className={`text-lg font-bold ${isDark ? 'text-foreground' : 'text-gray-800'} transition-colors duration-300 group-hover:text-[#F57224]`}>
                 {category.name}
               </h3>
-              <p className="mt-1 text-sm text-muted-foreground/70">{category._count.products} Products</p>
+              <p className="mt-1 text-sm text-muted-foreground/70">{category.count} Products</p>
             </div>
             <div className={`flex h-10 w-10 items-center justify-center rounded-full transition-all duration-300 group-hover:bg-[#F57224] group-hover:text-white group-hover:scale-110 ${isDark ? 'bg-muted/50 text-muted-foreground' : 'bg-gray-100 text-gray-600'}`}>
               <ArrowRight className="size-4" />
@@ -536,8 +551,10 @@ function LuxuryCategoryCard({ category, index }: { category: any; index: number 
 // ============================================
 
 function BrandMarquee() {
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
   const { theme } = useTheme()
-  const isDark = theme === 'dark'
+  const isDark = mounted && theme === 'dark'
   
   const brands = [
     "Apple", "Samsung", "Nike", "Adidas", "Gucci", 
@@ -568,14 +585,23 @@ function BrandMarquee() {
 // ============================================
 
 export default function HomePage() {
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
   const [flashSaleTarget] = useState(() => new Date(Date.now() + 2 * 3600000))
   const { theme } = useTheme()
-  const isDark = theme === 'dark'
+  const isDark = mounted && theme === 'dark'
   
-  const featured = getFeaturedProducts(8)
-  const flashProducts = getFlashSaleProducts(4)
-  const newArrivals = getNewArrivals(8)
-  const bestsellers = getBestsellers(4)
+  // ============================================
+  // UPDATED: Using new data functions from products.ts
+  // ============================================
+  const featured = getFeaturedProducts().slice(0, 8)
+  const trending = getTrendingProducts().slice(0, 8)
+  const flashProducts = products
+    .filter(p => p.discountPercentage >= 30)
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 4)
+  const newArrivals = getNewArrivals().slice(0, 8)
+  const bestsellers = getBestSellerProducts().slice(0, 4)
 
   const stats = [
     { value: "50K+", label: "Happy Customers", icon: Users },
@@ -651,7 +677,7 @@ export default function HomePage() {
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {featured.map((product, index) => (
+          {trending.map((product, index) => (
             <UltraPremiumProductCard key={product.id} product={product} index={index} />
           ))}
         </div>

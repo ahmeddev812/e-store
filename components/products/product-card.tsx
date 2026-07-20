@@ -211,7 +211,7 @@ export function ProductCard({
           {variant === "premium" && (
             <div className="mt-4 flex items-center justify-between">
               <span className="text-[10px] text-muted-foreground">
-                {product.isBestseller ? "Bestseller" : "In stock"}
+                {product.isBestSeller ? "Bestseller" : "In stock"}
               </span>
               <Button size="sm" className="shadow-glow">
                 <ShoppingBag className="mr-1 size-3" />
