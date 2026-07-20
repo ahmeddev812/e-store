@@ -103,7 +103,7 @@ export default function OrderTrackingPage() {
         <p className="text-muted-foreground text-sm">Enter your order ID to check the current status.</p>
       </div>
 
-      <Card className="mb-8 !bg-muted/50 !backdrop-blur-xl">
+      <Card className="mb-8 bg-muted/50 backdrop-blur-xl">
         <CardContent className="p-5 flex gap-2">
           <Input
             placeholder="Enter order ID (e.g. ORD-...)"
@@ -113,8 +113,9 @@ export default function OrderTrackingPage() {
               setError("")
             }}
             onKeyDown={(e) => e.key === "Enter" && handleLookup()}
+            aria-label="Order ID"
           />
-          <Button onClick={handleLookup}>
+          <Button onClick={handleLookup} aria-label="Search orders">
             <Search className="size-4" />
             Search
           </Button>
@@ -122,7 +123,7 @@ export default function OrderTrackingPage() {
       </Card>
 
       {error && (
-        <Card className="!bg-muted/50 !backdrop-blur-xl">
+        <Card className="bg-muted/50 backdrop-blur-xl">
           <CardContent className="p-8 flex flex-col items-center text-center">
             <XCircle className="size-12 text-red-400 mb-4" />
             <p className="text-foreground font-medium mb-1">Order Not Found</p>
@@ -248,7 +249,7 @@ export default function OrderTrackingPage() {
       {!order && !error && !searched && (
         <div className="text-center py-12 animate-fade-in">
           <div className="inline-flex rounded-full bg-muted/50 backdrop-blur-xl border border-border p-6 mb-4">
-            <Truck className="size-12 text-foreground/20" />
+            <Truck className="size-12 text-foreground/50" />
           </div>
           <p className="text-muted-foreground/70 text-sm">Enter an order ID above to track your package.</p>
         </div>

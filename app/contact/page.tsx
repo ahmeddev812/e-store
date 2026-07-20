@@ -459,17 +459,18 @@ export default function ContactPage() {
                       : social.name === "LinkedIn" ? LinkedinSvg
                       : YoutubeSvg
                     return (
-                      <motion.a
-                        key={social.name}
-                        href={social.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ scale: 1.1, y: -2 }}
-                        className="rounded-full p-3 transition-all duration-300"
-                        style={{ backgroundColor: `${social.color}20` }}
-                      >
-                        <Icon className="size-5" style={{ color: social.color }} />
-                      </motion.a>
+                    <motion.a
+                      key={social.name}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      className="rounded-full p-3 transition-all duration-300"
+                      style={{ backgroundColor: `${social.color}20` }}
+                      aria-label={social.name}
+                    >
+                      <Icon className="size-5" style={{ color: social.color }} />
+                    </motion.a>
                     )
                   })}
                 </div>
@@ -516,6 +517,8 @@ export default function ContactPage() {
               <button
                 onClick={() => setOpenFaq(openFaq === index ? null : index)}
                 className="flex w-full items-center justify-between p-5 text-left transition-colors hover:bg-muted/50"
+                aria-expanded={openFaq === index}
+                aria-controls={`faq-answer-${index}`}
               >
                 <span className="font-medium text-foreground">{faq.question}</span>
                 <ChevronRight className={`size-5 text-[#F57224] transition-transform duration-300 ${openFaq === index ? "rotate-90" : ""}`} />
@@ -528,6 +531,9 @@ export default function ContactPage() {
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3 }}
                     className="border-t border-border px-5 pb-5"
+                    id={`faq-answer-${index}`}
+                    role="region"
+                    aria-label={faq.question}
                   >
                     <p className="pt-3 text-sm text-muted-foreground">{faq.answer}</p>
                   </motion.div>

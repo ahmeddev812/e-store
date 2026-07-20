@@ -69,6 +69,7 @@ function ImageGallery({ images, title, discount }: { images: string[]; title: st
         <button 
           className="absolute right-4 top-4 rounded-full bg-background/70 p-2 backdrop-blur-sm transition-all hover:bg-[#F57224] hover:text-white shadow-md"
           onClick={() => setIsZoomed(!isZoomed)}
+          aria-label={isZoomed ? "Zoom out" : "Zoom in"}
         >
           <Maximize2 className="size-4 text-foreground" />
         </button>
@@ -87,6 +88,7 @@ function ImageGallery({ images, title, discount }: { images: string[]; title: st
                   ? `ring-2 ring-[#F57224] ring-offset-2 ring-offset-background` 
                   : `opacity-60 hover:opacity-100`
               }`}
+              aria-label={`View image ${i + 1}`}
             >
               <Image src={img} alt={`${title} ${i + 1}`} fill className="object-cover" />
             </motion.button>
@@ -152,9 +154,16 @@ export default function ProductDetailPage() {
   const [quantity, setQuantity] = useState(1)
   const [selectedTab, setSelectedTab] = useState("details")
   const [isShareOpen, setIsShareOpen] = useState(false)
+  const [showStickyBar, setShowStickyBar] = useState(false)
   const heroRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll()
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
+
+  useEffect(() => {
+    const handleScroll = () => setShowStickyBar(window.scrollY > 300)
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   const addItem = useCartStore((s) => s.addItem)
   const { toggleItem, isInWishlist } = useWishlistStore()
@@ -335,6 +344,7 @@ export default function ProductDetailPage() {
                         onClick={() => handleShare(social.name)}
                         className="rounded-lg p-2 transition-all hover:scale-110"
                         style={{ backgroundColor: `${social.color}20` }}
+                        aria-label={`Share on ${social.name === 'copy' ? 'copy link' : social.name}`}
                       >
                         <social.icon className="size-4" style={{ color: social.color }} />
                       </button>
@@ -595,7 +605,7 @@ export default function ProductDetailPage() {
 
       {/* Sticky Add to Cart Bar (Mobile) */}
       <AnimatePresence>
-        {typeof window !== 'undefined' && window.scrollY > 300 && (
+        {showStickyBar && (
           <motion.div
             initial={{ y: 100 }}
             animate={{ y: 0 }}

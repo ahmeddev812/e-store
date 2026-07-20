@@ -381,6 +381,7 @@ export default function BlogPage() {
                       <button
                         key={cat.name}
                         className={`flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm text-muted-foreground hover:bg-gradient-to-r hover:from-[#F57224]/20 hover:to-[#F57224]/5 hover:text-[#F57224] transition-all duration-300 group`}
+                        aria-pressed={false}
                       >
                         <span className="flex items-center gap-2">
                           <span className={`size-1.5 rounded-full bg-muted/20 group-hover:bg-[#F57224] transition-colors`} />
@@ -404,12 +405,13 @@ export default function BlogPage() {
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {tags.map((tag) => (
-                      <span
+                      <button
                         key={tag}
-                        className={`px-3 py-1.5 rounded-full text-[11px] font-medium bg-muted/50 text-muted-foreground border-border hover:bg-[#F57224]/20 hover:text-[#F57224] hover:border-[#F57224]/30 border transition-all duration-300 cursor-pointer`}
+                        className="px-3 py-1.5 rounded-full text-[11px] font-medium bg-muted/50 text-muted-foreground border-border hover:bg-[#F57224]/20 hover:text-[#F57224] hover:border-[#F57224]/30 border transition-all duration-300 cursor-pointer"
+                        aria-label={`Filter by tag: ${tag}`}
                       >
                         {tag}
-                      </span>
+                      </button>
                     ))}
                   </div>
                 </CardContent>

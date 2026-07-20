@@ -49,7 +49,7 @@ function SearchPageContent() {
       {!query.trim() ? (
         <div className="flex flex-col items-center justify-center py-20 animate-fade-in">
           <div className="rounded-full bg-muted/50 backdrop-blur-xl border border-border p-6 mb-4">
-            <SearchX className={`size-16 $text-foreground/20`} />
+            <SearchX className="size-16 text-foreground/20" />
           </div>
           <p className="mt-4 text-lg text-muted-foreground">Enter a search term to find products</p>
           <Link href="/products">
@@ -61,7 +61,7 @@ function SearchPageContent() {
       ) : results.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 animate-fade-in">
           <div className="rounded-full bg-muted/50 backdrop-blur-xl border border-border p-6 mb-4">
-            <SearchX className={`size-16 $text-foreground/20`} />
+            <SearchX className="size-16 text-foreground/20" />
           </div>
           <p className="mt-4 text-lg text-muted-foreground">No results found for &ldquo;{query}&rdquo;</p>
           <p className="mt-2 text-sm text-foreground/30">Try different keywords or browse our categories</p>

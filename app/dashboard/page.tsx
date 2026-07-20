@@ -118,7 +118,7 @@ export default function DashboardPage() {
           <div className="mb-8 flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
             <div className="flex items-center gap-4">
               <Avatar className="size-16 border-2 border-[#F57224]/30">
-                <AvatarImage src={userImage} />
+                <AvatarImage src={userImage} alt={userName} />
                 <AvatarFallback className="bg-muted text-lg text-muted-foreground">
                   {getInitials(userName)}
                 </AvatarFallback>

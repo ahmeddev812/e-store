@@ -103,7 +103,7 @@ function FlashProductCard({ product, index }: { product: typeof products[number]
               {Array.from({ length: 5 }).map((_, i) => (
                 <Star
                   key={i}
-                  className={`size-3 ${i < Math.round(product.rating) ? "fill-yellow-500 text-yellow-500" : "fill-white/10 text-white/10"}`}
+                  className={`size-3 ${i < Math.round(product.rating) ? "fill-yellow-500 text-yellow-500" : "fill-muted-foreground/20 text-muted-foreground/20"}`}
                 />
               ))}
               <span className={`ml-1 text-xs text-muted-foreground/70`}>({product.rating})</span>

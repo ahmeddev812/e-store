@@ -319,6 +319,7 @@ function OrderSuccessContent() {
                       onClick={() => handleShare(social.name)}
                       className="rounded-lg p-2 transition-all hover:scale-110"
                       style={{ backgroundColor: `${social.color}20` }}
+                      aria-label={`Share on ${social.name === 'copy' ? 'copy link' : social.name}`}
                     >
                       <social.icon className="size-4" style={{ color: social.color }} />
                     </button>

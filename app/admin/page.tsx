@@ -188,7 +188,7 @@ export default function AdminPage() {
                     <CardContent className="p-5">
                       <div className="flex items-start justify-between">
                         <div className={`rounded-xl ${card.bg} p-3 transition-all duration-300 group-hover:scale-110`}>
-                          <Icon className={`size-5 text-${card.color.split(' ')[1]}`} />
+                          <Icon className="size-5 text-[#F57224]" />
                         </div>
                         <div className="flex items-center gap-1 rounded-full bg-muted/50 px-2 py-1 text-xs backdrop-blur-sm">
                           {card.trend === "up" ? (
@@ -433,8 +433,8 @@ export default function AdminPage() {
                 <Card className="glass-premium group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(245,114,36,0.2)]">
                   <CardContent className="p-4">
                     <div className="flex items-center gap-3">
-                      <div className={`rounded-xl bg-${item.color}/10 p-2.5 transition-all duration-300 group-hover:scale-110`}>
-                        <item.icon className={`size-5 text-${item.color}`} />
+                      <div className="rounded-xl bg-muted/30 p-2.5 transition-all duration-300 group-hover:scale-110">
+                        <item.icon className="size-5 text-[#F57224]" />
                       </div>
                       <div>
                         <p className="text-sm font-semibold text-foreground">{item.title}</p>

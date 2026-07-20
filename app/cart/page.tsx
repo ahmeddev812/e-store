@@ -80,6 +80,7 @@ function CartItem({ item, onUpdate, onRemove }: any) {
                           onUpdate(item.quantity - 1)
                         }
                       }}
+                      aria-label="Decrease quantity"
                     >
                       <Minus className="size-3" />
                     </Button>
@@ -91,6 +92,7 @@ function CartItem({ item, onUpdate, onRemove }: any) {
                       size="icon-xs"
                       className="size-7 hover:bg-[#F57224]/20 hover:text-[#F57224]"
                       onClick={() => onUpdate(item.quantity + 1)}
+                      aria-label="Increase quantity"
                     >
                       <Plus className="size-3" />
                     </Button>
@@ -477,7 +479,7 @@ export default function CartPage() {
                   >
                     {isCheckingOut ? (
                       <div className="flex items-center gap-2">
-                        <div className="size-4 animate-spin rounded-full border-2 border-border border-t-white" />
+                        <div className="size-4 animate-spin rounded-full border-2 border-border border-t-current" />
                         Processing...
                       </div>
                     ) : (

@@ -277,8 +277,9 @@ export default function ReturnsPage() {
             <CardContent className="p-6 md:p-8">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-foreground/70">Order ID</label>
+                  <label htmlFor="order-id" className="text-sm font-medium text-foreground/70">Order ID</label>
                   <Input
+                    id="order-id"
                     type="text"
                     placeholder="e.g. ORD-2024-XXXXX"
                     value={orderId}
@@ -289,8 +290,9 @@ export default function ReturnsPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-foreground/70">Return Reason</label>
+                  <label htmlFor="return-reason" className="text-sm font-medium text-foreground/70">Return Reason</label>
                   <select
+                    id="return-reason"
                     value={reason}
                     onChange={(e) => setReason(e.target.value)}
                     className="w-full rounded-lg border border-border bg-muted/50 px-3 py-2.5 text-sm text-foreground outline-none transition-colors focus:border-[#F57224]/50 focus:ring-1 focus:ring-[#F57224]/30"

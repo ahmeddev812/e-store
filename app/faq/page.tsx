@@ -106,6 +106,8 @@ function FAQItem({ question, answer, isOpen, onToggle, index, category, popular 
       <button
         onClick={onToggle}
         className="flex w-full items-center justify-between py-5 text-left transition-all duration-300 hover:pl-2"
+        aria-expanded={isOpen}
+        aria-controls={`faq-answer-${index}`}
       >
         <div className="flex-1 pr-4">
           <div className="flex items-center gap-2 mb-1">
@@ -137,6 +139,9 @@ function FAQItem({ question, answer, isOpen, onToggle, index, category, popular 
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
+            id={`faq-answer-${index}`}
+            role="region"
+            aria-label={question}
           >
             <div className="pb-5 pl-0 md:pl-4">
               <p className="text-muted-foreground leading-relaxed">{answer}</p>
@@ -303,6 +308,7 @@ export default function FAQPage() {
                             ? "bg-gradient-to-r from-[#F57224]/20 to-[#F57224]/5 text-[#F57224]"
                             : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
                         }`}
+                        aria-pressed={activeCategory === cat.name}
                       >
                         <span className="flex items-center gap-2">
                           <span>{cat.icon}</span>

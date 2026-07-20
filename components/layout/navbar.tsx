@@ -18,6 +18,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Badge } from "@/components/ui/badge"
 import { useUser, useClerk, SignInButton, UserButton } from "@clerk/nextjs"
 import { useUIStore } from "@/store/ui"
+import { useMounted } from "@/hooks/use-mounted"
 
 const guestLinks = [
   { name: "Home", href: "/", icon: Home },
@@ -44,7 +45,7 @@ function isActive(href: string, pathname: string): boolean {
 export function Navbar() {
   const [searchOpen, setSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
-  const [mounted, setMounted] = useState(false)
+  const mounted = useMounted()
   const [scrolled, setScrolled] = useState(false)
   const [searchSuggestions, setSearchSuggestions] = useState<string[]>([])
   const { theme, setTheme } = useTheme()
@@ -55,8 +56,6 @@ export function Navbar() {
   const wishlistCount = useWishlistStore((s) => s.items.length)
   const router = useRouter()
   const pathname = usePathname()
-
-  useEffect(() => setMounted(true), [])
 
   useEffect(() => {
     const handleScroll = () => {

@@ -252,7 +252,7 @@ export default function HelpPage() {
                 <Card className="glass-premium group h-full cursor-pointer transition-all duration-500 hover:border-[#F57224]/30 hover:shadow-[0_0_40px_rgba(245,114,36,0.15)]">
                   <CardContent className="p-6">
                     <div
-                      className="mb-4 inline-flex items-center justify-center rounded-xl bg-gradient-to-br ${category.color} p-3 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg"
+                      className={`mb-4 inline-flex items-center justify-center rounded-xl bg-gradient-to-br ${category.color} p-3 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg`}
                     >
                       <category.icon className="size-6 text-[#F57224]" />
                     </div>
@@ -305,8 +305,10 @@ export default function HelpPage() {
                   <button
                     onClick={() => toggleFaq(index)}
                     className="flex w-full items-center justify-between px-6 py-5 text-left transition-colors hover:bg-accent/10"
+                    aria-expanded={openFaq === index}
+                    aria-controls={`faq-answer-${index}`}
                   >
-                    <span className="flex-1 pr-4 font-semibold text-foreground group-hover:text-[#F57224] transition-colors">
+                    <span className="flex-1 pr-4 font-semibold text-foreground transition-colors">
                       {item.question}
                     </span>
                     <motion.span
@@ -324,6 +326,9 @@ export default function HelpPage() {
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.3 }}
+                        id={`faq-answer-${index}`}
+                        role="region"
+                        aria-label={item.question}
                       >
                         <div className="border-t border-border px-6 pb-5">
                           <p className="pt-3 text-sm text-muted-foreground leading-relaxed">

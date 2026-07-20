@@ -83,7 +83,7 @@ export default function ProfileSettingsPage() {
             <CardContent className="flex flex-col items-center gap-4 p-6 sm:flex-row">
               <div className="relative">
                 <Avatar className="size-20 border-2 border-[#F57224]/30">
-                  <AvatarImage src={userImage} />
+                  <AvatarImage src={userImage} alt={userName} />
                   <AvatarFallback className="bg-muted text-xl text-muted-foreground">
                     {getInitials(userName)}
                   </AvatarFallback>
@@ -92,7 +92,7 @@ export default function ProfileSettingsPage() {
               <div className="text-center sm:text-left">
                 <p className="text-lg font-medium text-foreground">{userName}</p>
                 <p className="text-sm text-muted-foreground">{userEmail}</p>
-                <p className="mt-1 text-xs text-foreground/30">Managed by Clerk</p>
+                <p className="mt-1 text-xs text-muted-foreground/70">Managed by Clerk</p>
               </div>
             </CardContent>
           </Card>

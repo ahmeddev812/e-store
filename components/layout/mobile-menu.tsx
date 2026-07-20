@@ -9,6 +9,7 @@ import { useUIStore } from "@/store/ui"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { useUser, useClerk } from "@clerk/nextjs"
+import { useMounted } from "@/hooks/use-mounted"
 import {
   X, Home, Package, Grid, Info, Phone, Heart, ShoppingBag, LogOut, User,
   Sparkles, Flame, Award, Truck, Settings, MapPin,
@@ -35,10 +36,11 @@ function MobileMenu() {
   const pathname = usePathname()
   const router = useRouter()
   const { isMobileMenuOpen, setMobileMenuOpen } = useUIStore()
+  const mounted = useMounted()
   const { isSignedIn, user } = useUser()
   const { signOut } = useClerk()
   const { theme } = useTheme()
-  const isDark = theme === 'dark'
+  const isDark = mounted && theme === 'dark'
 
   useEffect(() => {
     if (isMobileMenuOpen) {
