@@ -24,6 +24,10 @@ import { formatUSD, getDiscountPrice, truncate } from "@/lib/utils"
 // 1. THE ULTIMATE CINEMATIC HERO
 // ============================================
 
+// ============================================
+// 1. THE ULTIMATE CINEMATIC HERO - FIXED BUTTONS
+// ============================================
+
 function PremiumHero() {
   const { theme } = useTheme()
   const isDark = theme === 'dark'
@@ -78,7 +82,6 @@ function PremiumHero() {
     >
       {/* ===== BACKGROUND LAYER ===== */}
       <div className="absolute inset-0 z-0">
-        {/* Video Background */}
         <video
           autoPlay={isVideoPlaying}
           loop
@@ -90,39 +93,43 @@ function PremiumHero() {
           <source src="/hero-video.mp4" type="video/mp4" />
         </video>
         
-        {/* Premium Overlay with Depth */}
+        {/* Premium Overlay - THEME AWARE */}
         <div className={`absolute inset-0 ${
           isDark 
             ? 'bg-gradient-to-br from-black/85 via-black/60 to-black/90' 
-            : 'bg-gradient-to-br from-black/80 via-black/50 to-black/85'
+            : 'bg-gradient-to-br from-black/70 via-black/50 to-black/75'
         }`}>
-          {/* Cinematic Vignette */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_50%,transparent_30%,black_100%)] opacity-60" />
           
-          {/* Single subtle ambient orb */}
-          <div className="absolute -top-40 -right-40 size-[600px] rounded-full bg-[#F57224]/10 blur-[150px]" />
-          <div className="absolute -bottom-40 -left-40 size-[500px] rounded-full bg-[#D4A853]/8 blur-[120px]" />
+          <div className={`absolute -top-40 -right-40 size-[600px] rounded-full ${isDark ? 'bg-[#F57224]/15' : 'bg-[#F57224]/10'} blur-[150px]`} />
+          <div className={`absolute -bottom-40 -left-40 size-[500px] rounded-full ${isDark ? 'bg-[#D4A853]/10' : 'bg-[#D4A853]/5'} blur-[120px]`} />
         </div>
 
-        {/* Grid Pattern */}
-        <div className={`absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNENEE4NTMiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBvbHlsaW5lIHBvaW50cz0iNDAgMCA4MCA0MCA0MCA4MCAwIDQwIi8+PC9nPjwvZz48L3N2Zz4=')] opacity-20`} />
+        <div className={`absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNENEE4NTMiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBvbHlsaW5lIHBvaW50cz0iNDAgMCA4MCA0MCA0MCA4MCAwIDQwIi8+PC9nPjwvZz48L3N2Zz4=')] ${isDark ? 'opacity-20' : 'opacity-10'}`} />
         
-        {/* Shimmer Line */}
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#D4A853]/30 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#F57224]/20 to-transparent" />
       </div>
 
-      {/* ===== VIDEO CONTROLS ===== */}
+      {/* ===== VIDEO CONTROLS - FIXED ===== */}
       <div className="absolute top-6 right-6 z-30 flex gap-2">
         <button
           onClick={() => setIsMuted(!isMuted)}
-          className={`rounded-full ${isDark ? 'bg-white/10 backdrop-blur-xl' : 'bg-black/20 backdrop-blur-xl'} p-3 text-white hover:bg-white/20 transition-all hover:scale-110 border border-white/10`}
+          className={`rounded-full backdrop-blur-xl p-3 text-white hover:scale-110 transition-all duration-300 border ${
+            isDark 
+              ? 'bg-white/10 hover:bg-white/20 border-white/10' 
+              : 'bg-black/30 hover:bg-black/50 border-white/20'
+          }`}
         >
           {isMuted ? <VolumeX className="size-4" /> : <Volume2 className="size-4" />}
         </button>
         <button
           onClick={() => setIsVideoPlaying(!isVideoPlaying)}
-          className={`rounded-full ${isDark ? 'bg-white/10 backdrop-blur-xl' : 'bg-black/20 backdrop-blur-xl'} p-3 text-white hover:bg-white/20 transition-all hover:scale-110 border border-white/10`}
+          className={`rounded-full backdrop-blur-xl p-3 text-white hover:scale-110 transition-all duration-300 border ${
+            isDark 
+              ? 'bg-white/10 hover:bg-white/20 border-white/10' 
+              : 'bg-black/30 hover:bg-black/50 border-white/20'
+          }`}
         >
           {isVideoPlaying ? <Pause className="size-4" /> : <Play className="size-4" />}
         </button>
@@ -137,7 +144,7 @@ function PremiumHero() {
             className={`h-12 w-0.5 rounded-full transition-all duration-500 ${
               index === activeSlide 
                 ? 'bg-[#F57224] w-6' 
-                : 'bg-white/20 hover:bg-white/40 w-0.5'
+                : 'bg-white/30 hover:bg-white/50 w-0.5'
             }`}
           />
         ))}
@@ -173,7 +180,7 @@ function PremiumHero() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="text-sm font-medium tracking-[0.3em] text-white/40 uppercase"
+                className="text-sm font-medium tracking-[0.3em] text-white/50 uppercase"
               >
                 {slides[activeSlide].tag}
               </motion.p>
@@ -202,13 +209,14 @@ function PremiumHero() {
                 {slides[activeSlide].description}
               </motion.p>
 
-              {/* CTA Buttons */}
+              {/* ===== CTA BUTTONS - FIXED ===== */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
                 className="flex flex-wrap gap-4"
               >
+                {/* Primary Button - Same in both themes */}
                 <Link href="/products">
                   <Button className="group relative overflow-hidden bg-[#F57224] px-6 py-5 text-sm sm:text-base font-bold uppercase tracking-wider text-white shadow-[0_0_30px_rgba(245,114,36,0.3)] hover:shadow-[0_0_40px_rgba(245,114,36,0.5)] transition-all duration-300">
                     <span className="relative z-10 flex items-center">
@@ -219,22 +227,30 @@ function PremiumHero() {
                     <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-[#F57224] to-[#D4A853] transition-transform duration-500 group-hover:translate-x-0" />
                   </Button>
                 </Link>
+                
+                {/* 🔥 FIXED: Outline Button - Solid background in light theme */}
                 <Link href="/categories">
                   <Button 
                     variant="outline" 
-                    className="border-white/20 px-6 py-5 text-sm sm:text-base font-bold uppercase tracking-wider text-white hover:bg-white/10 hover:border-white/40 transition-all duration-300"
+                    className={`px-6 py-5 text-sm sm:text-base font-bold uppercase tracking-wider transition-all duration-300 ${
+                      isDark 
+                        ? 'border-white/20 text-white hover:bg-white/10 hover:border-white/40' 
+                        : 'border-white/30 text-white bg-black/20 hover:bg-black/30 hover:border-white/50 backdrop-blur-sm'
+                    }`}
                   >
                     View All
                   </Button>
                 </Link>
               </motion.div>
 
-              {/* Trust Badges */}
+              {/* ===== TRUST BADGES - FIXED ===== */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.7 }}
-                className="flex flex-wrap items-center gap-8 pt-6 border-t border-white/10"
+                className={`flex flex-wrap items-center gap-8 pt-6 border-t ${
+                  isDark ? 'border-white/10' : 'border-white/20'
+                }`}
               >
                 <div className="flex items-center gap-3">
                   <div className="flex -space-x-2">
@@ -252,13 +268,13 @@ function PremiumHero() {
                       ))}
                       <span className="ml-2 text-sm font-bold text-white">4.9</span>
                     </div>
-                    <p className="text-xs font-medium tracking-wider text-white/50">
+                    <p className={`text-xs font-medium tracking-wider ${isDark ? 'text-white/50' : 'text-white/70'}`}>
                       50,000+ Happy Customers
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-6 text-white/30">
+                <div className={`flex items-center gap-6 ${isDark ? 'text-white/30' : 'text-white/50'}`}>
                   <div className="flex items-center gap-2">
                     <Shield className="size-4 text-[#D4A853]" />
                     <span className="text-xs font-medium">Secure</span>
@@ -278,7 +294,7 @@ function PremiumHero() {
         </div>
       </div>
 
-      {/* ===== SCROLL INDICATOR ===== */}
+      {/* ===== SCROLL INDICATOR - FIXED ===== */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -290,11 +306,15 @@ function PremiumHero() {
           transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
           className="flex flex-col items-center gap-2"
         >
-          <span className="text-[10px] font-bold tracking-[0.3em] text-white/20 uppercase">
+          <span className={`text-[10px] font-bold tracking-[0.3em] uppercase ${isDark ? 'text-white/20' : 'text-white/40'}`}>
             Scroll
           </span>
-          <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 backdrop-blur-sm">
-            <ChevronRight className="size-5 rotate-90 text-white/20" />
+          <div className={`flex h-10 w-10 items-center justify-center rounded-full border ${
+            isDark 
+              ? 'border-white/10 bg-white/5' 
+              : 'border-white/20 bg-black/20 backdrop-blur-sm'
+          }`}>
+            <ChevronRight className={`size-5 rotate-90 ${isDark ? 'text-white/20' : 'text-white/40'}`} />
           </div>
         </motion.div>
       </motion.div>
@@ -302,9 +322,8 @@ function PremiumHero() {
     </div>
   )
 }
-
 // ============================================
-// 2. COUNTDOWN TIMER
+// 2. COUNTDOWN TIMER - THEME AWARE
 // ============================================
 
 function CountdownTimer({ target }: { target: Date }) {
@@ -351,7 +370,7 @@ function CountdownTimer({ target }: { target: Date }) {
 }
 
 // ============================================
-// 3. PRODUCT CARD
+// 3. PRODUCT CARD - THEME AWARE
 // ============================================
 
 function UltraPremiumProductCard({ product, index }: { product: any; index: number }) {
@@ -384,7 +403,7 @@ function UltraPremiumProductCard({ product, index }: { product: any; index: numb
                 </Badge>
               )}
               {product.rating >= 4.7 && (
-                <Badge className="bg-yellow-500/20 text-yellow-400 border-yellow-500/30 backdrop-blur-sm text-[10px]">
+                <Badge className={`${isDark ? 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30' : 'bg-yellow-100 text-yellow-700 border-yellow-300'} backdrop-blur-sm text-[10px]`}>
                   <Star className="mr-1 size-2 fill-yellow-500" /> Bestseller
                 </Badge>
               )}
@@ -418,7 +437,7 @@ function UltraPremiumProductCard({ product, index }: { product: any; index: numb
               </div>
             </div>
 
-            <CardContent className="p-5">
+            <CardContent className={`p-5 ${isDark ? 'bg-card' : 'bg-white'}`}>
               <div className="mb-2 flex items-center justify-between">
                 <span className="text-[10px] uppercase tracking-wider text-muted-foreground/60">{product.categoryName}</span>
                 <Rating value={product.rating} size="sm" readonly />
@@ -456,7 +475,7 @@ function UltraPremiumProductCard({ product, index }: { product: any; index: numb
 }
 
 // ============================================
-// 4. CATEGORY CARD
+// 4. CATEGORY CARD - THEME AWARE
 // ============================================
 
 function LuxuryCategoryCard({ category, index }: { category: any; index: number }) {
@@ -513,7 +532,7 @@ function LuxuryCategoryCard({ category, index }: { category: any; index: number 
 }
 
 // ============================================
-// 5. BRAND MARQUEE
+// 5. BRAND MARQUEE - THEME AWARE
 // ============================================
 
 function BrandMarquee() {
@@ -528,7 +547,7 @@ function BrandMarquee() {
 
   return (
     <div className="relative overflow-hidden py-10">
-      <div className={`absolute inset-0 bg-gradient-to-r from-transparent ${isDark ? 'via-[#F57224]/5' : 'via-[#F57224]/5'} to-transparent`} />
+      <div className={`absolute inset-0 bg-gradient-to-r from-transparent ${isDark ? 'via-[#F57224]/8' : 'via-[#F57224]/5'} to-transparent`} />
       <div className="flex animate-marquee whitespace-nowrap">
         {[...brands, ...brands].map((brand, idx) => (
           <div
@@ -589,7 +608,7 @@ export default function HomePage() {
 
       {/* 3. FLASH SALES */}
       <section className="mx-auto max-w-7xl px-6 py-20">
-        <div className={`relative mb-12 overflow-hidden rounded-2xl ${isDark ? 'bg-gradient-to-r from-[#F57224]/10 via-[#F57224]/5 to-transparent border-border' : 'bg-gradient-to-r from-[#F57224]/10 via-[#F57224]/5 to-transparent border-gray-200'} border p-8`}>
+        <div className={`relative mb-12 overflow-hidden rounded-2xl ${isDark ? 'bg-gradient-to-r from-[#F57224]/15 via-[#F57224]/8 to-transparent border-border' : 'bg-gradient-to-r from-[#F57224]/10 via-[#F57224]/5 to-transparent border-gray-200'} border p-8`}>
           <div className="absolute right-0 top-0 -mr-20 -mt-20 size-40 rounded-full bg-[#F57224]/20 blur-3xl" />
           <div className="relative flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-4">
@@ -690,7 +709,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 7. FEATURED COLLECTION CTA */}
+      {/* 7. FEATURED COLLECTION CTA - THEME AWARE */}
       <section className="mx-auto max-w-7xl px-6 py-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -727,7 +746,7 @@ export default function HomePage() {
         </motion.div>
       </section>
 
-      {/* 8. WHY CHOOSE US */}
+      {/* 8. WHY CHOOSE US - THEME AWARE */}
       <section className="mx-auto max-w-7xl px-6 py-20">
         <div className="mb-12 text-center">
           <Badge className="mb-4 bg-gradient-to-r from-[#F57224]/20 to-[#F57224]/5 text-[#F57224] border-none">
@@ -763,7 +782,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 9. STATS */}
+      {/* 9. STATS - THEME AWARE */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -787,7 +806,7 @@ export default function HomePage() {
       {/* 10. BRAND MARQUEE */}
       <BrandMarquee />
 
-      {/* 11. NEWSLETTER */}
+      {/* 11. NEWSLETTER - THEME AWARE */}
       <section className="mx-auto max-w-7xl px-6 pb-24 pt-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -796,7 +815,7 @@ export default function HomePage() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className={`relative overflow-hidden rounded-3xl p-12 sm:p-16 text-center ${isDark ? 'bg-card border-border' : 'bg-white border-gray-200'} border shadow-lg`}
         >
-          <div className={`absolute inset-0 bg-gradient-to-r ${isDark ? 'from-[#F57224]/5 via-transparent to-[#F57224]/3' : 'from-[#F57224]/5 via-transparent to-[#F57224]/3'}`} />
+          <div className={`absolute inset-0 bg-gradient-to-r ${isDark ? 'from-[#F57224]/8 via-transparent to-[#F57224]/5' : 'from-[#F57224]/5 via-transparent to-[#F57224]/3'}`} />
           <div className="relative">
             <Gift className="mx-auto mb-4 size-12 text-[#F57224]" />
             <h2 className={`text-2xl sm:text-3xl font-bold ${isDark ? 'text-foreground' : 'text-gray-800'}`}>Subscribe & Save 15%</h2>
