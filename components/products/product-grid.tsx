@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion"
 import type { Product } from "@/data/products"
-import { ProductCard, type ProductCardProps } from "@/components/products/product-card"
+import { ProductCard } from "@/components/products/product-card"
+import type { ProductCardProps } from "@/components/products/product-card.types"
 import { cn } from "@/lib/utils"
 import { staggerContainer } from "@/lib/motion"
 
