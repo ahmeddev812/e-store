@@ -3,6 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
 import { motion } from "framer-motion"
 import { Clock, Eye, Heart, ShoppingBag, Star } from "lucide-react"
 import { toast } from "sonner"
@@ -27,6 +28,7 @@ export function ProductCard({
   animate = true,
   className,
 }: ProductCardProps) {
+  const router = useRouter()
   const [isHovered, setIsHovered] = useState(false)
   const { toggleItem, isInWishlist } = useWishlistStore()
   const wishlisted = isInWishlist(product.id)
@@ -131,7 +133,7 @@ export function ProductCard({
                 className="border-border bg-background/90 text-foreground backdrop-blur-xl hover:border-primary hover:bg-primary hover:text-primary-foreground"
                 onClick={(e) => {
                   e.preventDefault()
-                  window.location.href = `/products/${product.slug}`
+                  router.push(`/products/${product.slug}`)
                 }}
               >
                 <Eye className="mr-2 size-4" />

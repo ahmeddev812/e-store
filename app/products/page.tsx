@@ -1,7 +1,8 @@
 "use client"
 
-import { Suspense, use, useMemo, useState, useEffect, useRef } from "react"
+import { Suspense, use, useMemo, useState, useEffect, useRef, useCallback } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import Image from "next/image"
 
 
@@ -34,7 +35,7 @@ const sortOptions = [
 ] as const
 
 // Premium Product Card Component - Theme Aware
-function ProductCard({ product, index }: { product: any; index: number }) {
+function ProductCard({ product, index, onSaveScroll, nav }: { product: any; index: number; onSaveScroll?: () => void; nav?: (url: string) => void }) {
   const [isHovered, setIsHovered] = useState(false)
   const discountedPrice = getDiscountPrice(product.price, product.discountPercentage)
 
@@ -47,7 +48,7 @@ function ProductCard({ product, index }: { product: any; index: number }) {
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
     >
-      <Link href={`/products/${product.slug}`}>
+      <Link href={`/products/${product.slug}`} onClick={onSaveScroll}>
         <Card className="group relative overflow-hidden transition-all duration-500 hover:border-[#F57224]/30 hover:shadow-[0_0_40px_rgba(245,114,36,0.2)] bg-card border-border">
           {/* Image Container */}
           <div className="relative overflow-hidden bg-muted">
@@ -91,7 +92,9 @@ function ProductCard({ product, index }: { product: any; index: number }) {
                     className="border-border bg-muted/30 text-foreground hover:bg-[#F57224] hover:text-white hover:border-[#F57224]"
                     onClick={(e) => {
                       e.preventDefault()
-                      window.location.href = `/products/${product.slug}`
+                      if (onSaveScroll) onSaveScroll()
+                      if (nav) nav(`/products/${product.slug}`)
+                      else window.location.href = `/products/${product.slug}`
                     }}
                   >
                     <Eye className="mr-2 size-4" />
@@ -308,6 +311,31 @@ function ProductsPageContent({
   const [priceRange, setPriceRange] = useState(4000)
   const [inStock, setInStock] = useState(false)
 
+  const router = useRouter()
+  const isFirstRender = useRef(true)
+
+  // Save scroll position before navigating away
+  useEffect(() => {
+    const handleBeforeNav = () => {
+      if (typeof window !== "undefined") {
+        sessionStorage.setItem("products_scroll", String(window.scrollY))
+      }
+    }
+    window.addEventListener("beforeunload", handleBeforeNav)
+    return () => window.removeEventListener("beforeunload", handleBeforeNav)
+  }, [])
+
+  // Restore scroll position on mount (from back navigation)
+  useEffect(() => {
+    const savedScroll = sessionStorage.getItem("products_scroll")
+    if (savedScroll) {
+      sessionStorage.removeItem("products_scroll")
+      requestAnimationFrame(() => {
+        window.scrollTo(0, parseInt(savedScroll, 10))
+      })
+    }
+  }, [])
+
   useEffect(() => {
     setCategory(categoryParam)
   }, [categoryParam])
@@ -324,6 +352,30 @@ function ProductsPageContent({
   useEffect(() => {
     setSort(sortParam)
   }, [sortParam])
+
+  // Sync filter state to URL so back/forward navigation preserves context
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false
+      return
+    }
+    const url = new URL(window.location.href)
+    const params = new URLSearchParams()
+    if (category) params.set("category", category)
+    if (sort !== "default") params.set("sort", sort)
+    if (page > 1) params.set("page", String(page))
+    if (search) params.set("q", search)
+    const qs = params.toString()
+    const newPath = qs ? `/products?${qs}` : "/products"
+    router.replace(newPath, { scroll: false })
+  }, [category, sort, search, page])
+
+  // Save scroll position on product link click
+  const saveScroll = useCallback(() => {
+    if (typeof window !== "undefined") {
+      sessionStorage.setItem("products_scroll", String(window.scrollY))
+    }
+  }, [])
 
   const heroRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll()
@@ -614,13 +666,13 @@ function ProductsPageContent({
             ) : viewMode === "grid" ? (
               <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {paginated.map((product, index) => (
-                  <ProductCard key={product.id} product={product} index={index} />
+                  <ProductCard key={product.id} product={product} index={index} onSaveScroll={saveScroll} nav={router.push} />
                 ))}
               </div>
             ) : (
               <div className="space-y-4">
                 {paginated.map((product) => (
-                  <ProductCard key={product.id} product={product} index={0} />
+                  <ProductCard key={product.id} product={product} index={0} onSaveScroll={saveScroll} nav={router.push} />
                 ))}
               </div>
             )}

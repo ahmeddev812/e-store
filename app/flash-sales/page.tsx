@@ -3,6 +3,7 @@
 import { useEffect, useState, useMemo } from "react"
 import Link from "next/link"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -45,6 +46,7 @@ function formatCountdown(ms: number) {
 }
 
 function FlashProductCard({ product, index }: { product: typeof products[number]; index: number }) {
+  const router = useRouter()
   const discountedPrice = getDiscountPrice(product.price, product.discountPercentage)
 
   return (
@@ -82,7 +84,7 @@ function FlashProductCard({ product, index }: { product: typeof products[number]
                 className={`border-border bg-muted/30 text-foreground hover:bg-[#F57224] hover:text-white hover:border-[#F57224]`}
                 onClick={(e) => {
                   e.preventDefault()
-                  window.location.href = `/products/${product.slug}`
+                  router.push(`/products/${product.slug}`)
                 }}
               >
                 <Eye className="mr-2 size-4" />
@@ -116,9 +118,11 @@ function FlashProductCard({ product, index }: { product: typeof products[number]
 }
 
 export default function FlashSalesPage() {
+  const router = useRouter()
   const [activeFilter, setActiveFilter] = useState(0)
 
-  const endTime = useMemo(() => Date.now() + 2 * 60 * 60 * 1000, [])
+  const [endTime, setEndTime] = useState(0)
+  useEffect(() => { setEndTime(Date.now() + 2 * 60 * 60 * 1000) }, [])
   const remaining = useCountdown(endTime)
   const { hours, minutes, seconds } = formatCountdown(remaining)
   const isExpired = remaining <= 0

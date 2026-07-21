@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
 import { motion } from "framer-motion"
 import { Crown, Star, TrendingUp, ShoppingBag, ArrowRight, Eye, Heart, Award, Flame } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -12,6 +13,7 @@ import { formatUSD, getDiscountPrice } from "@/lib/utils"
 import { getBestSellerProducts } from "@/data/products"
 
 export default function BestSellersPage() {
+  const router = useRouter()
   const products = getBestSellerProducts().slice(0, 12).sort((a, b) => b.rating - a.rating)
 
   const totalProducts = products.length
@@ -217,7 +219,7 @@ export default function BestSellersPage() {
                           className="border-border bg-muted/30 text-foreground hover:bg-[#F57224] hover:text-white hover:border-[#F57224]"
                           onClick={(e) => {
                             e.preventDefault()
-                            window.location.href = `/products/${product.slug}`
+                            router.push(`/products/${product.slug}`)
                           }}
                         >
                           <Eye className="mr-2 size-4" />

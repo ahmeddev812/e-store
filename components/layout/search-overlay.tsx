@@ -34,9 +34,9 @@ const recentSearches = [
 ]
 
 const trendingProducts = [
-  { name: "Sony WH-1000XM5", price: 399, image: "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=100&h=100&fit=crop", rating: 4.9 },
-  { name: "Nike Air Max", price: 129, image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=100&h=100&fit=crop", rating: 4.8 },
-  { name: "iPhone 15 Pro", price: 999, image: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=100&h=100&fit=crop", rating: 4.9 },
+  { name: "Sony WH-1000XM5", slug: "sony-wh-1000xm5-headphones", price: 399, image: "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=100&h=100&fit=crop", rating: 4.9 },
+  { name: "Nike Air Max", slug: "nike-air-max-270", price: 129, image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=100&h=100&fit=crop", rating: 4.8 },
+  { name: "iPhone 15 Pro", slug: "apple-iphone-15-pro", price: 999, image: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=100&h=100&fit=crop", rating: 4.9 },
 ]
 
 function SearchOverlay() {
@@ -197,7 +197,8 @@ function SearchOverlay() {
                             transition={{ delay: idx * 0.05 }}
                             onClick={() => {
                               setSearchOpen(false)
-                              router.push(`/search?q=${encodeURIComponent(product.name)}`)
+                              if (product.slug) router.push(`/products/${product.slug}`)
+                              else router.push(`/search?q=${encodeURIComponent(product.name)}`)
                             }}
                             className="group flex cursor-pointer items-center gap-3 rounded-xl bg-muted/50 p-3 transition-all hover:bg-[#F57224]/10 hover:scale-[1.02]"
                           >

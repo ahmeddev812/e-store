@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -12,6 +13,7 @@ import { getNewArrivals } from "@/data/products"
 import { Sparkles, Clock, ShoppingBag, ArrowRight, Star, Eye, Heart, Tag } from "lucide-react"
 
 export default function NewArrivalsPage() {
+  const router = useRouter()
   const products = getNewArrivals().slice(0, 12)
 
   if (products.length === 0) {
@@ -163,7 +165,7 @@ export default function NewArrivalsPage() {
                           className={`border-border bg-muted/30 text-foreground hover:bg-[#F57224] hover:text-white hover:border-[#F57224]`}
                           onClick={(e) => {
                             e.preventDefault()
-                            window.location.href = `/products/${product.slug}`
+                            router.push(`/products/${product.slug}`)
                           }}
                         >
                           <Eye className="mr-2 size-4" />

@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { useCartStore } from "@/store/cart"
 import { validateCoupon } from "@/data/coupons"
+import { getProductById } from "@/data/products"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
@@ -26,6 +27,8 @@ import { Footer } from "@/components/layout/footer"
 function CartItem({ item, onUpdate, onRemove }: any) {
   const discountedPrice = getDiscountPrice(item.price, item.discountPercentage)
   const lineTotal = discountedPrice * item.quantity
+  const product = getProductById(item.productId)
+  const productSlug = product?.slug || item.productId
 
   return (
     <motion.div
@@ -56,7 +59,7 @@ function CartItem({ item, onUpdate, onRemove }: any) {
           <div className="flex-1 min-w-0">
             <div className="flex items-start justify-between gap-4">
               <div className="flex-1">
-                <Link href={`/products/${item.productId}`}>
+                <Link href={`/products/${productSlug}`}>
                   <h3 className="text-base font-semibold text-foreground transition-colors hover:text-[#F57224] line-clamp-1">
                     {item.title}
                   </h3>

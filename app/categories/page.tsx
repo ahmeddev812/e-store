@@ -3,7 +3,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { motion, useScroll, useTransform } from "framer-motion"
-import { useRef } from "react"
+import { useEffect, useRef } from "react"
 import { categoriesWithCount } from "@/data/products"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -64,6 +64,7 @@ const itemVariants = {
 const featuredCategories = categoriesWithCount.slice(0, 8)
 
 export default function CategoriesPage() {
+  useEffect(() => { window.scrollTo(0, 0) }, [])
   const heroRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll()
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
