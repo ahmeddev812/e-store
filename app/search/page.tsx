@@ -1,7 +1,6 @@
 "use client"
 
-import { Suspense, useMemo } from "react"
-import { useSearchParams } from "next/navigation"
+import { Suspense, use, useMemo } from "react"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { SearchX } from "lucide-react"
@@ -12,7 +11,11 @@ import { Rating } from "@/components/ui/rating"
 import { Button } from "@/components/ui/button"
 import { formatUSD, getDiscountPrice, truncate } from "@/lib/utils"
 
-export default function SearchPage() {
+export default function SearchPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
   return (
     <Suspense fallback={
       <div className="mx-auto max-w-7xl px-6 py-8">
@@ -20,14 +23,18 @@ export default function SearchPage() {
         <p className="mt-1 text-muted-foreground">Loading...</p>
       </div>
     }>
-      <SearchPageContent />
+      <SearchPageContent searchParams={searchParams} />
     </Suspense>
   )
 }
 
-function SearchPageContent() {
-  const searchParams = useSearchParams()
-  const query = searchParams.get("q") || ""
+function SearchPageContent({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
+  const sp = use(searchParams)
+  const query = typeof sp.q === "string" ? sp.q : ""
 
 
   const results = useMemo(() => {

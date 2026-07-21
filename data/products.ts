@@ -943,31 +943,30 @@ const PRODUCT_IMAGES: Record<string, { thumbnail: string; images: string[] }> = 
     ]
   },
   'organic-coconut-oil-500ml': {
-    thumbnail: '/images/products/organic-coconut-oil-500ml-thumbnail.jpg',
+    thumbnail: '/images/products/Organic Coconut Oil 500ml thumbnail.jpg',
     images: [
-      '/images/products/organic-coconut-oil-500ml-image-1.jpg',
-      '/images/products/organic-coconut-oil-500ml-image-2.jpg'
+      '/images/products/Organic Coconut Oil 500ml.jpg',
+     
     ]
   },
   'organic-oats-1kg': {
-    thumbnail: '/images/products/organic-oats-1kg-thumbnail.jpg',
+    thumbnail: '/images/products/organic-oats-1kg.jpg',
     images: [
-      '/images/products/organic-oats-1kg-image-1.jpg',
-      '/images/products/organic-oats-1kg-image-2.jpg'
+      '/images/products/organic-oats-1kg.jpg',
+
     ]
   },
   'organic-almonds-500g': {
-    thumbnail: '/images/products/organic-almonds-500g-thumbnail.jpg',
+    thumbnail: '/images/products/organic-almonds-500g.jpg',
     images: [
-      '/images/products/organic-almonds-500g-image-1.jpg',
-      '/images/products/organic-almonds-500g-image-2.jpg'
+      '/images/products/organic-almonds-500g.jpg',
     ]
   },
   'organic-quinoa-1kg': {
-    thumbnail: '/images/products/organic-quinoa-1kg-thumbnail.jpg',
+    thumbnail: '/images/products/organic-quinoa-1kg.jpg',
     images: [
-      '/images/products/organic-quinoa-1kg-image-1.jpg',
-      '/images/products/organic-quinoa-1kg-image-2.jpg'
+      '/images/products/organic-quinoa-1kg.jpg',
+      '/images/products/organic-quinoa-1kg.jpg'
     ]
   },
   'organic-chia-seeds-500g': {
@@ -985,31 +984,30 @@ const PRODUCT_IMAGES: Record<string, { thumbnail: string; images: string[] }> = 
     ]
   },
   'organic-maple-syrup-250ml': {
-    thumbnail: '/images/products/organic-maple-syrup-250ml-thumbnail.jpg',
+    thumbnail: '/images/products/Organic Maple Syrup 250ml.jpg',
     images: [
-      '/images/products/organic-maple-syrup-250ml-image-1.jpg',
-      '/images/products/organic-maple-syrup-250ml-image-2.jpg'
+      '/images/products/Organic Maple Syrup 250ml.jpg',
+      
     ]
   },
   'organic-turmeric-powder-200g': {
-    thumbnail: '/images/products/organic-turmeric-powder-200g-thumbnail.jpg',
+    thumbnail: '/images/products/organic-turmeric-powder-200g.jpg',
     images: [
-      '/images/products/organic-turmeric-powder-200g-image-1.jpg',
-      '/images/products/organic-turmeric-powder-200g-image-2.jpg'
+      '/images/products/organic-turmeric-powder-200g.jpg'
     ]
   },
   'organic-dried-figs-400g': {
-    thumbnail: '/images/products/organic-dried-figs-400g-thumbnail.jpg',
+    thumbnail: '/images/products/organic-dried-figs-400g.jpg',
     images: [
-      '/images/products/organic-dried-figs-400g-image-1.jpg',
-      '/images/products/organic-dried-figs-400g-image-2.jpg'
+      '/images/products/organic-dried-figs-400g.jpg',
+  
     ]
   },
   'organic-brown-rice-1kg': {
-    thumbnail: '/images/products/organic-brown-rice-1kg-thumbnail.jpg',
+    thumbnail: '/images/products/Organic Brown Rice 1kg.jpg',
     images: [
-      '/images/products/organic-brown-rice-1kg-image-1.jpg',
-      '/images/products/organic-brown-rice-1kg-image-2.jpg'
+      '/images/products/Organic Brown Rice 1kg.jpg',
+   
     ]
   }
 };

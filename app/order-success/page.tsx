@@ -1,7 +1,6 @@
 "use client"
 
-import { Suspense, useEffect, useState, useMemo } from "react"
-import { useSearchParams } from "next/navigation"
+import { Suspense, use, useEffect, useState, useMemo } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
@@ -111,9 +110,13 @@ function GenericSuccessPage() {
   )
 }
 
-function OrderSuccessContent() {
-  const searchParams = useSearchParams()
-  const sessionId = searchParams.get("session_id")
+function OrderSuccessContent({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
+  const sp = use(searchParams)
+  const sessionId = typeof sp.session_id === "string" ? sp.session_id : ""
 
   const [isShareOpen, setIsShareOpen] = useState(false)
   const [confetti, setConfetti] = useState(true)
@@ -580,10 +583,14 @@ function OrderSuccessContent() {
   )
 }
 
-export default function OrderSuccessPage() {
+export default function OrderSuccessPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
   return (
     <Suspense fallback={<LoadingSpinner />}>
-      <OrderSuccessContent />
+      <OrderSuccessContent searchParams={searchParams} />
     </Suspense>
   )
 }

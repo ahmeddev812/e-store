@@ -1,7 +1,6 @@
 "use client"
 
-import { Suspense, useMemo, useState, useEffect, useRef } from "react"
-import { useSearchParams } from "next/navigation"
+import { Suspense, use, useMemo, useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
 
@@ -256,10 +255,14 @@ function FilterSidebar({
   )
 }
 
-export default function ProductsPage() {
+export default function ProductsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
   return (
     <Suspense fallback={<ProductsPageSkeleton />}>
-      <ProductsPageContent />
+      <ProductsPageContent searchParams={searchParams} />
     </Suspense>
   )
 }
@@ -284,12 +287,16 @@ function ProductsPageSkeleton() {
   )
 }
 
-function ProductsPageContent() {
-  const searchParams = useSearchParams()
-  const categoryParam = searchParams.get("category") || ""
-  const sortParam = searchParams.get("sort") || "default"
-  const pageParam = parseInt(searchParams.get("page") || "1", 10)
-  const qParam = searchParams.get("q") || ""
+function ProductsPageContent({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
+  const sp = use(searchParams)
+  const categoryParam = typeof sp.category === "string" ? sp.category : ""
+  const sortParam = typeof sp.sort === "string" ? sp.sort : "default"
+  const pageParam = parseInt(typeof sp.page === "string" ? sp.page : "1", 10)
+  const qParam = typeof sp.q === "string" ? sp.q : ""
 
   const [category, setCategory] = useState(categoryParam)
   const [sort, setSort] = useState(sortParam)
@@ -300,7 +307,24 @@ function ProductsPageContent() {
   const [isFilterOpen, setIsFilterOpen] = useState(false)
   const [priceRange, setPriceRange] = useState(4000)
   const [inStock, setInStock] = useState(false)
-  
+
+  useEffect(() => {
+    setCategory(categoryParam)
+  }, [categoryParam])
+
+  useEffect(() => {
+    setPage(pageParam)
+  }, [pageParam])
+
+  useEffect(() => {
+    setSearch(qParam)
+    setSearchInput(qParam)
+  }, [qParam])
+
+  useEffect(() => {
+    setSort(sortParam)
+  }, [sortParam])
+
   const heroRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll()
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
