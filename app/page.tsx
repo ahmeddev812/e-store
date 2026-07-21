@@ -22,7 +22,8 @@ import {
   getFeaturedProducts, 
   getNewArrivals, 
   getTrendingProducts,
-  getBestSellerProducts
+  getBestSellerProducts,
+  getFlashSaleProducts
 } from "@/data/products"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -587,7 +588,8 @@ function BrandMarquee() {
 export default function HomePage() {
   const [mounted, setMounted] = useState(false)
   useEffect(() => setMounted(true), [])
-  const [flashSaleTarget] = useState(() => new Date(Date.now() + 2 * 3600000))
+  const [flashSaleTarget, setFlashSaleTarget] = useState(new Date())
+  useEffect(() => setFlashSaleTarget(new Date(Date.now() + 2 * 3600000)), [])
   const { theme } = useTheme()
   const isDark = mounted && theme === 'dark'
   
@@ -596,9 +598,11 @@ export default function HomePage() {
   // ============================================
   const featured = getFeaturedProducts().slice(0, 8)
   const trending = getTrendingProducts().slice(0, 8)
-  const flashProducts = products
-    .filter(p => p.discountPercentage >= 30)
-    .sort(() => Math.random() - 0.5)
+  const flashProducts = getFlashSaleProducts()
+    .sort((a, b) => {
+      const hash = (s: string) => s.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0)
+      return hash(a.id) - hash(b.id)
+    })
     .slice(0, 4)
   const newArrivals = getNewArrivals().slice(0, 8)
   const bestsellers = getBestSellerProducts().slice(0, 4)

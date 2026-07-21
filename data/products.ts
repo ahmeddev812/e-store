@@ -1,6 +1,6 @@
 // data/products.ts
-// BlazeCart - Premium Ecommerce Product Data
-// Total Products: 128
+// BlazeCart - Premium Ecommerce Product Data with Correct Product Images
+// Total Products: 138
 // Last Updated: 2024
 
 export interface Product {
@@ -37,11 +37,1012 @@ export interface Product {
 }
 
 // ============================================
+// PRODUCT IMAGE MAPPING - SPECIFIC TO EACH PRODUCT
+// ============================================
+
+const PRODUCT_IMAGES: Record<string, { thumbnail: string; images: string[] }> = {
+  // ========== ELECTRONICS ==========
+  'iphone-16-pro-max': {
+    thumbnail: '/images/products/iphone-16-pro-max-thumbnail.jpg',
+    images: [
+      '/images/products/iphone-16-pro-max-image-1.jpg',
+      '/images/products/iphone-16-pro-max-image-2.jpg',
+      '/images/products/iphone-16-pro-max-image-3.jpg'
+    ]
+  },
+  'macbook-pro-m4-14-inch': {
+    thumbnail: '/images/products/macbook-pro-m4-14-inch-thumbnail.jpg',
+    images: [
+      '/images/products/macbook-pro-m4-14-inch-image-1.jpg',
+      '/images/products/macbook-pro-m4-14-inch-image-2.jpg',
+      '/images/products/macbook-pro-m4-14-inch-image-3.jpg'
+    ]
+  },
+  'samsung-galaxy-s24-ultra': {
+    thumbnail: '/images/products/samsung-galaxy-s24-ultra-thumbnail.jpg',
+    images: [
+      '/images/products/samsung-galaxy-s24-ultra-image-1.jpg',
+      '/images/products/samsung-galaxy-s24-ultra-image-2.jpg',
+      '/images/products/samsung-galaxy-s24-ultra-image-3.jpg'
+    ]
+  },
+  'sony-wh-1000xm5-headphones': {
+    thumbnail: '/images/products/sony-wh-1000xm5-headphones-thumbnail.jpg',
+    images: [
+      '/images/products/sony-wh-1000xm5-headphones-image-1.jpg',
+      '/images/products/sony-wh-1000xm5-headphones-image-2.jpg',
+      '/images/products/sony-wh-1000xm5-headphones-image-3.jpg'
+    ]
+  },
+  'dell-xps-16': {
+    thumbnail: '/images/products/dell-xps-16-thumbnail.jpg',
+    images: [
+      '/images/products/dell-xps-16-image-1.jpg',
+      '/images/products/dell-xps-16-image-2.jpg'
+    ]
+  },
+  'logitech-mx-master-3s': {
+    thumbnail: '/images/products/logitech-mx-master-3s-thumbnail.jpg',
+    images: [
+      '/images/products/logitech-mx-master-3s-image-1.jpg',
+      '/images/products/logitech-mx-master-3s-image-2.jpg'
+    ]
+  },
+  'asus-rog-zephyrus-g16': {
+    thumbnail: '/images/products/asus-rog-zephyrus-g16-thumbnail.jpg',
+    images: [
+      '/images/products/asus-rog-zephyrus-g16-image-1.jpg',
+      '/images/products/asus-rog-zephyrus-g16-image-2.jpg'
+    ]
+  },
+  'apple-watch-ultra-2': {
+    thumbnail: '/images/products/apple-watch-ultra-2-thumbnail.jpg',
+    images: [
+      '/images/products/apple-watch-ultra-2-image-1.jpg',
+      '/images/products/apple-watch-ultra-2-image-2.jpg'
+    ]
+  },
+  'samsung-65-inch-oled-tv': {
+    thumbnail: '/images/products/samsung-65-inch-oled-tv-thumbnail.jpg',
+    images: [
+      '/images/products/samsung-65-inch-oled-tv-image-1.jpg',
+      '/images/products/samsung-65-inch-oled-tv-image-2.jpg'
+    ]
+  },
+  'bose-quietcomfort-earbuds': {
+    thumbnail: '/images/products/bose-quietcomfort-earbuds-thumbnail.jpg',
+    images: [
+      '/images/products/bose-quietcomfort-earbuds-image-1.jpg',
+      '/images/products/bose-quietcomfort-earbuds-image-2.jpg'
+    ]
+  },
+  'lenovo-thinkpad-x1-carbon-gen-12': {
+    thumbnail: '/images/products/lenovo-thinkpad-x1-carbon-gen-12-thumbnail.jpg',
+    images: [
+      '/images/products/lenovo-thinkpad-x1-carbon-gen-12-image-1.jpg',
+      '/images/products/lenovo-thinkpad-x1-carbon-gen-12-image-2.jpg'
+    ]
+  },
+  'anker-737-power-bank': {
+    thumbnail: '/images/products/anker-737-power-bank-thumbnail.jpg',
+    images: [
+      '/images/products/anker-737-power-bank-image-1.jpg',
+    ]
+  },
+  'canon-eos-r5-mark-ii': {
+    thumbnail: '/images/products/canon-eos-r5-mark-ii-thumbnail.jpg',
+    images: [
+      '/images/products/canon-eos-r5-mark-ii-image-1.jpg',
+      '/images/products/canon-eos-r5-mark-ii-image-2.jpg'
+    ]
+  },
+  'steelseries-arctis-nova-pro': {
+    thumbnail: '/images/products/steelseries-arctis-nova-pro-thumbnail.jpg',
+    images: [
+      '/images/products/steelseries-arctis-nova-pro-image-1.jpg',
+      '/images/products/steelseries-arctis-nova-pro-image-2.jpg'
+    ]
+  },
+  'gopro-hero-13-black': {
+    thumbnail: '/images/products/gopro-hero-13-black-thumbnail.jpg',
+    images: [
+      '/images/products/gopro-hero-13-black-image-1.jpg',
+      '/images/products/gopro-hero-13-black-image-2.jpg'
+    ]
+  },
+  'dji-mini-4-pro-drone': {
+    thumbnail: '/images/products/dji-mini-4-pro-drone-thumbnail.jpg',
+    images: [
+      '/images/products/dji-mini-4-pro-drone-image-1.jpg',
+      '/images/products/dji-mini-4-pro-drone-image-2.jpg'
+    ]
+  },
+  'samsung-2tb-t7-shield-ssd': {
+    thumbnail: '/images/products/samsung-2tb-t7-shield-ssd-thumbnail.jpg',
+    images: [
+      '/images/products/samsung-2tb-t7-shield-ssd-image-1.jpg',
+    ]
+  },
+  'philips-hue-smart-bulbs-set': {
+    thumbnail: '/images/products/philips-hue-smart-bulbs-set-thumbnail.jpg',
+    images: [
+      '/images/products/philips-hue-smart-bulbs-set-image-1.jpg',
+      '/images/products/philips-hue-smart-bulbs-set-image-2.jpg'
+    ]
+  },
+  'razer-blade-16-gaming-laptop': {
+    thumbnail: '/images/products/razer-blade-16-gaming-laptop-thumbnail.jpg',
+    images: [
+      '/images/products/razer-blade-16-gaming-laptop-image-1.jpg',
+      '/images/products/razer-blade-16-gaming-laptop-image-2.jpg'
+    ]
+  },
+  'lg-c4-77-inch-oled-tv': {
+    thumbnail: '/images/products/lg-c4-77-inch-oled-tv-thumbnail.jpg',
+    images: [
+      '/images/products/lg-c4-77-inch-oled-tv-image-1.jpg',
+      '/images/products/lg-c4-77-inch-oled-tv-image-2.jpg'
+    ]
+  },
+
+  // ========== FASHION ==========
+  'prada-leather-jacket': {
+    thumbnail: '/images/products/prada-leather-jacket-thumbnail.jpg',
+    images: [
+      '/images/products/prada-leather-jacket-image-1.jpg',
+      '/images/products/prada-leather-jacket-image-2.jpg'
+    ]
+  },
+  'gucci-silk-scarf': {
+    thumbnail: '/images/products/gucci-silk-scarf-thumbnail.jpg',
+    images: [
+      '/images/products/gucci-silk-scarf-image-1.jpg',
+      '/images/products/gucci-silk-scarf-image-2.jpg'
+    ]
+  },
+  'saint-laurent-leather-belt': {
+    thumbnail: '/images/products/saint-laurent-leather-belt-thumbnail.jpg',
+    images: [
+      '/images/products/saint-laurent-leather-belt-image-1.jpg',
+      '/images/products/saint-laurent-leather-belt-image-2.jpg'
+    ]
+  },
+  'burberry-trench-coat': {
+    thumbnail: '/images/products/burberry-trench-coat-thumbnail.jpg',
+    images: [
+      '/images/products/burberry-trench-coat-image-1.jpg',
+      '/images/products/burberry-trench-coat-image-2.jpg'
+    ]
+  },
+  'versace-sunglasses': {
+    thumbnail: '/images/products/versace-sunglasses-thumbnail.jpg',
+    images: [
+      '/images/products/versace-sunglasses-image-1.jpg',
+      '/images/products/versace-sunglasses-image-2.jpg'
+    ]
+  },
+  'hugo-boss-suit': {
+    thumbnail: '/images/products/hugo-boss-suit-thumbnail.jpg',
+    images: [
+      '/images/products/hugo-boss-suit-image-1.jpg',
+      '/images/products/hugo-boss-suit-image-2.jpg'
+    ]
+  },
+  'ralph-lauren-polo-shirt': {
+    thumbnail: '/images/products/ralph-lauren-polo-shirt-thumbnail.jpg',
+    images: [
+      '/images/products/ralph-lauren-polo-shirt-image-1.jpg',
+      '/images/products/ralph-lauren-polo-shirt-image-2.jpg'
+    ]
+  },
+  'armani-cashmere-sweater': {
+    thumbnail: '/images/products/armani-cashmere-sweater-thumbnail.jpg',
+    images: [
+      '/images/products/armani-cashmere-sweater-image-1.jpg',
+      '/images/products/armani-cashmere-sweater-image-2.jpg'
+    ]
+  },
+  'tom-ford-jeans': {
+    thumbnail: '/images/products/tom-ford-jeans-thumbnail.jpg',
+    images: [
+      '/images/products/tom-ford-jeans-image-1.jpg',
+      '/images/products/tom-ford-jeans-image-2.jpg'
+    ]
+  },
+  'fendi-leather-wallet': {
+    thumbnail: '/images/products/fendi-leather-wallet-thumbnail.jpg',
+    images: [
+      '/images/products/fendi-leather-wallet-image-1.jpg',
+      '/images/products/fendi-leather-wallet-image-2.jpg'
+    ]
+  },
+  'moncler-puffer-jacket': {
+    thumbnail: '/images/products/moncler-puffer-jacket-thumbnail.jpg',
+    images: [
+      '/images/products/moncler-puffer-jacket-image-1.jpg',
+      '/images/products/moncler-puffer-jacket-image-2.jpg'
+    ]
+  },
+  'balenciaga-hoodie': {
+    thumbnail: '/images/products/balenciaga-hoodie-thumbnail.jpg',
+    images: [
+      '/images/products/balenciaga-hoodie-image-1.jpg',
+      '/images/products/balenciaga-hoodie-image-2.jpg'
+    ]
+  },
+  'dior-saddle-bag': {
+    thumbnail: '/images/products/dior-saddle-bag-thumbnail.jpg',
+    images: [
+      '/images/products/dior-saddle-bag-image-1.jpg',
+      '/images/products/dior-saddle-bag-image-2.jpg'
+    ]
+  },
+  'kenzo-tiger-sweatshirt': {
+    thumbnail: '/images/products/kenzo-tiger-sweatshirt-thumbnail.jpg',
+    images: [
+      '/images/products/kenzo-tiger-sweatshirt-image-1.jpg',
+      '/images/products/kenzo-tiger-sweatshirt-image-2.jpg'
+    ]
+  },
+  'valentino-rockstud-heels': {
+    thumbnail: '/images/products/valentino-rockstud-heels-thumbnail.jpg',
+    images: [
+      '/images/products/valentino-rockstud-heels-image-1.jpg',
+      '/images/products/valentino-rockstud-heels-image-2.jpg'
+    ]
+  },
+  'off-white-belt': {
+    thumbnail: '/images/products/off-white-belt-thumbnail.jpg',
+    images: [
+      '/images/products/off-white-belt-image-1.jpg',
+      '/images/products/off-white-belt-image-2.jpg'
+    ]
+  },
+  'alexander-mcqueen-skull-scarf': {
+    thumbnail: '/images/products/alexander-mcqueen-skull-scarf-thumbnail.jpg',
+    images: [
+      '/images/products/alexander-mcqueen-skull-scarf-image-1.jpg',
+      '/images/products/alexander-mcqueen-skull-scarf-image-2.jpg'
+    ]
+  },
+  'bottega-veneta-intrecciato-tote': {
+    thumbnail: '/images/products/bottega-veneta-intrecciato-tote-thumbnail.jpg',
+    images: [
+      '/images/products/bottega-veneta-intrecciato-tote-image-1.jpg',
+      '/images/products/bottega-veneta-intrecciato-tote-image-2.jpg'
+    ]
+  },
+  'saint-laurent-tuxedo-jacket': {
+    thumbnail: '/images/products/saint-laurent-tuxedo-jacket-thumbnail.jpg',
+    images: [
+      '/images/products/saint-laurent-tuxedo-jacket-image-1.jpg',
+      '/images/products/saint-laurent-tuxedo-jacket-image-2.jpg'
+    ]
+  },
+  'acne-studios-logo-scarf': {
+    thumbnail: '/images/products/acne-studios-logo-scarf-thumbnail.jpg',
+    images: [
+      '/images/products/acne-studios-logo-scarf-image-1.jpg',
+      '/images/products/acne-studios-logo-scarf-image-2.jpg'
+    ]
+  },
+
+  // ========== FOOTWEAR ==========
+  'nike-air-max-270': {
+    thumbnail: '/images/products/nike-air-max-270-thumbnail.jpg',
+    images: [
+      '/images/products/nike-air-max-270-image-1.jpg',
+      '/images/products/nike-air-max-270-image-2.jpg'
+    ]
+  },
+  'adidas-ultraboost-5': {
+    thumbnail: '/images/products/adidas-ultraboost-5-thumbnail.jpg',
+    images: [
+      '/images/products/adidas-ultraboost-5-image-1.jpg',
+      '/images/products/adidas-ultraboost-5-image-2.jpg'
+    ]
+  },
+  'new-balance-990v6': {
+    thumbnail: '/images/products/new-balance-990v6-thumbnail.jpg',
+    images: [
+      '/images/products/new-balance-990v6-image-1.jpg',
+      '/images/products/new-balance-990v6-image-2.jpg'
+    ]
+  },
+  'hoka-bondi-8': {
+    thumbnail: '/images/products/hoka-bondi-8-thumbnail.jpg',
+    images: [
+      '/images/products/hoka-bondi-8-image-1.jpg',
+      '/images/products/hoka-bondi-8-image-2.jpg'
+    ]
+  },
+  'puma-suede-classic': {
+    thumbnail: '/images/products/puma-suede-classic-thumbnail.jpg',
+    images: [
+      '/images/products/puma-suede-classic-image-1.jpg',
+      '/images/products/puma-suede-classic-image-2.jpg'
+    ]
+  },
+  'air-jordan-1-low': {
+    thumbnail: '/images/products/air-jordan-1-low-thumbnail.jpg',
+    images: [
+      '/images/products/air-jordan-1-low-image-1.jpg',
+      '/images/products/air-jordan-1-low-image-2.jpg'
+    ]
+  },
+  'on-cloudmonster': {
+    thumbnail: '/images/products/on-cloudmonster-thumbnail.jpg',
+    images: [
+      '/images/products/on-cloudmonster-image-1.jpg',
+      '/images/products/on-cloudmonster-image-2.jpg'
+    ]
+  },
+  'vans-old-skool': {
+    thumbnail: '/images/products/vans-old-skool-thumbnail.jpg',
+    images: [
+      '/images/products/vans-old-skool-image-1.jpg',
+      '/images/products/vans-old-skool-image-2.jpg'
+    ]
+  },
+  'asics-gel-kayano-30': {
+    thumbnail: '/images/products/asics-gel-kayano-30-thumbnail.jpg',
+    images: [
+      '/images/products/asics-gel-kayano-30-image-1.jpg',
+      '/images/products/asics-gel-kayano-30-image-2.jpg'
+    ]
+  },
+  'converse-chuck-70': {
+    thumbnail: '/images/products/converse-chuck-70-thumbnail.jpg',
+    images: [
+      '/images/products/converse-chuck-70-image-1.jpg',
+      '/images/products/converse-chuck-70-image-2.jpg'
+    ]
+  },
+  'reebok-club-c-85': {
+    thumbnail: '/images/products/reebok-club-c-85-thumbnail.jpg',
+    images: [
+      '/images/products/reebok-club-c-85-image-1.jpg',
+      '/images/products/reebok-club-c-85-image-2.jpg'
+    ]
+  },
+  'saucony-triumph-22': {
+    thumbnail: '/images/products/saucony-triumph-22-thumbnail.jpg',
+    images: [
+      '/images/products/saucony-triumph-22-image-1.jpg',
+      '/images/products/saucony-triumph-22-image-2.jpg'
+    ]
+  },
+  'balenciaga-triple-s-sneakers': {
+    thumbnail: '/images/products/balenciaga-triple-s-sneakers-thumbnail.jpg',
+    images: [
+      '/images/products/balenciaga-triple-s-sneakers-image-1.jpg',
+      '/images/products/balenciaga-triple-s-sneakers-image-2.jpg'
+    ]
+  },
+  'mizuno-wave-rider-27': {
+    thumbnail: '/images/products/mizuno-wave-rider-27-thumbnail.jpg',
+    images: [
+      '/images/products/mizuno-wave-rider-27-image-1.jpg',
+      '/images/products/mizuno-wave-rider-27-image-2.jpg'
+    ]
+  },
+  'ugg-classic-mini-boots': {
+    thumbnail: '/images/products/ugg-classic-mini-boots-thumbnail.jpg',
+    images: [
+      '/images/products/ugg-classic-mini-boots-image-1.jpg',
+      '/images/products/ugg-classic-mini-boots-image-2.jpg'
+    ]
+  },
+
+  // ========== WATCHES ==========
+  'rolex-submariner-date': {
+    thumbnail: '/images/products/rolex-submariner-date-thumbnail.jpg',
+    images: [
+      '/images/products/rolex-submariner-date-image-1.jpg',
+      '/images/products/rolex-submariner-date-image-2.jpg'
+    ]
+  },
+  'omega-speedmaster-professional': {
+    thumbnail: '/images/products/omega-speedmaster-professional-thumbnail.jpg',
+    images: [
+      '/images/products/omega-speedmaster-professional-image-1.jpg',
+      '/images/products/omega-speedmaster-professional-image-2.jpg'
+    ]
+  },
+  'garmin-fenix-7-pro': {
+    thumbnail: '/images/products/garmin-fenix-7-pro-thumbnail.jpg',
+    images: [
+      '/images/products/garmin-fenix-7-pro-image-1.jpg',
+      '/images/products/garmin-fenix-7-pro-image-2.jpg'
+    ]
+  },
+  'tag-heuer-carrera-chronograph': {
+    thumbnail: '/images/products/tag-heuer-carrera-chronograph-thumbnail.jpg',
+    images: [
+      '/images/products/tag-heuer-carrera-chronograph-image-1.jpg',
+      '/images/products/tag-heuer-carrera-chronograph-image-2.jpg'
+    ]
+  },
+  'samsung-galaxy-watch-6': {
+    thumbnail: '/images/products/samsung-galaxy-watch-6-thumbnail.jpg',
+    images: [
+      '/images/products/samsung-galaxy-watch-6-image-1.jpg',
+      '/images/products/samsung-galaxy-watch-6-image-2.jpg'
+    ]
+  },
+  'seiko-prospex-diver': {
+    thumbnail: '/images/products/seiko-prospex-diver-thumbnail.jpg',
+    images: [
+      '/images/products/seiko-prospex-diver-image-1.jpg',
+      '/images/products/seiko-prospex-diver-image-2.jpg'
+    ]
+  },
+  'cartier-tank-solo': {
+    thumbnail: '/images/products/cartier-tank-solo-thumbnail.jpg',
+    images: [
+      '/images/products/cartier-tank-solo-image-1.jpg',
+      '/images/products/cartier-tank-solo-image-2.jpg'
+    ]
+  },
+  'casio-g-shock-ga-2100': {
+    thumbnail: '/images/products/casio-g-shock-ga-2100-thumbnail.jpg',
+    images: [
+      '/images/products/casio-g-shock-ga-2100-image-1.jpg',
+      '/images/products/casio-g-shock-ga-2100-image-2.jpg'
+    ]
+  },
+  'tissot-prx-powermatic-80': {
+    thumbnail: '/images/products/tissot-prx-powermatic-80-thumbnail.jpg',
+    images: [
+      '/images/products/tissot-prx-powermatic-80-image-1.jpg',
+      '/images/products/tissot-prx-powermatic-80-image-2.jpg'
+    ]
+  },
+  'hamilton-khaki-field': {
+    thumbnail: '/images/products/hamilton-khaki-field-thumbnail.jpg',
+    images: [
+      '/images/products/hamilton-khaki-field-image-1.jpg',
+      '/images/products/hamilton-khaki-field-image-2.jpg'
+    ]
+  },
+  'breitling-navitimer-b01': {
+    thumbnail: '/images/products/breitling-navitimer-b01-thumbnail.jpg',
+    images: [
+      '/images/products/breitling-navitimer-b01-image-1.jpg',
+      '/images/products/breitling-navitimer-b01-image-2.jpg'
+    ]
+  },
+
+  // ========== HOME & LIVING ==========
+  'dyson-v15-detect-vacuum': {
+    thumbnail: '/images/products/dyson-v15-detect-vacuum-thumbnail.jpg',
+    images: [
+      '/images/products/dyson-v15-detect-vacuum-image-1.jpg',
+      '/images/products/dyson-v15-detect-vacuum-image-2.jpg'
+    ]
+  },
+  'kitchenaid-artisan-stand-mixer': {
+    thumbnail: '/images/products/kitchenaid-artisan-stand-mixer-thumbnail.jpg',
+    images: [
+      '/images/products/kitchenaid-artisan-stand-mixer-image-1.jpg',
+      '/images/products/kitchenaid-artisan-stand-mixer-image-2.jpg'
+    ]
+  },
+  'sony-65-inch-oled-tv': {
+    thumbnail: '/images/products/sony-65-inch-oled-tv-thumbnail.jpg',
+    images: [
+      '/images/products/sony-65-inch-oled-tv-image-1.jpg',
+      '/images/products/sony-65-inch-oled-tv-image-2.jpg'
+    ]
+  },
+  'sonos-era-300-speaker': {
+    thumbnail: '/images/products/sonos-era-300-speaker-thumbnail.jpg',
+    images: [
+      '/images/products/sonos-era-300-speaker-image-1.jpg',
+      '/images/products/sonos-era-300-speaker-image-2.jpg'
+    ]
+  },
+  'le-creuset-dutch-oven': {
+    thumbnail: '/images/products/le-creuset-dutch-oven-thumbnail.jpg',
+    images: [
+      '/images/products/le-creuset-dutch-oven-image-1.jpg',
+      '/images/products/le-creuset-dutch-oven-image-2.jpg'
+    ]
+  },
+  'philips-hue-starter-kit': {
+    thumbnail: '/images/products/philips-hue-starter-kit-thumbnail.jpg',
+    images: [
+      '/images/products/philips-hue-starter-kit-image-1.jpg',
+      '/images/products/philips-hue-starter-kit-image-2.jpg'
+    ]
+  },
+  'nespresso-vertuo-pop': {
+    thumbnail: '/images/products/nespresso-vertuo-pop-thumbnail.jpg',
+    images: [
+      '/images/products/nespresso-vertuo-pop-image-1.jpg',
+      '/images/products/nespresso-vertuo-pop-image-2.jpg'
+    ]
+  },
+  'google-nest-hub-max': {
+    thumbnail: '/images/products/google-nest-hub-max-thumbnail.jpg',
+    images: [
+      '/images/products/google-nest-hub-max-image-1.jpg',
+      '/images/products/google-nest-hub-max-image-2.jpg'
+    ]
+  },
+  'victorinox-swiss-classic-knife': {
+    thumbnail: '/images/products/victorinox-swiss-classic-knife-thumbnail.jpg',
+    images: [
+      '/images/products/victorinox-swiss-classic-knife-image-1.jpg',
+      '/images/products/victorinox-swiss-classic-knife-image-2.jpg'
+    ]
+  },
+  'smeg-kettle-50s-style': {
+    thumbnail: '/images/products/smeg-kettle-50s-style-thumbnail.jpg',
+    images: [
+      '/images/products/smeg-kettle-50s-style-image-1.jpg',
+      '/images/products/smeg-kettle-50s-style-image-2.jpg'
+    ]
+  },
+  'cuisinart-air-fryer-toaster-oven': {
+    thumbnail: '/images/products/cuisinart-air-fryer-toaster-oven-thumbnail.jpg',
+    images: [
+      '/images/products/cuisinart-air-fryer-toaster-oven-image-1.jpg',
+      '/images/products/cuisinart-air-fryer-toaster-oven-image-2.jpg'
+    ]
+  },
+  'jbl-partybox-710': {
+    thumbnail: '/images/products/jbl-partybox-710-thumbnail.jpg',
+    images: [
+      '/images/products/jbl-partybox-710-image-1.jpg',
+      '/images/products/jbl-partybox-710-image-2.jpg'
+    ]
+  },
+  'zwilling-ja-henckels-knife-set': {
+    thumbnail: '/images/products/zwilling-ja-henckels-knife-set-thumbnail.jpg',
+    images: [
+      '/images/products/zwilling-ja-henckels-knife-set-image-1.jpg',
+      '/images/products/zwilling-ja-henckels-knife-set-image-2.jpg'
+    ]
+  },
+  'miele-complete-c3-vacuum': {
+    thumbnail: '/images/products/miele-complete-c3-vacuum-thumbnail.jpg',
+    images: [
+      '/images/products/miele-complete-c3-vacuum-image-1.jpg',
+      '/images/products/miele-complete-c3-vacuum-image-2.jpg'
+    ]
+  },
+  'keurig-k-elite-coffee-maker': {
+    thumbnail: '/images/products/keurig-k-elite-coffee-maker-thumbnail.jpg',
+    images: [
+      '/images/products/keurig-k-elite-coffee-maker-image-1.jpg',
+      '/images/products/keurig-k-elite-coffee-maker-image-2.jpg'
+    ]
+  },
+
+  // ========== BEAUTY & PERSONAL CARE ==========
+  'dyson-airwrap-multi-styler': {
+    thumbnail: '/images/products/dyson-airwrap-multi-styler-thumbnail.jpg',
+    images: [
+      '/images/products/dyson-airwrap-multi-styler-image-1.jpg',
+      '/images/products/dyson-airwrap-multi-styler-image-2.jpg'
+    ]
+  },
+  'cerave-hydrating-cleanser': {
+    thumbnail: '/images/products/cerave-hydrating-cleanser-thumbnail.jpg',
+    images: [
+      '/images/products/cerave-hydrating-cleanser-image-1.jpg',
+      '/images/products/cerave-hydrating-cleanser-image-2.jpg'
+    ]
+  },
+  'loreal-paris-revitalift-serum': {
+    thumbnail: '/images/products/loreal-paris-revitalift-serum-thumbnail.jpg',
+    images: [
+      '/images/products/loreal-paris-revitalift-serum-image-1.jpg',
+      '/images/products/loreal-paris-revitalift-serum-image-2.jpg'
+    ]
+  },
+  'philips-sonicare-toothbrush': {
+    thumbnail: '/images/products/philips-sonicare-toothbrush-thumbnail.jpg',
+    images: [
+      '/images/products/philips-sonicare-toothbrush-image-1.jpg',
+      '/images/products/philips-sonicare-toothbrush-image-2.jpg'
+    ]
+  },
+  'olay-regenerist-retinol-24': {
+    thumbnail: '/images/products/olay-regenerist-retinol-24-thumbnail.jpg',
+    images: [
+      '/images/products/olay-regenerist-retinol-24-image-1.jpg',
+      '/images/products/olay-regenerist-retinol-24-image-2.jpg'
+    ]
+  },
+  'braun-series-9-shaver': {
+    thumbnail: '/images/products/braun-series-9-shaver-thumbnail.jpg',
+    images: [
+      '/images/products/braun-series-9-shaver-image-1.jpg',
+      '/images/products/braun-series-9-shaver-image-2.jpg'
+    ]
+  },
+  'the-ordinary-hyaluronic-acid-2': {
+    thumbnail: '/images/products/the-ordinary-hyaluronic-acid-2-thumbnail.jpg',
+    images: [
+      '/images/products/the-ordinary-hyaluronic-acid-2-image-1.jpg',
+      '/images/products/the-ordinary-hyaluronic-acid-2-image-2.jpg'
+    ]
+  },
+  'foreo-luna-3-face-brush': {
+    thumbnail: '/images/products/foreo-luna-3-face-brush-thumbnail.jpg',
+    images: [
+      '/images/products/foreo-luna-3-face-brush-image-1.jpg',
+      '/images/products/foreo-luna-3-face-brush-image-2.jpg'
+    ]
+  },
+  'estee-lauder-night-serum': {
+    thumbnail: '/images/products/estee-lauder-night-serum-thumbnail.jpg',
+    images: [
+      '/images/products/estee-lauder-night-serum-image-1.jpg',
+      '/images/products/estee-lauder-night-serum-image-2.jpg'
+    ]
+  },
+  'panasonic-multi-style-curling-iron': {
+    thumbnail: '/images/products/panasonic-multi-style-curling-iron-thumbnail.jpg',
+    images: [
+      '/images/products/panasonic-multi-style-curling-iron-image-1.jpg',
+      '/images/products/panasonic-multi-style-curling-iron-image-2.jpg'
+    ]
+  },
+  'neutrogena-hydro-boost-water-gel': {
+    thumbnail: '/images/products/neutrogena-hydro-boost-water-gel-thumbnail.jpg',
+    images: [
+      '/images/products/neutrogena-hydro-boost-water-gel-image-1.jpg',
+      '/images/products/neutrogena-hydro-boost-water-gel-image-2.jpg'
+    ]
+  },
+  'remington-hair-straightener': {
+    thumbnail: '/images/products/remington-hair-straightener-thumbnail.jpg',
+    images: [
+      '/images/products/remington-hair-straightener-image-1.jpg',
+      '/images/products/remington-hair-straightener-image-2.jpg'
+    ]
+  },
+
+  // ========== FITNESS & SPORTS ==========
+  'peloton-bike-plus': {
+    thumbnail: '/images/products/peloton-bike-plus-thumbnail.jpg',
+    images: [
+      '/images/products/peloton-bike-plus-image-1.jpg',
+      '/images/products/peloton-bike-plus-image-2.jpg'
+    ]
+  },
+  'garmin-forerunner-965': {
+    thumbnail: '/images/products/garmin-forerunner-965-thumbnail.jpg',
+    images: [
+      '/images/products/garmin-forerunner-965-image-1.jpg',
+      '/images/products/garmin-forerunner-965-image-2.jpg'
+    ]
+  },
+  'bowflex-selecttech-552-dumbbells': {
+    thumbnail: '/images/products/bowflex-selecttech-552-dumbbells-thumbnail.jpg',
+    images: [
+      '/images/products/bowflex-selecttech-552-dumbbells-image-1.jpg',
+      '/images/products/bowflex-selecttech-552-dumbbells-image-2.jpg'
+    ]
+  },
+  'theragun-pro': {
+    thumbnail: '/images/products/theragun-pro-thumbnail.jpg',
+    images: [
+      '/images/products/theragun-pro-image-1.jpg',
+      '/images/products/theragun-pro-image-2.jpg'
+    ]
+  },
+  'whoop-4-0-fitness-tracker': {
+    thumbnail: '/images/products/whoop-4-0-fitness-tracker-thumbnail.jpg',
+    images: [
+      '/images/products/whoop-4-0-fitness-tracker-image-1.jpg',
+      '/images/products/whoop-4-0-fitness-tracker-image-2.jpg'
+    ]
+  },
+  'nordictrack-treadmill': {
+    thumbnail: '/images/products/nordictrack-treadmill-thumbnail.jpg',
+    images: [
+      '/images/products/nordictrack-treadmill-image-1.jpg',
+      '/images/products/nordictrack-treadmill-image-2.jpg'
+    ]
+  },
+  'fitbit-charge-6': {
+    thumbnail: '/images/products/fitbit-charge-6-thumbnail.jpg',
+    images: [
+      '/images/products/fitbit-charge-6-image-1.jpg',
+      '/images/products/fitbit-charge-6-image-2.jpg'
+    ]
+  },
+  'concept2-rower': {
+    thumbnail: '/images/products/concept2-rower-thumbnail.jpg',
+    images: [
+      '/images/products/concept2-rower-image-1.jpg',
+      '/images/products/concept2-rower-image-2.jpg'
+    ]
+  },
+  'under-armour-hovr-shoes': {
+    thumbnail: '/images/products/under-armour-hovr-shoes-thumbnail.jpg',
+    images: [
+      '/images/products/under-armour-hovr-shoes-image-1.jpg',
+      '/images/products/under-armour-hovr-shoes-image-2.jpg'
+    ]
+  },
+  'adidas-powerlifting-belt': {
+    thumbnail: '/images/products/adidas-powerlifting-belt-thumbnail.jpg',
+    images: [
+      '/images/products/adidas-powerlifting-belt-image-1.jpg',
+      '/images/products/adidas-powerlifting-belt-image-2.jpg'
+    ]
+  },
+  'trx-suspension-trainer': {
+    thumbnail: '/images/products/trx-suspension-trainer-thumbnail.jpg',
+    images: [
+      '/images/products/trx-suspension-trainer-image-1.jpg',
+      '/images/products/trx-suspension-trainer-image-2.jpg'
+    ]
+  },
+
+  // ========== GAMING ==========
+  'playstation-5-digital-edition': {
+    thumbnail: '/images/products/playstation-5-digital-edition-thumbnail.jpg',
+    images: [
+      '/images/products/playstation-5-digital-edition-image-1.jpg',
+      '/images/products/playstation-5-digital-edition-image-2.jpg'
+    ]
+  },
+  'xbox-series-x': {
+    thumbnail: '/images/products/xbox-series-x-thumbnail.jpg',
+    images: [
+      '/images/products/xbox-series-x-image-1.jpg',
+      '/images/products/xbox-series-x-image-2.jpg'
+    ]
+  },
+  'nintendo-switch-oled': {
+    thumbnail: '/images/products/nintendo-switch-oled-thumbnail.jpg',
+    images: [
+      '/images/products/nintendo-switch-oled-image-1.jpg',
+      '/images/products/nintendo-switch-oled-image-2.jpg'
+    ]
+  },
+  'logitech-g-pro-x-superlight': {
+    thumbnail: '/images/products/logitech-g-pro-x-superlight-thumbnail.jpg',
+    images: [
+      '/images/products/logitech-g-pro-x-superlight-image-1.jpg',
+      '/images/products/logitech-g-pro-x-superlight-image-2.jpg'
+    ]
+  },
+  'razer-deathadder-v3-pro': {
+    thumbnail: '/images/products/razer-deathadder-v3-pro-thumbnail.jpg',
+    images: [
+      '/images/products/razer-deathadder-v3-pro-image-1.jpg',
+      '/images/products/razer-deathadder-v3-pro-image-2.jpg'
+    ]
+  },
+  'corsair-k95-rgb-platinum': {
+    thumbnail: '/images/products/corsair-k95-rgb-platinum-thumbnail.jpg',
+    images: [
+      '/images/products/corsair-k95-rgb-platinum-image-1.jpg',
+      '/images/products/corsair-k95-rgb-platinum-image-2.jpg'
+    ]
+  },
+  'steelseries-arctis-nova-7': {
+    thumbnail: '/images/products/steelseries-arctis-nova-7-thumbnail.jpg',
+    images: [
+      '/images/products/steelseries-arctis-nova-7-image-1.jpg',
+      '/images/products/steelseries-arctis-nova-7-image-2.jpg'
+    ]
+  },
+  'samsung-odyssey-g9-monitor': {
+    thumbnail: '/images/products/samsung-odyssey-g9-monitor-thumbnail.jpg',
+    images: [
+      '/images/products/samsung-odyssey-g9-monitor-image-1.jpg',
+      '/images/products/samsung-odyssey-g9-monitor-image-2.jpg'
+    ]
+  },
+  'wd-black-2tb-gaming-ssd': {
+    thumbnail: '/images/products/wd-black-2tb-gaming-ssd-thumbnail.jpg',
+    images: [
+      '/images/products/wd-black-2tb-gaming-ssd-image-1.jpg',
+      '/images/products/wd-black-2tb-gaming-ssd-image-2.jpg'
+    ]
+  },
+  'razer-kishi-v2-controller': {
+    thumbnail: '/images/products/razer-kishi-v2-controller-thumbnail.jpg',
+    images: [
+      '/images/products/razer-kishi-v2-controller-image-1.jpg',
+      '/images/products/razer-kishi-v2-controller-image-2.jpg'
+    ]
+  },
+
+  // ========== BOOKS ==========
+  'the-psychology-of-money': {
+    thumbnail: '/images/products/the-psychology-of-money-thumbnail.jpg',
+    images: [
+      '/images/products/the-psychology-of-money-image-1.jpg',
+      '/images/products/the-psychology-of-money-image-2.jpg'
+    ]
+  },
+  'atomic-habits': {
+    thumbnail: '/images/products/atomic-habits-thumbnail.jpg',
+    images: [
+      '/images/products/atomic-habits-image-1.jpg',
+      '/images/products/atomic-habits-image-2.jpg'
+    ]
+  },
+  'the-silent-patient': {
+    thumbnail: '/images/products/the-silent-patient-thumbnail.jpg',
+    images: [
+      '/images/products/the-silent-patient-image-1.jpg',
+      '/images/products/the-silent-patient-image-2.jpg'
+    ]
+  },
+  'sapiens': {
+    thumbnail: '/images/products/sapiens-thumbnail.jpg',
+    images: [
+      '/images/products/sapiens-image-1.jpg',
+      '/images/products/sapiens-image-2.jpg'
+    ]
+  },
+  'project-hail-mary': {
+    thumbnail: '/images/products/project-hail-mary-thumbnail.jpg',
+    images: [
+      '/images/products/project-hail-mary-image-1.jpg',
+      '/images/products/project-hail-mary-image-2.jpg'
+    ]
+  },
+  'becoming': {
+    thumbnail: '/images/products/becoming-thumbnail.jpg',
+    images: [
+      '/images/products/becoming-image-1.jpg',
+      '/images/products/becoming-image-2.jpg'
+    ]
+  },
+  'the-creative-act': {
+    thumbnail: '/images/products/the-creative-act-thumbnail.jpg',
+    images: [
+      '/images/products/the-creative-act-image-1.jpg',
+      '/images/products/the-creative-act-image-2.jpg'
+    ]
+  },
+  'the-four-agreements': {
+    thumbnail: '/images/products/the-four-agreements-thumbnail.jpg',
+    images: [
+      '/images/products/the-four-agreements-image-1.jpg',
+      '/images/products/the-four-agreements-image-2.jpg'
+    ]
+  },
+  'dune': {
+    thumbnail: '/images/products/dune-thumbnail.jpg',
+    images: [
+      '/images/products/dune-image-1.jpg',
+      '/images/products/dune-image-2.jpg'
+    ]
+  },
+  'where-the-crawdads-sing': {
+    thumbnail: '/images/products/where-the-crawdads-sing-thumbnail.jpg',
+    images: [
+      '/images/products/where-the-crawdads-sing-image-1.jpg',
+      '/images/products/where-the-crawdads-sing-image-2.jpg'
+    ]
+  },
+
+  // ========== ORGANIC GROCERIES ==========
+  'organic-honey-500g': {
+    thumbnail: '/images/products/Organic Honey 500g.jpg',
+    images: [
+      '/images/products/Organic Honey 500g.jpg',
+    ]
+  },
+  'organic-green-tea-100g': {
+    thumbnail: '/images/products/organic-green-tea-100g.jpg',
+    images: [
+      '/images/products/organic-green-tea-100g.jpg',
+    ]
+  },
+  'organic-coconut-oil-500ml': {
+    thumbnail: '/images/products/organic-coconut-oil-500ml-thumbnail.jpg',
+    images: [
+      '/images/products/organic-coconut-oil-500ml-image-1.jpg',
+      '/images/products/organic-coconut-oil-500ml-image-2.jpg'
+    ]
+  },
+  'organic-oats-1kg': {
+    thumbnail: '/images/products/organic-oats-1kg-thumbnail.jpg',
+    images: [
+      '/images/products/organic-oats-1kg-image-1.jpg',
+      '/images/products/organic-oats-1kg-image-2.jpg'
+    ]
+  },
+  'organic-almonds-500g': {
+    thumbnail: '/images/products/organic-almonds-500g-thumbnail.jpg',
+    images: [
+      '/images/products/organic-almonds-500g-image-1.jpg',
+      '/images/products/organic-almonds-500g-image-2.jpg'
+    ]
+  },
+  'organic-quinoa-1kg': {
+    thumbnail: '/images/products/organic-quinoa-1kg-thumbnail.jpg',
+    images: [
+      '/images/products/organic-quinoa-1kg-image-1.jpg',
+      '/images/products/organic-quinoa-1kg-image-2.jpg'
+    ]
+  },
+  'organic-chia-seeds-500g': {
+    thumbnail: '/images/products/Organic Chia Seeds 500g-image-1.jpg',
+    images: [
+      '/images/products/Organic Chia Seeds 500g-image-1.jpg',
+    
+    ]
+  },
+  'organic-olive-oil-750ml': {
+    thumbnail: '/images/products/organic-olive-oil-750ml-thumbnail.jpg',
+    images: [
+      '/images/products/organic-olive-oil-750ml-image-1.jpg',
+      '/images/products/organic-olive-oil-750ml-image-2.jpg'
+    ]
+  },
+  'organic-maple-syrup-250ml': {
+    thumbnail: '/images/products/organic-maple-syrup-250ml-thumbnail.jpg',
+    images: [
+      '/images/products/organic-maple-syrup-250ml-image-1.jpg',
+      '/images/products/organic-maple-syrup-250ml-image-2.jpg'
+    ]
+  },
+  'organic-turmeric-powder-200g': {
+    thumbnail: '/images/products/organic-turmeric-powder-200g-thumbnail.jpg',
+    images: [
+      '/images/products/organic-turmeric-powder-200g-image-1.jpg',
+      '/images/products/organic-turmeric-powder-200g-image-2.jpg'
+    ]
+  },
+  'organic-dried-figs-400g': {
+    thumbnail: '/images/products/organic-dried-figs-400g-thumbnail.jpg',
+    images: [
+      '/images/products/organic-dried-figs-400g-image-1.jpg',
+      '/images/products/organic-dried-figs-400g-image-2.jpg'
+    ]
+  },
+  'organic-brown-rice-1kg': {
+    thumbnail: '/images/products/organic-brown-rice-1kg-thumbnail.jpg',
+    images: [
+      '/images/products/organic-brown-rice-1kg-image-1.jpg',
+      '/images/products/organic-brown-rice-1kg-image-2.jpg'
+    ]
+  }
+};
+
+const FALLBACK_IMAGES: { thumbnail: string; images: string[] } = {
+  thumbnail: '/images/products/default-thumbnail.jpg',
+  images: [
+    '/images/products/default-image-1.jpg',
+    '/images/products/default-image-2.jpg'
+  ]
+};
+
+// Helper function to get product images
+function getProductImages(slug: string) {
+  return PRODUCT_IMAGES[slug] || FALLBACK_IMAGES
+}
+
+// Helper to create product with correct images
+function createProduct(productData: any) {
+  const images = getProductImages(productData.slug)
+  return {
+    ...productData,
+    thumbnail: images.thumbnail,
+    images: images.images
+  }
+}
+
+// ============================================
 // CATEGORY 1: ELECTRONICS (20 Products)
 // ============================================
 
 const electronics: Product[] = [
-  {
+  createProduct({
     id: "p1",
     title: "iPhone 16 Pro Max",
     slug: "iphone-16-pro-max",
@@ -58,12 +1059,6 @@ const electronics: Product[] = [
     weight: 240,
     dimensions: { width: 77.6, height: 160.9, depth: 8.3 },
     tags: ["apple", "iphone", "smartphone", "5g", "pro"],
-    thumbnail: "/images/products/iphone-16-pro-max.jpg",
-    images: [
-      "/images/products/iphone-16-pro-max.jpg",
-      "/images/products/iphone-16-pro-max-2.jpg",
-      "/images/products/iphone-16-pro-max-3.jpg"
-    ],
     categoryId: "cat-1",
     categoryName: "Electronics",
     isFeatured: true,
@@ -72,8 +1067,8 @@ const electronics: Product[] = [
     isNewArrival: true,
     createdAt: "2024-09-20T10:00:00Z",
     updatedAt: "2024-09-20T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p2",
     title: "MacBook Pro M4 14-inch",
     slug: "macbook-pro-m4-14-inch",
@@ -90,11 +1085,6 @@ const electronics: Product[] = [
     weight: 1550,
     dimensions: { width: 312.6, height: 221.2, depth: 15.5 },
     tags: ["apple", "macbook", "laptop", "m4", "pro"],
-    thumbnail: "/images/products/macbook-pro-m4-14-inch.jpg",
-    images: [
-      "/images/products/macbook-pro-m4-14-inch.jpg",
-      "/images/products/macbook-pro-m4-14-inch-2.jpg"
-    ],
     categoryId: "cat-1",
     categoryName: "Electronics",
     isFeatured: true,
@@ -103,8 +1093,8 @@ const electronics: Product[] = [
     isNewArrival: true,
     createdAt: "2024-10-15T10:00:00Z",
     updatedAt: "2024-10-15T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p3",
     title: "Samsung Galaxy S24 Ultra",
     slug: "samsung-galaxy-s24-ultra",
@@ -121,11 +1111,6 @@ const electronics: Product[] = [
     weight: 233,
     dimensions: { width: 79.0, height: 162.3, depth: 8.6 },
     tags: ["samsung", "galaxy", "android", "smartphone", "s-pen"],
-    thumbnail: "/images/products/samsung-galaxy-s24-ultra.jpg",
-    images: [
-      "/images/products/samsung-galaxy-s24-ultra.jpg",
-      "/images/products/samsung-galaxy-s24-ultra-2.jpg"
-    ],
     categoryId: "cat-1",
     categoryName: "Electronics",
     isFeatured: true,
@@ -134,8 +1119,8 @@ const electronics: Product[] = [
     isNewArrival: false,
     createdAt: "2024-08-01T10:00:00Z",
     updatedAt: "2024-08-01T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p4",
     title: "Sony WH-1000XM5 Headphones",
     slug: "sony-wh-1000xm5-headphones",
@@ -152,11 +1137,6 @@ const electronics: Product[] = [
     weight: 250,
     dimensions: { width: 175, height: 200, depth: 75 },
     tags: ["sony", "headphones", "wireless", "noise-canceling"],
-    thumbnail: "/images/products/sony-wh-1000xm5-headphones.jpg",
-    images: [
-      "/images/products/sony-wh-1000xm5-headphones.jpg",
-      "/images/products/sony-wh-1000xm5-headphones-2.jpg"
-    ],
     categoryId: "cat-1",
     categoryName: "Electronics",
     isFeatured: true,
@@ -165,8 +1145,8 @@ const electronics: Product[] = [
     isNewArrival: false,
     createdAt: "2024-05-15T10:00:00Z",
     updatedAt: "2024-05-15T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p5",
     title: "Dell XPS 16",
     slug: "dell-xps-16",
@@ -183,11 +1163,6 @@ const electronics: Product[] = [
     weight: 2100,
     dimensions: { width: 358, height: 245, depth: 18.6 },
     tags: ["dell", "xps", "laptop", "oled", "creator"],
-    thumbnail: "/images/products/dell-xps-16.jpg",
-    images: [
-      "/images/products/dell-xps-16.jpg",
-      "/images/products/dell-xps-16-2.jpg"
-    ],
     categoryId: "cat-1",
     categoryName: "Electronics",
     isFeatured: false,
@@ -196,8 +1171,8 @@ const electronics: Product[] = [
     isNewArrival: false,
     createdAt: "2024-07-10T10:00:00Z",
     updatedAt: "2024-07-10T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p6",
     title: "Logitech MX Master 3S",
     slug: "logitech-mx-master-3s",
@@ -214,11 +1189,6 @@ const electronics: Product[] = [
     weight: 141,
     dimensions: { width: 84.3, height: 124.9, depth: 51.0 },
     tags: ["logitech", "mouse", "wireless", "ergonomic"],
-    thumbnail: "/images/products/logitech-mx-master-3s.jpg",
-    images: [
-      "/images/products/logitech-mx-master-3s.jpg",
-      "/images/products/logitech-mx-master-3s-2.jpg"
-    ],
     categoryId: "cat-1",
     categoryName: "Electronics",
     isFeatured: false,
@@ -227,8 +1197,8 @@ const electronics: Product[] = [
     isNewArrival: false,
     createdAt: "2024-03-15T10:00:00Z",
     updatedAt: "2024-03-15T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p7",
     title: "ASUS ROG Zephyrus G16",
     slug: "asus-rog-zephyrus-g16",
@@ -245,11 +1215,6 @@ const electronics: Product[] = [
     weight: 1850,
     dimensions: { width: 354, height: 242, depth: 22.9 },
     tags: ["asus", "rog", "gaming", "laptop", "oled"],
-    thumbnail: "/images/products/asus-rog-zephyrus-g16.jpg",
-    images: [
-      "/images/products/asus-rog-zephyrus-g16.jpg",
-      "/images/products/asus-rog-zephyrus-g16-2.jpg"
-    ],
     categoryId: "cat-1",
     categoryName: "Electronics",
     isFeatured: true,
@@ -258,8 +1223,8 @@ const electronics: Product[] = [
     isNewArrival: true,
     createdAt: "2024-09-01T10:00:00Z",
     updatedAt: "2024-09-01T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p8",
     title: "Apple Watch Ultra 2",
     slug: "apple-watch-ultra-2",
@@ -276,11 +1241,6 @@ const electronics: Product[] = [
     weight: 61,
     dimensions: { width: 44, height: 49, depth: 14.4 },
     tags: ["apple", "watch", "smartwatch", "fitness", "gps"],
-    thumbnail: "/images/products/apple-watch-ultra-2.jpg",
-    images: [
-      "/images/products/apple-watch-ultra-2.jpg",
-      "/images/products/apple-watch-ultra-2-2.jpg"
-    ],
     categoryId: "cat-1",
     categoryName: "Electronics",
     isFeatured: true,
@@ -289,8 +1249,8 @@ const electronics: Product[] = [
     isNewArrival: false,
     createdAt: "2024-06-15T10:00:00Z",
     updatedAt: "2024-06-15T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p9",
     title: "Samsung 65-inch OLED TV",
     slug: "samsung-65-inch-oled-tv",
@@ -307,11 +1267,6 @@ const electronics: Product[] = [
     weight: 25000,
     dimensions: { width: 1448, height: 837, depth: 40 },
     tags: ["samsung", "tv", "oled", "4k", "smart-tv"],
-    thumbnail: "/images/products/samsung-65-inch-oled-tv.jpg",
-    images: [
-      "/images/products/samsung-65-inch-oled-tv.jpg",
-      "/images/products/samsung-65-inch-oled-tv-2.jpg"
-    ],
     categoryId: "cat-1",
     categoryName: "Electronics",
     isFeatured: true,
@@ -320,8 +1275,8 @@ const electronics: Product[] = [
     isNewArrival: false,
     createdAt: "2024-04-10T10:00:00Z",
     updatedAt: "2024-04-10T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p10",
     title: "Bose QuietComfort Earbuds",
     slug: "bose-quietcomfort-earbuds",
@@ -338,11 +1293,6 @@ const electronics: Product[] = [
     weight: 26,
     dimensions: { width: 25, height: 30, depth: 20 },
     tags: ["bose", "earbuds", "wireless", "noise-canceling"],
-    thumbnail: "/images/products/bose-quietcomfort-earbuds.jpg",
-    images: [
-      "/images/products/bose-quietcomfort-earbuds.jpg",
-      "/images/products/bose-quietcomfort-earbuds-2.jpg"
-    ],
     categoryId: "cat-1",
     categoryName: "Electronics",
     isFeatured: false,
@@ -351,8 +1301,8 @@ const electronics: Product[] = [
     isNewArrival: false,
     createdAt: "2024-05-20T10:00:00Z",
     updatedAt: "2024-05-20T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p11",
     title: "Lenovo ThinkPad X1 Carbon Gen 12",
     slug: "lenovo-thinkpad-x1-carbon-gen-12",
@@ -369,11 +1319,6 @@ const electronics: Product[] = [
     weight: 1130,
     dimensions: { width: 315.6, height: 216, depth: 15.3 },
     tags: ["lenovo", "thinkpad", "ultrabook", "business", "oled"],
-    thumbnail: "/images/products/lenovo-thinkpad-x1-carbon-gen-12.jpg",
-    images: [
-      "/images/products/lenovo-thinkpad-x1-carbon-gen-12.jpg",
-      "/images/products/lenovo-thinkpad-x1-carbon-gen-12-2.jpg"
-    ],
     categoryId: "cat-1",
     categoryName: "Electronics",
     isFeatured: false,
@@ -382,8 +1327,8 @@ const electronics: Product[] = [
     isNewArrival: true,
     createdAt: "2024-08-20T10:00:00Z",
     updatedAt: "2024-08-20T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p12",
     title: "Anker 737 Power Bank",
     slug: "anker-737-power-bank",
@@ -400,11 +1345,6 @@ const electronics: Product[] = [
     weight: 630,
     dimensions: { width: 52, height: 155, depth: 52 },
     tags: ["anker", "power-bank", "fast-charging", "portable"],
-    thumbnail: "/images/products/anker-737-power-bank.jpg",
-    images: [
-      "/images/products/anker-737-power-bank.jpg",
-      "/images/products/anker-737-power-bank-2.jpg"
-    ],
     categoryId: "cat-1",
     categoryName: "Electronics",
     isFeatured: false,
@@ -413,8 +1353,8 @@ const electronics: Product[] = [
     isNewArrival: false,
     createdAt: "2024-06-01T10:00:00Z",
     updatedAt: "2024-06-01T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p13",
     title: "Canon EOS R5 Mark II",
     slug: "canon-eos-r5-mark-ii",
@@ -431,11 +1371,6 @@ const electronics: Product[] = [
     weight: 738,
     dimensions: { width: 138, height: 98, depth: 88 },
     tags: ["canon", "camera", "mirrorless", "professional", "8k"],
-    thumbnail: "/images/products/canon-eos-r5-mark-ii.jpg",
-    images: [
-      "/images/products/canon-eos-r5-mark-ii.jpg",
-      "/images/products/canon-eos-r5-mark-ii-2.jpg"
-    ],
     categoryId: "cat-1",
     categoryName: "Electronics",
     isFeatured: true,
@@ -444,8 +1379,8 @@ const electronics: Product[] = [
     isNewArrival: true,
     createdAt: "2024-10-01T10:00:00Z",
     updatedAt: "2024-10-01T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p14",
     title: "SteelSeries Arctis Nova Pro",
     slug: "steelseries-arctis-nova-pro",
@@ -462,11 +1397,6 @@ const electronics: Product[] = [
     weight: 340,
     dimensions: { width: 195, height: 240, depth: 95 },
     tags: ["steelseries", "gaming", "headset", "wireless", "audio"],
-    thumbnail: "/images/products/steelseries-arctis-nova-pro.jpg",
-    images: [
-      "/images/products/steelseries-arctis-nova-pro.jpg",
-      "/images/products/steelseries-arctis-nova-pro-2.jpg"
-    ],
     categoryId: "cat-1",
     categoryName: "Electronics",
     isFeatured: false,
@@ -475,8 +1405,8 @@ const electronics: Product[] = [
     isNewArrival: false,
     createdAt: "2024-07-15T10:00:00Z",
     updatedAt: "2024-07-15T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p15",
     title: "GoPro Hero 13 Black",
     slug: "gopro-hero-13-black",
@@ -493,11 +1423,6 @@ const electronics: Product[] = [
     weight: 152,
     dimensions: { width: 71.8, height: 50.8, depth: 33.6 },
     tags: ["gopro", "action-camera", "waterproof", "adventure"],
-    thumbnail: "/images/products/gopro-hero-13-black.jpg",
-    images: [
-      "/images/products/gopro-hero-13-black.jpg",
-      "/images/products/gopro-hero-13-black-2.jpg"
-    ],
     categoryId: "cat-1",
     categoryName: "Electronics",
     isFeatured: true,
@@ -506,8 +1431,8 @@ const electronics: Product[] = [
     isNewArrival: true,
     createdAt: "2024-09-10T10:00:00Z",
     updatedAt: "2024-09-10T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p16",
     title: "DJI Mini 4 Pro Drone",
     slug: "dji-mini-4-pro-drone",
@@ -524,11 +1449,6 @@ const electronics: Product[] = [
     weight: 249,
     dimensions: { width: 148, height: 94, depth: 64 },
     tags: ["dji", "drone", "4k", "portable", "obstacle-sensing"],
-    thumbnail: "/images/products/dji-mini-4-pro-drone.jpg",
-    images: [
-      "/images/products/dji-mini-4-pro-drone.jpg",
-      "/images/products/dji-mini-4-pro-drone-2.jpg"
-    ],
     categoryId: "cat-1",
     categoryName: "Electronics",
     isFeatured: false,
@@ -537,8 +1457,8 @@ const electronics: Product[] = [
     isNewArrival: false,
     createdAt: "2024-08-05T10:00:00Z",
     updatedAt: "2024-08-05T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p17",
     title: "Samsung 2TB T7 Shield SSD",
     slug: "samsung-2tb-t7-shield-ssd",
@@ -555,11 +1475,6 @@ const electronics: Product[] = [
     weight: 98,
     dimensions: { width: 59, height: 88, depth: 13 },
     tags: ["samsung", "ssd", "portable", "rugged", "storage"],
-    thumbnail: "/images/products/samsung-2tb-t7-shield-ssd.jpg",
-    images: [
-      "/images/products/samsung-2tb-t7-shield-ssd.jpg",
-      "/images/products/samsung-2tb-t7-shield-ssd-2.jpg"
-    ],
     categoryId: "cat-1",
     categoryName: "Electronics",
     isFeatured: false,
@@ -568,8 +1483,8 @@ const electronics: Product[] = [
     isNewArrival: false,
     createdAt: "2024-05-01T10:00:00Z",
     updatedAt: "2024-05-01T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p18",
     title: "Philips Hue Smart Bulbs Set",
     slug: "philips-hue-smart-bulbs-set",
@@ -586,11 +1501,6 @@ const electronics: Product[] = [
     weight: 200,
     dimensions: { width: 60, height: 110, depth: 60 },
     tags: ["philips", "hue", "smart-bulbs", "lighting", "smart-home"],
-    thumbnail: "/images/products/philips-hue-smart-bulbs-set.jpg",
-    images: [
-      "/images/products/philips-hue-smart-bulbs-set.jpg",
-      "/images/products/philips-hue-smart-bulbs-set-2.jpg"
-    ],
     categoryId: "cat-1",
     categoryName: "Electronics",
     isFeatured: false,
@@ -599,8 +1509,8 @@ const electronics: Product[] = [
     isNewArrival: false,
     createdAt: "2024-04-20T10:00:00Z",
     updatedAt: "2024-04-20T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p19",
     title: "Razer Blade 16 Gaming Laptop",
     slug: "razer-blade-16-gaming-laptop",
@@ -617,11 +1527,6 @@ const electronics: Product[] = [
     weight: 2450,
     dimensions: { width: 355, height: 244, depth: 21.9 },
     tags: ["razer", "gaming", "laptop", "oled", "rtx-4090"],
-    thumbnail: "/images/products/razer-blade-16-gaming-laptop.jpg",
-    images: [
-      "/images/products/razer-blade-16-gaming-laptop.jpg",
-      "/images/products/razer-blade-16-gaming-laptop-2.jpg"
-    ],
     categoryId: "cat-1",
     categoryName: "Electronics",
     isFeatured: true,
@@ -630,8 +1535,8 @@ const electronics: Product[] = [
     isNewArrival: true,
     createdAt: "2024-09-15T10:00:00Z",
     updatedAt: "2024-09-15T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p20",
     title: "LG C4 77-inch OLED TV",
     slug: "lg-c4-77-inch-oled-tv",
@@ -648,11 +1553,6 @@ const electronics: Product[] = [
     weight: 35000,
     dimensions: { width: 1721, height: 991, depth: 55 },
     tags: ["lg", "tv", "oled", "4k", "gaming"],
-    thumbnail: "/images/products/lg-c4-77-inch-oled-tv.jpg",
-    images: [
-      "/images/products/lg-c4-77-inch-oled-tv.jpg",
-      "/images/products/lg-c4-77-inch-oled-tv-2.jpg"
-    ],
     categoryId: "cat-1",
     categoryName: "Electronics",
     isFeatured: true,
@@ -661,15 +1561,15 @@ const electronics: Product[] = [
     isNewArrival: true,
     createdAt: "2024-10-10T10:00:00Z",
     updatedAt: "2024-10-10T10:00:00Z"
-  },
-];
+  })
+]
 
 // ============================================
 // CATEGORY 2: FASHION (20 Products)
 // ============================================
 
 const fashion: Product[] = [
-  {
+  createProduct({
     id: "p21",
     title: "Prada Leather Jacket",
     slug: "prada-leather-jacket",
@@ -686,11 +1586,6 @@ const fashion: Product[] = [
     weight: 1200,
     dimensions: { width: 50, height: 70, depth: 5 },
     tags: ["prada", "leather-jacket", "italian", "luxury", "fashion"],
-    thumbnail: "/images/products/prada-leather-jacket.jpg",
-    images: [
-      "/images/products/prada-leather-jacket.jpg",
-      "/images/products/prada-leather-jacket-2.jpg"
-    ],
     categoryId: "cat-2",
     categoryName: "Fashion",
     isFeatured: true,
@@ -699,8 +1594,8 @@ const fashion: Product[] = [
     isNewArrival: false,
     createdAt: "2024-08-10T10:00:00Z",
     updatedAt: "2024-08-10T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p22",
     title: "Gucci Silk Scarf",
     slug: "gucci-silk-scarf",
@@ -717,11 +1612,6 @@ const fashion: Product[] = [
     weight: 80,
     dimensions: { width: 90, height: 90, depth: 1 },
     tags: ["gucci", "silk-scarf", "italian", "luxury", "accessory"],
-    thumbnail: "/images/products/gucci-silk-scarf.jpg",
-    images: [
-      "/images/products/gucci-silk-scarf.jpg",
-      "/images/products/gucci-silk-scarf-2.jpg"
-    ],
     categoryId: "cat-2",
     categoryName: "Fashion",
     isFeatured: false,
@@ -730,8 +1620,8 @@ const fashion: Product[] = [
     isNewArrival: false,
     createdAt: "2024-07-01T10:00:00Z",
     updatedAt: "2024-07-01T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p23",
     title: "Saint Laurent Leather Belt",
     slug: "saint-laurent-leather-belt",
@@ -748,11 +1638,6 @@ const fashion: Product[] = [
     weight: 250,
     dimensions: { width: 3.5, height: 105, depth: 3 },
     tags: ["saint-laurent", "leather-belt", "brass-buckle", "luxury", "accessory"],
-    thumbnail: "/images/products/saint-laurent-leather-belt.jpg",
-    images: [
-      "/images/products/saint-laurent-leather-belt.jpg",
-      "/images/products/saint-laurent-leather-belt-2.jpg"
-    ],
     categoryId: "cat-2",
     categoryName: "Fashion",
     isFeatured: false,
@@ -761,8 +1646,8 @@ const fashion: Product[] = [
     isNewArrival: false,
     createdAt: "2024-06-15T10:00:00Z",
     updatedAt: "2024-06-15T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p24",
     title: "Burberry Trench Coat",
     slug: "burberry-trench-coat",
@@ -779,11 +1664,6 @@ const fashion: Product[] = [
     weight: 1500,
     dimensions: { width: 60, height: 120, depth: 8 },
     tags: ["burberry", "trench-coat", "british", "heritage", "luxury"],
-    thumbnail: "/images/products/burberry-trench-coat.jpg",
-    images: [
-      "/images/products/burberry-trench-coat.jpg",
-      "/images/products/burberry-trench-coat-2.jpg"
-    ],
     categoryId: "cat-2",
     categoryName: "Fashion",
     isFeatured: true,
@@ -792,8 +1672,8 @@ const fashion: Product[] = [
     isNewArrival: false,
     createdAt: "2024-05-15T10:00:00Z",
     updatedAt: "2024-05-15T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p25",
     title: "Versace Sunglasses",
     slug: "versace-sunglasses",
@@ -810,11 +1690,6 @@ const fashion: Product[] = [
     weight: 40,
     dimensions: { width: 140, height: 50, depth: 15 },
     tags: ["versace", "sunglasses", "italian", "luxury", "uv400"],
-    thumbnail: "/images/products/versace-sunglasses.jpg",
-    images: [
-      "/images/products/versace-sunglasses.jpg",
-      "/images/products/versace-sunglasses-2.jpg"
-    ],
     categoryId: "cat-2",
     categoryName: "Fashion",
     isFeatured: false,
@@ -823,8 +1698,8 @@ const fashion: Product[] = [
     isNewArrival: false,
     createdAt: "2024-07-20T10:00:00Z",
     updatedAt: "2024-07-20T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p26",
     title: "Hugo Boss Suit",
     slug: "hugo-boss-suit",
@@ -841,11 +1716,6 @@ const fashion: Product[] = [
     weight: 1800,
     dimensions: { width: 50, height: 100, depth: 10 },
     tags: ["hugo-boss", "suit", "italian-wool", "tailored", "formal"],
-    thumbnail: "/images/products/hugo-boss-suit.jpg",
-    images: [
-      "/images/products/hugo-boss-suit.jpg",
-      "/images/products/hugo-boss-suit-2.jpg"
-    ],
     categoryId: "cat-2",
     categoryName: "Fashion",
     isFeatured: true,
@@ -854,8 +1724,8 @@ const fashion: Product[] = [
     isNewArrival: true,
     createdAt: "2024-09-01T10:00:00Z",
     updatedAt: "2024-09-01T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p27",
     title: "Ralph Lauren Polo Shirt",
     slug: "ralph-lauren-polo-shirt",
@@ -872,11 +1742,6 @@ const fashion: Product[] = [
     weight: 200,
     dimensions: { width: 30, height: 70, depth: 2 },
     tags: ["ralph-lauren", "polo", "cotton", "american", "classic"],
-    thumbnail: "/images/products/ralph-lauren-polo-shirt.jpg",
-    images: [
-      "/images/products/ralph-lauren-polo-shirt.jpg",
-      "/images/products/ralph-lauren-polo-shirt-2.jpg"
-    ],
     categoryId: "cat-2",
     categoryName: "Fashion",
     isFeatured: false,
@@ -885,8 +1750,8 @@ const fashion: Product[] = [
     isNewArrival: false,
     createdAt: "2024-06-01T10:00:00Z",
     updatedAt: "2024-06-01T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p28",
     title: "Armani Cashmere Sweater",
     slug: "armani-cashmere-sweater",
@@ -903,11 +1768,6 @@ const fashion: Product[] = [
     weight: 350,
     dimensions: { width: 45, height: 65, depth: 3 },
     tags: ["armani", "cashmere", "sweater", "italian", "luxury"],
-    thumbnail: "/images/products/armani-cashmere-sweater.jpg",
-    images: [
-      "/images/products/armani-cashmere-sweater.jpg",
-      "/images/products/armani-cashmere-sweater-2.jpg"
-    ],
     categoryId: "cat-2",
     categoryName: "Fashion",
     isFeatured: true,
@@ -916,8 +1776,8 @@ const fashion: Product[] = [
     isNewArrival: true,
     createdAt: "2024-09-15T10:00:00Z",
     updatedAt: "2024-09-15T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p29",
     title: "Tom Ford Jeans",
     slug: "tom-ford-jeans",
@@ -934,11 +1794,6 @@ const fashion: Product[] = [
     weight: 600,
     dimensions: { width: 40, height: 100, depth: 5 },
     tags: ["tom-ford", "jeans", "denim", "italian", "luxury"],
-    thumbnail: "/images/products/tom-ford-jeans.jpg",
-    images: [
-      "/images/products/tom-ford-jeans.jpg",
-      "/images/products/tom-ford-jeans-2.jpg"
-    ],
     categoryId: "cat-2",
     categoryName: "Fashion",
     isFeatured: false,
@@ -947,8 +1802,8 @@ const fashion: Product[] = [
     isNewArrival: false,
     createdAt: "2024-08-05T10:00:00Z",
     updatedAt: "2024-08-05T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p30",
     title: "Fendi Leather Wallet",
     slug: "fendi-leather-wallet",
@@ -965,11 +1820,6 @@ const fashion: Product[] = [
     weight: 80,
     dimensions: { width: 10, height: 20, depth: 2 },
     tags: ["fendi", "wallet", "leather", "italian", "luxury"],
-    thumbnail: "/images/products/fendi-leather-wallet.jpg",
-    images: [
-      "/images/products/fendi-leather-wallet.jpg",
-      "/images/products/fendi-leather-wallet-2.jpg"
-    ],
     categoryId: "cat-2",
     categoryName: "Fashion",
     isFeatured: false,
@@ -978,8 +1828,8 @@ const fashion: Product[] = [
     isNewArrival: false,
     createdAt: "2024-07-10T10:00:00Z",
     updatedAt: "2024-07-10T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p31",
     title: "Moncler Puffer Jacket",
     slug: "moncler-puffer-jacket",
@@ -996,11 +1846,6 @@ const fashion: Product[] = [
     weight: 800,
     dimensions: { width: 60, height: 75, depth: 10 },
     tags: ["moncler", "puffer-jacket", "down", "italian", "luxury"],
-    thumbnail: "/images/products/moncler-puffer-jacket.jpg",
-    images: [
-      "/images/products/moncler-puffer-jacket.jpg",
-      "/images/products/moncler-puffer-jacket-2.jpg"
-    ],
     categoryId: "cat-2",
     categoryName: "Fashion",
     isFeatured: true,
@@ -1009,8 +1854,8 @@ const fashion: Product[] = [
     isNewArrival: true,
     createdAt: "2024-10-01T10:00:00Z",
     updatedAt: "2024-10-01T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p32",
     title: "Balenciaga Hoodie",
     slug: "balenciaga-hoodie",
@@ -1027,11 +1872,6 @@ const fashion: Product[] = [
     weight: 800,
     dimensions: { width: 60, height: 70, depth: 5 },
     tags: ["balenciaga", "hoodie", "streetwear", "cotton", "luxury"],
-    thumbnail: "/images/products/balenciaga-hoodie.jpg",
-    images: [
-      "/images/products/balenciaga-hoodie.jpg",
-      "/images/products/balenciaga-hoodie-2.jpg"
-    ],
     categoryId: "cat-2",
     categoryName: "Fashion",
     isFeatured: false,
@@ -1040,8 +1880,8 @@ const fashion: Product[] = [
     isNewArrival: false,
     createdAt: "2024-08-15T10:00:00Z",
     updatedAt: "2024-08-15T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p33",
     title: "Dior Saddle Bag",
     slug: "dior-saddle-bag",
@@ -1058,11 +1898,6 @@ const fashion: Product[] = [
     weight: 800,
     dimensions: { width: 20, height: 25, depth: 10 },
     tags: ["dior", "saddle-bag", "calfskin", "luxury", "italian"],
-    thumbnail: "/images/products/dior-saddle-bag.jpg",
-    images: [
-      "/images/products/dior-saddle-bag.jpg",
-      "/images/products/dior-saddle-bag-2.jpg"
-    ],
     categoryId: "cat-2",
     categoryName: "Fashion",
     isFeatured: true,
@@ -1071,8 +1906,8 @@ const fashion: Product[] = [
     isNewArrival: true,
     createdAt: "2024-09-20T10:00:00Z",
     updatedAt: "2024-09-20T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p34",
     title: "Kenzo Tiger Sweatshirt",
     slug: "kenzo-tiger-sweatshirt",
@@ -1089,11 +1924,6 @@ const fashion: Product[] = [
     weight: 450,
     dimensions: { width: 50, height: 65, depth: 3 },
     tags: ["kenzo", "tiger-print", "sweatshirt", "fashion", "luxury"],
-    thumbnail: "/images/products/kenzo-tiger-sweatshirt.jpg",
-    images: [
-      "/images/products/kenzo-tiger-sweatshirt.jpg",
-      "/images/products/kenzo-tiger-sweatshirt-2.jpg"
-    ],
     categoryId: "cat-2",
     categoryName: "Fashion",
     isFeatured: false,
@@ -1102,8 +1932,8 @@ const fashion: Product[] = [
     isNewArrival: false,
     createdAt: "2024-07-15T10:00:00Z",
     updatedAt: "2024-07-15T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p35",
     title: "Valentino Rockstud Heels",
     slug: "valentino-rockstud-heels",
@@ -1120,11 +1950,6 @@ const fashion: Product[] = [
     weight: 600,
     dimensions: { width: 20, height: 25, depth: 10 },
     tags: ["valentino", "rockstud", "heels", "stilettos", "italian"],
-    thumbnail: "/images/products/valentino-rockstud-heels.jpg",
-    images: [
-      "/images/products/valentino-rockstud-heels.jpg",
-      "/images/products/valentino-rockstud-heels-2.jpg"
-    ],
     categoryId: "cat-2",
     categoryName: "Fashion",
     isFeatured: true,
@@ -1133,8 +1958,8 @@ const fashion: Product[] = [
     isNewArrival: true,
     createdAt: "2024-09-15T10:00:00Z",
     updatedAt: "2024-09-15T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p36",
     title: "Off-White Belt",
     slug: "off-white-belt",
@@ -1151,11 +1976,6 @@ const fashion: Product[] = [
     weight: 200,
     dimensions: { width: 3, height: 120, depth: 2 },
     tags: ["off-white", "belt", "streetwear", "industrial", "accessory"],
-    thumbnail: "/images/products/off-white-belt.jpg",
-    images: [
-      "/images/products/off-white-belt.jpg",
-      "/images/products/off-white-belt-2.jpg"
-    ],
     categoryId: "cat-2",
     categoryName: "Fashion",
     isFeatured: false,
@@ -1164,8 +1984,8 @@ const fashion: Product[] = [
     isNewArrival: false,
     createdAt: "2024-06-20T10:00:00Z",
     updatedAt: "2024-06-20T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p37",
     title: "Alexander McQueen Skull Scarf",
     slug: "alexander-mcqueen-skull-scarf",
@@ -1182,11 +2002,6 @@ const fashion: Product[] = [
     weight: 60,
     dimensions: { width: 90, height: 90, depth: 1 },
     tags: ["alexander-mcqueen", "skull-scarf", "silk", "luxury", "accessory"],
-    thumbnail: "/images/products/alexander-mcqueen-skull-scarf.jpg",
-    images: [
-      "/images/products/alexander-mcqueen-skull-scarf.jpg",
-      "/images/products/alexander-mcqueen-skull-scarf-2.jpg"
-    ],
     categoryId: "cat-2",
     categoryName: "Fashion",
     isFeatured: false,
@@ -1195,8 +2010,8 @@ const fashion: Product[] = [
     isNewArrival: false,
     createdAt: "2024-05-25T10:00:00Z",
     updatedAt: "2024-05-25T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p38",
     title: "Bottega Veneta Intrecciato Tote",
     slug: "bottega-veneta-intrecciato-tote",
@@ -1213,11 +2028,6 @@ const fashion: Product[] = [
     weight: 1000,
     dimensions: { width: 35, height: 30, depth: 15 },
     tags: ["bottega-veneta", "intrecciato", "tote", "woven-leather", "italian"],
-    thumbnail: "/images/products/bottega-veneta-intrecciato-tote.jpg",
-    images: [
-      "/images/products/bottega-veneta-intrecciato-tote.jpg",
-      "/images/products/bottega-veneta-intrecciato-tote-2.jpg"
-    ],
     categoryId: "cat-2",
     categoryName: "Fashion",
     isFeatured: true,
@@ -1226,8 +2036,8 @@ const fashion: Product[] = [
     isNewArrival: true,
     createdAt: "2024-10-05T10:00:00Z",
     updatedAt: "2024-10-05T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p39",
     title: "Saint Laurent Tuxedo Jacket",
     slug: "saint-laurent-tuxedo-jacket",
@@ -1244,11 +2054,6 @@ const fashion: Product[] = [
     weight: 1200,
     dimensions: { width: 50, height: 75, depth: 8 },
     tags: ["saint-laurent", "tuxedo", "jacket", "formal", "luxury"],
-    thumbnail: "/images/products/saint-laurent-tuxedo-jacket.jpg",
-    images: [
-      "/images/products/saint-laurent-tuxedo-jacket.jpg",
-      "/images/products/saint-laurent-tuxedo-jacket-2.jpg"
-    ],
     categoryId: "cat-2",
     categoryName: "Fashion",
     isFeatured: true,
@@ -1257,8 +2062,8 @@ const fashion: Product[] = [
     isNewArrival: true,
     createdAt: "2024-10-10T10:00:00Z",
     updatedAt: "2024-10-10T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p40",
     title: "Acne Studios Logo Scarf",
     slug: "acne-studios-logo-scarf",
@@ -1275,11 +2080,6 @@ const fashion: Product[] = [
     weight: 150,
     dimensions: { width: 30, height: 180, depth: 1 },
     tags: ["acne-studios", "scarf", "wool", "scandinavian", "minimalist"],
-    thumbnail: "/images/products/acne-studios-logo-scarf.jpg",
-    images: [
-      "/images/products/acne-studios-logo-scarf.jpg",
-      "/images/products/acne-studios-logo-scarf-2.jpg"
-    ],
     categoryId: "cat-2",
     categoryName: "Fashion",
     isFeatured: false,
@@ -1288,15 +2088,15 @@ const fashion: Product[] = [
     isNewArrival: false,
     createdAt: "2024-06-25T10:00:00Z",
     updatedAt: "2024-06-25T10:00:00Z"
-  },
-];
+  })
+]
 
 // ============================================
 // CATEGORY 3: FOOTWEAR (15 Products)
 // ============================================
 
 const footwear: Product[] = [
-  {
+  createProduct({
     id: "p41",
     title: "Nike Air Max 270",
     slug: "nike-air-max-270",
@@ -1313,11 +2113,6 @@ const footwear: Product[] = [
     weight: 350,
     dimensions: { width: 28, height: 32, depth: 10 },
     tags: ["nike", "air-max", "sneakers", "casual", "comfort"],
-    thumbnail: "/images/products/nike-air-max-270.jpg",
-    images: [
-      "/images/products/nike-air-max-270.jpg",
-      "/images/products/nike-air-max-270-2.jpg"
-    ],
     categoryId: "cat-3",
     categoryName: "Footwear",
     isFeatured: true,
@@ -1326,8 +2121,8 @@ const footwear: Product[] = [
     isNewArrival: false,
     createdAt: "2024-05-10T10:00:00Z",
     updatedAt: "2024-05-10T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p42",
     title: "Adidas Ultraboost 5",
     slug: "adidas-ultraboost-5",
@@ -1344,11 +2139,6 @@ const footwear: Product[] = [
     weight: 310,
     dimensions: { width: 27, height: 30, depth: 10 },
     tags: ["adidas", "ultraboost", "running", "comfort", "boost"],
-    thumbnail: "/images/products/adidas-ultraboost-5.jpg",
-    images: [
-      "/images/products/adidas-ultraboost-5.jpg",
-      "/images/products/adidas-ultraboost-5-2.jpg"
-    ],
     categoryId: "cat-3",
     categoryName: "Footwear",
     isFeatured: true,
@@ -1357,8 +2147,8 @@ const footwear: Product[] = [
     isNewArrival: false,
     createdAt: "2024-06-01T10:00:00Z",
     updatedAt: "2024-06-01T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p43",
     title: "New Balance 990v6",
     slug: "new-balance-990v6",
@@ -1375,11 +2165,6 @@ const footwear: Product[] = [
     weight: 340,
     dimensions: { width: 28, height: 31, depth: 10 },
     tags: ["new-balance", "990", "running", "classic", "comfort"],
-    thumbnail: "/images/products/new-balance-990v6.jpg",
-    images: [
-      "/images/products/new-balance-990v6.jpg",
-      "/images/products/new-balance-990v6-2.jpg"
-    ],
     categoryId: "cat-3",
     categoryName: "Footwear",
     isFeatured: false,
@@ -1388,8 +2173,8 @@ const footwear: Product[] = [
     isNewArrival: false,
     createdAt: "2024-05-15T10:00:00Z",
     updatedAt: "2024-05-15T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p44",
     title: "Hoka Bondi 8",
     slug: "hoka-bondi-8",
@@ -1406,11 +2191,6 @@ const footwear: Product[] = [
     weight: 320,
     dimensions: { width: 29, height: 32, depth: 11 },
     tags: ["hoka", "bondi", "running", "max-cushion", "comfort"],
-    thumbnail: "/images/products/hoka-bondi-8.jpg",
-    images: [
-      "/images/products/hoka-bondi-8.jpg",
-      "/images/products/hoka-bondi-8-2.jpg"
-    ],
     categoryId: "cat-3",
     categoryName: "Footwear",
     isFeatured: false,
@@ -1419,8 +2199,8 @@ const footwear: Product[] = [
     isNewArrival: false,
     createdAt: "2024-06-10T10:00:00Z",
     updatedAt: "2024-06-10T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p45",
     title: "Puma Suede Classic",
     slug: "puma-suede-classic",
@@ -1437,11 +2217,6 @@ const footwear: Product[] = [
     weight: 280,
     dimensions: { width: 26, height: 28, depth: 10 },
     tags: ["puma", "suede", "classic", "sneakers", "casual"],
-    thumbnail: "/images/products/puma-suede-classic.jpg",
-    images: [
-      "/images/products/puma-suede-classic.jpg",
-      "/images/products/puma-suede-classic-2.jpg"
-    ],
     categoryId: "cat-3",
     categoryName: "Footwear",
     isFeatured: false,
@@ -1450,8 +2225,8 @@ const footwear: Product[] = [
     isNewArrival: false,
     createdAt: "2024-05-01T10:00:00Z",
     updatedAt: "2024-05-01T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p46",
     title: "Air Jordan 1 Low",
     slug: "air-jordan-1-low",
@@ -1468,11 +2243,6 @@ const footwear: Product[] = [
     weight: 330,
     dimensions: { width: 27, height: 30, depth: 10 },
     tags: ["jordan", "air-jordan", "sneakers", "basketball", "classic"],
-    thumbnail: "/images/products/air-jordan-1-low.jpg",
-    images: [
-      "/images/products/air-jordan-1-low.jpg",
-      "/images/products/air-jordan-1-low-2.jpg"
-    ],
     categoryId: "cat-3",
     categoryName: "Footwear",
     isFeatured: true,
@@ -1481,8 +2251,8 @@ const footwear: Product[] = [
     isNewArrival: false,
     createdAt: "2024-04-20T10:00:00Z",
     updatedAt: "2024-04-20T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p47",
     title: "On Cloudmonster",
     slug: "on-cloudmonster",
@@ -1499,11 +2269,6 @@ const footwear: Product[] = [
     weight: 310,
     dimensions: { width: 28, height: 31, depth: 11 },
     tags: ["on", "cloudmonster", "running", "max-cushion", "cloudtec"],
-    thumbnail: "/images/products/on-cloudmonster.jpg",
-    images: [
-      "/images/products/on-cloudmonster.jpg",
-      "/images/products/on-cloudmonster-2.jpg"
-    ],
     categoryId: "cat-3",
     categoryName: "Footwear",
     isFeatured: false,
@@ -1512,8 +2277,8 @@ const footwear: Product[] = [
     isNewArrival: false,
     createdAt: "2024-06-20T10:00:00Z",
     updatedAt: "2024-06-20T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p48",
     title: "Vans Old Skool",
     slug: "vans-old-skool",
@@ -1530,11 +2295,6 @@ const footwear: Product[] = [
     weight: 260,
     dimensions: { width: 25, height: 27, depth: 10 },
     tags: ["vans", "old-skool", "skateboarding", "classic", "casual"],
-    thumbnail: "/images/products/vans-old-skool.jpg",
-    images: [
-      "/images/products/vans-old-skool.jpg",
-      "/images/products/vans-old-skool-2.jpg"
-    ],
     categoryId: "cat-3",
     categoryName: "Footwear",
     isFeatured: false,
@@ -1543,8 +2303,8 @@ const footwear: Product[] = [
     isNewArrival: false,
     createdAt: "2024-05-25T10:00:00Z",
     updatedAt: "2024-05-25T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p49",
     title: "ASICS Gel-Kayano 30",
     slug: "asics-gel-kayano-30",
@@ -1561,11 +2321,6 @@ const footwear: Product[] = [
     weight: 340,
     dimensions: { width: 28, height: 31, depth: 11 },
     tags: ["asics", "gel-kayano", "running", "stability", "comfort"],
-    thumbnail: "/images/products/asics-gel-kayano-30.jpg",
-    images: [
-      "/images/products/asics-gel-kayano-30.jpg",
-      "/images/products/asics-gel-kayano-30-2.jpg"
-    ],
     categoryId: "cat-3",
     categoryName: "Footwear",
     isFeatured: false,
@@ -1574,8 +2329,8 @@ const footwear: Product[] = [
     isNewArrival: false,
     createdAt: "2024-07-01T10:00:00Z",
     updatedAt: "2024-07-01T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p50",
     title: "Converse Chuck 70",
     slug: "converse-chuck-70",
@@ -1592,11 +2347,6 @@ const footwear: Product[] = [
     weight: 250,
     dimensions: { width: 25, height: 27, depth: 10 },
     tags: ["converse", "chuck-70", "canvas", "classic", "casual"],
-    thumbnail: "/images/products/converse-chuck-70.jpg",
-    images: [
-      "/images/products/converse-chuck-70.jpg",
-      "/images/products/converse-chuck-70-2.jpg"
-    ],
     categoryId: "cat-3",
     categoryName: "Footwear",
     isFeatured: false,
@@ -1605,8 +2355,8 @@ const footwear: Product[] = [
     isNewArrival: false,
     createdAt: "2024-06-15T10:00:00Z",
     updatedAt: "2024-06-15T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p51",
     title: "Reebok Club C 85",
     slug: "reebok-club-c-85",
@@ -1623,11 +2373,6 @@ const footwear: Product[] = [
     weight: 300,
     dimensions: { width: 26, height: 29, depth: 10 },
     tags: ["reebok", "club-c", "classic", "tennis", "casual"],
-    thumbnail: "/images/products/reebok-club-c-85.jpg",
-    images: [
-      "/images/products/reebok-club-c-85.jpg",
-      "/images/products/reebok-club-c-85-2.jpg"
-    ],
     categoryId: "cat-3",
     categoryName: "Footwear",
     isFeatured: false,
@@ -1636,8 +2381,8 @@ const footwear: Product[] = [
     isNewArrival: false,
     createdAt: "2024-07-10T10:00:00Z",
     updatedAt: "2024-07-10T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p52",
     title: "Saucony Triumph 22",
     slug: "saucony-triumph-22",
@@ -1654,11 +2399,6 @@ const footwear: Product[] = [
     weight: 320,
     dimensions: { width: 28, height: 31, depth: 11 },
     tags: ["saucony", "triumph", "running", "cushion", "performance"],
-    thumbnail: "/images/products/saucony-triumph-22.jpg",
-    images: [
-      "/images/products/saucony-triumph-22.jpg",
-      "/images/products/saucony-triumph-22-2.jpg"
-    ],
     categoryId: "cat-3",
     categoryName: "Footwear",
     isFeatured: false,
@@ -1667,8 +2407,8 @@ const footwear: Product[] = [
     isNewArrival: false,
     createdAt: "2024-07-15T10:00:00Z",
     updatedAt: "2024-07-15T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p53",
     title: "Balenciaga Triple S Sneakers",
     slug: "balenciaga-triple-s-sneakers",
@@ -1685,11 +2425,6 @@ const footwear: Product[] = [
     weight: 800,
     dimensions: { width: 30, height: 35, depth: 12 },
     tags: ["balenciaga", "triple-s", "sneakers", "chunky", "luxury"],
-    thumbnail: "/images/products/balenciaga-triple-s-sneakers.jpg",
-    images: [
-      "/images/products/balenciaga-triple-s-sneakers.jpg",
-      "/images/products/balenciaga-triple-s-sneakers-2.jpg"
-    ],
     categoryId: "cat-3",
     categoryName: "Footwear",
     isFeatured: true,
@@ -1698,8 +2433,8 @@ const footwear: Product[] = [
     isNewArrival: false,
     createdAt: "2024-08-01T10:00:00Z",
     updatedAt: "2024-08-01T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p54",
     title: "Mizuno Wave Rider 27",
     slug: "mizuno-wave-rider-27",
@@ -1716,11 +2451,6 @@ const footwear: Product[] = [
     weight: 280,
     dimensions: { width: 27, height: 30, depth: 10 },
     tags: ["mizuno", "wave-rider", "running", "comfort", "versatile"],
-    thumbnail: "/images/products/mizuno-wave-rider-27.jpg",
-    images: [
-      "/images/products/mizuno-wave-rider-27.jpg",
-      "/images/products/mizuno-wave-rider-27-2.jpg"
-    ],
     categoryId: "cat-3",
     categoryName: "Footwear",
     isFeatured: false,
@@ -1729,8 +2459,8 @@ const footwear: Product[] = [
     isNewArrival: false,
     createdAt: "2024-07-20T10:00:00Z",
     updatedAt: "2024-07-20T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p55",
     title: "UGG Classic Mini Boots",
     slug: "ugg-classic-mini-boots",
@@ -1747,11 +2477,6 @@ const footwear: Product[] = [
     weight: 500,
     dimensions: { width: 25, height: 28, depth: 10 },
     tags: ["ugg", "classic-mini", "boots", "sheepskin", "warmth"],
-    thumbnail: "/images/products/ugg-classic-mini-boots.jpg",
-    images: [
-      "/images/products/ugg-classic-mini-boots.jpg",
-      "/images/products/ugg-classic-mini-boots-2.jpg"
-    ],
     categoryId: "cat-3",
     categoryName: "Footwear",
     isFeatured: false,
@@ -1760,15 +2485,15 @@ const footwear: Product[] = [
     isNewArrival: false,
     createdAt: "2024-08-15T10:00:00Z",
     updatedAt: "2024-08-15T10:00:00Z"
-  },
-];
+  })
+]
 
 // ============================================
 // CATEGORY 4: WATCHES (12 Products)
 // ============================================
 
 const watches: Product[] = [
-  {
+  createProduct({
     id: "p56",
     title: "Rolex Submariner Date",
     slug: "rolex-submariner-date",
@@ -1785,11 +2510,6 @@ const watches: Product[] = [
     weight: 155,
     dimensions: { width: 41, height: 48, depth: 12.5 },
     tags: ["rolex", "submariner", "luxury", "dive-watch", "automatic"],
-    thumbnail: "/images/products/rolex-submariner-date.jpg",
-    images: [
-      "/images/products/rolex-submariner-date.jpg",
-      "/images/products/rolex-submariner-date-2.jpg"
-    ],
     categoryId: "cat-4",
     categoryName: "Watches",
     isFeatured: true,
@@ -1798,356 +2518,301 @@ const watches: Product[] = [
     isNewArrival: false,
     createdAt: "2024-06-10T10:00:00Z",
     updatedAt: "2024-06-10T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p57",
-    title: "Apple Watch Ultra 2",
-    slug: "apple-watch-ultra-2",
-    description: "The Apple Watch Ultra 2 is the ultimate smartwatch for athletes and adventurers. The 49mm titanium case is durable and lightweight, while the always-on Retina display offers exceptional visibility. The S9 SiP chip provides powerful performance and precision GPS. The advanced health sensors include ECG, blood oxygen, and temperature sensing. This watch is built for those who push their limits.",
-    shortDescription: "Ultimate smartwatch with titanium case, GPS, health sensors, and rugged design.",
+    title: "Apple Watch Series 10",
+    slug: "apple-watch-series-10",
+    description: "The Apple Watch Series 10 represents the pinnacle of wearable technology with its stunning always-on Retina display, advanced health monitoring features including blood oxygen and ECG, and powerful S10 chip. The lightweight titanium case offers durability while maintaining comfort for all-day wear. With sleep tracking, workout detection, and fall detection, this smartwatch is your ultimate health and fitness companion. The watchOS 11 brings intelligent features that help you stay connected, active, and healthy.",
+    shortDescription: "Premium smartwatch with health monitoring, always-on display, and S10 chip.",
+    price: 549.99,
+    originalPrice: 599.99,
+    discountPercentage: 8,
+    rating: 4.8,
+    reviewCount: 3201,
+    stock: 45,
+    brand: "Apple",
+    sku: "BLZ-WT-0002",
+    weight: 42,
+    dimensions: { width: 45, height: 38, depth: 10.7 },
+    tags: ["apple", "smartwatch", "fitness", "health", "wearable"],
+    categoryId: "cat-4",
+    categoryName: "Watches",
+    isFeatured: true,
+    isTrending: true,
+    isBestSeller: true,
+    isNewArrival: true,
+    createdAt: "2024-09-12T10:00:00Z",
+    updatedAt: "2024-09-12T10:00:00Z"
+  }),
+  createProduct({
+    id: "p58",
+    title: "Garmin Fenix 8 Sapphire",
+    slug: "garmin-fenix-8-sapphire",
+    description: "The Garmin Fenix 8 Sapphire is the ultimate multisport GPS watch built for adventurers and athletes. The rugged design features a 51mm bezel with sapphire crystal display, titanium construction, and up to 37 days of battery life. With multi-band GPS, topo maps, dive-rated water resistance, and advanced training metrics, this watch handles everything from trail running to deep-sea diving. The built-in flashlight, solar charging, and satellite messaging make it indispensable for outdoor exploration.",
+    shortDescription: "Ultimate multisport GPS watch with sapphire crystal, titanium build, and solar charging.",
+    price: 1099.99,
+    originalPrice: 1199.99,
+    discountPercentage: 8,
+    rating: 4.7,
+    reviewCount: 1234,
+    stock: 18,
+    brand: "Garmin",
+    sku: "BLZ-WT-0003",
+    weight: 96,
+    dimensions: { width: 51, height: 51, depth: 14.7 },
+    tags: ["garmin", "fenix", "gps", "multisport", "outdoor"],
+    categoryId: "cat-4",
+    categoryName: "Watches",
+    isFeatured: true,
+    isTrending: false,
+    isBestSeller: false,
+    isNewArrival: true,
+    createdAt: "2024-08-01T10:00:00Z",
+    updatedAt: "2024-08-01T10:00:00Z"
+  }),
+  createProduct({
+    id: "p59",
+    title: "Omega Speedmaster Moonwatch",
+    slug: "omega-speedmaster-moonwatch",
+    description: "The Omega Speedmaster Moonwatch Professional is a legendary timepiece with an unparalleled heritage as the first watch worn on the moon. The 42mm stainless steel case houses the Master Chronometer caliber 3861 movement with manual winding. The hesalite crystal and stepped dial maintain the iconic 1969 Apollo 11 design. This chronograph features a tachymeter bezel, small seconds subdial, 30-minute recorder, and 12-hour recorder. A true collector's piece that combines horological history with modern precision.",
+    shortDescription: "Legendary moon watch with Master Chronometer movement and iconic Apollo-era design.",
+    price: 7299.99,
+    originalPrice: 7599.99,
+    discountPercentage: 4,
+    rating: 4.9,
+    reviewCount: 678,
+    stock: 5,
+    brand: "Omega",
+    sku: "BLZ-WT-0004",
+    weight: 145,
+    dimensions: { width: 42, height: 48, depth: 13.6 },
+    tags: ["omega", "speedmaster", "luxury", "chronograph", "automatic"],
+    categoryId: "cat-4",
+    categoryName: "Watches",
+    isFeatured: true,
+    isTrending: false,
+    isBestSeller: false,
+    isNewArrival: false,
+    createdAt: "2024-03-15T10:00:00Z",
+    updatedAt: "2024-03-15T10:00:00Z"
+  }),
+  createProduct({
+    id: "p60",
+    title: "Seiko Prospex SPB143",
+    slug: "seiko-prospex-spb143",
+    description: "The Seiko Prospex SPB143 is a modern reinterpretation of Seiko's iconic 1965 diver's watch, offering exceptional value in the luxury watch segment. The 40.5mm stainless steel case features a unidirectional rotating bezel with ceramic insert and a box-shaped sapphire crystal. The 6R35 automatic movement provides 70 hours of power reserve. With 200m water resistance and a comfortable steel bracelet, this watch delivers professional-grade diving performance with Seiko's legendary reliability.",
+    shortDescription: "Modern reinterpretation of the iconic 1965 Seiko diver with 200m water resistance.",
+    price: 1299.99,
+    originalPrice: 1399.99,
+    discountPercentage: 7,
+    rating: 4.7,
+    reviewCount: 342,
+    stock: 22,
+    brand: "Seiko",
+    sku: "BLZ-WT-0005",
+    weight: 175,
+    dimensions: { width: 40.5, height: 47.6, depth: 13.2 },
+    tags: ["seiko", "prospex", "diver", "automatic", "japanese"],
+    categoryId: "cat-4",
+    categoryName: "Watches",
+    isFeatured: false,
+    isTrending: true,
+    isBestSeller: false,
+    isNewArrival: false,
+    createdAt: "2024-05-20T10:00:00Z",
+    updatedAt: "2024-05-20T10:00:00Z"
+  }),
+  createProduct({
+    id: "p61",
+    title: "Tag Heuer Carrera Chronograph",
+    slug: "tag-heuer-carrera-chronograph",
+    description: "The Tag Heuer Carrera Chronograph embodies motorsport heritage with precision Swiss engineering. The 44mm stainless steel case features a ceramic tachymeter bezel and sapphire crystal with double anti-reflective treatment. The Heuer 02 automatic movement offers 80 hours of power reserve with column-wheel chronograph architecture. The sunray-brushed dial with three subdials creates a sophisticated racing aesthetic. This timepiece perfectly balances sporty elegance with technical excellence.",
+    shortDescription: "Swiss chronograph with Heuer 02 movement, ceramic bezel, and motorsport heritage.",
+    price: 5899.99,
+    originalPrice: 6299.99,
+    discountPercentage: 6,
+    rating: 4.8,
+    reviewCount: 234,
+    stock: 10,
+    brand: "Tag Heuer",
+    sku: "BLZ-WT-0006",
+    weight: 185,
+    dimensions: { width: 44, height: 50, depth: 15 },
+    tags: ["tag-heuer", "carrera", "chronograph", "swiss", "luxury"],
+    categoryId: "cat-4",
+    categoryName: "Watches",
+    isFeatured: false,
+    isTrending: true,
+    isBestSeller: true,
+    isNewArrival: false,
+    createdAt: "2024-04-10T10:00:00Z",
+    updatedAt: "2024-04-10T10:00:00Z"
+  }),
+  createProduct({
+    id: "p62",
+    title: "Citizen Eco-Drive Promaster",
+    slug: "citizen-eco-drive-promaster",
+    description: "The Citizen Eco-Drive Promaster BN0151 is the ultimate everyday dive watch powered by any light source, eliminating the need for battery changes. The 44mm stainless steel case features a scratch-resistant mineral crystal and unidirectional rotating bezel. The Eco-Drive caliber E168 movement provides 6 months of power reserve once fully charged. With 200m water resistance, luminous hands and markers, and a comfortable polyurethane strap, this watch offers exceptional value and reliability for diving and daily wear.",
+    shortDescription: "Light-powered dive watch with 200m resistance, luminous dial, and Eco-Drive technology.",
+    price: 399.99,
+    originalPrice: 449.99,
+    discountPercentage: 11,
+    rating: 4.6,
+    reviewCount: 1567,
+    stock: 55,
+    brand: "Citizen",
+    sku: "BLZ-WT-0007",
+    weight: 165,
+    dimensions: { width: 44, height: 48, depth: 12.5 },
+    tags: ["citizen", "eco-drive", "diver", "solar", "japanese"],
+    categoryId: "cat-4",
+    categoryName: "Watches",
+    isFeatured: false,
+    isTrending: false,
+    isBestSeller: true,
+    isNewArrival: false,
+    createdAt: "2024-02-01T10:00:00Z",
+    updatedAt: "2024-02-01T10:00:00Z"
+  }),
+  createProduct({
+    id: "p63",
+    title: "Tissot PRX Powermatic 80",
+    slug: "tissot-prx-powermatic-80",
+    description: "The Tissot PRX Powermatic 80 is a stunning revival of the 1970s integrated bracelet design, offering exceptional Swiss craftsmanship at an accessible price. The 40mm stainless steel case features a beautiful sunray-brushed dial with horizontal hobnail pattern. The Powermatic 80 automatic movement provides an impressive 80 hours of power reserve. The integrated bracelet with butterfly clasp creates a seamless silhouette. This watch has become a modern icon in the affordable luxury segment.",
+    shortDescription: "Vintage-inspired integrated bracelet watch with 80-hour Powermatic 80 movement.",
     price: 799.99,
     originalPrice: 849.99,
     discountPercentage: 6,
     rating: 4.8,
     reviewCount: 2345,
-    stock: 55,
-    brand: "Apple",
-    sku: "BLZ-WT-0002",
-    weight: 61,
-    dimensions: { width: 44, height: 49, depth: 14.4 },
-    tags: ["apple", "watch", "smartwatch", "fitness", "gps"],
-    thumbnail: "/images/products/apple-watch-ultra-2.jpg",
-    images: [
-      "/images/products/apple-watch-ultra-2.jpg",
-      "/images/products/apple-watch-ultra-2-2.jpg"
-    ],
-    categoryId: "cat-4",
-    categoryName: "Watches",
-    isFeatured: true,
-    isTrending: true,
-    isBestSeller: true,
-    isNewArrival: false,
-    createdAt: "2024-06-15T10:00:00Z",
-    updatedAt: "2024-06-15T10:00:00Z"
-  },
-  {
-    id: "p58",
-    title: "Omega Speedmaster Professional",
-    slug: "omega-speedmaster-professional",
-    description: "The Omega Speedmaster Professional, also known as the Moonwatch, is a legendary chronograph that has been to the moon. The 42mm stainless steel case and black dial create a classic and recognizable look. The manual-winding movement is a testament to traditional watchmaking. This watch is a symbol of human achievement and exploration.",
-    shortDescription: "Legendary chronograph with stainless steel case, black dial, and Moonwatch heritage.",
-    price: 7500.99,
-    originalPrice: 8000.99,
-    discountPercentage: 6,
-    rating: 4.9,
-    reviewCount: 345,
-    stock: 12,
-    brand: "Omega",
-    sku: "BLZ-WT-0003",
-    weight: 145,
-    dimensions: { width: 42, height: 48, depth: 14 },
-    tags: ["omega", "speedmaster", "chronograph", "moonwatch", "luxury"],
-    thumbnail: "/images/products/omega-speedmaster-professional.jpg",
-    images: [
-      "/images/products/omega-speedmaster-professional.jpg",
-      "/images/products/omega-speedmaster-professional-2.jpg"
-    ],
-    categoryId: "cat-4",
-    categoryName: "Watches",
-    isFeatured: true,
-    isTrending: false,
-    isBestSeller: false,
-    isNewArrival: false,
-    createdAt: "2024-05-20T10:00:00Z",
-    updatedAt: "2024-05-20T10:00:00Z"
-  },
-  {
-    id: "p59",
-    title: "Garmin Fenix 7 Pro",
-    slug: "garmin-fenix-7-pro",
-    description: "The Garmin Fenix 7 Pro is the ultimate multisport GPS watch for outdoor enthusiasts. The Power Sapphire solar charging lens extends battery life, while the advanced fitness tracking provides comprehensive data for training. The tactical features and navigation tools make it essential for adventures. This watch is built for those who demand the best in outdoor performance.",
-    shortDescription: "Multisport GPS watch with solar charging, advanced fitness tracking, and rugged design.",
-    price: 899.99,
-    originalPrice: 999.99,
-    discountPercentage: 10,
-    rating: 4.7,
-    reviewCount: 1876,
     stock: 35,
-    brand: "Garmin",
-    sku: "BLZ-WT-0004",
-    weight: 76,
-    dimensions: { width: 47, height: 47, depth: 14.5 },
-    tags: ["garmin", "fenix", "gps", "multisport", "fitness"],
-    thumbnail: "/images/products/garmin-fenix-7-pro.jpg",
-    images: [
-      "/images/products/garmin-fenix-7-pro.jpg",
-      "/images/products/garmin-fenix-7-pro-2.jpg"
-    ],
-    categoryId: "cat-4",
-    categoryName: "Watches",
-    isFeatured: false,
-    isTrending: true,
-    isBestSeller: false,
-    isNewArrival: false,
-    createdAt: "2024-07-10T10:00:00Z",
-    updatedAt: "2024-07-10T10:00:00Z"
-  },
-  {
-    id: "p60",
-    title: "Tag Heuer Carrera Chronograph",
-    slug: "tag-heuer-carrera-chronograph",
-    description: "The Tag Heuer Carrera Chronograph is a sophisticated sports watch that embodies the brand's racing heritage. The 44mm stainless steel case and black ceramic bezel create a bold and sporty look. The automatic movement and chronograph function provide precision and functionality. This watch is perfect for those who appreciate performance and style.",
-    shortDescription: "Sophisticated chronograph with stainless steel case, ceramic bezel, and racing heritage.",
-    price: 5500.99,
-    originalPrice: 6000.99,
-    discountPercentage: 8,
-    rating: 4.8,
-    reviewCount: 456,
-    stock: 10,
-    brand: "Tag Heuer",
-    sku: "BLZ-WT-0005",
-    weight: 150,
-    dimensions: { width: 44, height: 50, depth: 15 },
-    tags: ["tag-heuer", "carrera", "chronograph", "luxury", "racing"],
-    thumbnail: "/images/products/tag-heuer-carrera-chronograph.jpg",
-    images: [
-      "/images/products/tag-heuer-carrera-chronograph.jpg",
-      "/images/products/tag-heuer-carrera-chronograph-2.jpg"
-    ],
-    categoryId: "cat-4",
-    categoryName: "Watches",
-    isFeatured: false,
-    isTrending: false,
-    isBestSeller: false,
-    isNewArrival: false,
-    createdAt: "2024-06-20T10:00:00Z",
-    updatedAt: "2024-06-20T10:00:00Z"
-  },
-  {
-    id: "p61",
-    title: "Samsung Galaxy Watch 6",
-    slug: "samsung-galaxy-watch-6",
-    description: "The Samsung Galaxy Watch 6 is a versatile smartwatch that combines style and functionality. The 44mm case and vibrant AMOLED display create a stunning look. The advanced health sensors track heart rate, blood pressure, and sleep patterns with precision. The Wear OS platform ensures a seamless and intuitive experience. This watch is perfect for those who want a premium smartwatch experience.",
-    shortDescription: "Premium smartwatch with AMOLED display, advanced health sensors, and Wear OS.",
-    price: 399.99,
-    originalPrice: 449.99,
-    discountPercentage: 11,
-    rating: 4.6,
-    reviewCount: 3456,
-    stock: 80,
-    brand: "Samsung",
-    sku: "BLZ-WT-0006",
-    weight: 60,
-    dimensions: { width: 44.4, height: 44.4, depth: 9 },
-    tags: ["samsung", "galaxy-watch", "smartwatch", "wear-os", "health"],
-    thumbnail: "/images/products/samsung-galaxy-watch-6.jpg",
-    images: [
-      "/images/products/samsung-galaxy-watch-6.jpg",
-      "/images/products/samsung-galaxy-watch-6-2.jpg"
-    ],
+    brand: "Tissot",
+    sku: "BLZ-WT-0008",
+    weight: 135,
+    dimensions: { width: 40, height: 44, depth: 10.9 },
+    tags: ["tissot", "prx", "integrated", "automatic", "swiss"],
     categoryId: "cat-4",
     categoryName: "Watches",
     isFeatured: false,
     isTrending: true,
     isBestSeller: true,
     isNewArrival: false,
-    createdAt: "2024-07-15T10:00:00Z",
-    updatedAt: "2024-07-15T10:00:00Z"
-  },
-  {
-    id: "p62",
-    title: "Seiko Prospex Diver",
-    slug: "seiko-prospex-diver",
-    description: "The Seiko Prospex Diver is a reliable and durable dive watch that combines Japanese craftsmanship with precision engineering. The 45mm stainless steel case and blue dial create a classic and sporty look. The automatic movement and 200m water resistance ensure exceptional performance. This watch is perfect for divers and adventurers who demand reliability.",
-    shortDescription: "Reliable dive watch with automatic movement, 200m water resistance, and Japanese craftsmanship.",
-    price: 499.99,
-    originalPrice: 549.99,
-    discountPercentage: 9,
-    rating: 4.7,
-    reviewCount: 2345,
-    stock: 45,
-    brand: "Seiko",
-    sku: "BLZ-WT-0007",
-    weight: 160,
-    dimensions: { width: 45, height: 52, depth: 13 },
-    tags: ["seiko", "prospex", "diver", "automatic", "japanese"],
-    thumbnail: "/images/products/seiko-prospex-diver.jpg",
-    images: [
-      "/images/products/seiko-prospex-diver.jpg",
-      "/images/products/seiko-prospex-diver-2.jpg"
-    ],
-    categoryId: "cat-4",
-    categoryName: "Watches",
-    isFeatured: false,
-    isTrending: false,
-    isBestSeller: false,
-    isNewArrival: false,
-    createdAt: "2024-07-20T10:00:00Z",
-    updatedAt: "2024-07-20T10:00:00Z"
-  },
-  {
-    id: "p63",
-    title: "Cartier Tank Solo",
-    slug: "cartier-tank-solo",
-    description: "The Cartier Tank Solo is a symbol of timeless elegance and refined style. The rectangular case and Roman numeral dial create a classic and distinctive look. The stainless steel case and leather strap offer versatility and sophistication. This watch is a tribute to the brand's rich heritage and commitment to excellence.",
-    shortDescription: "Timeless rectangular watch with Roman numeral dial, stainless steel case, and elegance.",
-    price: 2999.99,
-    originalPrice: 3299.99,
-    discountPercentage: 9,
-    rating: 4.9,
-    reviewCount: 234,
-    stock: 10,
-    brand: "Cartier",
-    sku: "BLZ-WT-0008",
-    weight: 85,
-    dimensions: { width: 31, height: 40, depth: 7 },
-    tags: ["cartier", "tank-solo", "elegant", "leather", "luxury"],
-    thumbnail: "/images/products/cartier-tank-solo.jpg",
-    images: [
-      "/images/products/cartier-tank-solo.jpg",
-      "/images/products/cartier-tank-solo-2.jpg"
-    ],
-    categoryId: "cat-4",
-    categoryName: "Watches",
-    isFeatured: true,
-    isTrending: false,
-    isBestSeller: false,
-    isNewArrival: false,
-    createdAt: "2024-08-01T10:00:00Z",
-    updatedAt: "2024-08-01T10:00:00Z"
-  },
-  {
+    createdAt: "2024-07-01T10:00:00Z",
+    updatedAt: "2024-07-01T10:00:00Z"
+  }),
+  createProduct({
     id: "p64",
-    title: "Casio G-Shock GA-2100",
-    slug: "casio-g-shock-ga-2100",
-    description: "The Casio G-Shock GA-2100 is a rugged and durable watch that combines classic style with exceptional toughness. The thin profile and carbon core guard structure provide enhanced durability. The analog and digital display offers versatility, while the shock-resistant construction ensures reliability in any situation. This watch is built for those who demand performance and style.",
-    shortDescription: "Rugged watch with carbon core guard, shock-resistant construction, and classic design.",
-    price: 99.99,
-    originalPrice: 109.99,
-    discountPercentage: 9,
-    rating: 4.5,
-    reviewCount: 6789,
-    stock: 150,
+    title: "Casio G-Shock GA2100",
+    slug: "casio-g-shock-ga2100",
+    description: "The Casio G-Shock GA2100, nicknamed the CasiOak, is a revolutionary slim-profile G-Shock that combines iconic toughness with modern style. The carbon core guard structure protects the movement while keeping the case ultra-thin at 11.8mm. Features include shock resistance, 200m water resistance, a stopwatch, timer, alarms, and world time. The analog-digital display with octagonal bezel design has made this one of the most popular G-Shocks ever created.",
+    shortDescription: "Ultra-slim G-Shock with carbon core guard, analog-digital display, and iconic CasiOak design.",
+    price: 149.99,
+    originalPrice: 169.99,
+    discountPercentage: 12,
+    rating: 4.7,
+    reviewCount: 4567,
+    stock: 120,
     brand: "Casio",
     sku: "BLZ-WT-0009",
-    weight: 55,
-    dimensions: { width: 45.4, height: 46.2, depth: 11.8 },
-    tags: ["casio", "g-shock", "ga-2100", "durable", "shock-resistant"],
-    thumbnail: "/images/products/casio-g-shock-ga-2100.jpg",
-    images: [
-      "/images/products/casio-g-shock-ga-2100.jpg",
-      "/images/products/casio-g-shock-ga-2100-2.jpg"
-    ],
+    weight: 52,
+    dimensions: { width: 46.8, height: 43.2, depth: 11.8 },
+    tags: ["casio", "g-shock", "digital", "tough", "casi oak"],
     categoryId: "cat-4",
     categoryName: "Watches",
     isFeatured: false,
     isTrending: true,
     isBestSeller: true,
     isNewArrival: false,
-    createdAt: "2024-08-10T10:00:00Z",
-    updatedAt: "2024-08-10T10:00:00Z"
-  },
-  {
+    createdAt: "2024-01-15T10:00:00Z",
+    updatedAt: "2024-01-15T10:00:00Z"
+  }),
+  createProduct({
     id: "p65",
-    title: "Tissot PRX Powermatic 80",
-    slug: "tissot-prx-powermatic-80",
-    description: "The Tissot PRX Powermatic 80 is a modern sports watch inspired by the 1970s. The integrated bracelet and wafer-thin case create a sleek silhouette. The automatic movement with 80-hour power reserve ensures reliability and precision. The dial features a beautiful sunburst pattern that catches the light. This watch offers exceptional value for those who appreciate style and quality.",
-    shortDescription: "Modern sports watch with 80-hour power reserve, integrated bracelet, and sleek design.",
-    price: 699.99,
-    originalPrice: 749.99,
+    title: "Samsung Galaxy Watch Ultra",
+    slug: "samsung-galaxy-watch-ultra",
+    description: "The Samsung Galaxy Watch Ultra is a premium smartwatch designed for extreme environments and outdoor adventures. The titanium grade 4 case with cushion design protects the 47mm Super AMOLED display. The Watch Ultra features a unique quick button, 10ATM + IP68 water resistance, and a peak brightness of 3000 nits. Powered by the Exynos W1000 chip with 2GB RAM, it delivers seamless performance with Wear OS 5. Advanced bio-sensors track everything from sleep apnea to body composition.",
+    shortDescription: "Rugged titanium smartwatch with 10ATM water resistance, 3000-nit display, and Wear OS 5.",
+    price: 649.99,
+    originalPrice: 699.99,
     discountPercentage: 7,
-    rating: 4.8,
+    rating: 4.6,
     reviewCount: 876,
     stock: 25,
-    brand: "Tissot",
+    brand: "Samsung",
     sku: "BLZ-WT-0010",
-    weight: 130,
-    dimensions: { width: 40, height: 46, depth: 10.9 },
-    tags: ["tissot", "prx", "powermatic", "sports-watch", "automatic"],
-    thumbnail: "/images/products/tissot-prx-powermatic-80.jpg",
-    images: [
-      "/images/products/tissot-prx-powermatic-80.jpg",
-      "/images/products/tissot-prx-powermatic-80-2.jpg"
-    ],
+    weight: 63,
+    dimensions: { width: 47, height: 47, depth: 12.1 },
+    tags: ["samsung", "galaxy", "smartwatch", "rugged", "wear-os"],
     categoryId: "cat-4",
     categoryName: "Watches",
-    isFeatured: false,
-    isTrending: true,
+    isFeatured: true,
+    isTrending: false,
     isBestSeller: false,
-    isNewArrival: false,
-    createdAt: "2024-08-15T10:00:00Z",
-    updatedAt: "2024-08-15T10:00:00Z"
-  },
-  {
+    isNewArrival: true,
+    createdAt: "2024-07-24T10:00:00Z",
+    updatedAt: "2024-07-24T10:00:00Z"
+  }),
+  createProduct({
     id: "p66",
-    title: "Hamilton Khaki Field",
-    slug: "hamilton-khaki-field",
-    description: "The Hamilton Khaki Field is a rugged and versatile watch inspired by military heritage. The 38mm stainless steel case and black dial create a classic and functional design. The automatic movement provides reliable performance, while the durable strap ensures comfort. This watch is perfect for those who appreciate a blend of style and utility.",
-    shortDescription: "Rugged field watch with automatic movement, military-inspired design, and durability.",
-    price: 599.99,
-    originalPrice: 649.99,
-    discountPercentage: 8,
-    rating: 4.7,
-    reviewCount: 1234,
-    stock: 30,
-    brand: "Hamilton",
+    title: "Fossil Gen 7 Hybrid",
+    slug: "fossil-gen-7-hybrid",
+    description: "The Fossil Gen 7 Hybrid smartwatch blends classic analog watch design with modern smart features. The 44mm stainless steel case frames a beautiful analog dial with subtle digital display. This hybrid offers up to 14 days of battery life, activity tracking, heart rate monitoring, smartphone notifications, and customizable buttons. The always-on hands and e-ink display ensure you always see the time. It's the perfect choice for those who want smart features without sacrificing traditional watch aesthetics.",
+    shortDescription: "Hybrid smartwatch combining analog design with fitness tracking and 14-day battery life.",
+    price: 299.99,
+    originalPrice: 349.99,
+    discountPercentage: 14,
+    rating: 4.4,
+    reviewCount: 654,
+    stock: 40,
+    brand: "Fossil",
     sku: "BLZ-WT-0011",
-    weight: 120,
-    dimensions: { width: 38, height: 46, depth: 11 },
-    tags: ["hamilton", "khaki-field", "field-watch", "automatic", "military"],
-    thumbnail: "/images/products/hamilton-khaki-field.jpg",
-    images: [
-      "/images/products/hamilton-khaki-field.jpg",
-      "/images/products/hamilton-khaki-field-2.jpg"
-    ],
+    weight: 75,
+    dimensions: { width: 44, height: 46, depth: 12 },
+    tags: ["fossil", "hybrid", "smartwatch", "analog", "fitness"],
     categoryId: "cat-4",
     categoryName: "Watches",
     isFeatured: false,
     isTrending: false,
     isBestSeller: false,
-    isNewArrival: false,
-    createdAt: "2024-08-20T10:00:00Z",
-    updatedAt: "2024-08-20T10:00:00Z"
-  },
-  {
+    isNewArrival: true,
+    createdAt: "2024-10-01T10:00:00Z",
+    updatedAt: "2024-10-01T10:00:00Z"
+  }),
+  createProduct({
     id: "p67",
-    title: "Breitling Navitimer B01",
-    slug: "breitling-navitimer-b01",
-    description: "The Breitling Navitimer B01 is a legendary pilot's watch that has been an icon of aviation for decades. The 43mm stainless steel case and black dial with slide rule bezel create a distinctive and functional design. The in-house automatic movement ensures precision and reliability. This watch is a must-have for aviation enthusiasts and collectors.",
-    shortDescription: "Legendary pilot's watch with slide rule bezel, in-house movement, and iconic design.",
-    price: 8500.99,
-    originalPrice: 9000.99,
-    discountPercentage: 6,
-    rating: 4.9,
-    reviewCount: 234,
-    stock: 6,
-    brand: "Breitling",
+    title: "Longines Master Collection Moonphase",
+    slug: "longines-master-collection-moonphase",
+    description: "The Longines Master Collection Moonphase is a masterpiece of classical watchmaking with its elegant moonphase complication and complete calendar. The 40mm stainless steel case with its distinctive stepped bezel houses the L899 automatic movement with 64 hours of power reserve. The silver barleycorn dial features blued steel hands, a moonphase display at 6 o'clock, and a date pointer. The alligator leather strap with triple folding clasp adds the finishing touch to this refined timepiece.",
+    shortDescription: "Elegant moonphase watch with complete calendar, automatic movement, and classic design.",
+    price: 2799.99,
+    originalPrice: 2999.99,
+    discountPercentage: 7,
+    rating: 4.8,
+    reviewCount: 189,
+    stock: 12,
+    brand: "Longines",
     sku: "BLZ-WT-0012",
     weight: 160,
-    dimensions: { width: 43, height: 50, depth: 14.5 },
-    tags: ["breitling", "navitimer", "pilot-watch", "chronograph", "luxury"],
-    thumbnail: "/images/products/breitling-navitimer-b01.jpg",
-    images: [
-      "/images/products/breitling-navitimer-b01.jpg",
-      "/images/products/breitling-navitimer-b01-2.jpg"
-    ],
+    dimensions: { width: 40, height: 47, depth: 11.5 },
+    tags: ["longines", "master-collection", "moonphase", "elegant", "automatic"],
     categoryId: "cat-4",
     categoryName: "Watches",
     isFeatured: true,
     isTrending: false,
     isBestSeller: false,
     isNewArrival: false,
-    createdAt: "2024-09-01T10:00:00Z",
-    updatedAt: "2024-09-01T10:00:00Z"
-  },
-];
+    createdAt: "2024-03-25T10:00:00Z",
+    updatedAt: "2024-03-25T10:00:00Z"
+  }),
+]
 
 // ============================================
-// CATEGORY 5: HOME & LIVING (15 Products)
+// CATEGORY 5: HOME & LIVING (15 Products) - p68 to p82
 // ============================================
 
 const homeLiving: Product[] = [
-  {
+  createProduct({
     id: "p68",
     title: "Dyson V15 Detect Vacuum",
     slug: "dyson-v15-detect-vacuum",
@@ -2164,11 +2829,6 @@ const homeLiving: Product[] = [
     weight: 3100,
     dimensions: { width: 250, height: 1260, depth: 250 },
     tags: ["dyson", "vacuum", "cordless", "laser", "cleaning"],
-    thumbnail: "/images/products/dyson-v15-detect-vacuum.jpg",
-    images: [
-      "/images/products/dyson-v15-detect-vacuum.jpg",
-      "/images/products/dyson-v15-detect-vacuum-2.jpg"
-    ],
     categoryId: "cat-5",
     categoryName: "Home & Living",
     isFeatured: true,
@@ -2177,8 +2837,8 @@ const homeLiving: Product[] = [
     isNewArrival: false,
     createdAt: "2024-07-01T10:00:00Z",
     updatedAt: "2024-07-01T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p69",
     title: "KitchenAid Artisan Stand Mixer",
     slug: "kitchenaid-artisan-stand-mixer",
@@ -2195,11 +2855,6 @@ const homeLiving: Product[] = [
     weight: 12000,
     dimensions: { width: 350, height: 370, depth: 220 },
     tags: ["kitchenaid", "stand-mixer", "baking", "kitchen", "cooking"],
-    thumbnail: "/images/products/kitchenaid-artisan-stand-mixer.jpg",
-    images: [
-      "/images/products/kitchenaid-artisan-stand-mixer.jpg",
-      "/images/products/kitchenaid-artisan-stand-mixer-2.jpg"
-    ],
     categoryId: "cat-5",
     categoryName: "Home & Living",
     isFeatured: true,
@@ -2208,8 +2863,8 @@ const homeLiving: Product[] = [
     isNewArrival: false,
     createdAt: "2024-06-15T10:00:00Z",
     updatedAt: "2024-06-15T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p70",
     title: "Sony 65-inch OLED TV",
     slug: "sony-65-inch-oled-tv",
@@ -2226,11 +2881,6 @@ const homeLiving: Product[] = [
     weight: 25000,
     dimensions: { width: 1448, height: 837, depth: 40 },
     tags: ["sony", "tv", "oled", "4k", "entertainment"],
-    thumbnail: "/images/products/sony-65-inch-oled-tv.jpg",
-    images: [
-      "/images/products/sony-65-inch-oled-tv.jpg",
-      "/images/products/sony-65-inch-oled-tv-2.jpg"
-    ],
     categoryId: "cat-5",
     categoryName: "Home & Living",
     isFeatured: true,
@@ -2239,8 +2889,8 @@ const homeLiving: Product[] = [
     isNewArrival: false,
     createdAt: "2024-05-20T10:00:00Z",
     updatedAt: "2024-05-20T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p71",
     title: "Sonos Era 300 Speaker",
     slug: "sonos-era-300-speaker",
@@ -2257,11 +2907,6 @@ const homeLiving: Product[] = [
     weight: 4500,
     dimensions: { width: 260, height: 160, depth: 185 },
     tags: ["sonos", "speaker", "audio", "spatial-audio", "wireless"],
-    thumbnail: "/images/products/sonos-era-300-speaker.jpg",
-    images: [
-      "/images/products/sonos-era-300-speaker.jpg",
-      "/images/products/sonos-era-300-speaker-2.jpg"
-    ],
     categoryId: "cat-5",
     categoryName: "Home & Living",
     isFeatured: false,
@@ -2270,8 +2915,8 @@ const homeLiving: Product[] = [
     isNewArrival: false,
     createdAt: "2024-06-20T10:00:00Z",
     updatedAt: "2024-06-20T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p72",
     title: "Le Creuset Dutch Oven",
     slug: "le-creuset-dutch-oven",
@@ -2288,11 +2933,6 @@ const homeLiving: Product[] = [
     weight: 6800,
     dimensions: { width: 260, height: 170, depth: 260 },
     tags: ["le-creuset", "dutch-oven", "cast-iron", "cooking", "kitchen"],
-    thumbnail: "/images/products/le-creuset-dutch-oven.jpg",
-    images: [
-      "/images/products/le-creuset-dutch-oven.jpg",
-      "/images/products/le-creuset-dutch-oven-2.jpg"
-    ],
     categoryId: "cat-5",
     categoryName: "Home & Living",
     isFeatured: false,
@@ -2301,8 +2941,8 @@ const homeLiving: Product[] = [
     isNewArrival: false,
     createdAt: "2024-07-05T10:00:00Z",
     updatedAt: "2024-07-05T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p73",
     title: "Philips Hue Starter Kit",
     slug: "philips-hue-starter-kit",
@@ -2319,11 +2959,6 @@ const homeLiving: Product[] = [
     weight: 600,
     dimensions: { width: 200, height: 150, depth: 100 },
     tags: ["philips", "hue", "smart-lighting", "led", "smart-home"],
-    thumbnail: "/images/products/philips-hue-starter-kit.jpg",
-    images: [
-      "/images/products/philips-hue-starter-kit.jpg",
-      "/images/products/philips-hue-starter-kit-2.jpg"
-    ],
     categoryId: "cat-5",
     categoryName: "Home & Living",
     isFeatured: false,
@@ -2332,8 +2967,8 @@ const homeLiving: Product[] = [
     isNewArrival: false,
     createdAt: "2024-07-10T10:00:00Z",
     updatedAt: "2024-07-10T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p74",
     title: "Nespresso Vertuo Pop",
     slug: "nespresso-vertuo-pop",
@@ -2350,11 +2985,6 @@ const homeLiving: Product[] = [
     weight: 3000,
     dimensions: { width: 136, height: 250, depth: 426 },
     tags: ["nespresso", "coffee-machine", "coffee", "compact", "barista"],
-    thumbnail: "/images/products/nespresso-vertuo-pop.jpg",
-    images: [
-      "/images/products/nespresso-vertuo-pop.jpg",
-      "/images/products/nespresso-vertuo-pop-2.jpg"
-    ],
     categoryId: "cat-5",
     categoryName: "Home & Living",
     isFeatured: false,
@@ -2363,8 +2993,8 @@ const homeLiving: Product[] = [
     isNewArrival: false,
     createdAt: "2024-07-15T10:00:00Z",
     updatedAt: "2024-07-15T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p75",
     title: "Google Nest Hub Max",
     slug: "google-nest-hub-max",
@@ -2381,11 +3011,6 @@ const homeLiving: Product[] = [
     weight: 1200,
     dimensions: { width: 250, height: 180, depth: 100 },
     tags: ["google", "nest-hub", "smart-display", "smart-home", "assistant"],
-    thumbnail: "/images/products/google-nest-hub-max.jpg",
-    images: [
-      "/images/products/google-nest-hub-max.jpg",
-      "/images/products/google-nest-hub-max-2.jpg"
-    ],
     categoryId: "cat-5",
     categoryName: "Home & Living",
     isFeatured: false,
@@ -2394,8 +3019,8 @@ const homeLiving: Product[] = [
     isNewArrival: false,
     createdAt: "2024-07-20T10:00:00Z",
     updatedAt: "2024-07-20T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p76",
     title: "Victorinox Swiss Classic Knife",
     slug: "victorinox-swiss-classic-knife",
@@ -2412,11 +3037,6 @@ const homeLiving: Product[] = [
     weight: 100,
     dimensions: { width: 25, height: 230, depth: 5 },
     tags: ["victorinox", "swiss", "kitchen-knife", "precision", "durable"],
-    thumbnail: "/images/products/victorinox-swiss-classic-knife.jpg",
-    images: [
-      "/images/products/victorinox-swiss-classic-knife.jpg",
-      "/images/products/victorinox-swiss-classic-knife-2.jpg"
-    ],
     categoryId: "cat-5",
     categoryName: "Home & Living",
     isFeatured: false,
@@ -2425,8 +3045,8 @@ const homeLiving: Product[] = [
     isNewArrival: false,
     createdAt: "2024-08-01T10:00:00Z",
     updatedAt: "2024-08-01T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p77",
     title: "Smeg Kettle 50's Style",
     slug: "smeg-kettle-50s-style",
@@ -2443,11 +3063,6 @@ const homeLiving: Product[] = [
     weight: 1500,
     dimensions: { width: 160, height: 220, depth: 220 },
     tags: ["smeg", "kettle", "retro", "stainless-steel", "kitchen"],
-    thumbnail: "/images/products/smeg-kettle-50s-style.jpg",
-    images: [
-      "/images/products/smeg-kettle-50s-style.jpg",
-      "/images/products/smeg-kettle-50s-style-2.jpg"
-    ],
     categoryId: "cat-5",
     categoryName: "Home & Living",
     isFeatured: false,
@@ -2456,8 +3071,8 @@ const homeLiving: Product[] = [
     isNewArrival: false,
     createdAt: "2024-08-05T10:00:00Z",
     updatedAt: "2024-08-05T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p78",
     title: "Cuisinart Air Fryer Toaster Oven",
     slug: "cuisinart-air-fryer-toaster-oven",
@@ -2474,11 +3089,6 @@ const homeLiving: Product[] = [
     weight: 8000,
     dimensions: { width: 400, height: 300, depth: 350 },
     tags: ["cuisinart", "air-fryer", "toaster-oven", "versatile", "kitchen"],
-    thumbnail: "/images/products/cuisinart-air-fryer-toaster-oven.jpg",
-    images: [
-      "/images/products/cuisinart-air-fryer-toaster-oven.jpg",
-      "/images/products/cuisinart-air-fryer-toaster-oven-2.jpg"
-    ],
     categoryId: "cat-5",
     categoryName: "Home & Living",
     isFeatured: false,
@@ -2487,8 +3097,8 @@ const homeLiving: Product[] = [
     isNewArrival: false,
     createdAt: "2024-08-10T10:00:00Z",
     updatedAt: "2024-08-10T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p79",
     title: "JBL PartyBox 710",
     slug: "jbl-partybox-710",
@@ -2505,11 +3115,6 @@ const homeLiving: Product[] = [
     weight: 18000,
     dimensions: { width: 500, height: 400, depth: 350 },
     tags: ["jbl", "partybox", "speaker", "party", "portable"],
-    thumbnail: "/images/products/jbl-partybox-710.jpg",
-    images: [
-      "/images/products/jbl-partybox-710.jpg",
-      "/images/products/jbl-partybox-710-2.jpg"
-    ],
     categoryId: "cat-5",
     categoryName: "Home & Living",
     isFeatured: false,
@@ -2518,8 +3123,8 @@ const homeLiving: Product[] = [
     isNewArrival: false,
     createdAt: "2024-08-15T10:00:00Z",
     updatedAt: "2024-08-15T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p80",
     title: "Zwilling J.A. Henckels Knife Set",
     slug: "zwilling-ja-henckels-knife-set",
@@ -2536,11 +3141,6 @@ const homeLiving: Product[] = [
     weight: 2000,
     dimensions: { width: 300, height: 400, depth: 100 },
     tags: ["zwilling", "knife-set", "german", "premium", "kitchen"],
-    thumbnail: "/images/products/zwilling-ja-henckels-knife-set.jpg",
-    images: [
-      "/images/products/zwilling-ja-henckels-knife-set.jpg",
-      "/images/products/zwilling-ja-henckels-knife-set-2.jpg"
-    ],
     categoryId: "cat-5",
     categoryName: "Home & Living",
     isFeatured: false,
@@ -2549,8 +3149,8 @@ const homeLiving: Product[] = [
     isNewArrival: false,
     createdAt: "2024-08-20T10:00:00Z",
     updatedAt: "2024-08-20T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p81",
     title: "Miele Complete C3 Vacuum",
     slug: "miele-complete-c3-vacuum",
@@ -2567,11 +3167,6 @@ const homeLiving: Product[] = [
     weight: 8500,
     dimensions: { width: 300, height: 400, depth: 250 },
     tags: ["miele", "vacuum", "canister", "premium", "cleaning"],
-    thumbnail: "/images/products/miele-complete-c3-vacuum.jpg",
-    images: [
-      "/images/products/miele-complete-c3-vacuum.jpg",
-      "/images/products/miele-complete-c3-vacuum-2.jpg"
-    ],
     categoryId: "cat-5",
     categoryName: "Home & Living",
     isFeatured: false,
@@ -2580,8 +3175,8 @@ const homeLiving: Product[] = [
     isNewArrival: false,
     createdAt: "2024-08-25T10:00:00Z",
     updatedAt: "2024-08-25T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p82",
     title: "Keurig K-Elite Coffee Maker",
     slug: "keurig-k-elite-coffee-maker",
@@ -2598,11 +3193,6 @@ const homeLiving: Product[] = [
     weight: 3200,
     dimensions: { width: 250, height: 330, depth: 200 },
     tags: ["keurig", "coffee-maker", "single-serve", "versatile", "iced-coffee"],
-    thumbnail: "/images/products/keurig-k-elite-coffee-maker.jpg",
-    images: [
-      "/images/products/keurig-k-elite-coffee-maker.jpg",
-      "/images/products/keurig-k-elite-coffee-maker-2.jpg"
-    ],
     categoryId: "cat-5",
     categoryName: "Home & Living",
     isFeatured: false,
@@ -2611,15 +3201,15 @@ const homeLiving: Product[] = [
     isNewArrival: false,
     createdAt: "2024-09-01T10:00:00Z",
     updatedAt: "2024-09-01T10:00:00Z"
-  },
-];
+  })
+]
 
 // ============================================
-// CATEGORY 6: BEAUTY & PERSONAL CARE (12 Products)
+// CATEGORY 6: BEAUTY & PERSONAL CARE (12 Products) - p83 to p94
 // ============================================
 
 const beauty: Product[] = [
-  {
+  createProduct({
     id: "p83",
     title: "Dyson Airwrap Multi-Styler",
     slug: "dyson-airwrap-multi-styler",
@@ -2636,11 +3226,6 @@ const beauty: Product[] = [
     weight: 1100,
     dimensions: { width: 250, height: 300, depth: 150 },
     tags: ["dyson", "airwrap", "hair-styler", "coanda", "heatless"],
-    thumbnail: "/images/products/dyson-airwrap-multi-styler.jpg",
-    images: [
-      "/images/products/dyson-airwrap-multi-styler.jpg",
-      "/images/products/dyson-airwrap-multi-styler-2.jpg"
-    ],
     categoryId: "cat-6",
     categoryName: "Beauty & Personal Care",
     isFeatured: true,
@@ -2649,8 +3234,8 @@ const beauty: Product[] = [
     isNewArrival: false,
     createdAt: "2024-06-15T10:00:00Z",
     updatedAt: "2024-06-15T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p84",
     title: "CeraVe Hydrating Cleanser",
     slug: "cerave-hydrating-cleanser",
@@ -2667,11 +3252,6 @@ const beauty: Product[] = [
     weight: 560,
     dimensions: { width: 70, height: 200, depth: 50 },
     tags: ["cerave", "cleanser", "hydrating", "skincare", "dermatologist"],
-    thumbnail: "/images/products/cerave-hydrating-cleanser.jpg",
-    images: [
-      "/images/products/cerave-hydrating-cleanser.jpg",
-      "/images/products/cerave-hydrating-cleanser-2.jpg"
-    ],
     categoryId: "cat-6",
     categoryName: "Beauty & Personal Care",
     isFeatured: false,
@@ -2680,8 +3260,8 @@ const beauty: Product[] = [
     isNewArrival: false,
     createdAt: "2024-05-20T10:00:00Z",
     updatedAt: "2024-05-20T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p85",
     title: "L'Oréal Paris Revitalift Serum",
     slug: "loreal-paris-revitalift-serum",
@@ -2698,11 +3278,6 @@ const beauty: Product[] = [
     weight: 30,
     dimensions: { width: 30, height: 100, depth: 30 },
     tags: ["loreal", "revitalift", "serum", "anti-aging", "skincare"],
-    thumbnail: "/images/products/loreal-paris-revitalift-serum.jpg",
-    images: [
-      "/images/products/loreal-paris-revitalift-serum.jpg",
-      "/images/products/loreal-paris-revitalift-serum-2.jpg"
-    ],
     categoryId: "cat-6",
     categoryName: "Beauty & Personal Care",
     isFeatured: false,
@@ -2711,8 +3286,8 @@ const beauty: Product[] = [
     isNewArrival: false,
     createdAt: "2024-06-10T10:00:00Z",
     updatedAt: "2024-06-10T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p86",
     title: "Philips Sonicare Toothbrush",
     slug: "philips-sonicare-toothbrush",
@@ -2729,11 +3304,6 @@ const beauty: Product[] = [
     weight: 150,
     dimensions: { width: 30, height: 240, depth: 30 },
     tags: ["philips", "sonicare", "toothbrush", "dental", "sonic"],
-    thumbnail: "/images/products/philips-sonicare-toothbrush.jpg",
-    images: [
-      "/images/products/philips-sonicare-toothbrush.jpg",
-      "/images/products/philips-sonicare-toothbrush-2.jpg"
-    ],
     categoryId: "cat-6",
     categoryName: "Beauty & Personal Care",
     isFeatured: false,
@@ -2742,8 +3312,8 @@ const beauty: Product[] = [
     isNewArrival: false,
     createdAt: "2024-06-20T10:00:00Z",
     updatedAt: "2024-06-20T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p87",
     title: "Olay Regenerist Retinol 24",
     slug: "olay-regenerist-retinol-24",
@@ -2760,11 +3330,6 @@ const beauty: Product[] = [
     weight: 50,
     dimensions: { width: 50, height: 80, depth: 50 },
     tags: ["olay", "regenerist", "retinol", "anti-aging", "skincare"],
-    thumbnail: "/images/products/olay-regenerist-retinol-24.jpg",
-    images: [
-      "/images/products/olay-regenerist-retinol-24.jpg",
-      "/images/products/olay-regenerist-retinol-24-2.jpg"
-    ],
     categoryId: "cat-6",
     categoryName: "Beauty & Personal Care",
     isFeatured: false,
@@ -2773,8 +3338,8 @@ const beauty: Product[] = [
     isNewArrival: false,
     createdAt: "2024-07-01T10:00:00Z",
     updatedAt: "2024-07-01T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p88",
     title: "Braun Series 9 Shaver",
     slug: "braun-series-9-shaver",
@@ -2791,11 +3356,6 @@ const beauty: Product[] = [
     weight: 600,
     dimensions: { width: 60, height: 160, depth: 40 },
     tags: ["braun", "series-9", "shaver", "electric", "precision"],
-    thumbnail: "/images/products/braun-series-9-shaver.jpg",
-    images: [
-      "/images/products/braun-series-9-shaver.jpg",
-      "/images/products/braun-series-9-shaver-2.jpg"
-    ],
     categoryId: "cat-6",
     categoryName: "Beauty & Personal Care",
     isFeatured: true,
@@ -2804,8 +3364,8 @@ const beauty: Product[] = [
     isNewArrival: false,
     createdAt: "2024-07-10T10:00:00Z",
     updatedAt: "2024-07-10T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p89",
     title: "The Ordinary Hyaluronic Acid 2%",
     slug: "the-ordinary-hyaluronic-acid-2",
@@ -2822,11 +3382,6 @@ const beauty: Product[] = [
     weight: 30,
     dimensions: { width: 30, height: 100, depth: 30 },
     tags: ["the-ordinary", "hyaluronic-acid", "serum", "hydration", "skincare"],
-    thumbnail: "/images/products/the-ordinary-hyaluronic-acid-2.jpg",
-    images: [
-      "/images/products/the-ordinary-hyaluronic-acid-2.jpg",
-      "/images/products/the-ordinary-hyaluronic-acid-2-2.jpg"
-    ],
     categoryId: "cat-6",
     categoryName: "Beauty & Personal Care",
     isFeatured: false,
@@ -2835,8 +3390,8 @@ const beauty: Product[] = [
     isNewArrival: false,
     createdAt: "2024-07-15T10:00:00Z",
     updatedAt: "2024-07-15T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p90",
     title: "Foreo Luna 3 Face Brush",
     slug: "foreo-luna-3-face-brush",
@@ -2853,11 +3408,6 @@ const beauty: Product[] = [
     weight: 130,
     dimensions: { width: 80, height: 100, depth: 35 },
     tags: ["foreo", "luna", "face-brush", "cleansing", "skincare"],
-    thumbnail: "/images/products/foreo-luna-3-face-brush.jpg",
-    images: [
-      "/images/products/foreo-luna-3-face-brush.jpg",
-      "/images/products/foreo-luna-3-face-brush-2.jpg"
-    ],
     categoryId: "cat-6",
     categoryName: "Beauty & Personal Care",
     isFeatured: false,
@@ -2866,8 +3416,8 @@ const beauty: Product[] = [
     isNewArrival: false,
     createdAt: "2024-07-20T10:00:00Z",
     updatedAt: "2024-07-20T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p91",
     title: "Estée Lauder Night Serum",
     slug: "estee-lauder-night-serum",
@@ -2884,11 +3434,6 @@ const beauty: Product[] = [
     weight: 30,
     dimensions: { width: 30, height: 100, depth: 30 },
     tags: ["estee-lauder", "night-serum", "anti-aging", "repair", "skincare"],
-    thumbnail: "/images/products/estee-lauder-night-serum.jpg",
-    images: [
-      "/images/products/estee-lauder-night-serum.jpg",
-      "/images/products/estee-lauder-night-serum-2.jpg"
-    ],
     categoryId: "cat-6",
     categoryName: "Beauty & Personal Care",
     isFeatured: true,
@@ -2897,8 +3442,8 @@ const beauty: Product[] = [
     isNewArrival: false,
     createdAt: "2024-08-01T10:00:00Z",
     updatedAt: "2024-08-01T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p92",
     title: "Panasonic Multi-Style Curling Iron",
     slug: "panasonic-multi-style-curling-iron",
@@ -2915,11 +3460,6 @@ const beauty: Product[] = [
     weight: 400,
     dimensions: { width: 40, height: 300, depth: 40 },
     tags: ["panasonic", "curling-iron", "styling", "ceramic", "heat"],
-    thumbnail: "/images/products/panasonic-multi-style-curling-iron.jpg",
-    images: [
-      "/images/products/panasonic-multi-style-curling-iron.jpg",
-      "/images/products/panasonic-multi-style-curling-iron-2.jpg"
-    ],
     categoryId: "cat-6",
     categoryName: "Beauty & Personal Care",
     isFeatured: false,
@@ -2928,8 +3468,8 @@ const beauty: Product[] = [
     isNewArrival: false,
     createdAt: "2024-08-05T10:00:00Z",
     updatedAt: "2024-08-05T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p93",
     title: "Neutrogena Hydro Boost Water Gel",
     slug: "neutrogena-hydro-boost-water-gel",
@@ -2946,11 +3486,6 @@ const beauty: Product[] = [
     weight: 50,
     dimensions: { width: 70, height: 70, depth: 50 },
     tags: ["neutrogena", "hydro-boost", "water-gel", "moisturizer", "hydration"],
-    thumbnail: "/images/products/neutrogena-hydro-boost-water-gel.jpg",
-    images: [
-      "/images/products/neutrogena-hydro-boost-water-gel.jpg",
-      "/images/products/neutrogena-hydro-boost-water-gel-2.jpg"
-    ],
     categoryId: "cat-6",
     categoryName: "Beauty & Personal Care",
     isFeatured: false,
@@ -2959,8 +3494,8 @@ const beauty: Product[] = [
     isNewArrival: false,
     createdAt: "2024-08-10T10:00:00Z",
     updatedAt: "2024-08-10T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p94",
     title: "Remington Hair Straightener",
     slug: "remington-hair-straightener",
@@ -2977,11 +3512,6 @@ const beauty: Product[] = [
     weight: 350,
     dimensions: { width: 30, height: 280, depth: 40 },
     tags: ["remington", "hair-straightener", "ceramic", "professional", "styling"],
-    thumbnail: "/images/products/remington-hair-straightener.jpg",
-    images: [
-      "/images/products/remington-hair-straightener.jpg",
-      "/images/products/remington-hair-straightener-2.jpg"
-    ],
     categoryId: "cat-6",
     categoryName: "Beauty & Personal Care",
     isFeatured: false,
@@ -2990,15 +3520,15 @@ const beauty: Product[] = [
     isNewArrival: false,
     createdAt: "2024-08-15T10:00:00Z",
     updatedAt: "2024-08-15T10:00:00Z"
-  },
-];
+  })
+]
 
 // ============================================
-// CATEGORY 7: FITNESS & SPORTS (12 Products)
+// CATEGORY 7: FITNESS & SPORTS (12 Products) - p95 to p106
 // ============================================
 
 const fitness: Product[] = [
-  {
+  createProduct({
     id: "p95",
     title: "Peloton Bike+",
     slug: "peloton-bike-plus",
@@ -3015,11 +3545,6 @@ const fitness: Product[] = [
     weight: 62000,
     dimensions: { width: 600, height: 1500, depth: 600 },
     tags: ["peloton", "bike", "cycling", "fitness", "indoor"],
-    thumbnail: "/images/products/peloton-bike-plus.jpg",
-    images: [
-      "/images/products/peloton-bike-plus.jpg",
-      "/images/products/peloton-bike-plus-2.jpg"
-    ],
     categoryId: "cat-7",
     categoryName: "Fitness & Sports",
     isFeatured: true,
@@ -3028,8 +3553,8 @@ const fitness: Product[] = [
     isNewArrival: false,
     createdAt: "2024-06-15T10:00:00Z",
     updatedAt: "2024-06-15T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p96",
     title: "Garmin Forerunner 965",
     slug: "garmin-forerunner-965",
@@ -3046,11 +3571,6 @@ const fitness: Product[] = [
     weight: 53,
     dimensions: { width: 45, height: 45, depth: 12 },
     tags: ["garmin", "forerunner", "gps", "running", "fitness"],
-    thumbnail: "/images/products/garmin-forerunner-965.jpg",
-    images: [
-      "/images/products/garmin-forerunner-965.jpg",
-      "/images/products/garmin-forerunner-965-2.jpg"
-    ],
     categoryId: "cat-7",
     categoryName: "Fitness & Sports",
     isFeatured: true,
@@ -3059,8 +3579,8 @@ const fitness: Product[] = [
     isNewArrival: false,
     createdAt: "2024-07-01T10:00:00Z",
     updatedAt: "2024-07-01T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p97",
     title: "Bowflex SelectTech 552 Dumbbells",
     slug: "bowflex-selecttech-552-dumbbells",
@@ -3077,11 +3597,6 @@ const fitness: Product[] = [
     weight: 25000,
     dimensions: { width: 400, height: 200, depth: 200 },
     tags: ["bowflex", "selecttech", "dumbbells", "adjustable", "home-gym"],
-    thumbnail: "/images/products/bowflex-selecttech-552-dumbbells.jpg",
-    images: [
-      "/images/products/bowflex-selecttech-552-dumbbells.jpg",
-      "/images/products/bowflex-selecttech-552-dumbbells-2.jpg"
-    ],
     categoryId: "cat-7",
     categoryName: "Fitness & Sports",
     isFeatured: false,
@@ -3090,8 +3605,8 @@ const fitness: Product[] = [
     isNewArrival: false,
     createdAt: "2024-07-05T10:00:00Z",
     updatedAt: "2024-07-05T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p98",
     title: "Theragun Pro",
     slug: "theragun-pro",
@@ -3108,11 +3623,6 @@ const fitness: Product[] = [
     weight: 1500,
     dimensions: { width: 70, height: 220, depth: 70 },
     tags: ["theragun", "percussive-therapy", "massage", "recovery", "fitness"],
-    thumbnail: "/images/products/theragun-pro.jpg",
-    images: [
-      "/images/products/theragun-pro.jpg",
-      "/images/products/theragun-pro-2.jpg"
-    ],
     categoryId: "cat-7",
     categoryName: "Fitness & Sports",
     isFeatured: false,
@@ -3121,8 +3631,8 @@ const fitness: Product[] = [
     isNewArrival: false,
     createdAt: "2024-07-10T10:00:00Z",
     updatedAt: "2024-07-10T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p99",
     title: "Whoop 4.0 Fitness Tracker",
     slug: "whoop-4-0-fitness-tracker",
@@ -3139,11 +3649,6 @@ const fitness: Product[] = [
     weight: 45,
     dimensions: { width: 40, height: 40, depth: 10 },
     tags: ["whoop", "fitness-tracker", "heart-rate", "sleep", "recovery"],
-    thumbnail: "/images/products/whoop-4-0-fitness-tracker.jpg",
-    images: [
-      "/images/products/whoop-4-0-fitness-tracker.jpg",
-      "/images/products/whoop-4-0-fitness-tracker-2.jpg"
-    ],
     categoryId: "cat-7",
     categoryName: "Fitness & Sports",
     isFeatured: false,
@@ -3152,8 +3657,8 @@ const fitness: Product[] = [
     isNewArrival: false,
     createdAt: "2024-07-15T10:00:00Z",
     updatedAt: "2024-07-15T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p100",
     title: "NordicTrack Treadmill",
     slug: "nordictrack-treadmill",
@@ -3170,11 +3675,6 @@ const fitness: Product[] = [
     weight: 90000,
     dimensions: { width: 800, height: 1500, depth: 2000 },
     tags: ["nordictrack", "treadmill", "running", "fitness", "home-gym"],
-    thumbnail: "/images/products/nordictrack-treadmill.jpg",
-    images: [
-      "/images/products/nordictrack-treadmill.jpg",
-      "/images/products/nordictrack-treadmill-2.jpg"
-    ],
     categoryId: "cat-7",
     categoryName: "Fitness & Sports",
     isFeatured: false,
@@ -3183,8 +3683,8 @@ const fitness: Product[] = [
     isNewArrival: false,
     createdAt: "2024-07-20T10:00:00Z",
     updatedAt: "2024-07-20T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p101",
     title: "Fitbit Charge 6",
     slug: "fitbit-charge-6",
@@ -3201,11 +3701,6 @@ const fitness: Product[] = [
     weight: 30,
     dimensions: { width: 37, height: 40, depth: 10 },
     tags: ["fitbit", "charge", "fitness-tracker", "heart-rate", "gps"],
-    thumbnail: "/images/products/fitbit-charge-6.jpg",
-    images: [
-      "/images/products/fitbit-charge-6.jpg",
-      "/images/products/fitbit-charge-6-2.jpg"
-    ],
     categoryId: "cat-7",
     categoryName: "Fitness & Sports",
     isFeatured: false,
@@ -3214,8 +3709,8 @@ const fitness: Product[] = [
     isNewArrival: false,
     createdAt: "2024-08-01T10:00:00Z",
     updatedAt: "2024-08-01T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p102",
     title: "Concept2 Rower",
     slug: "concept2-rower",
@@ -3232,11 +3727,6 @@ const fitness: Product[] = [
     weight: 26000,
     dimensions: { width: 600, height: 800, depth: 2500 },
     tags: ["concept2", "rower", "indoor-rowing", "fitness", "home-gym"],
-    thumbnail: "/images/products/concept2-rower.jpg",
-    images: [
-      "/images/products/concept2-rower.jpg",
-      "/images/products/concept2-rower-2.jpg"
-    ],
     categoryId: "cat-7",
     categoryName: "Fitness & Sports",
     isFeatured: true,
@@ -3245,8 +3735,8 @@ const fitness: Product[] = [
     isNewArrival: false,
     createdAt: "2024-08-05T10:00:00Z",
     updatedAt: "2024-08-05T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p103",
     title: "Under Armour HOVR Shoes",
     slug: "under-armour-hovr-shoes",
@@ -3263,11 +3753,6 @@ const fitness: Product[] = [
     weight: 280,
     dimensions: { width: 27, height: 30, depth: 10 },
     tags: ["under-armour", "hovr", "running", "shoes", "cushioning"],
-    thumbnail: "/images/products/under-armour-hovr-shoes.jpg",
-    images: [
-      "/images/products/under-armour-hovr-shoes.jpg",
-      "/images/products/under-armour-hovr-shoes-2.jpg"
-    ],
     categoryId: "cat-7",
     categoryName: "Fitness & Sports",
     isFeatured: false,
@@ -3276,8 +3761,8 @@ const fitness: Product[] = [
     isNewArrival: false,
     createdAt: "2024-08-10T10:00:00Z",
     updatedAt: "2024-08-10T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p104",
     title: "Sony WH-1000XM5 Headphones",
     slug: "sony-wh-1000xm5-headphones",
@@ -3294,11 +3779,6 @@ const fitness: Product[] = [
     weight: 250,
     dimensions: { width: 175, height: 200, depth: 75 },
     tags: ["sony", "wh-1000xm5", "headphones", "noise-canceling", "wireless"],
-    thumbnail: "/images/products/sony-wh-1000xm5-headphones.jpg",
-    images: [
-      "/images/products/sony-wh-1000xm5-headphones.jpg",
-      "/images/products/sony-wh-1000xm5-headphones-2.jpg"
-    ],
     categoryId: "cat-7",
     categoryName: "Fitness & Sports",
     isFeatured: true,
@@ -3307,8 +3787,8 @@ const fitness: Product[] = [
     isNewArrival: false,
     createdAt: "2024-05-20T10:00:00Z",
     updatedAt: "2024-05-20T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p105",
     title: "Adidas Powerlifting Belt",
     slug: "adidas-powerlifting-belt",
@@ -3325,11 +3805,6 @@ const fitness: Product[] = [
     weight: 800,
     dimensions: { width: 10, height: 100, depth: 5 },
     tags: ["adidas", "powerlifting-belt", "weightlifting", "support", "leather"],
-    thumbnail: "/images/products/adidas-powerlifting-belt.jpg",
-    images: [
-      "/images/products/adidas-powerlifting-belt.jpg",
-      "/images/products/adidas-powerlifting-belt-2.jpg"
-    ],
     categoryId: "cat-7",
     categoryName: "Fitness & Sports",
     isFeatured: false,
@@ -3338,8 +3813,8 @@ const fitness: Product[] = [
     isNewArrival: false,
     createdAt: "2024-08-15T10:00:00Z",
     updatedAt: "2024-08-15T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p106",
     title: "TRX Suspension Trainer",
     slug: "trx-suspension-trainer",
@@ -3356,11 +3831,6 @@ const fitness: Product[] = [
     weight: 800,
     dimensions: { width: 150, height: 200, depth: 50 },
     tags: ["trx", "suspension-trainer", "bodyweight", "fitness", "portable"],
-    thumbnail: "/images/products/trx-suspension-trainer.jpg",
-    images: [
-      "/images/products/trx-suspension-trainer.jpg",
-      "/images/products/trx-suspension-trainer-2.jpg"
-    ],
     categoryId: "cat-7",
     categoryName: "Fitness & Sports",
     isFeatured: false,
@@ -3369,15 +3839,15 @@ const fitness: Product[] = [
     isNewArrival: false,
     createdAt: "2024-08-20T10:00:00Z",
     updatedAt: "2024-08-20T10:00:00Z"
-  },
-];
+  })
+]
 
 // ============================================
-// CATEGORY 8: GAMING (10 Products)
+// CATEGORY 8: GAMING (10 Products) - p107 to p116
 // ============================================
 
 const gaming: Product[] = [
-  {
+  createProduct({
     id: "p107",
     title: "PlayStation 5 Digital Edition",
     slug: "playstation-5-digital-edition",
@@ -3394,11 +3864,6 @@ const gaming: Product[] = [
     weight: 4500,
     dimensions: { width: 390, height: 104, depth: 260 },
     tags: ["playstation", "ps5", "console", "gaming", "next-gen"],
-    thumbnail: "/images/products/playstation-5-digital-edition.jpg",
-    images: [
-      "/images/products/playstation-5-digital-edition.jpg",
-      "/images/products/playstation-5-digital-edition-2.jpg"
-    ],
     categoryId: "cat-8",
     categoryName: "Gaming",
     isFeatured: true,
@@ -3407,8 +3872,8 @@ const gaming: Product[] = [
     isNewArrival: false,
     createdAt: "2024-06-15T10:00:00Z",
     updatedAt: "2024-06-15T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p108",
     title: "Xbox Series X",
     slug: "xbox-series-x",
@@ -3425,11 +3890,6 @@ const gaming: Product[] = [
     weight: 4500,
     dimensions: { width: 151, height: 151, depth: 301 },
     tags: ["xbox", "series-x", "console", "gaming", "4k"],
-    thumbnail: "/images/products/xbox-series-x.jpg",
-    images: [
-      "/images/products/xbox-series-x.jpg",
-      "/images/products/xbox-series-x-2.jpg"
-    ],
     categoryId: "cat-8",
     categoryName: "Gaming",
     isFeatured: true,
@@ -3438,8 +3898,8 @@ const gaming: Product[] = [
     isNewArrival: false,
     createdAt: "2024-06-20T10:00:00Z",
     updatedAt: "2024-06-20T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p109",
     title: "Nintendo Switch OLED",
     slug: "nintendo-switch-oled",
@@ -3456,11 +3916,6 @@ const gaming: Product[] = [
     weight: 420,
     dimensions: { width: 184, height: 106, depth: 56 },
     tags: ["nintendo", "switch", "oled", "portable", "gaming"],
-    thumbnail: "/images/products/nintendo-switch-oled.jpg",
-    images: [
-      "/images/products/nintendo-switch-oled.jpg",
-      "/images/products/nintendo-switch-oled-2.jpg"
-    ],
     categoryId: "cat-8",
     categoryName: "Gaming",
     isFeatured: false,
@@ -3469,8 +3924,8 @@ const gaming: Product[] = [
     isNewArrival: false,
     createdAt: "2024-07-01T10:00:00Z",
     updatedAt: "2024-07-01T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p110",
     title: "Logitech G Pro X Superlight",
     slug: "logitech-g-pro-x-superlight",
@@ -3487,11 +3942,6 @@ const gaming: Product[] = [
     weight: 63,
     dimensions: { width: 63, height: 125, depth: 40 },
     tags: ["logitech", "g-pro", "gaming-mouse", "wireless", "lightweight"],
-    thumbnail: "/images/products/logitech-g-pro-x-superlight.jpg",
-    images: [
-      "/images/products/logitech-g-pro-x-superlight.jpg",
-      "/images/products/logitech-g-pro-x-superlight-2.jpg"
-    ],
     categoryId: "cat-8",
     categoryName: "Gaming",
     isFeatured: false,
@@ -3500,8 +3950,8 @@ const gaming: Product[] = [
     isNewArrival: false,
     createdAt: "2024-07-10T10:00:00Z",
     updatedAt: "2024-07-10T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p111",
     title: "Razer DeathAdder V3 Pro",
     slug: "razer-deathadder-v3-pro",
@@ -3518,11 +3968,6 @@ const gaming: Product[] = [
     weight: 63,
     dimensions: { width: 68, height: 128, depth: 44 },
     tags: ["razer", "deathadder", "gaming-mouse", "wireless", "lightweight"],
-    thumbnail: "/images/products/razer-deathadder-v3-pro.jpg",
-    images: [
-      "/images/products/razer-deathadder-v3-pro.jpg",
-      "/images/products/razer-deathadder-v3-pro-2.jpg"
-    ],
     categoryId: "cat-8",
     categoryName: "Gaming",
     isFeatured: false,
@@ -3531,8 +3976,8 @@ const gaming: Product[] = [
     isNewArrival: false,
     createdAt: "2024-07-15T10:00:00Z",
     updatedAt: "2024-07-15T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p112",
     title: "Corsair K95 RGB Platinum",
     slug: "corsair-k95-rgb-platinum",
@@ -3549,11 +3994,6 @@ const gaming: Product[] = [
     weight: 1450,
     dimensions: { width: 460, height: 210, depth: 45 },
     tags: ["corsair", "k95", "gaming-keyboard", "mechanical", "rgb"],
-    thumbnail: "/images/products/corsair-k95-rgb-platinum.jpg",
-    images: [
-      "/images/products/corsair-k95-rgb-platinum.jpg",
-      "/images/products/corsair-k95-rgb-platinum-2.jpg"
-    ],
     categoryId: "cat-8",
     categoryName: "Gaming",
     isFeatured: false,
@@ -3562,8 +4002,8 @@ const gaming: Product[] = [
     isNewArrival: false,
     createdAt: "2024-07-20T10:00:00Z",
     updatedAt: "2024-07-20T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p113",
     title: "SteelSeries Arctis Nova 7",
     slug: "steelseries-arctis-nova-7",
@@ -3580,11 +4020,6 @@ const gaming: Product[] = [
     weight: 330,
     dimensions: { width: 190, height: 240, depth: 90 },
     tags: ["steelseries", "arctis-nova", "gaming-headset", "wireless", "audio"],
-    thumbnail: "/images/products/steelseries-arctis-nova-7.jpg",
-    images: [
-      "/images/products/steelseries-arctis-nova-7.jpg",
-      "/images/products/steelseries-arctis-nova-7-2.jpg"
-    ],
     categoryId: "cat-8",
     categoryName: "Gaming",
     isFeatured: false,
@@ -3593,8 +4028,8 @@ const gaming: Product[] = [
     isNewArrival: false,
     createdAt: "2024-08-01T10:00:00Z",
     updatedAt: "2024-08-01T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p114",
     title: "Samsung Odyssey G9 Monitor",
     slug: "samsung-odyssey-g9-monitor",
@@ -3611,11 +4046,6 @@ const gaming: Product[] = [
     weight: 12000,
     dimensions: { width: 1140, height: 520, depth: 420 },
     tags: ["samsung", "odyssey", "g9", "gaming-monitor", "curved"],
-    thumbnail: "/images/products/samsung-odyssey-g9-monitor.jpg",
-    images: [
-      "/images/products/samsung-odyssey-g9-monitor.jpg",
-      "/images/products/samsung-odyssey-g9-monitor-2.jpg"
-    ],
     categoryId: "cat-8",
     categoryName: "Gaming",
     isFeatured: true,
@@ -3624,8 +4054,8 @@ const gaming: Product[] = [
     isNewArrival: false,
     createdAt: "2024-08-05T10:00:00Z",
     updatedAt: "2024-08-05T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p115",
     title: "WD_BLACK 2TB Gaming SSD",
     slug: "wd-black-2tb-gaming-ssd",
@@ -3642,11 +4072,6 @@ const gaming: Product[] = [
     weight: 50,
     dimensions: { width: 22, height: 80, depth: 2.4 },
     tags: ["wd", "black", "gaming-ssd", "nvme", "storage"],
-    thumbnail: "/images/products/wd-black-2tb-gaming-ssd.jpg",
-    images: [
-      "/images/products/wd-black-2tb-gaming-ssd.jpg",
-      "/images/products/wd-black-2tb-gaming-ssd-2.jpg"
-    ],
     categoryId: "cat-8",
     categoryName: "Gaming",
     isFeatured: false,
@@ -3655,8 +4080,8 @@ const gaming: Product[] = [
     isNewArrival: false,
     createdAt: "2024-08-10T10:00:00Z",
     updatedAt: "2024-08-10T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p116",
     title: "Razer Kishi V2 Controller",
     slug: "razer-kishi-v2-controller",
@@ -3673,11 +4098,6 @@ const gaming: Product[] = [
     weight: 150,
     dimensions: { width: 90, height: 45, depth: 30 },
     tags: ["razer", "kishi", "mobile-controller", "gaming", "usb-c"],
-    thumbnail: "/images/products/razer-kishi-v2-controller.jpg",
-    images: [
-      "/images/products/razer-kishi-v2-controller.jpg",
-      "/images/products/razer-kishi-v2-controller-2.jpg"
-    ],
     categoryId: "cat-8",
     categoryName: "Gaming",
     isFeatured: false,
@@ -3686,15 +4106,15 @@ const gaming: Product[] = [
     isNewArrival: false,
     createdAt: "2024-08-15T10:00:00Z",
     updatedAt: "2024-08-15T10:00:00Z"
-  },
-];
+  })
+]
 
 // ============================================
-// CATEGORY 9: BOOKS (10 Products)
+// CATEGORY 9: BOOKS (10 Products) - p117 to p126
 // ============================================
 
 const books: Product[] = [
-  {
+  createProduct({
     id: "p117",
     title: "The Psychology of Money",
     slug: "the-psychology-of-money",
@@ -3711,11 +4131,6 @@ const books: Product[] = [
     weight: 300,
     dimensions: { width: 140, height: 210, depth: 20 },
     tags: ["psychology", "money", "finance", "behavioral", "personal-finance"],
-    thumbnail: "/images/products/the-psychology-of-money.jpg",
-    images: [
-      "/images/products/the-psychology-of-money.jpg",
-      "/images/products/the-psychology-of-money-2.jpg"
-    ],
     categoryId: "cat-9",
     categoryName: "Books",
     isFeatured: false,
@@ -3724,8 +4139,8 @@ const books: Product[] = [
     isNewArrival: false,
     createdAt: "2024-07-01T10:00:00Z",
     updatedAt: "2024-07-01T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p118",
     title: "Atomic Habits",
     slug: "atomic-habits",
@@ -3742,11 +4157,6 @@ const books: Product[] = [
     weight: 280,
     dimensions: { width: 140, height: 210, depth: 18 },
     tags: ["habits", "self-improvement", "psychology", "personal-growth", "productivity"],
-    thumbnail: "/images/products/atomic-habits.jpg",
-    images: [
-      "/images/products/atomic-habits.jpg",
-      "/images/products/atomic-habits-2.jpg"
-    ],
     categoryId: "cat-9",
     categoryName: "Books",
     isFeatured: true,
@@ -3755,8 +4165,8 @@ const books: Product[] = [
     isNewArrival: false,
     createdAt: "2024-06-15T10:00:00Z",
     updatedAt: "2024-06-15T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p119",
     title: "The Silent Patient",
     slug: "the-silent-patient",
@@ -3773,11 +4183,6 @@ const books: Product[] = [
     weight: 350,
     dimensions: { width: 135, height: 200, depth: 25 },
     tags: ["thriller", "psychological", "suspense", "crime", "fiction"],
-    thumbnail: "/images/products/the-silent-patient.jpg",
-    images: [
-      "/images/products/the-silent-patient.jpg",
-      "/images/products/the-silent-patient-2.jpg"
-    ],
     categoryId: "cat-9",
     categoryName: "Books",
     isFeatured: false,
@@ -3786,8 +4191,8 @@ const books: Product[] = [
     isNewArrival: false,
     createdAt: "2024-07-10T10:00:00Z",
     updatedAt: "2024-07-10T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p120",
     title: "Sapiens",
     slug: "sapiens",
@@ -3804,11 +4209,6 @@ const books: Product[] = [
     weight: 400,
     dimensions: { width: 150, height: 220, depth: 25 },
     tags: ["history", "humanity", "science", "evolution", "non-fiction"],
-    thumbnail: "/images/products/sapiens.jpg",
-    images: [
-      "/images/products/sapiens.jpg",
-      "/images/products/sapiens-2.jpg"
-    ],
     categoryId: "cat-9",
     categoryName: "Books",
     isFeatured: false,
@@ -3817,8 +4217,8 @@ const books: Product[] = [
     isNewArrival: false,
     createdAt: "2024-07-15T10:00:00Z",
     updatedAt: "2024-07-15T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p121",
     title: "Project Hail Mary",
     slug: "project-hail-mary",
@@ -3835,11 +4235,6 @@ const books: Product[] = [
     weight: 380,
     dimensions: { width: 140, height: 210, depth: 22 },
     tags: ["science-fiction", "space", "adventure", "thriller", "science"],
-    thumbnail: "/images/products/project-hail-mary.jpg",
-    images: [
-      "/images/products/project-hail-mary.jpg",
-      "/images/products/project-hail-mary-2.jpg"
-    ],
     categoryId: "cat-9",
     categoryName: "Books",
     isFeatured: true,
@@ -3848,8 +4243,8 @@ const books: Product[] = [
     isNewArrival: false,
     createdAt: "2024-08-01T10:00:00Z",
     updatedAt: "2024-08-01T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p122",
     title: "Becoming",
     slug: "becoming",
@@ -3866,11 +4261,6 @@ const books: Product[] = [
     weight: 350,
     dimensions: { width: 150, height: 220, depth: 25 },
     tags: ["memoir", "inspiration", "michelle-obama", "biography", "leadership"],
-    thumbnail: "/images/products/becoming.jpg",
-    images: [
-      "/images/products/becoming.jpg",
-      "/images/products/becoming-2.jpg"
-    ],
     categoryId: "cat-9",
     categoryName: "Books",
     isFeatured: false,
@@ -3879,8 +4269,8 @@ const books: Product[] = [
     isNewArrival: false,
     createdAt: "2024-08-05T10:00:00Z",
     updatedAt: "2024-08-05T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p123",
     title: "The Creative Act",
     slug: "the-creative-act",
@@ -3897,11 +4287,6 @@ const books: Product[] = [
     weight: 320,
     dimensions: { width: 140, height: 210, depth: 20 },
     tags: ["creativity", "art", "music", "rick-rubin", "inspiration"],
-    thumbnail: "/images/products/the-creative-act.jpg",
-    images: [
-      "/images/products/the-creative-act.jpg",
-      "/images/products/the-creative-act-2.jpg"
-    ],
     categoryId: "cat-9",
     categoryName: "Books",
     isFeatured: false,
@@ -3910,8 +4295,8 @@ const books: Product[] = [
     isNewArrival: false,
     createdAt: "2024-08-10T10:00:00Z",
     updatedAt: "2024-08-10T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p124",
     title: "The Four Agreements",
     slug: "the-four-agreements",
@@ -3928,11 +4313,6 @@ const books: Product[] = [
     weight: 200,
     dimensions: { width: 130, height: 180, depth: 15 },
     tags: ["self-help", "spirituality", "wisdom", "personal-growth", "toltec"],
-    thumbnail: "/images/products/the-four-agreements.jpg",
-    images: [
-      "/images/products/the-four-agreements.jpg",
-      "/images/products/the-four-agreements-2.jpg"
-    ],
     categoryId: "cat-9",
     categoryName: "Books",
     isFeatured: false,
@@ -3941,8 +4321,8 @@ const books: Product[] = [
     isNewArrival: false,
     createdAt: "2024-08-15T10:00:00Z",
     updatedAt: "2024-08-15T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p125",
     title: "Dune",
     slug: "dune",
@@ -3959,11 +4339,6 @@ const books: Product[] = [
     weight: 450,
     dimensions: { width: 150, height: 220, depth: 30 },
     tags: ["science-fiction", "epic", "dune", "classic", "adventure"],
-    thumbnail: "/images/products/dune.jpg",
-    images: [
-      "/images/products/dune.jpg",
-      "/images/products/dune-2.jpg"
-    ],
     categoryId: "cat-9",
     categoryName: "Books",
     isFeatured: true,
@@ -3972,8 +4347,8 @@ const books: Product[] = [
     isNewArrival: false,
     createdAt: "2024-08-20T10:00:00Z",
     updatedAt: "2024-08-20T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p126",
     title: "Where the Crawdads Sing",
     slug: "where-the-crawdads-sing",
@@ -3990,11 +4365,6 @@ const books: Product[] = [
     weight: 350,
     dimensions: { width: 140, height: 210, depth: 25 },
     tags: ["literary-fiction", "nature", "loneliness", "love", "mystery"],
-    thumbnail: "/images/products/where-the-crawdads-sing.jpg",
-    images: [
-      "/images/products/where-the-crawdads-sing.jpg",
-      "/images/products/where-the-crawdads-sing-2.jpg"
-    ],
     categoryId: "cat-9",
     categoryName: "Books",
     isFeatured: false,
@@ -4003,15 +4373,15 @@ const books: Product[] = [
     isNewArrival: false,
     createdAt: "2024-08-25T10:00:00Z",
     updatedAt: "2024-08-25T10:00:00Z"
-  },
-];
+  })
+]
 
 // ============================================
-// CATEGORY 10: ORGANIC GROCERIES (12 Products)
+// CATEGORY 10: ORGANIC GROCERIES (12 Products) - p127 to p138
 // ============================================
 
 const groceries: Product[] = [
-  {
+  createProduct({
     id: "p127",
     title: "Organic Honey 500g",
     slug: "organic-honey-500g",
@@ -4028,11 +4398,6 @@ const groceries: Product[] = [
     weight: 500,
     dimensions: { width: 70, height: 120, depth: 70 },
     tags: ["organic", "honey", "natural", "antioxidants", "sweetener"],
-    thumbnail: "/images/products/organic-honey-500g.jpg",
-    images: [
-      "/images/products/organic-honey-500g.jpg",
-      "/images/products/organic-honey-500g-2.jpg"
-    ],
     categoryId: "cat-10",
     categoryName: "Organic Groceries",
     isFeatured: false,
@@ -4041,8 +4406,8 @@ const groceries: Product[] = [
     isNewArrival: false,
     createdAt: "2024-06-10T10:00:00Z",
     updatedAt: "2024-06-10T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p128",
     title: "Organic Green Tea 100g",
     slug: "organic-green-tea-100g",
@@ -4059,11 +4424,6 @@ const groceries: Product[] = [
     weight: 100,
     dimensions: { width: 50, height: 100, depth: 50 },
     tags: ["organic", "green-tea", "antioxidants", "health", "beverage"],
-    thumbnail: "/images/products/organic-green-tea-100g.jpg",
-    images: [
-      "/images/products/organic-green-tea-100g.jpg",
-      "/images/products/organic-green-tea-100g-2.jpg"
-    ],
     categoryId: "cat-10",
     categoryName: "Organic Groceries",
     isFeatured: false,
@@ -4072,8 +4432,8 @@ const groceries: Product[] = [
     isNewArrival: false,
     createdAt: "2024-06-20T10:00:00Z",
     updatedAt: "2024-06-20T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p129",
     title: "Organic Coconut Oil 500ml",
     slug: "organic-coconut-oil-500ml",
@@ -4090,11 +4450,6 @@ const groceries: Product[] = [
     weight: 500,
     dimensions: { width: 70, height: 140, depth: 70 },
     tags: ["organic", "coconut-oil", "cold-pressed", "versatile", "health"],
-    thumbnail: "/images/products/organic-coconut-oil-500ml.jpg",
-    images: [
-      "/images/products/organic-coconut-oil-500ml.jpg",
-      "/images/products/organic-coconut-oil-500ml-2.jpg"
-    ],
     categoryId: "cat-10",
     categoryName: "Organic Groceries",
     isFeatured: false,
@@ -4103,8 +4458,8 @@ const groceries: Product[] = [
     isNewArrival: false,
     createdAt: "2024-07-01T10:00:00Z",
     updatedAt: "2024-07-01T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p130",
     title: "Organic Oats 1kg",
     slug: "organic-oats-1kg",
@@ -4121,11 +4476,6 @@ const groceries: Product[] = [
     weight: 1000,
     dimensions: { width: 100, height: 180, depth: 100 },
     tags: ["organic", "oats", "breakfast", "fiber", "healthy"],
-    thumbnail: "/images/products/organic-oats-1kg.jpg",
-    images: [
-      "/images/products/organic-oats-1kg.jpg",
-      "/images/products/organic-oats-1kg-2.jpg"
-    ],
     categoryId: "cat-10",
     categoryName: "Organic Groceries",
     isFeatured: false,
@@ -4134,8 +4484,8 @@ const groceries: Product[] = [
     isNewArrival: false,
     createdAt: "2024-07-10T10:00:00Z",
     updatedAt: "2024-07-10T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p131",
     title: "Organic Almonds 500g",
     slug: "organic-almonds-500g",
@@ -4152,11 +4502,6 @@ const groceries: Product[] = [
     weight: 500,
     dimensions: { width: 80, height: 150, depth: 80 },
     tags: ["organic", "almonds", "snack", "nuts", "protein"],
-    thumbnail: "/images/products/organic-almonds-500g.jpg",
-    images: [
-      "/images/products/organic-almonds-500g.jpg",
-      "/images/products/organic-almonds-500g-2.jpg"
-    ],
     categoryId: "cat-10",
     categoryName: "Organic Groceries",
     isFeatured: false,
@@ -4165,8 +4510,8 @@ const groceries: Product[] = [
     isNewArrival: false,
     createdAt: "2024-07-15T10:00:00Z",
     updatedAt: "2024-07-15T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p132",
     title: "Organic Quinoa 1kg",
     slug: "organic-quinoa-1kg",
@@ -4183,11 +4528,6 @@ const groceries: Product[] = [
     weight: 1000,
     dimensions: { width: 100, height: 180, depth: 100 },
     tags: ["organic", "quinoa", "superfood", "gluten-free", "protein"],
-    thumbnail: "/images/products/organic-quinoa-1kg.jpg",
-    images: [
-      "/images/products/organic-quinoa-1kg.jpg",
-      "/images/products/organic-quinoa-1kg-2.jpg"
-    ],
     categoryId: "cat-10",
     categoryName: "Organic Groceries",
     isFeatured: false,
@@ -4196,8 +4536,8 @@ const groceries: Product[] = [
     isNewArrival: false,
     createdAt: "2024-07-20T10:00:00Z",
     updatedAt: "2024-07-20T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p133",
     title: "Organic Chia Seeds 500g",
     slug: "organic-chia-seeds-500g",
@@ -4214,11 +4554,6 @@ const groceries: Product[] = [
     weight: 500,
     dimensions: { width: 80, height: 150, depth: 80 },
     tags: ["organic", "chia-seeds", "superfood", "omega-3", "healthy"],
-    thumbnail: "/images/products/organic-chia-seeds-500g.jpg",
-    images: [
-      "/images/products/organic-chia-seeds-500g.jpg",
-      "/images/products/organic-chia-seeds-500g-2.jpg"
-    ],
     categoryId: "cat-10",
     categoryName: "Organic Groceries",
     isFeatured: false,
@@ -4227,8 +4562,8 @@ const groceries: Product[] = [
     isNewArrival: false,
     createdAt: "2024-08-01T10:00:00Z",
     updatedAt: "2024-08-01T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p134",
     title: "Organic Olive Oil 750ml",
     slug: "organic-olive-oil-750ml",
@@ -4245,11 +4580,6 @@ const groceries: Product[] = [
     weight: 750,
     dimensions: { width: 80, height: 200, depth: 80 },
     tags: ["organic", "olive-oil", "extra-virgin", "cold-pressed", "cooking"],
-    thumbnail: "/images/products/organic-olive-oil-750ml.jpg",
-    images: [
-      "/images/products/organic-olive-oil-750ml.jpg",
-      "/images/products/organic-olive-oil-750ml-2.jpg"
-    ],
     categoryId: "cat-10",
     categoryName: "Organic Groceries",
     isFeatured: false,
@@ -4258,8 +4588,8 @@ const groceries: Product[] = [
     isNewArrival: false,
     createdAt: "2024-08-05T10:00:00Z",
     updatedAt: "2024-08-05T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p135",
     title: "Organic Maple Syrup 250ml",
     slug: "organic-maple-syrup-250ml",
@@ -4276,11 +4606,6 @@ const groceries: Product[] = [
     weight: 250,
     dimensions: { width: 60, height: 120, depth: 60 },
     tags: ["organic", "maple-syrup", "pancake", "natural", "sweetener"],
-    thumbnail: "/images/products/organic-maple-syrup-250ml.jpg",
-    images: [
-      "/images/products/organic-maple-syrup-250ml.jpg",
-      "/images/products/organic-maple-syrup-250ml-2.jpg"
-    ],
     categoryId: "cat-10",
     categoryName: "Organic Groceries",
     isFeatured: false,
@@ -4289,8 +4614,8 @@ const groceries: Product[] = [
     isNewArrival: false,
     createdAt: "2024-08-10T10:00:00Z",
     updatedAt: "2024-08-10T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p136",
     title: "Organic Turmeric Powder 200g",
     slug: "organic-turmeric-powder-200g",
@@ -4307,11 +4632,6 @@ const groceries: Product[] = [
     weight: 200,
     dimensions: { width: 70, height: 100, depth: 70 },
     tags: ["organic", "turmeric", "powder", "spice", "health"],
-    thumbnail: "/images/products/organic-turmeric-powder-200g.jpg",
-    images: [
-      "/images/products/organic-turmeric-powder-200g.jpg",
-      "/images/products/organic-turmeric-powder-200g-2.jpg"
-    ],
     categoryId: "cat-10",
     categoryName: "Organic Groceries",
     isFeatured: false,
@@ -4320,8 +4640,8 @@ const groceries: Product[] = [
     isNewArrival: false,
     createdAt: "2024-08-15T10:00:00Z",
     updatedAt: "2024-08-15T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p137",
     title: "Organic Dried Figs 400g",
     slug: "organic-dried-figs-400g",
@@ -4338,11 +4658,6 @@ const groceries: Product[] = [
     weight: 400,
     dimensions: { width: 80, height: 150, depth: 80 },
     tags: ["organic", "dried-figs", "snack", "fiber", "healthy"],
-    thumbnail: "/images/products/organic-dried-figs-400g.jpg",
-    images: [
-      "/images/products/organic-dried-figs-400g.jpg",
-      "/images/products/organic-dried-figs-400g-2.jpg"
-    ],
     categoryId: "cat-10",
     categoryName: "Organic Groceries",
     isFeatured: false,
@@ -4351,8 +4666,8 @@ const groceries: Product[] = [
     isNewArrival: false,
     createdAt: "2024-08-20T10:00:00Z",
     updatedAt: "2024-08-20T10:00:00Z"
-  },
-  {
+  }),
+  createProduct({
     id: "p138",
     title: "Organic Brown Rice 1kg",
     slug: "organic-brown-rice-1kg",
@@ -4369,11 +4684,6 @@ const groceries: Product[] = [
     weight: 1000,
     dimensions: { width: 100, height: 180, depth: 100 },
     tags: ["organic", "brown-rice", "whole-grain", "fiber", "healthy"],
-    thumbnail: "/images/products/organic-brown-rice-1kg.jpg",
-    images: [
-      "/images/products/organic-brown-rice-1kg.jpg",
-      "/images/products/organic-brown-rice-1kg-2.jpg"
-    ],
     categoryId: "cat-10",
     categoryName: "Organic Groceries",
     isFeatured: false,
@@ -4382,88 +4692,177 @@ const groceries: Product[] = [
     isNewArrival: false,
     createdAt: "2024-08-25T10:00:00Z",
     updatedAt: "2024-08-25T10:00:00Z"
-  },
-];
+  })
+]
 
 // ============================================
-// EXPORT ALL PRODUCTS
+// EXPORT ALL PRODUCTS - COMPLETE (138 Products)
 // ============================================
 
 export const products = [
-  ...electronics,
-  ...fashion,
-  ...footwear,
-  ...watches,
-  ...homeLiving,
-  ...beauty,
-  ...fitness,
-  ...gaming,
-  ...books,
-  ...groceries,
-];
+  ...electronics,    // 20 products (p1-p20)
+  ...fashion,        // 20 products (p21-p40)
+  ...footwear,       // 15 products (p41-p55)
+  ...watches,        // 12 products (p56-p67)
+  ...homeLiving,     // 15 products (p68-p82)
+  ...beauty,         // 12 products (p83-p94)
+  ...fitness,        // 12 products (p95-p106)
+  ...gaming,         // 10 products (p107-p116)
+  ...books,          // 10 products (p117-p126)
+  ...groceries       // 12 products (p127-p138)
+]
+
+// ============================================
+// COMPLETE CATEGORIES WITH COUNTS
+// ============================================
+
+// Type for categories with product counts
+interface CategoryWithCount {
+  id: string
+  name: string
+  slug: string
+  image: string
+  count: number
+  description?: string
+}
+
+export type Category = CategoryWithCount
+
+export const categoriesWithCount: CategoryWithCount[] = [
+  { 
+    id: "cat-1", 
+    name: "Electronics", 
+    slug: "electronics", 
+    image: "https://images.unsplash.com/photo-1498049794561-7780e7231661?w=600&h=400&fit=crop",
+    count: electronics.length,
+    description: "Latest gadgets and electronic devices"
+  },
+  { 
+    id: "cat-2", 
+    name: "Fashion", 
+    slug: "fashion", 
+    image: "https://images.unsplash.com/photo-1445205170230-053b83016050?w=600&h=400&fit=crop",
+    count: fashion.length,
+    description: "Premium clothing and accessories"
+  },
+  { 
+    id: "cat-3", 
+    name: "Footwear", 
+    slug: "footwear", 
+    image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=600&h=400&fit=crop",
+    count: footwear.length,
+    description: "Shoes for every occasion"
+  },
+  { 
+    id: "cat-4", 
+    name: "Watches", 
+    slug: "watches", 
+    image: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=600&h=400&fit=crop",
+    count: watches.length,
+    description: "Luxury timepieces"
+  },
+  { 
+    id: "cat-5", 
+    name: "Home & Living", 
+    slug: "home-living", 
+    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&h=400&fit=crop",
+    count: homeLiving.length,
+    description: "Elevate your living space"
+  },
+  { 
+    id: "cat-6", 
+    name: "Beauty & Personal Care", 
+    slug: "beauty-personal-care", 
+    image: "https://images.unsplash.com/photo-1522338140262-f46f5913618a?w=600&h=400&fit=crop",
+    count: beauty.length,
+    description: "Premium beauty and grooming products"
+  },
+  { 
+    id: "cat-7", 
+    name: "Fitness & Sports", 
+    slug: "fitness-sports", 
+    image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&h=400&fit=crop",
+    count: fitness.length,
+    description: "Gear for active lifestyles"
+  },
+  { 
+    id: "cat-8", 
+    name: "Gaming", 
+    slug: "gaming", 
+    image: "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=600&h=400&fit=crop",
+    count: gaming.length,
+    description: "Next-gen gaming equipment"
+  },
+  { 
+    id: "cat-9", 
+    name: "Books", 
+    slug: "books", 
+    image: "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=600&h=400&fit=crop",
+    count: books.length,
+    description: "Knowledge and inspiration"
+  },
+  { 
+    id: "cat-10", 
+    name: "Organic Groceries", 
+    slug: "organic-groceries", 
+    image: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&h=400&fit=crop",
+    count: groceries.length,
+    description: "Fresh and organic produce"
+  }
+]
 
 // ============================================
 // HELPER FUNCTIONS
 // ============================================
 
 export function getProductBySlug(slug: string) {
-  return products.find(p => p.slug === slug);
+  return products.find(p => p.slug === slug)
 }
 
 export function getProductById(id: string) {
-  return products.find(p => p.id === id);
+  return products.find(p => p.id === id)
 }
 
 export function getProductsByCategory(categoryId: string) {
-  return products.filter(p => p.categoryId === categoryId);
+  return products.filter(p => p.categoryId === categoryId)
 }
 
-export function getFeaturedProducts() {
-  return products.filter(p => p.isFeatured);
+export function getFeaturedProducts(limit?: number) {
+  const featured = products.filter(p => p.isFeatured)
+  return limit ? featured.slice(0, limit) : featured
 }
 
-export function getTrendingProducts() {
-  return products.filter(p => p.isTrending);
+export function getTrendingProducts(limit?: number) {
+  const trending = products.filter(p => p.isTrending)
+  return limit ? trending.slice(0, limit) : trending
 }
 
-export function getBestSellerProducts() {
-  return products.filter(p => p.isBestSeller);
+export function getBestSellerProducts(limit?: number) {
+  const bestsellers = products.filter(p => p.isBestSeller)
+  return limit ? bestsellers.slice(0, limit) : bestsellers
 }
 
-export function getNewArrivals() {
-  return products.filter(p => p.isNewArrival);
+export function getNewArrivals(limit?: number) {
+  const newArrivals = products.filter(p => p.isNewArrival)
+  return limit ? newArrivals.slice(0, limit) : newArrivals
 }
 
-export interface Category {
-  id: string
-  name: string
-  slug: string
-  image: string
+export function getFlashSaleProducts(limit?: number) {
+  const flashSale = products.filter(p => p.discountPercentage >= 10)
+  return limit ? flashSale.slice(0, limit) : flashSale
 }
-
-export interface CategoryWithCount extends Category {
-  count: number
-}
-
-export const categoriesWithCount: CategoryWithCount[] = [
-  { id: "cat-1", name: "Electronics", slug: "electronics", image: "/images/categories/electronics.jpg", count: electronics.length },
-  { id: "cat-2", name: "Fashion", slug: "fashion", image: "/images/categories/fashion.jpg", count: fashion.length },
-  { id: "cat-3", name: "Footwear", slug: "footwear", image: "/images/categories/footwear.jpg", count: footwear.length },
-  { id: "cat-4", name: "Watches", slug: "watches", image: "/images/categories/watches.jpg", count: watches.length },
-  { id: "cat-5", name: "Home & Living", slug: "home-living", image: "/images/categories/home-living.jpg", count: homeLiving.length },
-  { id: "cat-6", name: "Beauty & Personal Care", slug: "beauty-personal-care", image: "/images/categories/beauty-personal-care.jpg", count: beauty.length },
-  { id: "cat-7", name: "Fitness & Sports", slug: "fitness-sports", image: "/images/categories/fitness-sports.jpg", count: fitness.length },
-  { id: "cat-8", name: "Gaming", slug: "gaming", image: "/images/categories/gaming.jpg", count: gaming.length },
-  { id: "cat-9", name: "Books", slug: "books", image: "/images/categories/books.jpg", count: books.length },
-  { id: "cat-10", name: "Organic Groceries", slug: "organic-groceries", image: "/images/categories/organic-groceries.jpg", count: groceries.length },
-];
 
 export function getRelatedProducts(productId: string, limit = 4) {
   const product = products.find(p => p.id === productId)
   if (!product) return []
+  const seed = productId.split('').reduce((a, c) => a + c.charCodeAt(0), 0)
   return products
     .filter(p => p.categoryId === product.categoryId && p.id !== productId)
-    .sort(() => Math.random() - 0.5)
+    .sort((a, b) => {
+      const ha = (a.id.charCodeAt(0) * seed + a.id.charCodeAt(a.id.length - 1)) % 100
+      const hb = (b.id.charCodeAt(0) * seed + b.id.charCodeAt(b.id.length - 1)) % 100
+      return ha - hb
+    })
     .slice(0, limit)
 }
 

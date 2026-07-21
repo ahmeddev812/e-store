@@ -406,8 +406,18 @@ html {
 
 /* ===== SELECTION ===== */
 ::selection {
-  background: var(--selection-bg);
-  color: white;
+  background: #F57224;
+  color: #000;
+}
+
+.dark ::selection {
+  background: #F57224;
+  color: #fff;
+}
+
+.moz-selection {
+  background: #F57224;
+  color: #000;
 }
 
 /* ===== ACCENT RINGS ===== */

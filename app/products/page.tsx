@@ -207,7 +207,7 @@ function FilterSidebar({
           <input
             type="range"
             min="0"
-            max="2000"
+            max="4000"
             value={localPriceRange}
             onChange={(e) => {
               setLocalPriceRange(parseInt(e.target.value))
@@ -215,13 +215,13 @@ function FilterSidebar({
             }}
             className="w-full h-2 rounded-lg appearance-none bg-gradient-to-r from-[#F57224] to-orange-500"
             style={{
-              background: `linear-gradient(to right, #F57224 0%, #F57224 ${(localPriceRange / 2000) * 100}%, rgba(128,128,128,0.15) ${(localPriceRange / 2000) * 100}%)`
+              background: `linear-gradient(to right, #F57224 0%, #F57224 ${(localPriceRange / 4000) * 100}%, rgba(128,128,128,0.15) ${(localPriceRange / 4000) * 100}%)`
             }}
           />
           <div className="mt-2 flex justify-between text-xs text-muted-foreground/70">
             <span>$0</span>
             <span>${localPriceRange}</span>
-            <span>$2000+</span>
+            <span>$4000+</span>
           </div>
         </div>
       </div>
@@ -245,9 +245,9 @@ function FilterSidebar({
         className="w-full border-border"
         onClick={() => {
           setCategory("")
-          setPriceRange(2000)
+          setPriceRange(4000)
           setInStock(false)
-          setLocalPriceRange(2000)
+          setLocalPriceRange(4000)
         }}
       >
         Clear All Filters
@@ -298,7 +298,7 @@ function ProductsPageContent() {
   const [searchInput, setSearchInput] = useState(qParam)
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
   const [isFilterOpen, setIsFilterOpen] = useState(false)
-  const [priceRange, setPriceRange] = useState(2000)
+  const [priceRange, setPriceRange] = useState(4000)
   const [inStock, setInStock] = useState(false)
   
   const heroRef = useRef<HTMLDivElement>(null)
@@ -369,7 +369,7 @@ function ProductsPageContent() {
 
   const activeFiltersCount = [
     category ? 1 : 0,
-    priceRange < 2000 ? 1 : 0,
+    priceRange < 4000 ? 1 : 0,
     inStock ? 1 : 0,
     search ? 1 : 0
   ].filter(Boolean).length
@@ -518,10 +518,10 @@ function ProductsPageContent() {
                     </button>
                   </Badge>
                 )}
-                {priceRange < 2000 && (
+                {priceRange < 4000 && (
                   <Badge className="flex items-center gap-1 bg-[#F57224]/20 text-[#F57224]">
                     Up to ${priceRange}
-                    <button onClick={() => setPriceRange(2000)}>
+                    <button onClick={() => setPriceRange(4000)}>
                       <X className="size-3" />
                     </button>
                   </Badge>
@@ -547,7 +547,7 @@ function ProductsPageContent() {
                   size="sm"
                   onClick={() => {
                     setCategory("")
-                    setPriceRange(2000)
+                    setPriceRange(4000)
                     setInStock(false)
                     setSearch("")
                     setSearchInput("")
@@ -580,7 +580,7 @@ function ProductsPageContent() {
                     setSearch("")
                     setSearchInput("")
                     setSort("default")
-                    setPriceRange(2000)
+                    setPriceRange(4000)
                     setInStock(false)
                   }}
                 >
