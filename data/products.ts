@@ -435,60 +435,34 @@ const PRODUCT_IMAGES: Record<string, { thumbnail: string; images: string[] }> = 
   },
 
   // ========== WATCHES ==========
-  'rolex-submariner-date': {
-    thumbnail: '/images/products/rolex-submariner-date-thumbnail.jpg',
+  
+  'apple-watch-series-10': {
+    thumbnail: '/images/products/Apple Watch Series 10.jpg',
     images: [
-      '/images/products/rolex-submariner-date-image-1.jpg',
-      '/images/products/rolex-submariner-date-image-2.jpg'
+      '/images/products/Apple Watch Series 10.jpg',
+     
     ]
   },
-  'omega-speedmaster-professional': {
-    thumbnail: '/images/products/omega-speedmaster-professional-thumbnail.jpg',
+  'garmin-fenix-8-sapphire': {
+    thumbnail:'/images/products/Garmin Fenix 8 Sapphire.jpg',
     images: [
-      '/images/products/omega-speedmaster-professional-image-1.jpg',
-      '/images/products/omega-speedmaster-professional-image-2.jpg'
+      '/images/products/Garmin Fenix 8 Sapphire.jpg',
+      
     ]
   },
-  'garmin-fenix-7-pro': {
-    thumbnail: '/images/products/garmin-fenix-7-pro-thumbnail.jpg',
+  'seiko-prospex-spb143': {
+    thumbnail: '/images/products/Seiko Prospex SPB143.jpg',
     images: [
-      '/images/products/garmin-fenix-7-pro-image-1.jpg',
-      '/images/products/garmin-fenix-7-pro-image-2.jpg'
+      '/images/products/Seiko Prospex SPB143.jpg',
+      
     ]
   },
-  'tag-heuer-carrera-chronograph': {
-    thumbnail: '/images/products/tag-heuer-carrera-chronograph-thumbnail.jpg',
+ 
+  'citizen-eco-drive-promaster': {
+    thumbnail: '/images/products/citizen-eco-drive-promaster1.jpg',
     images: [
-      '/images/products/tag-heuer-carrera-chronograph-image-1.jpg',
-      '/images/products/tag-heuer-carrera-chronograph-image-2.jpg'
-    ]
-  },
-  'samsung-galaxy-watch-6': {
-    thumbnail: '/images/products/samsung-galaxy-watch-6-thumbnail.jpg',
-    images: [
-      '/images/products/samsung-galaxy-watch-6-image-1.jpg',
-      '/images/products/samsung-galaxy-watch-6-image-2.jpg'
-    ]
-  },
-  'seiko-prospex-diver': {
-    thumbnail: '/images/products/seiko-prospex-diver-thumbnail.jpg',
-    images: [
-      '/images/products/seiko-prospex-diver-image-1.jpg',
-      '/images/products/seiko-prospex-diver-image-2.jpg'
-    ]
-  },
-  'cartier-tank-solo': {
-    thumbnail: '/images/products/cartier-tank-solo-thumbnail.jpg',
-    images: [
-      '/images/products/cartier-tank-solo-image-1.jpg',
-      '/images/products/cartier-tank-solo-image-2.jpg'
-    ]
-  },
-  'casio-g-shock-ga-2100': {
-    thumbnail: '/images/products/casio-g-shock-ga-2100-thumbnail.jpg',
-    images: [
-      '/images/products/casio-g-shock-ga-2100-image-1.jpg',
-      '/images/products/casio-g-shock-ga-2100-image-2.jpg'
+      '/images/products/citizen-eco-drive-promaster1.jpg',
+      
     ]
   },
   'tissot-prx-powermatic-80': {
@@ -498,18 +472,32 @@ const PRODUCT_IMAGES: Record<string, { thumbnail: string; images: string[] }> = 
       '/images/products/tissot-prx-powermatic-80-image-2.jpg'
     ]
   },
-  'hamilton-khaki-field': {
-    thumbnail: '/images/products/hamilton-khaki-field-thumbnail.jpg',
+  'casio-g-shock-ga2100': {
+    thumbnail: '/images/products/Casio G-Shock GA2100.jpg',
     images: [
-      '/images/products/hamilton-khaki-field-image-1.jpg',
-      '/images/products/hamilton-khaki-field-image-2.jpg'
+      '/images/products/Casio G-Shock GA2100.jpg',
+     
     ]
   },
-  'breitling-navitimer-b01': {
-    thumbnail: '/images/products/breitling-navitimer-b01-thumbnail.jpg',
+  'samsung-galaxy-watch-ultra': {
+    thumbnail: '/images/products/Samsung Galaxy Watch Ultra.jpg',
     images: [
-      '/images/products/breitling-navitimer-b01-image-1.jpg',
-      '/images/products/breitling-navitimer-b01-image-2.jpg'
+      '/images/products/Samsung Galaxy Watch Ultra.jpg',
+      
+    ]
+  },
+  'fossil-gen-7-hybrid': {
+    thumbnail: '/images/products/Fossil Gen 7 Hybrid.jpg',
+    images: [
+      '/images/products/Fossil Gen 7 Hybrid.jpg',
+      
+    ]
+  },
+  'longines-master-collection-moonphase': {
+    thumbnail: '/images/products/Longines Master Collection Moonphase.jpg',
+    images: [
+      '/images/products/Longines Master Collection Moonphase.jpg',
+      
     ]
   },
 
@@ -708,17 +696,17 @@ const PRODUCT_IMAGES: Record<string, { thumbnail: string; images: string[] }> = 
 
   // ========== FITNESS & SPORTS ==========
   'peloton-bike-plus': {
-    thumbnail: '/images/products/peloton-bike-plus-thumbnail.jpg',
+    thumbnail: '/images/products/Peloton Bike+.jpg',
     images: [
-      '/images/products/peloton-bike-plus-image-1.jpg',
-      '/images/products/peloton-bike-plus-image-2.jpg'
+      '/images/products/Peloton Bike+.jpg',
+      
     ]
   },
   'garmin-forerunner-965': {
-    thumbnail: '/images/products/garmin-forerunner-965-thumbnail.jpg',
+    thumbnail: '/images/products/Garmin Forerunner 965.jpg',
     images: [
-      '/images/products/garmin-forerunner-965-image-1.jpg',
-      '/images/products/garmin-forerunner-965-image-2.jpg'
+      '/images/products/Garmin Forerunner 965.jpg',
+      
     ]
   },
   'bowflex-selecttech-552-dumbbells': {
@@ -729,10 +717,10 @@ const PRODUCT_IMAGES: Record<string, { thumbnail: string; images: string[] }> = 
     ]
   },
   'theragun-pro': {
-    thumbnail: '/images/products/theragun-pro-thumbnail.jpg',
+    thumbnail: '/images/products/Theragun Pro.jpg',
     images: [
-      '/images/products/theragun-pro-image-1.jpg',
-      '/images/products/theragun-pro-image-2.jpg'
+      '/images/products/Theragun Pro.jpg',
+      
     ]
   },
   'whoop-4-0-fitness-tracker': {
@@ -743,10 +731,10 @@ const PRODUCT_IMAGES: Record<string, { thumbnail: string; images: string[] }> = 
     ]
   },
   'nordictrack-treadmill': {
-    thumbnail: '/images/products/nordictrack-treadmill-thumbnail.jpg',
+    thumbnail: '/images/products/NordicTrack Treadmill.jpg',
     images: [
-      '/images/products/nordictrack-treadmill-image-1.jpg',
-      '/images/products/nordictrack-treadmill-image-2.jpg'
+      '/images/products/NordicTrack Treadmill1.jpg',
+      
     ]
   },
   'fitbit-charge-6': {
@@ -757,31 +745,31 @@ const PRODUCT_IMAGES: Record<string, { thumbnail: string; images: string[] }> = 
     ]
   },
   'concept2-rower': {
-    thumbnail: '/images/products/concept2-rower-thumbnail.jpg',
+    thumbnail: '/images/products/Concept2 Rower.jpg',
     images: [
-      '/images/products/concept2-rower-image-1.jpg',
-      '/images/products/concept2-rower-image-2.jpg'
+      '/images/products/Concept2 Rower.jpg',
+     
     ]
   },
   'under-armour-hovr-shoes': {
-    thumbnail: '/images/products/under-armour-hovr-shoes-thumbnail.jpg',
+    thumbnail: '/images/products/Under Armour HOVR Shoes.jpg',
     images: [
-      '/images/products/under-armour-hovr-shoes-image-1.jpg',
-      '/images/products/under-armour-hovr-shoes-image-2.jpg'
+      '/images/products/Under Armour HOVR Shoes.jpg',
+      
     ]
   },
   'adidas-powerlifting-belt': {
-    thumbnail: '/images/products/adidas-powerlifting-belt-thumbnail.jpg',
+    thumbnail: '/images/products/Adidas Powerlifting Belt.jpg',
     images: [
-      '/images/products/adidas-powerlifting-belt-image-1.jpg',
-      '/images/products/adidas-powerlifting-belt-image-2.jpg'
+      '/images/products/Adidas Powerlifting Belt.jpg',
+      
     ]
   },
   'trx-suspension-trainer': {
-    thumbnail: '/images/products/trx-suspension-trainer-thumbnail.jpg',
+    thumbnail: '/images/products/TRX Suspension Trainer.jpg',
     images: [
-      '/images/products/trx-suspension-trainer-image-1.jpg',
-      '/images/products/trx-suspension-trainer-image-2.jpg'
+      '/images/products/TRX Suspension Trainer.jpg',
+      
     ]
   },
 
@@ -859,73 +847,73 @@ const PRODUCT_IMAGES: Record<string, { thumbnail: string; images: string[] }> = 
 
   // ========== BOOKS ==========
   'the-psychology-of-money': {
-    thumbnail: '/images/products/the-psychology-of-money-thumbnail.jpg',
+    thumbnail: '/images/products/The Psychology of Money.jpg',
     images: [
-      '/images/products/the-psychology-of-money-image-1.jpg',
-      '/images/products/the-psychology-of-money-image-2.jpg'
+      '/images/products/The Psychology of Money.jpg',
+    
     ]
   },
   'atomic-habits': {
-    thumbnail: '/images/products/atomic-habits-thumbnail.jpg',
+    thumbnail: '/images/products/Atomic Habits.jpg',
     images: [
-      '/images/products/atomic-habits-image-1.jpg',
-      '/images/products/atomic-habits-image-2.jpg'
+      '/images/products/Atomic Habits.jpg',
+      
     ]
   },
   'the-silent-patient': {
-    thumbnail: '/images/products/the-silent-patient-thumbnail.jpg',
+    thumbnail: '/images/products/The Silent Patient.jpg',
     images: [
-      '/images/products/the-silent-patient-image-1.jpg',
-      '/images/products/the-silent-patient-image-2.jpg'
+      '/images/products/The Silent Patient.jpg',
+     
     ]
   },
   'sapiens': {
-    thumbnail: '/images/products/sapiens-thumbnail.jpg',
+    thumbnail: '/images/products/Sapiens.jpg',
     images: [
-      '/images/products/sapiens-image-1.jpg',
-      '/images/products/sapiens-image-2.jpg'
+      '/images/products/Sapiens.jpg',
+      
     ]
   },
   'project-hail-mary': {
-    thumbnail: '/images/products/project-hail-mary-thumbnail.jpg',
+    thumbnail: '/images/products/Project Hail Mary.jpg',
     images: [
-      '/images/products/project-hail-mary-image-1.jpg',
-      '/images/products/project-hail-mary-image-2.jpg'
+      '/images/products/Project Hail Mary.jpg',
+    
     ]
   },
   'becoming': {
-    thumbnail: '/images/products/becoming-thumbnail.jpg',
+    thumbnail: '/images/products/Becoming Book.jpg',
     images: [
-      '/images/products/becoming-image-1.jpg',
-      '/images/products/becoming-image-2.jpg'
+      '/images/products/Becoming Book.jpg',
+      
     ]
   },
   'the-creative-act': {
-    thumbnail: '/images/products/the-creative-act-thumbnail.jpg',
+    thumbnail: '/images/products/The Creative Act.jpg',
     images: [
-      '/images/products/the-creative-act-image-1.jpg',
-      '/images/products/the-creative-act-image-2.jpg'
+      '/images/products/The Creative Act.jpg',
+ 
     ]
   },
   'the-four-agreements': {
-    thumbnail: '/images/products/the-four-agreements-thumbnail.jpg',
+    thumbnail: '/images/products/The Four Agreements.jpg',
     images: [
-      '/images/products/the-four-agreements-image-1.jpg',
-      '/images/products/the-four-agreements-image-2.jpg'
+      '/images/products/The Four Agreements.jpg',
+      
     ]
   },
   'dune': {
-    thumbnail: '/images/products/dune-thumbnail.jpg',
+    thumbnail: '/images/products/Dune.jpg',
     images: [
-      '/images/products/dune-image-1.jpg',
-      '/images/products/dune-image-2.jpg'
+      '/images/products/Dune.jpg',
+      
     ]
   },
   'where-the-crawdads-sing': {
-    thumbnail: '/images/products/where-the-crawdads-sing-thumbnail.jpg',
+    thumbnail: '/images/products/Where the Crawdads Sing.jpg',
     images: [
-      '/images/products/where-the-crawdads-sing-image-1.jpg',
-      '/images/products/where-the-crawdads-sing-image-2.jpg'
+      '/images/products/Where the Crawdads Sing.jpg',
+      
     ]
   },
 

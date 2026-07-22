@@ -335,6 +335,7 @@ export default function AdminPage() {
                         src={product.image}
                         alt={product.name}
                         fill
+                        sizes="48px"
                         className="object-cover"
                       />
                     </div>

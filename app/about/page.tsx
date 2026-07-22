@@ -239,6 +239,8 @@ export default function AboutPage() {
                 alt="Our Story"
                 width={800}
                 height={600}
+                priority
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover w-full h-full transition-transform duration-700 hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
@@ -430,6 +432,7 @@ export default function AboutPage() {
                         alt={testimonial.name}
                         width={48}
                         height={48}
+                        sizes="48px"
                         className="object-cover"
                       />
                     </div>
@@ -488,6 +491,7 @@ export default function AboutPage() {
                     alt={member.name}
                     width={192}
                     height={192}
+                    sizes="192px"
                     className="object-cover w-full h-full"
                   />
                 </div>

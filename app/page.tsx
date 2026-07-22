@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState, useRef, useMemo } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
@@ -596,16 +596,16 @@ export default function HomePage() {
   // ============================================
   // UPDATED: Using new data functions from products.ts
   // ============================================
-  const featured = getFeaturedProducts().slice(0, 8)
-  const trending = getTrendingProducts().slice(0, 8)
-  const flashProducts = getFlashSaleProducts()
+  const featured = useMemo(() => getFeaturedProducts().slice(0, 8), [])
+  const trending = useMemo(() => getTrendingProducts().slice(0, 8), [])
+  const flashProducts = useMemo(() => getFlashSaleProducts()
     .sort((a, b) => {
       const hash = (s: string) => s.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0)
       return hash(a.id) - hash(b.id)
     })
-    .slice(0, 4)
-  const newArrivals = getNewArrivals().slice(0, 8)
-  const bestsellers = getBestSellerProducts().slice(0, 4)
+    .slice(0, 4), [])
+  const newArrivals = useMemo(() => getNewArrivals().slice(0, 8), [])
+  const bestsellers = useMemo(() => getBestSellerProducts().slice(0, 4), [])
 
   const stats = [
     { value: "50K+", label: "Happy Customers", icon: Users },

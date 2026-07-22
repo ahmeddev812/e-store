@@ -132,6 +132,7 @@ export default function NewArrivalsPage() {
                         alt={product.title}
                         width={400}
                         height={400}
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                         className="aspect-square w-full object-cover transition-all duration-700 group-hover:scale-110"
                       />
 

@@ -230,6 +230,7 @@ export default function CategoriesPage() {
                         alt={cat.name}
                         width={400}
                         height={300}
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-110"
                       />
                       

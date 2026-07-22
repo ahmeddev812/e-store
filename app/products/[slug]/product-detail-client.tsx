@@ -51,6 +51,8 @@ function ImageGallery({ images, title, discount }: { images: string[]; title: st
             src={images[selectedImage]}
             alt={title}
             fill
+            priority
+            sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 40vw"
             className="object-cover transition-transform duration-500"
             style={{
               transform: isZoomed ? `scale(2) translate(${(50 - mousePosition.x) / 10}%, ${(50 - mousePosition.y) / 10}%)` : 'scale(1)'
@@ -88,7 +90,7 @@ function ImageGallery({ images, title, discount }: { images: string[]; title: st
               }`}
               aria-label={`View image ${i + 1}`}
             >
-              <Image src={img} alt={`${title} ${i + 1}`} fill className="object-cover" />
+              <Image src={img} alt={`${title} ${i + 1}`} fill sizes="80px" className="object-cover" />
             </motion.button>
           ))}
         </div>
@@ -548,6 +550,7 @@ export default function ProductDetailClient({
                         alt={rp.title}
                         width={300}
                         height={300}
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                         className="aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-110"
                       />
                       {rp.discountPercentage > 0 && (

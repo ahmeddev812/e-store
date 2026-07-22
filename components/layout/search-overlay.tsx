@@ -207,6 +207,7 @@ function SearchOverlay() {
                                 src={product.image}
                                 alt={product.name}
                                 fill
+                                sizes="48px"
                                 className="object-cover"
                               />
                             </div>

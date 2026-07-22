@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { useRef, useState, useEffect } from "react"
 import { 
   Mail, Shield, Truck, 
@@ -195,7 +195,7 @@ export function Footer() {
 
       {/* Main Footer Content */}
       <div className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid gap-8 md:grid-cols-3 lg:grid-cols-6">
+        <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-6">
           {/* Brand Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -302,7 +302,7 @@ export function Footer() {
                 <p className="text-sm text-muted-foreground/70">Get 10% off your first purchase + exclusive deals</p>
               </div>
             </div>
-            <form onSubmit={handleSubscribe} className="flex w-full max-w-md gap-2">
+            <form onSubmit={handleSubscribe} className="flex w-full max-w-md flex-col gap-2 sm:flex-row">
               <Input
                 type="email"
                 placeholder="Enter your email"
@@ -350,17 +350,19 @@ export function Footer() {
       </div>
 
       {/* Scroll to Top Button */}
-      {showScrollTop && (
-        <motion.button
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0 }}
-          onClick={scrollToTop}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0 }}
+            onClick={scrollToTop}
           className="fixed bottom-8 right-8 z-50 rounded-full bg-gradient-to-r from-[#F57224] to-orange-500 p-3 shadow-glow transition-all duration-300 hover:scale-110 text-white"
         >
           <ArrowUp className="size-5" />
-        </motion.button>
-      )}
+          </motion.button>
+        )}
+      </AnimatePresence>
     </footer>
   )
 }

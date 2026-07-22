@@ -59,13 +59,14 @@ function FlashProductCard({ product, index }: { product: typeof products[number]
       <Link href={`/products/${product.slug}`}>
         <Card className={`group overflow-hidden transition-all duration-500 hover:border-[#F57224]/30 hover:shadow-[0_0_40px_rgba(245,114,36,0.2)] glass-premium`}>
           <div className={`relative overflow-hidden bg-muted`}>
-            <Image
-              src={product.thumbnail}
-              alt={product.title}
-              width={400}
-              height={400}
-              className="aspect-square w-full object-cover transition-all duration-700 group-hover:scale-110"
-            />
+              <Image
+                src={product.thumbnail}
+                alt={product.title}
+                width={400}
+                height={400}
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                className="aspect-square w-full object-cover transition-all duration-700 group-hover:scale-110"
+              />
             <div className="absolute left-3 top-3 z-10">
               <Badge className="bg-gradient-to-r from-[#F57224] to-orange-500 border-none shadow-glow animate-pulse text-white">
                 -{product.discountPercentage}%

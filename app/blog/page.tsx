@@ -222,6 +222,8 @@ export default function BlogPage() {
                     alt={featuredPost.title}
                     width={1200}
                     height={600}
+                    priority
+                    sizes="(max-width: 1024px) 100vw, 50vw"
                     className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
@@ -310,6 +312,7 @@ export default function BlogPage() {
                         alt={post.title}
                         width={800}
                         height={500}
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
                       />
                     </div>

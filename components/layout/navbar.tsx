@@ -61,7 +61,7 @@ export function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20)
     }
-    window.addEventListener("scroll", handleScroll)
+    window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
@@ -239,17 +239,12 @@ export function Navbar() {
                 >
                   <Heart className={`size-4 text-foreground/70 transition-all duration-300 group-hover:scale-110 group-hover:text-[#D4A853]`} />
                   {mounted && wishlistCount > 0 && (
-                    <AnimatePresence>
-                      <motion.span
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        exit={{ scale: 0 }}
-                        className="absolute -right-0.5 -top-0.5 flex size-4 items-center justify-center rounded-full bg-gradient-to-r from-[#D4A853] to-[#F57224] text-[9px] font-bold text-white shadow-glow"
-                        aria-hidden="true"
-                      >
-                        {wishlistCount}
-                      </motion.span>
-                    </AnimatePresence>
+                    <span
+                      className="absolute -right-0.5 -top-0.5 flex size-4 items-center justify-center rounded-full bg-gradient-to-r from-[#D4A853] to-[#F57224] text-[9px] font-bold text-white shadow-glow"
+                      aria-hidden="true"
+                    >
+                      {wishlistCount}
+                    </span>
                   )}
                 </Link>
               ) : null}
@@ -262,17 +257,12 @@ export function Navbar() {
               >
                 <ShoppingCart className={`size-4 text-foreground/70 transition-all duration-300 group-hover:scale-110 group-hover:text-[#D4A853]`} />
                 {mounted && itemCount > 0 && (
-                  <AnimatePresence>
-                    <motion.span
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      exit={{ scale: 0 }}
-                      className="absolute -right-0.5 -top-0.5 flex size-4 items-center justify-center rounded-full bg-gradient-to-r from-[#D4A853] to-[#F57224] text-[9px] font-bold text-white shadow-glow"
-                      aria-hidden="true"
-                    >
-                      {itemCount}
-                    </motion.span>
-                  </AnimatePresence>
+                  <span
+                    className="absolute -right-0.5 -top-0.5 flex size-4 items-center justify-center rounded-full bg-gradient-to-r from-[#D4A853] to-[#F57224] text-[9px] font-bold text-white shadow-glow"
+                    aria-hidden="true"
+                  >
+                    {itemCount}
+                  </span>
                 )}
               </Link>
 
@@ -365,10 +355,10 @@ export function Navbar() {
         <AnimatePresence>
           {searchOpen && (
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className="border-t border-border bg-gradient-to-b from-background/95 to-background/85 backdrop-blur-2xl"
+              initial={{ opacity: 0, maxHeight: 0 }}
+              animate={{ opacity: 1, maxHeight: 300 }}
+              exit={{ opacity: 0, maxHeight: 0 }}
+              className="overflow-hidden border-t border-border bg-gradient-to-b from-background/95 to-background/85 backdrop-blur-2xl"
             >
               <form onSubmit={handleSearch} className="mx-auto max-w-[100rem] px-6 py-6 sm:px-8 lg:px-10" role="search">
                 <div className="relative">

@@ -52,12 +52,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="flex min-h-screen flex-col">
             {/* Premium Animated Background */}
             <div className="fixed inset-0 -z-20">
-              {/* Base Gradient - Uses CSS variables */}
+              {/* Base Gradient */}
               <div className="absolute inset-0 bg-gradient-to-br from-background via-background/50 to-background dark:via-[var(--bg-gradient)]" />
               
-              {/* Animated Orbs - Uses CSS variables */}
-              <div className="absolute top-20 left-10 size-72 rounded-full bg-[#F57224]/10 blur-[120px] animate-pulse dark:bg-[#F57224]/20" />
-              <div className="absolute bottom-20 right-10 size-96 rounded-full bg-[#F57224]/5 blur-[140px] animate-pulse delay-1000 dark:bg-[#F57224]/10" />
+              {/* Static Orbs - reduced GPU cost by removing animate-pulse */}
+              <div className="absolute top-20 left-10 size-72 rounded-full bg-[#F57224]/10 blur-[120px] dark:bg-[#F57224]/20" />
+              <div className="absolute bottom-20 right-10 size-96 rounded-full bg-[#F57224]/5 blur-[140px] dark:bg-[#F57224]/10" />
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-[500px] rounded-full bg-orange-500/5 blur-[100px] dark:bg-orange-500/10" />
               
               {/* Grid Pattern */}
@@ -67,22 +67,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(245,114,36,0.08),transparent)] pointer-events-none dark:bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(245,114,36,0.15),transparent)]" />
             </div>
 
-            {/* Floating Particles Effect */}
-            <div className="fixed inset-0 -z-10 pointer-events-none">
-              <div className="absolute top-1/4 left-1/4 size-1 rounded-full bg-[#F57224]/20 animate-float dark:bg-[#F57224]/30" />
-              <div className="absolute top-3/4 right-1/4 size-2 rounded-full bg-orange-500/15 animate-float-delay dark:bg-orange-500/20" />
-              <div className="absolute bottom-1/4 left-1/3 size-1.5 rounded-full bg-[#F57224]/15 animate-float-slow dark:bg-[#F57224]/20" />
-              <div className="absolute top-1/2 right-1/3 size-1 rounded-full bg-orange-500/20 animate-float-fast dark:bg-orange-500/25" />
-            </div>
-
             <AnnouncementBar />
             <Navbar />
             <MobileMenu />
             
             <main className="relative z-10 flex-1">
               {children}
-              <Footer />
             </main>
+            <Footer />
           </div>
         </Providers>
       </body>
