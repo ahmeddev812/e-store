@@ -139,7 +139,7 @@ export function Navbar() {
         <div className="mx-auto max-w-[100rem] px-6 sm:px-8 lg:px-10">
           <div className="flex h-16 items-center justify-between lg:h-20">
             {/* Logo */}
-            <div className="flex items-center gap-12">
+            <div className="flex items-center gap-4 lg:gap-12">
               <Link href="/" className="group relative flex items-center gap-3" aria-label="BlazeCart Home">
                 <div className="relative">
                   <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-[#D4A853] to-[#F57224] blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-500" />
@@ -201,13 +201,13 @@ export function Navbar() {
             </div>
 
             {/* Right Section */}
-            <div className="flex items-center gap-2 lg:gap-3">
+            <div className="flex items-center gap-1 sm:gap-2 lg:gap-3">
               {/* Search Button */}
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setSearchOpen(!searchOpen)}
-                className="relative rounded-full p-2.5 transition-all duration-300 hover:bg-[#D4A853]/15 hover:text-[#D4A853]"
+                className="relative rounded-full p-1.5 sm:p-2.5 transition-all duration-300 hover:bg-[#D4A853]/15 hover:text-[#D4A853]"
                 aria-label="Toggle search"
                 aria-expanded={searchOpen}
               >
@@ -220,7 +220,7 @@ export function Navbar() {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                  className="rounded-full p-2.5 transition-all duration-300 hover:bg-[#D4A853]/15"
+                  className="rounded-full p-1.5 sm:p-2.5 transition-all duration-300 hover:bg-[#D4A853]/15"
                 aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
                 >
                   {theme === "dark" ? 
@@ -234,7 +234,7 @@ export function Navbar() {
               {isSignedIn ? (
                 <Link
                   href="/wishlist"
-                  className="group relative rounded-full p-2.5 transition-all duration-300 hover:bg-[#D4A853]/15"
+                  className="group relative rounded-full p-1.5 sm:p-2.5 transition-all duration-300 hover:bg-[#D4A853]/15"
                   aria-label={`Wishlist (${wishlistCount} items)`}
                 >
                   <Heart className={`size-4 text-foreground/70 transition-all duration-300 group-hover:scale-110 group-hover:text-[#D4A853]`} />
@@ -252,7 +252,7 @@ export function Navbar() {
               {/* Cart */}
               <Link
                 href="/cart"
-                className="group relative rounded-full p-2.5 transition-all duration-300 hover:bg-[#D4A853]/15"
+                className="group relative rounded-full p-1.5 sm:p-2.5 transition-all duration-300 hover:bg-[#D4A853]/15"
                 aria-label={`Shopping cart (${itemCount} items)`}
               >
                 <ShoppingCart className={`size-4 text-foreground/70 transition-all duration-300 group-hover:scale-110 group-hover:text-[#D4A853]`} />
@@ -332,7 +332,7 @@ export function Navbar() {
                 </div>
               ) : (
                 <SignInButton mode="modal">
-                  <button className={`rounded-full p-2 transition-all duration-300 hover:bg-[#D4A853]/15`} aria-label="Sign in">
+                  <button className={`rounded-full p-1.5 sm:p-2 transition-all duration-300 hover:bg-[#D4A853]/15`} aria-label="Sign in">
                     <User className={`size-4 text-foreground/70`} />
                   </button>
                 </SignInButton>
@@ -342,7 +342,7 @@ export function Navbar() {
               <motion.button
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setMobileMenuOpen(true)}
-                className={`rounded-full p-2.5 transition-all duration-300 hover:bg-[#D4A853]/15 lg:hidden`}
+                className={`rounded-full p-1.5 sm:p-2.5 transition-all duration-300 hover:bg-[#D4A853]/15 lg:hidden`}
                 aria-label="Open mobile menu"
               >
                 <Menu className={`size-4 text-foreground/70`} />

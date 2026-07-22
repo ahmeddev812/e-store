@@ -11,7 +11,6 @@ import {
   Smartphone, Palette, Briefcase, Gem, Flame, Zap,
   Coffee, Watch, Camera, Rocket, Users, Award, Globe,
   Headphones, Diamond, Shield, Truck, RotateCcw, Gift,
-  Play, Pause, Volume2, VolumeX
 } from "lucide-react"
 // ============================================
 // IMPORT UPDATED: New data file with 138 products
@@ -41,8 +40,6 @@ function PremiumHero() {
   const { theme } = useTheme()
   const isDark = mounted && theme === 'dark'
   const heroRef = useRef<HTMLDivElement>(null)
-  const [isVideoPlaying, setIsVideoPlaying] = useState(true)
-  const [isMuted, setIsMuted] = useState(true)
   const [activeSlide, setActiveSlide] = useState(0)
   
   // Slides data
@@ -92,9 +89,9 @@ function PremiumHero() {
       {/* ===== BACKGROUND LAYER ===== */}
       <div className="absolute inset-0 z-0">
         <video
-          autoPlay={isVideoPlaying}
+          autoPlay
           loop
-          muted={isMuted}
+          muted
           playsInline
           className="h-full w-full object-cover scale-105"
           poster="/hero-poster.jpg"
@@ -118,30 +115,6 @@ function PremiumHero() {
         
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#D4A853]/30 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#F57224]/20 to-transparent" />
-      </div>
-
-      {/* ===== VIDEO CONTROLS - FIXED ===== */}
-      <div className="absolute top-6 right-6 z-30 flex gap-2">
-        <button
-          onClick={() => setIsMuted(!isMuted)}
-          className={`rounded-full backdrop-blur-xl p-3 text-white hover:scale-110 transition-all duration-300 border ${
-            isDark 
-              ? 'bg-white/10 hover:bg-white/20 border-white/10' 
-              : 'bg-black/30 hover:bg-black/50 border-white/20'
-          }`}
-        >
-          {isMuted ? <VolumeX className="size-4" /> : <Volume2 className="size-4" />}
-        </button>
-        <button
-          onClick={() => setIsVideoPlaying(!isVideoPlaying)}
-          className={`rounded-full backdrop-blur-xl p-3 text-white hover:scale-110 transition-all duration-300 border ${
-            isDark 
-              ? 'bg-white/10 hover:bg-white/20 border-white/10' 
-              : 'bg-black/30 hover:bg-black/50 border-white/20'
-          }`}
-        >
-          {isVideoPlaying ? <Pause className="size-4" /> : <Play className="size-4" />}
-        </button>
       </div>
 
       {/* ===== SLIDE INDICATORS ===== */}
