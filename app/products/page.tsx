@@ -3,8 +3,6 @@
 import { Suspense, use, useMemo, useState, useEffect, useRef, useCallback } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import Image from "next/image"
-
 
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import { 
@@ -34,123 +32,7 @@ const sortOptions = [
   { value: "name-desc", label: "Name: Z-A", icon: Package },
 ] as const
 
-// Premium Product Card Component - Theme Aware
-function ProductCard({ product, index, onSaveScroll, nav }: { product: any; index: number; onSaveScroll?: () => void; nav?: (url: string) => void }) {
-  const [isHovered, setIsHovered] = useState(false)
-  const discountedPrice = getDiscountPrice(product.price, product.discountPercentage)
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.05 }}
-      whileHover={{ y: -8 }}
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
-    >
-      <Link href={`/products/${product.slug}`} onClick={onSaveScroll}>
-        <Card className="group relative overflow-hidden transition-all duration-500 hover:border-[#F57224]/30 hover:shadow-[0_0_40px_rgba(245,114,36,0.2)] bg-card border-border">
-          {/* Image Container */}
-          <div className="relative overflow-hidden bg-muted">
-            <Image
-              src={product.thumbnail}
-              alt={product.title}
-              width={400}
-              height={400}
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-              className="aspect-square w-full object-cover transition-all duration-700 group-hover:scale-110"
-            />
-            
-            {/* Discount Badge */}
-            {product.discountPercentage > 0 && (
-              <div className="absolute left-3 top-3 z-10">
-                <Badge className="bg-gradient-to-r from-[#F57224] to-orange-500 border-none shadow-glow text-white">
-                  -{product.discountPercentage}%
-                </Badge>
-              </div>
-            )}
-
-            {/* Top Rated Badge */}
-            {product.rating >= 4.5 && (
-              <div className="absolute right-3 top-3 z-10">
-                <Badge variant="secondary" className="bg-yellow-500/20 text-yellow-400 border-yellow-500/30 backdrop-blur-sm">
-                  <Star className="mr-1 size-3 fill-yellow-500" /> Top Rated
-                </Badge>
-              </div>
-            )}
-
-            {/* Quick View Overlay */}
-            <AnimatePresence>
-              {isHovered && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 20 }}
-                  className="absolute inset-0 flex items-center justify-center bg-background/60 backdrop-blur-sm"
-                >
-                  <Button 
-                    variant="outline" 
-                    className="border-border bg-muted/30 text-foreground hover:bg-[#F57224] hover:text-white hover:border-[#F57224]"
-                    onClick={(e) => {
-                      e.preventDefault()
-                      if (onSaveScroll) onSaveScroll()
-                      if (nav) nav(`/products/${product.slug}`)
-                      else window.location.href = `/products/${product.slug}`
-                    }}
-                  >
-                    <Eye className="mr-2 size-4" />
-                    Quick View
-                  </Button>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-
-          {/* Content */}
-          <CardContent className="p-4">
-            <p className="text-xs text-muted-foreground/70 uppercase tracking-wider">{product.brand}</p>
-            <h3 className="mt-1 font-semibold text-foreground line-clamp-2 group-hover:text-[#F57224] transition-colors">
-              {truncate(product.title, 45)}
-            </h3>
-            
-            {/* Price */}
-            <div className="mt-2 flex items-baseline gap-2">
-              <span className="text-xl font-bold text-[#F57224]">{formatUSD(discountedPrice)}</span>
-              {product.discountPercentage > 0 && (
-                <span className="text-xs text-muted-foreground/70 line-through">{formatUSD(product.price)}</span>
-              )}
-            </div>
-            
-            {/* Rating & Stock */}
-            <div className="mt-2 flex items-center justify-between">
-              <Rating value={product.rating} size="sm" readonly showValue />
-              {product.stock < 10 && product.stock > 0 && (
-                <span className="flex items-center gap-1 text-[10px] text-yellow-500">
-                  <Clock className="size-3" />
-                  Only {product.stock} left
-                </span>
-              )}
-            </div>
-
-            {/* Progress Bar */}
-            {product.stock < 30 && product.stock > 0 && (
-              <div className="mt-3">
-                <div className="h-1.5 rounded-full bg-muted/30 overflow-hidden">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${(product.stock / 100) * 100}%` }}
-                    transition={{ duration: 0.8 }}
-                    className="h-full rounded-full bg-gradient-to-r from-[#F57224] to-orange-500"
-                  />
-                </div>
-              </div>
-            )}
-          </CardContent>
-        </Card>
-      </Link>
-    </motion.div>
-  )
-}
+import { ProductCard } from "@/components/products/product-card"
 
 // Filter Sidebar Component - Theme Aware
 function FilterSidebar({ 
@@ -667,13 +549,17 @@ function ProductsPageContent({
             ) : viewMode === "grid" ? (
               <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {paginated.map((product, index) => (
-                  <ProductCard key={product.id} product={product} index={index} onSaveScroll={saveScroll} nav={router.push} />
+                  <div key={product.id} onClick={saveScroll}>
+                    <ProductCard product={product} index={index} />
+                  </div>
                 ))}
               </div>
             ) : (
               <div className="space-y-4">
                 {paginated.map((product) => (
-                  <ProductCard key={product.id} product={product} index={0} onSaveScroll={saveScroll} nav={router.push} />
+                  <div key={product.id} onClick={saveScroll}>
+                    <ProductCard product={product} index={0} />
+                  </div>
                 ))}
               </div>
             )}

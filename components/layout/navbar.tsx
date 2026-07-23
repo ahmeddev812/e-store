@@ -235,7 +235,7 @@ export function Navbar() {
                 <Link
                   href="/wishlist"
                   className="group relative rounded-full p-1.5 sm:p-2.5 transition-all duration-300 hover:bg-[#D4A853]/15"
-                  aria-label={`Wishlist (${wishlistCount} items)`}
+                  aria-label={mounted ? `Wishlist (${wishlistCount} items)` : "Wishlist"}
                 >
                   <Heart className={`size-4 text-foreground/70 transition-all duration-300 group-hover:scale-110 group-hover:text-[#D4A853]`} />
                   {mounted && wishlistCount > 0 && (
@@ -253,7 +253,7 @@ export function Navbar() {
               <Link
                 href="/cart"
                 className="group relative rounded-full p-1.5 sm:p-2.5 transition-all duration-300 hover:bg-[#D4A853]/15"
-                aria-label={`Shopping cart (${itemCount} items)`}
+                aria-label={mounted ? `Shopping cart (${itemCount} items)` : "Shopping cart"}
               >
                 <ShoppingCart className={`size-4 text-foreground/70 transition-all duration-300 group-hover:scale-110 group-hover:text-[#D4A853]`} />
                 {mounted && itemCount > 0 && (

@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server"
+import { getStripeImageUrl } from "@/lib/stripe"
 
 export async function POST(req: Request) {
   console.log("[Stripe API] POST /api/stripe/checkout called")
@@ -18,11 +19,7 @@ export async function POST(req: Request) {
   }
 
   try {
-    const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
-
-    console.log("[Stripe API] Using base URL:", baseUrl)
-    console.log("[Stripe API] Publishable key present:", !!publishableKey)
+    console.log("[Stripe API] Publishable key present:", !!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
     const { Stripe } = await import("stripe")
     const stripe = new Stripe(secretKey, {
@@ -33,7 +30,6 @@ export async function POST(req: Request) {
     const { items, shipping } = body
 
     console.log("[Stripe API] Cart items received:", items?.length || 0)
-    console.log("[Stripe API] Shipping data received:", !!shipping)
 
     if (!items || items.length === 0) {
       console.error("[Stripe API] No items in cart")
@@ -54,22 +50,28 @@ export async function POST(req: Request) {
       discountPercentage: number
       quantity: number
     }
-    const lineItems = (items as LineItem[]).map((item) => ({
-      price_data: {
-        currency: "usd",
-        product_data: {
-          name: item.title,
-          images: [item.thumbnail],
+    const lineItems = (items as LineItem[]).map((item) => {
+      const imageUrl = getStripeImageUrl(item.thumbnail, req)
+      return {
+        price_data: {
+          currency: "usd",
+          product_data: {
+            name: item.title,
+            ...(imageUrl ? { images: [imageUrl] } : {}),
+          },
+          unit_amount: Math.round(
+            (item.price - (item.price * (item.discountPercentage || 0)) / 100) * 100
+          ),
         },
-        unit_amount: Math.round(
-          (item.price - (item.price * (item.discountPercentage || 0)) / 100) * 100
-        ),
-      },
-      quantity: item.quantity,
-    }))
+        quantity: item.quantity,
+      }
+    })
+
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ||
+      `${req.headers.get("x-forwarded-proto") || "https"}://${req.headers.get("host") || "localhost:3000"}`
 
     console.log("[Stripe API] Creating Checkout Session...")
-    console.log("[Stripe API] Line items:", JSON.stringify(lineItems.map((li: any) => ({ name: li.price_data.product_data.name, amount: li.price_data.unit_amount, qty: li.quantity }))))
+    console.log("[Stripe API] Using base URL:", baseUrl)
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],

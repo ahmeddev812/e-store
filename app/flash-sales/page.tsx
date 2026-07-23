@@ -2,7 +2,6 @@
 
 import { useEffect, useState, useMemo } from "react"
 import Link from "next/link"
-import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
@@ -10,7 +9,8 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { formatUSD, getDiscountPrice } from "@/lib/utils"
 import { products } from "@/data/products"
-import { Flame, Clock, Zap, ShoppingBag, ArrowRight, Tag, Star, Eye } from "lucide-react"
+import { Flame, Clock, Zap, ShoppingBag, ArrowRight, Tag } from "lucide-react"
+import { ProductCard } from "@/components/products/product-card"
 
 const discountFilters = [
   { label: "All", value: 0 },
@@ -43,79 +43,6 @@ function formatCountdown(ms: number) {
     minutes: String(m).padStart(2, "0"),
     seconds: String(s).padStart(2, "0"),
   }
-}
-
-function FlashProductCard({ product, index }: { product: typeof products[number]; index: number }) {
-  const router = useRouter()
-  const discountedPrice = getDiscountPrice(product.price, product.discountPercentage)
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.05 }}
-      whileHover={{ y: -6 }}
-    >
-      <Link href={`/products/${product.slug}`}>
-        <Card className={`group overflow-hidden transition-all duration-500 hover:border-[#F57224]/30 hover:shadow-[0_0_40px_rgba(245,114,36,0.2)] glass-premium`}>
-          <div className={`relative overflow-hidden bg-muted`}>
-              <Image
-                src={product.thumbnail}
-                alt={product.title}
-                width={400}
-                height={400}
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                className="aspect-square w-full object-cover transition-all duration-700 group-hover:scale-110"
-              />
-            <div className="absolute left-3 top-3 z-10">
-              <Badge className="bg-gradient-to-r from-[#F57224] to-orange-500 border-none shadow-glow animate-pulse text-white">
-                -{product.discountPercentage}%
-              </Badge>
-            </div>
-            {product.rating >= 4.5 && (
-              <div className="absolute right-3 top-3 z-10">
-                <Badge variant="secondary" className={`bg-yellow-500/20 text-yellow-400 border-yellow-500/30 backdrop-blur-sm`}>
-                  <Star className="mr-1 size-3 fill-yellow-500" /> Top Rated
-                </Badge>
-              </div>
-            )}
-            <div className={`absolute inset-0 flex items-center justify-center bg-black/0 opacity-0 transition-all duration-300 group-hover:bg-background/60 group-hover:opacity-100`}>
-              <Button
-                variant="outline"
-                className={`border-border bg-muted/30 text-foreground hover:bg-[#F57224] hover:text-white hover:border-[#F57224]`}
-                onClick={(e) => {
-                  e.preventDefault()
-                  router.push(`/products/${product.slug}`)
-                }}
-              >
-                <Eye className="mr-2 size-4" />
-                Quick View
-              </Button>
-            </div>
-          </div>
-          <CardContent className="p-4">
-            <p className={`text-xs text-muted-foreground/70 uppercase tracking-wider`}>{product.categoryName}</p>
-            <h3 className={`mt-1 font-semibold text-foreground line-clamp-2 group-hover:text-[#F57224] transition-colors`}>
-              {product.title}
-            </h3>
-            <div className="mt-2 flex items-baseline gap-2">
-              <span className="text-xl font-bold text-[#F57224]">{formatUSD(discountedPrice)}</span>
-              <span className={`text-xs text-muted-foreground/70 line-through`}>{formatUSD(product.price)}</span>
-            </div>
-            <div className="mt-2 flex items-center gap-1">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star
-                  key={i}
-                  className={`size-3 ${i < Math.round(product.rating) ? "fill-yellow-500 text-yellow-500" : "fill-muted-foreground/20 text-muted-foreground/20"}`}
-                />
-              ))}
-              <span className={`ml-1 text-xs text-muted-foreground/70`}>({product.rating})</span>
-            </div>
-          </CardContent>
-        </Card>
-      </Link>
-    </motion.div>
-  )
 }
 
 export default function FlashSalesPage() {
@@ -302,7 +229,7 @@ export default function FlashSalesPage() {
         ) : (
           <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
             {filtered.map((product, index) => (
-              <FlashProductCard key={product.id} product={product} index={index} />
+              <ProductCard key={product.id} product={product} index={index} variant="catalog" />
             ))}
           </div>
         )}

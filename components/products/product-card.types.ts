@@ -8,6 +8,7 @@ export interface ProductCardProps {
   variant?: ProductCardVariant
   showWishlist?: boolean
   showQuickView?: boolean
+  showAddToCart?: boolean
   showStock?: boolean
   showTags?: boolean
   animate?: boolean

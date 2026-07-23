@@ -29,6 +29,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Rating } from "@/components/ui/rating"
 import { formatUSD, getDiscountPrice, truncate } from "@/lib/utils"
+import { ProductCard } from "@/components/products/product-card"
 
 // ============================================
 // 1. THE ULTIMATE CINEMATIC HERO - FIXED BUTTONS
@@ -355,113 +356,6 @@ function CountdownTimer({ target }: { target: Date }) {
 }
 
 // ============================================
-// 3. PRODUCT CARD - THEME AWARE
-// ============================================
-
-function UltraPremiumProductCard({ product, index }: { product: any; index: number }) {
-  const [mounted, setMounted] = useState(false)
-  useEffect(() => setMounted(true), [])
-  const [isWishlisted, setIsWishlisted] = useState(false)
-  const [isHovered, setIsHovered] = useState(false)
-  const discountedPrice = getDiscountPrice(product.price, product.discountPercentage)
-  const { theme } = useTheme()
-  const isDark = mounted && theme === 'dark'
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.08, ease: "easeOut" }}
-      viewport={{ once: true, margin: "-50px" }}
-      whileHover={{ y: -6 }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      className="group"
-    >
-      <Link href={`/products/${product.slug}`} className="block">
-        <div className="relative">
-          <div className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-[#F57224] via-[#D4A853] to-[#F57224] opacity-0 blur-xl transition-all duration-500 group-hover:opacity-25" />
-          
-          <Card className={`overflow-hidden rounded-2xl shadow-lg transition-all duration-500 hover:shadow-2xl hover:shadow-[#F57224]/10 ${isDark ? 'bg-card border-border' : 'bg-white border-gray-200'}`}>
-            <div className="absolute left-3 top-3 z-20 flex gap-2">
-              {product.discountPercentage > 0 && (
-                <Badge className="bg-gradient-to-r from-[#F57224] to-orange-500 border-none shadow-glow text-[10px] text-white">
-                  -{product.discountPercentage}%
-                </Badge>
-              )}
-              {product.rating >= 4.7 && (
-                <Badge className={`${isDark ? 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30' : 'bg-yellow-100 text-yellow-700 border-yellow-300'} backdrop-blur-sm text-[10px]`}>
-                  <Star className="mr-1 size-2 fill-yellow-500" /> Bestseller
-                </Badge>
-              )}
-            </div>
-            
-            <button 
-              onClick={(e) => { e.preventDefault(); e.stopPropagation(); setIsWishlisted(!isWishlisted); }}
-              className={`absolute right-3 top-3 z-20 rounded-full p-2 transition-all duration-300 ${
-                isHovered ? 'opacity-100' : 'opacity-0'
-              } hover:bg-[#F57224] hover:text-white shadow-md ${isDark ? 'bg-background/70 backdrop-blur-xl' : 'bg-white/80 backdrop-blur-xl'}`}
-              aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
-            >
-              <Heart className={`size-4 transition-all duration-300 ${isWishlisted ? "fill-[#F57224] text-[#F57224] scale-110" : isDark ? 'text-foreground/70' : 'text-gray-600'}`} />
-            </button>
-
-            <div className={`relative overflow-hidden ${isDark ? 'bg-muted' : 'bg-gray-100'}`}>
-              <Image
-                src={product.thumbnail}
-                alt={product.title}
-                width={500}
-                height={500}
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                loading="lazy"
-                className="aspect-square w-full object-cover transition-all duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-500 group-hover:opacity-100">
-                <Button size="sm" className={`${isDark ? 'bg-background/90 backdrop-blur-xl text-foreground' : 'bg-white/90 backdrop-blur-xl text-gray-800'} hover:bg-[#F57224] hover:text-white transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 shadow-lg border-0`}>
-                  <Eye className="mr-2 size-3" /> Quick View
-                </Button>
-              </div>
-            </div>
-
-            <CardContent className={`p-5 ${isDark ? 'bg-card' : 'bg-white'}`}>
-              <div className="mb-2 flex items-center justify-between">
-                <span className="text-[10px] uppercase tracking-wider text-muted-foreground/60">{product.categoryName}</span>
-                <Rating value={product.rating} size="sm" readonly />
-              </div>
-              <h3 className={`text-base font-semibold line-clamp-2 ${isDark ? 'text-foreground' : 'text-gray-800'} transition-colors duration-300 group-hover:text-[#F57224]`}>
-                {truncate(product.title, 40)}
-              </h3>
-              <div className="mt-3 flex items-baseline gap-2">
-                <span className="text-xl font-bold text-[#F57224]">
-                  {formatUSD(discountedPrice)}
-                </span>
-                {product.discountPercentage > 0 && (
-                  <span className="text-xs line-through text-muted-foreground/60">{formatUSD(product.price)}</span>
-                )}
-              </div>
-              <div className="mt-4 flex items-center justify-between">
-                <div className="flex items-center gap-1.5">
-                  <div className="flex -space-x-1">
-                    {[...Array(3)].map((_, i) => (
-                      <div key={i} className="size-4 rounded-full bg-gradient-to-r from-[#F57224] to-orange-500 ring-2 ring-background" />
-                    ))}
-                  </div>
-                  <span className="text-[10px] text-muted-foreground/50">+{product.stock} bought</span>
-                </div>
-                <Button size="sm" className="bg-[#F57224] hover:bg-[#F57224]/80 shadow-glow text-white">
-                  <ShoppingBag className="mr-1 size-3" /> Buy
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </Link>
-    </motion.div>
-  )
-}
-
-// ============================================
 // 4. CATEGORY CARD - THEME AWARE
 // ============================================
 
@@ -629,7 +523,7 @@ export default function HomePage() {
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {flashProducts.map((product, index) => (
-            <UltraPremiumProductCard key={product.id} product={product} index={index} />
+            <ProductCard key={product.id} product={product} index={index} />
           ))}
         </div>
       </section>
@@ -655,7 +549,7 @@ export default function HomePage() {
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {trending.map((product, index) => (
-            <UltraPremiumProductCard key={product.id} product={product} index={index} />
+            <ProductCard key={product.id} product={product} index={index} />
           ))}
         </div>
       </section>
@@ -681,7 +575,7 @@ export default function HomePage() {
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {newArrivals.slice(0, 4).map((product, index) => (
-            <UltraPremiumProductCard key={product.id} product={product} index={index} />
+            <ProductCard key={product.id} product={product} index={index} />
           ))}
         </div>
       </section>
@@ -707,7 +601,7 @@ export default function HomePage() {
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {bestsellers.map((product, index) => (
-            <UltraPremiumProductCard key={product.id} product={product} index={index} />
+            <ProductCard key={product.id} product={product} index={index} />
           ))}
         </div>
       </section>

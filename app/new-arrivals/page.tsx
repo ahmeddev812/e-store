@@ -1,16 +1,13 @@
 "use client"
 
 import Link from "next/link"
-import Image from "next/image"
-import { useRouter } from "next/navigation"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Card, CardContent } from "@/components/ui/card"
-import { Rating } from "@/components/ui/rating"
 import { formatUSD, getDiscountPrice } from "@/lib/utils"
 import { getNewArrivals } from "@/data/products"
-import { Sparkles, Clock, ShoppingBag, ArrowRight, Star, Eye, Heart, Tag } from "lucide-react"
+import { Sparkles, Clock, ShoppingBag, ArrowRight } from "lucide-react"
+import { useRouter } from "next/navigation"
+import { ProductCard } from "@/components/products/product-card"
 
 export default function NewArrivalsPage() {
   const router = useRouter()
@@ -112,103 +109,9 @@ export default function NewArrivalsPage() {
         </section>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-          {products.map((product, index) => {
-            const discountedPrice = getDiscountPrice(product.price, product.discountPercentage)
-
-            return (
-              <motion.div
-                key={product.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: index * 0.05 }}
-                whileHover={{ y: -8 }}
-              >
-                <Link href={`/products/${product.slug}`}>
-                  <Card variant="premium" className={`group h-full bg-card border-border`}>
-                    <div className={`relative overflow-hidden bg-muted`}>
-                      <Image
-                        src={product.thumbnail}
-                        alt={product.title}
-                        width={400}
-                        height={400}
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                        className="aspect-square w-full object-cover transition-all duration-700 group-hover:scale-110"
-                      />
-
-                      <div className="absolute left-3 top-3 z-10 flex flex-col gap-2">
-                        {product.isNewArrival && (
-                          <Badge className="bg-gradient-to-r from-[#F57224] to-orange-500 border-none shadow-glow text-white">
-                            <Sparkles className="size-3 mr-1" />
-                            Just Added
-                          </Badge>
-                        )}
-                        {product.discountPercentage > 0 && !product.isNewArrival && (
-                          <Badge className="bg-gradient-to-r from-[#F57224] to-orange-500 border-none shadow-glow text-white">
-                            <Tag className="size-3 mr-1" />
-                            -{product.discountPercentage}%
-                          </Badge>
-                        )}
-                      </div>
-
-                      {product.discountPercentage > 0 && product.isNewArrival && (
-                        <div className="absolute right-3 top-3 z-10">
-                          <Badge className="bg-gradient-to-r from-[#F57224] to-orange-500 border-none shadow-glow text-white">
-                            <Tag className="size-3 mr-1" />
-                            -{product.discountPercentage}%
-                          </Badge>
-                        </div>
-                      )}
-
-                      <div className={`absolute inset-0 flex items-center justify-center bg-background/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300`}>
-                        <Button
-                          variant="outline"
-                          className={`border-border bg-muted/30 text-foreground hover:bg-[#F57224] hover:text-white hover:border-[#F57224]`}
-                          onClick={(e) => {
-                            e.preventDefault()
-                            router.push(`/products/${product.slug}`)
-                          }}
-                        >
-                          <Eye className="mr-2 size-4" />
-                          Quick View
-                        </Button>
-                      </div>
-                    </div>
-
-                    <CardContent className="p-4 space-y-3">
-                      <p className={`text-xs text-muted-foreground/70 uppercase tracking-wider`}>
-                        {product.brand || product.categoryName}
-                      </p>
-
-                      <h3 className={`font-semibold text-foreground line-clamp-2 group-hover:text-[#F57224] transition-colors`}>
-                        {product.title}
-                      </h3>
-
-                      <div className="flex items-baseline gap-2">
-                        <span className="text-xl font-bold text-[#F57224]">
-                          {formatUSD(discountedPrice)}
-                        </span>
-                        {product.discountPercentage > 0 && (
-                          <span className={`text-xs text-muted-foreground/70 line-through`}>
-                            {formatUSD(product.price)}
-                          </span>
-                        )}
-                      </div>
-
-                      <Rating value={product.rating} size="sm" readonly showValue />
-
-                      {product.stock > 0 && product.stock < 10 && (
-                        <div className="flex items-center gap-1 text-xs text-yellow-500">
-                          <Clock className="size-3" />
-                          Only {product.stock} left
-                        </div>
-                      )}
-                    </CardContent>
-                  </Card>
-                </Link>
-              </motion.div>
-            )
-          })}
+          {products.map((product, index) => (
+            <ProductCard key={product.id} product={product} index={index} variant="catalog" />
+          ))}
         </div>
 
         <motion.div

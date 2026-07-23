@@ -1,16 +1,14 @@
 "use client"
 
 import Link from "next/link"
-import Image from "next/image"
-import { useRouter } from "next/navigation"
 import { motion } from "framer-motion"
-import { Crown, Star, TrendingUp, ShoppingBag, ArrowRight, Eye, Heart, Award, Flame } from "lucide-react"
+import { Crown, Star, TrendingUp, ShoppingBag, ArrowRight, Award, Flame } from "lucide-react"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Card, CardContent } from "@/components/ui/card"
-import { Rating } from "@/components/ui/rating"
 import { formatUSD, getDiscountPrice } from "@/lib/utils"
 import { getBestSellerProducts } from "@/data/products"
+import { ProductCard } from "@/components/products/product-card"
 
 export default function BestSellersPage() {
   const router = useRouter()
@@ -156,111 +154,9 @@ export default function BestSellersPage() {
 
         {/* Products Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {products.map((product, index) => {
-            const discountedPrice = getDiscountPrice(
-              product.price,
-              product.discountPercentage
-            )
-            const isTopRated = product.rating >= 4.5
-
-            return (
-              <motion.div
-                key={product.id}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.05 }}
-                whileHover={{ y: -8 }}
-              >
-                <Link href={`/products/${product.slug}`}>
-                  <Card
-                    variant="premium"
-                    className="group relative overflow-hidden h-full bg-card border-border"
-                  >
-                    <div className="relative overflow-hidden bg-muted">
-                      <Image
-                        src={product.thumbnail}
-                        alt={product.title}
-                        width={400}
-                        height={400}
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                        className="aspect-square w-full object-cover transition-all duration-700 group-hover:scale-110"
-                      />
-
-                      <div className="absolute left-3 top-3 z-10 flex flex-col gap-2">
-                        <Badge className="bg-gradient-to-r from-[#F57224] to-orange-500 border-none shadow-glow text-[10px] px-2 py-0.5 text-white">
-                          <Flame className="size-3 mr-1" />
-                          #{index + 1}
-                        </Badge>
-                        {isTopRated && (
-                          <Badge
-                            variant="secondary"
-                            className="bg-yellow-500/20 text-yellow-400 border-yellow-500/30 backdrop-blur-sm text-[10px] px-2 py-0.5"
-                          >
-                            <Award className="size-3 mr-1" />
-                            Bestseller
-                          </Badge>
-                        )}
-                      </div>
-
-                      {product.discountPercentage > 0 && (
-                        <div className="absolute right-3 top-3 z-10">
-                          <Badge className="bg-red-500/80 border-none text-[10px] px-2 py-0.5 text-white">
-                            -{product.discountPercentage}%
-                          </Badge>
-                        </div>
-                      )}
-
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        whileHover={{ opacity: 1 }}
-                        className="absolute inset-0 flex items-center justify-center bg-background/60 backdrop-blur-sm"
-                      >
-                        <Button
-                          variant="outline"
-                          className="border-border bg-muted/30 text-foreground hover:bg-[#F57224] hover:text-white hover:border-[#F57224]"
-                          onClick={(e) => {
-                            e.preventDefault()
-                            router.push(`/products/${product.slug}`)
-                          }}
-                        >
-                          <Eye className="mr-2 size-4" />
-                          Quick View
-                        </Button>
-                      </motion.div>
-                    </div>
-
-                    <CardContent className="p-4">
-                      <p className="text-xs text-muted-foreground/70 uppercase tracking-wider">
-                        {product.brand}
-                      </p>
-                      <h3 className="mt-1 font-semibold text-foreground line-clamp-2 group-hover:text-[#F57224] transition-colors">
-                        {product.title}
-                      </h3>
-
-                      <div className="mt-2 flex items-baseline gap-2">
-                        <span className="text-xl font-bold text-[#F57224]">
-                          {formatUSD(discountedPrice)}
-                        </span>
-                        {product.discountPercentage > 0 && (
-                          <span className="text-xs text-muted-foreground/70 line-through">
-                            {formatUSD(product.price)}
-                          </span>
-                        )}
-                      </div>
-
-                      <div className="mt-2 flex items-center justify-between">
-                        <Rating value={product.rating} size="sm" readonly showValue />
-                        <div className="flex items-center gap-1 text-[10px] text-muted-foreground/70">
-                          <Heart className="size-3" />
-                          {product.stock > 0 ? "In Stock" : "Out of Stock"}
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
-              </motion.div>
-            )
-          })}
+          {products.map((product, index) => (
+            <ProductCard key={product.id} product={product} index={index} variant="catalog" />
+          ))}
         </div>
 
         <motion.div

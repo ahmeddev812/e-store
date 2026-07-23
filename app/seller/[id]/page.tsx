@@ -1,143 +1,15 @@
 "use client"
 
 import { useParams } from "next/navigation"
-import { Star, Calendar, Clock, MapPin, Package } from "lucide-react"
+import { Calendar, Clock, MapPin, Package, Star } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { products } from "@/data/products"
 import { Product } from "@/types"
-import { cn, formatUSD, getDiscountPrice } from "@/lib/utils"
-import Image from "next/image"
+import { cn, formatUSD } from "@/lib/utils"
 import Link from "next/link"
-import { Heart, ShoppingCart } from "lucide-react"
-import { useWishlistStore } from "@/store/wishlist"
-import { useCartStore } from "@/store/cart"
-import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
-
-interface ProductCardProps {
-  product: Product
-  className?: string
-}
-
-function ProductCard({ product, className }: ProductCardProps) {
-  const { isInWishlist, toggleItem } = useWishlistStore()
-  const { addItem } = useCartStore()
-  const wishlisted = isInWishlist(product.id)
-  const discountedPrice = getDiscountPrice(product.price, product.discountPercentage)
-
-  return (
-    <motion.div
-      whileHover={{ y: -4 }}
-      transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      className={cn(
-        "group relative rounded-2xl border border-border bg-muted/50 p-3 shadow-2xl backdrop-blur-xl transition-all duration-300 hover:border-[#F57224]/30 hover:scale-[1.02] hover:shadow-[0_8px_40px_rgba(245,114,36,0.2)]",
-        className
-      )}
-    >
-      <Link href={`/products/${product.slug}`} className="block">
-        <div className="relative aspect-square w-full overflow-hidden rounded-xl">
-          <Image
-            src={product.thumbnail ?? product.images[0] ?? "/placeholder.svg"}
-            alt={product.title}
-            fill
-            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-            className="object-cover transition-transform duration-500 group-hover:scale-110"
-            loading="lazy"
-          />
-          {product.discountPercentage > 0 && (
-            <div className="absolute left-2 top-2 rounded-lg bg-[#F57224] px-2 py-0.5 text-xs font-bold text-white shadow-lg">
-              -{Math.round(product.discountPercentage)}%
-            </div>
-          )}
-        </div>
-      </Link>
-
-      <button
-        onClick={(e) => {
-          e.preventDefault()
-          toggleItem({
-            id: product.id,
-            title: product.title,
-            price: product.price,
-            discountPercentage: product.discountPercentage,
-            thumbnail: product.thumbnail,
-            slug: product.slug,
-          })
-        }}
-        className={cn(
-          "absolute right-5 top-5 flex h-8 w-8 items-center justify-center rounded-full backdrop-blur-xl transition-all hover:scale-110",
-          wishlisted
-            ? "bg-[#F57224]/20 text-[#F57224]"
-            : "bg-muted/50 text-foreground/70 hover:bg-[#F57224]/20 hover:text-[#F57224]"
-        )}
-      >
-        <Heart className={cn("h-4 w-4", wishlisted && "fill-[#F57224]")} />
-      </button>
-
-      <div className="mt-3 space-y-2">
-        <Link href={`/products/${product.slug}`}>
-          <h3 className="line-clamp-1 text-sm font-semibold text-foreground transition-colors group-hover:text-[#F57224]">
-            {product.title}
-          </h3>
-        </Link>
-
-        {product.brand && (
-          <p className="text-xs text-muted-foreground">by {product.brand}</p>
-        )}
-
-        <div className="flex items-center gap-2">
-          <span className="text-lg font-bold text-foreground">
-            {formatUSD(discountedPrice)}
-          </span>
-          {product.discountPercentage > 0 && (
-            <span className="text-sm text-muted-foreground line-through">
-              {formatUSD(product.price)}
-            </span>
-          )}
-        </div>
-
-        <div className="flex items-center gap-1">
-          <div className="flex items-center gap-0.5">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Star
-                key={i}
-                className={cn(
-                  "h-3.5 w-3.5",
-                  i < Math.round(product.rating)
-                    ? "fill-[#F57224] text-[#F57224]"
-                    : "fill-none text-muted-foreground/30"
-                )}
-              />
-            ))}
-          </div>
-          <span className="ml-1 text-xs text-muted-foreground">
-            ({product.rating})
-          </span>
-        </div>
-
-        <Button
-          onClick={(e) => {
-            e.preventDefault()
-            addItem({
-              productId: product.id,
-              title: product.title,
-              price: product.price,
-              discountPercentage: product.discountPercentage,
-              thumbnail: product.thumbnail,
-            }, 1)
-          }}
-          variant="default"
-          size="sm"
-          className="w-full"
-        >
-          <ShoppingCart className="mr-1.5 h-4 w-4" />
-          Add to Cart
-        </Button>
-      </div>
-    </motion.div>
-  )
-}
+import { ProductCard } from "@/components/products/product-card"
 
 export default function SellerPage() {
   const params = useParams()

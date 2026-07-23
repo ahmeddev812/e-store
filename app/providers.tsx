@@ -13,7 +13,7 @@ export function Providers({
     <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY!}>
       <ThemeProvider
         attribute="class"
-        defaultTheme="system"  // Changed from "dark" to "system"
+        defaultTheme="system"
         enableSystem
         disableTransitionOnChange
       >
@@ -21,7 +21,10 @@ export function Providers({
 
         <Toaster
           richColors
-          position="top-right"
+          position="bottom-right"
+          duration={1500}
+          visibleToasts={2}
+          gap={8}
         />
       </ThemeProvider>
     </ClerkProvider>
